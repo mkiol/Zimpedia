@@ -63,7 +63,7 @@ Page {
 
         ViewPlaceholder {
             enabled: listView.count == 0 && !panel.moving
-            text: qsTr("Find article, by typing in the Search field below")
+            text: qsTr("Find article, by typing in the search field")
 
         }
 

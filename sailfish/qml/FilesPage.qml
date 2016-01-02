@@ -41,7 +41,7 @@ Page {
             Label {
                 wrapMode: Text.AlignLeft
                 anchors.left: parent.left; anchors.right: parent.right;
-                anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
+                anchors.leftMargin: Theme.horizontalPageMargin; anchors.rightMargin: Theme.horizontalPageMargin
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: Theme.fontSizeMedium
                 color: listItem.enabled ? Theme.primaryColor : Theme.secondaryColor
@@ -55,12 +55,16 @@ Page {
 
         ViewPlaceholder {
             enabled: listView.count == 0 && !fileModel.searching
-            //enabled: !fileModel.searching
             text: qsTr("No files were found")
-            hintText: qsTr("Upload ZIM files to any folder under your home directory.")
+        }
+
+        Bubble {
+            enabled: listView.count == 0 && !fileModel.searching && !menu.active
+            text: qsTr("The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from <a href='http://www.kiwix.org/wiki/Content_in_all_languages'>this page</a>. If you already have some ZIM files, put them to any folder you like under your home directory.")
         }
 
         PageMenu {
+            id: menu
             showChangeZIM: false
         }
 

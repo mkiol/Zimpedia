@@ -47,7 +47,7 @@ Page {
             }
 
             PaddedLabel {
-                text: qsTr("Offline Wikipedia and ZIM files viewer");
+                text: qsTr("Offline reader for Wikipedia and other Wiki projects");
             }
 
             Button {
@@ -72,11 +72,11 @@ Page {
                 text: qsTr("This software is distributed under the terms of the Mozilla Public License v.2.0</a>")
             }
 
-            Button {
+            /*Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("View license");
                 onClicked: Qt.openUrlExternally(LICENSE)
-            }
+            }*/
 
             SectionHeader {
                 text: qsTr("Third party components copyrights")

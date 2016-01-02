@@ -30,7 +30,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  desktop-file-utils
 
 %description
-Offline Wikipedia and ZIM files viewer
+Offline reader for Wikipedia and other Wiki projects
 
 
 %prep
