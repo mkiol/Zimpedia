@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="50"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline-läsare för Wikipedia och andra Wiki-projekt</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="72"/>
@@ -66,7 +66,7 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="63"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation type="unfinished"></translation>
+        <translation>ZIM är ett öppet filformat som lagrar wiki-innehåll för offline-användning. Samlingen av trevliga wikis kan laddas ner från &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. Om du redan har några ZIM-filer, kan du placera dem i valfri mapp i din hemkatalog eller på ditt SD-kort.</translation>
     </message>
     <message>
         <source>Upload ZIM files to any folder under your home directory.</source>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="66"/>
         <source>Find article, by typing in the search field</source>
-        <translation>Hitta artikeln genom att skriva i nedanstående sökfält</translation>
+        <translation>Hitta artikeln genom att skriva i sökfältet</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="92"/>
