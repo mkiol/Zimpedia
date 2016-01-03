@@ -9,6 +9,8 @@
   obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#define _FILE_OFFSET_BITS 64
+
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
@@ -42,9 +44,6 @@ int main(int argc, char *argv[])
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
-
-    //app->setApplicationDisplayName(APP_NAME);
-    //app->setApplicationVersion(VERSION);
 
     QTranslator translator;
     QString locale = QLocale::system().name();
