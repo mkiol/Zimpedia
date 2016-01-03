@@ -23,9 +23,13 @@ FileFinder::FileFinder(QObject *parent) : QThread(parent)
 void FileFinder::run()
 {
     // Start search for ZIM files
+
+    // All dirs under home directory
     const QStringList homeLocation = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-    QString homePath = homeLocation.isEmpty() ? "/home/nemo" : homeLocation.first();
-    findFiles(homePath);
+    findFiles(homeLocation.isEmpty() ? "/home/nemo" : homeLocation.first());
+
+    // All dirs on SD card
+    findFiles("/media/sdcard");
 }
 
 void FileFinder::findFiles(const QString &dirName)
