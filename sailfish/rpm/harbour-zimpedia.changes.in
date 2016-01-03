@@ -8,6 +8,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jan 03 2016 Michal Kosciesza <michal@mkiol.net> 1.0-2
+- Large ZIM files support
+- SD card as a possible location of ZIM files
+- SV and PL translations
+
 * Sat Jan 02 2016 Michal Kosciesza <michal@mkiol.net> 1.0-1
 - Initial version
 

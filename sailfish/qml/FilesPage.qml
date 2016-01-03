@@ -34,7 +34,7 @@ Page {
         delegate: ListItem {
             id: listItem
 
-            enabled: settings.zimFile !== model.id
+            //enabled: settings.zimFile !== model.id
 
             contentHeight: Theme.itemSizeMedium
 
@@ -50,6 +50,7 @@ Page {
 
             onClicked: {
                 settings.zimFile = model.id;
+                zimServer.loadZimFile();
             }
         }
 
@@ -60,7 +61,7 @@ Page {
 
         Bubble {
             enabled: listView.count == 0 && !fileModel.searching && !menu.active
-            text: qsTr("The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from <a href='http://www.kiwix.org/wiki/Content_in_all_languages'>this page</a>. If you already have some ZIM files, put them to any folder you like under your home directory.")
+            text: qsTr("The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from <a href='http://www.kiwix.org/wiki/Content_in_all_languages'>this page</a>. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.")
         }
 
         PageMenu {

@@ -69,7 +69,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: qsTr("This software is distributed under the terms of the Mozilla Public License v.2.0</a>")
+                text: qsTr("This software is distributed under the terms of the Mozilla Public License v.2.0")
             }
 
             /*Button {

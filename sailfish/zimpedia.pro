@@ -30,10 +30,15 @@ OTHER_FILES += \
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
-CONFIG += sailfishapp_i18n
+#CONFIG += sailfishapp_i18n
 
 TRANSLATIONS += translations/harbour-zimpedia-en.ts \
-                translations/harbour-zimpedia-pl.ts
+                translations/harbour-zimpedia-pl.ts \
+                translations/harbour-zimpedia-sv.ts
+
+translations.files = translations
+translations.path = /usr/share/$${TARGET}
+INSTALLS += translations
 
 DISTFILES += \
     qml/main.qml \
@@ -44,6 +49,7 @@ DISTFILES += \
     qml/PageMenu.qml \
     rpm/harbour-zimpedia.changes.in \
     rpm/harbour-zimpedia.spec \
-    rpm/harbour-zimpedia.yaml
+    rpm/harbour-zimpedia.yaml \
+    qml/Bubble.qml
 
 PKGCONFIG += zlib

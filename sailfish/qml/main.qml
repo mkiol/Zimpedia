@@ -13,6 +13,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 ApplicationWindow {
+    id: app
+
     //initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -30,10 +32,10 @@ ApplicationWindow {
         }
     }
 
-    Connections {
+    /*Connections {
         target: settings
         onZimFileChanged: zimServer.loadZimFile();
-    }
+    }*/
 
     Connections {
         target: zimServer

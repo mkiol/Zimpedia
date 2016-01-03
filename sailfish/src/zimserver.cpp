@@ -61,6 +61,7 @@ bool ZimServer::loadZimFile()
             delete zimfile;
             zimfile = Q_NULLPTR;
         }
+        s->setZimFile("");
         emit loadedChanged();
         return false;
     }
@@ -77,6 +78,7 @@ bool ZimServer::loadZimFile()
             delete zimfile;
             zimfile = Q_NULLPTR;
         }
+        s->setZimFile("");
         emit loadedChanged();
         return false;
     }
@@ -97,7 +99,7 @@ bool ZimServer::getListening()
 
 void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 {
-    qDebug() << "requestHandler, URL:" << req->url().toString();
+    //qDebug() << "requestHandler, URL:" << req->url().toString();
 
     if (!getLoaded()) {
         qWarning() << "ZIM file not loaded!";
