@@ -34,7 +34,9 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 TRANSLATIONS += translations/harbour-zimpedia-en.ts \
                 translations/harbour-zimpedia-pl.ts \
-                translations/harbour-zimpedia-sv.ts
+                translations/harbour-zimpedia-sv.ts \
+                translations/harbour-zimpedia-cs_CZ.ts \
+                translations/harbour-zimpedia-es.ts
 
 translations.files = translations
 translations.path = /usr/share/$${TARGET}
