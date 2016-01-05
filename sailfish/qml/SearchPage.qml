@@ -52,7 +52,7 @@ Page {
             }
 
             onClicked: {
-                //console.log("model.url:",model.url);
+                console.log("model.url:",model.url);
                 Qt.openUrlExternally(model.url);
             }
 

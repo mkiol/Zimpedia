@@ -19,7 +19,7 @@ CoverBackground {
 
         Image {
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "icon.png"
+            source: "icon-cover.png"
         }
 
         Label {
