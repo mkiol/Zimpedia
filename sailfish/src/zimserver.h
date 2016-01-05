@@ -16,9 +16,9 @@
 
 #include <zim/file.h>
 
-#include "qhttpserver/qhttpserver.h"
-#include "qhttpserver/qhttprequest.h"
-#include "qhttpserver/qhttpresponse.h"
+#include <qhttpserver.h>
+#include <qhttprequest.h>
+#include <qhttpresponse.h>
 
 class ZimServer : public QObject
 {

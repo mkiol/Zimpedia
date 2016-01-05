@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     QString locale = QLocale::system().name();
-    //locale="pl";
+    //locale="cs_CZ";
     if(!translator.load("harbour-zimpedia-" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
         qDebug() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
     }

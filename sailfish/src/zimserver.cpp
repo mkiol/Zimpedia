@@ -100,13 +100,14 @@ bool ZimServer::getListening()
 void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 {
     //qDebug() << "requestHandler, URL:" << req->url().toString();
+    //qDebug() << "requestHandler, URL:" << QString::fromStdString(zim::urldecode(req->url().toString().toStdString()));
 
     if (!getLoaded()) {
         qWarning() << "ZIM file not loaded!";
         resp->setHeader("Content-Length", "0");
         resp->setHeader("Connection", "close");
         resp->writeHead(500);
-        resp->end("");
+        resp->end();
         return;
     }
 
@@ -116,37 +117,54 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
         resp->setHeader("Content-Length", "0");
         resp->setHeader("Connection", "close");
         resp->writeHead(404);
-        resp->end("");
+        resp->end();
         return;
     }
 
     QString zimUrl = QStringList(pathlist.mid(1,pathlist.size()-1)).join("/");
 
-    zim::File::const_iterator it = zimfile->find(zimUrl.toStdString());
+    zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
 
     if (it == zimfile->end()) {
       qWarning() << "Article not found!";
       resp->setHeader("Content-Length", "0");
       resp->setHeader("Connection", "close");
       resp->writeHead(404);
-      resp->end("");
+      resp->end();
       return;
     }
 
-    if (it->isRedirect()) {
+    /*qDebug() << "Url:" << QString::fromStdString(it->getLongUrl())
+             << "Title:" << QString::fromStdString(it->getTitle())
+             << "Redirection:" << it->isRedirect();*/
+
+    /*if (it->isRedirect()) {
+      QString redirectionUrl = QString(QUrl("/" +QString::fromStdString(it->getRedirectArticle().getLongUrl())).toEncoded());
+      qDebug() << "Redirection to" << redirectionUrl;
       resp->setHeader("Content-Length", "0");
-      resp->setHeader("Location", QString::fromStdString(it->getRedirectArticle().getUrl()).toLatin1());
+      resp->setHeader("Location", redirectionUrl);
       resp->setHeader("Connection", "close");
       resp->writeHead(302);
       resp->end("");
       return;
+    }*/
+
+    if (it->isDeleted()) {
+      qWarning() << "Article deleted!";
+      resp->setHeader("Content-Length", "0");
+      resp->setHeader("Connection", "close");
+      resp->writeHead(404);
+      resp->end();
+      return;
     }
 
-    zim::Blob zimblob = it->getData();
+    zim::Article article = it->isRedirect() ? it->getRedirectArticle() : *it;
+    zim::Blob zimblob = article.getData();
+
     QByteArray data(zimblob.data(), zimblob.size());
 
     resp->setHeader("Content-Length", QString::number(data.size()));
-    resp->setHeader("Content-Type", QString::fromStdString(it->getMimeType()).toLatin1());
+    resp->setHeader("Content-Type", QString::fromStdString(article.getMimeType()));
     resp->setHeader("Connection", "close");
     resp->writeHead(200);
     resp->end(data);
