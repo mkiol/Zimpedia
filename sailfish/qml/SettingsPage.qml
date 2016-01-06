@@ -15,9 +15,11 @@ import Sailfish.Silica 1.0
 Dialog {
     id: root
 
+    property bool advancedVisible: false
+
     function isPortValid() {
       var result = parseInt(portField.text).toString()==portField.text && parseInt(portField.text) > 1023 && parseInt(portField.text) <= 65535;
-      portErrorLabel.visible = !result;
+      portErrorLabel.error = !result;
       return result;
     }
 
@@ -29,7 +31,6 @@ Dialog {
 
         Column {
             id: column
-            spacing: Theme.paddingLarge
             anchors {
                 top: parent.top
                 left: parent.left
@@ -40,8 +41,39 @@ Dialog {
                 title: qsTr("Settings")
             }
 
+            SectionHeader {
+                text: qsTr("UI")
+            }
+
+            ComboBox {
+                id: fontSizeBox
+                width: root.width
+                label: qsTr("Font size")
+                currentIndex: settings.fontSize - 1
+
+                menu: ContextMenu {
+                    MenuItem { text: qsTr("Normal") }
+                    MenuItem { text: qsTr("Large") }
+                    MenuItem { text: qsTr("Extra large") }
+                }
+            }
+
+            Spacer {}
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: advancedVisible ? qsTr("Hide advanced options") : qsTr("Show advanced options")
+                onClicked: advancedVisible = !advancedVisible;
+            }
+
+            SectionHeader {
+                visible: advancedVisible
+                text: qsTr("Advanced")
+            }
+
             TextField {
                 id: portField
+                visible: advancedVisible
                 anchors {left: parent.left;right: parent.right}
 
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -60,7 +92,8 @@ Dialog {
 
             Label {
                 id: portErrorLabel
-                visible: false
+                property bool error: false
+                visible: error && advancedVisible
                 anchors {left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge;rightMargin: Theme.paddingLarge}
                 color: "Red"
                 text: qsTr("Port number is invalid! Allowed port range is 1024-65535.")
@@ -74,5 +107,6 @@ Dialog {
 
     onAccepted: {
         settings.port = portField.text
+        settings.fontSize = fontSizeBox.currentIndex + 1;
     }
 }

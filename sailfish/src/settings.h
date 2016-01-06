@@ -23,6 +23,7 @@ class Settings: public QObject
     Q_OBJECT
 
     Q_PROPERTY (int port READ getPort WRITE setPort NOTIFY portChanged)
+    Q_PROPERTY (int fontSize READ getFontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY (QString zimFile READ getZimFile WRITE setZimFile NOTIFY zimFileChanged)
 
 public:
@@ -30,7 +31,8 @@ public:
 
     void setPort(int value);
     int getPort();
-
+    void setFontSize(int value);
+    int getFontSize();
     void setZimFile(const QString & value);
     QString getZimFile();
 
@@ -38,6 +40,7 @@ public:
 
 signals:
     void portChanged();
+    void fontSizeChanged();
     void zimFileChanged();
 
 private:

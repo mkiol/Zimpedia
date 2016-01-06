@@ -41,6 +41,20 @@ int Settings::getPort()
     return settings.value("port", 9091).toInt();
 }
 
+void Settings::setFontSize(int value)
+{
+    if (getFontSize() != value) {
+        settings.setValue("fontsize", value);
+        emit fontSizeChanged();
+    }
+}
+
+int Settings::getFontSize()
+{
+    return settings.value("fontsize", 1).toInt();
+}
+
+
 void Settings::setZimFile(const QString & value)
 {
     if (getZimFile() != value) {

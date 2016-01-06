@@ -13,12 +13,14 @@
 #include <QStringList>
 #include <QDir>
 #include <QFile>
+#include <QRegExp>
 
 #include <zim/fileiterator.h>
 #include <zim/blob.h>
 
 #include "zimserver.h"
 #include "settings.h"
+#include "sailfishapp.h"
 
 ZimServer::ZimServer(QObject *parent) :
     QObject(parent)
@@ -97,10 +99,53 @@ bool ZimServer::getListening()
     return isListening;
 }
 
+bool ZimServer::getResContent(const QString &filename, QByteArray &data)
+{
+#ifdef SAILFISH
+    QFile file(SailfishApp::pathTo("res/" + filename).toLocalFile());
+#elif BB10
+    QFile file(QDir::currentPath()+"/app/native/res/" + filename);
+#else
+    return false;
+#endif
+
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Could not open" << filename << "for reading: " << file.errorString();
+        file.close();
+        return false;
+    }
+
+    data = file.readAll();
+    file.close();
+
+    return true;
+}
+
+void ZimServer::setScreenSize(int width)
+{
+    //qDebug() << "setScreenSize" << width;
+    this->width = width;
+}
+
+QString ZimServer::getContentType(const QString & file)
+{
+    QStringList l = file.split(".");
+
+    QString ext = "";
+    if (l.length()>0)
+        ext = l[l.length()-1];
+
+    return ext == "css" ? "text/css; charset=utf-8" :
+           ext == "gif" ? "image/gif" :
+           ext == "png" ? "image/png" :
+           ext == "js" ? "application/x-javascript; charset=utf-8" :
+           "text/html; charset=utf-8";
+}
+
 void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 {
-    //qDebug() << "requestHandler, URL:" << req->url().toString();
-    //qDebug() << "requestHandler, URL:" << QString::fromStdString(zim::urldecode(req->url().toString().toStdString()));
+    //qDebug() << "requestHandler, URL:" << req->url().path();
+    //qDebug() << "requestHandler, URL:" << QString::fromStdString(zim::urldecode(req->url().path().toStdString()));
 
     if (!getLoaded()) {
         qWarning() << "ZIM file not loaded!";
@@ -121,7 +166,45 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
         return;
     }
 
+    // Internal Zimpedia resources, namespace = R
+    if (pathlist.at(1) == "R" || pathlist.at(1) == "r") {
+        qWarning() << "Resource namespace request!";
+        QString filename = pathlist.at(2);
+        QByteArray body;
+        if (getResContent(filename, body)) {
+            QString contentType = getContentType(filename);
+            resp->setHeader("Content-Length", QString::number(body.size()));
+            resp->setHeader("Content-Type", contentType);
+            resp->setHeader("Connection", "close");
+            resp->writeHead(200);
+            resp->end(body);
+            return;
+        } else {
+            qWarning() << "Unable to get resource file:" << filename;
+            resp->setHeader("Content-Length", "0");
+            resp->setHeader("Connection", "close");
+            resp->writeHead(404);
+            resp->end();
+            return;
+        }
+    }
+
     QString zimUrl = QStringList(pathlist.mid(1,pathlist.size()-1)).join("/");
+
+    //qDebug() << "zimUrl:" << zimUrl;
+    //qDebug() << "query:" << req->url().query();
+
+    /*QString resUrl = "";
+    if (req->url().query().contains("&modules=jquery%2Cmediawiki&only=scripts"))
+        resUrl = "/r/jquery.js";
+    if (!resUrl.isEmpty()) {
+        resp->setHeader("Content-Length", "0");
+        resp->setHeader("Location", resUrl);
+        resp->setHeader("Connection", "close");
+        resp->writeHead(302);
+        resp->end();
+        return;
+    }*/
 
     zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
 
@@ -162,6 +245,9 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
     zim::Blob zimblob = article.getData();
 
     QByteArray data(zimblob.data(), zimblob.size());
+    QString dd(data);
+    filter(dd);
+    data = dd.toUtf8();
 
     resp->setHeader("Content-Length", QString::number(data.size()));
     resp->setHeader("Content-Type", QString::fromStdString(article.getMimeType()));
@@ -174,6 +260,28 @@ QString ZimServer::getLocalUrl(const QString &zimUrl)
 {
     Settings* s = Settings::instance();
     return QString("http://localhost:%1/%2").arg(s->getPort()).arg(zimUrl);
+}
+
+void ZimServer::filter(QString &data)
+{
+    QString scale;
+    QString width;
+
+    Settings* s = Settings::instance();
+    switch (s->getFontSize()) {
+    case 1:
+        return;
+        //scale = "1"; width = "device-width"; break;
+    case 2:
+        scale = "1.3"; width = QString::number(this->width/2)+"px"; break;
+    case 3:
+        scale = "1.6"; width = QString::number(this->width/3)+"px"; break;
+    default:
+        scale = "1"; width = "device-width"; break;
+    }
+
+    QRegExp rxMetaViewport("<meta\\s[^>]*name\\s*=(\"viewport\"|'viewport')[^>]*>", Qt::CaseInsensitive);
+    data.replace(rxMetaViewport,QString("<meta name=\"viewport\" content=\"width=%1px, initial-scale=%2\">").arg(width).arg(scale));
 }
 
 void ZimServer::findTitle(const QString &title)

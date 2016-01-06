@@ -52,7 +52,8 @@ Page {
             }
 
             onClicked: {
-                console.log("model.url:",model.url);
+                //console.log("model.url:",model.url);
+                zimServer.setScreenSize(Math.min(page.width,page.height));
                 Qt.openUrlExternally(model.url);
             }
 

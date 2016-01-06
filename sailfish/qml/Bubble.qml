@@ -32,12 +32,7 @@ Rectangle {
 
     height: label.height + 2 * Theme.horizontalPageMargin
 
-    /*border {
-        width: 2
-        color: Theme.secondaryHighlightColor
-    }
-    radius: Theme.paddingSmall*/
-    color: Theme.highlightDimmerColor //"transparent"
+    color: Theme.highlightDimmerColor
 
     Label {
         id: label

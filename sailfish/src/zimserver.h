@@ -31,6 +31,7 @@ public:
     explicit ZimServer(QObject *parent = 0);
     Q_INVOKABLE bool loadZimFile();
     Q_INVOKABLE void findTitle(const QString & title);
+    Q_INVOKABLE void setScreenSize(int width);
 
     bool getLoaded();
     bool getListening();
@@ -47,8 +48,12 @@ private:
     QHttpServer * server;
     zim::File * zimfile;
     bool isListening;
+    int width;
 
     QString getLocalUrl(const QString & zimUrl);
+    bool getResContent(const QString &filename, QByteArray &data);
+    QString getContentType(const QString & file);
+    void filter(QString & data);
 };
 
 #endif // ZIMSERVER_H
