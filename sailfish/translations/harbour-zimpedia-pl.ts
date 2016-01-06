@@ -34,13 +34,9 @@
         <translation>Oprogramowanie dystrybuowane zgodnie z postanowieniami licencji Mozilla Public License w wersji 2.0</translation>
     </message>
     <message>
-        <source>This software is distributed under the terms of the Mozilla Public License v.2.0&lt;/a&gt;</source>
-        <translation type="vanished">Oprogramowanie dystrybuowane zgodnie z postanowieniami licencji Mozilla Public License w wersji 2.0.</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="82"/>
         <source>Third party components copyrights</source>
-        <translation>Prawa autorskie komponentów stron trzecich</translation>
+        <translation>Prawa autorskie stron trzecich</translation>
     </message>
 </context>
 <context>
@@ -51,18 +47,14 @@
         <translation>Wybierz plik ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="58"/>
+        <location filename="../qml/FilesPage.qml" line="59"/>
         <source>No files were found</source>
         <translation>Brak plików</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="63"/>
+        <location filename="../qml/FilesPage.qml" line="64"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM jest otwartym formatem umożliwiającym przechowywanie i korzystanie ze stron typu Wiki bez dostępu do Internetu. Zbiór ciekawych Wiki można pobrać z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze znajdującym się w katalogu domowym lub na karcie SD.</translation>
-    </message>
-    <message>
-        <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory.</source>
-        <translation type="vanished">ZIM jest otwartym formatem umożliwiającym przechowywanie i korzystanie ze stron typu Wiki bez dostępu do Internetu. Zbiór ciekawych Wiki można pobrać z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze znajdującym się w katalogu domowym lub na karcie SD.</translation>
     </message>
 </context>
 <context>
@@ -86,12 +78,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../qml/SearchPage.qml" line="66"/>
+        <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Find article, by typing in the search field</source>
         <translation>Znajdź artykuł, wpisując szukane słowo</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="92"/>
+        <location filename="../qml/SearchPage.qml" line="93"/>
         <source>Search</source>
         <translation>Szukaj</translation>
     </message>
@@ -99,22 +91,62 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="40"/>
+        <location filename="../qml/SettingsPage.qml" line="41"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="48"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>UI</source>
+        <translation>Interfejs</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Font size</source>
+        <translation>Wiekość liter</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="55"/>
+        <source>Normal</source>
+        <translation>Normalna</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="56"/>
+        <source>Large</source>
+        <translation>Duża</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="57"/>
+        <source>Extra large</source>
+        <translation>Bardzo duża</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Hide advanced options</source>
+        <translation>Ukryj zaawansowane ustawienia</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Show advanced options</source>
+        <translation>Pokaż zaawansowane ustawienia</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="71"/>
+        <source>Advanced</source>
+        <translation>Zaawansowane</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Enter port number here!</source>
         <translation>Wpisz tutaj numer portu!</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
+        <location filename="../qml/SettingsPage.qml" line="81"/>
         <source>Local server listening port number</source>
-        <translation>Numer portu na którym będzie słuchał lokalny serwer HTTP</translation>
+        <translation>Numer portu lokalnego serwera WWW</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="99"/>
         <source>Port number is invalid! Allowed port range is 1024-65535.</source>
         <translation>Numer portu nie jest prawidłowy. Prawidłowy zakres to: 1024-65535.</translation>
     </message>

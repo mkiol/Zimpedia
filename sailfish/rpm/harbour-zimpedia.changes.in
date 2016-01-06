@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Jan 06 2016 Michal Kosciesza <michal@mkiol.net> 1.0-4
+- Font size settings
+- DE translation (thanks to popanz)
+
 * Tue Jan 05 2016 Michal Kosciesza <michal@mkiol.net> 1.0-3
 - Fix for searching non-latin titles
 - CS translation (thanks to RikudouSage)
