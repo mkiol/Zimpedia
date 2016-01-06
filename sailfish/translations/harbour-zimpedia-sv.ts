@@ -98,42 +98,42 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Utseende</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Teckenstorlek</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="55"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="56"/>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Stor</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="57"/>
         <source>Extra large</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra stor</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Hide advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Dölj avancerade alternativ</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Show advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa avancerade alternativ</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="71"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancerat</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>
