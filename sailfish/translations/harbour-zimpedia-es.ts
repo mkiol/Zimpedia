@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.0" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
@@ -98,42 +98,42 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfaz</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de la fuente</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="55"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="56"/>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="57"/>
         <source>Extra large</source>
-        <translation type="unfinished"></translation>
+        <translation>Muy grande</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Hide advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar opciones avanzadas</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Show advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar opciones avanzadas</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="71"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzado</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>
