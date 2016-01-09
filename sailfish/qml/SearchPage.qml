@@ -20,22 +20,33 @@ Page {
     SilicaListView {
         id: listView
         anchors { top: parent.top; left: parent.left; right: parent.right }
+        height: page.height
         clip:true
 
-        height: page.height - panel.height
-        Behavior on height {
+        //height: page.height - panel.height
+        /*Behavior on height {
             NumberAnimation {
                 duration: 500; easing.type: Easing.OutQuad
             }
-        }
+        }*/
 
         model: articleModel
 
-        header: Spacer {}
+        //header: Spacer {}
 
         /*header: PageHeader {
             title: qsTr("")
         }*/
+
+        header: SearchField {
+            id: searchField
+            width: parent.width
+            placeholderText: qsTr("Search")
+            onTextChanged: zimServer.findTitle(text);
+        }
+
+        // prevent newly added list delegates from stealing focus away from the search field
+        currentIndex: -1
 
         delegate: ListItem {
             id: listItem
@@ -63,7 +74,7 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: listView.count == 0 && !panel.moving
+            enabled: listView.count == 0
             text: qsTr("Find article, by typing in the search field")
 
         }
@@ -76,7 +87,7 @@ Page {
         flickable: listView
     }
 
-    DockedPanel {
+    /*DockedPanel {
         id: panel
 
         width: parent.width
@@ -98,7 +109,7 @@ Page {
                 listView.focus = true;
             }
         }
-    }
+    }*/
 }
 
 
