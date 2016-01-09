@@ -47,12 +47,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="58"/>
+        <location filename="../qml/FilesPage.qml" line="59"/>
         <source>No files were found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="63"/>
+        <location filename="../qml/FilesPage.qml" line="64"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -78,12 +78,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../qml/SearchPage.qml" line="66"/>
+        <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Find article, by typing in the search field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="92"/>
+        <location filename="../qml/SearchPage.qml" line="93"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -91,22 +91,62 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="40"/>
+        <location filename="../qml/SettingsPage.qml" line="41"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="48"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="55"/>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="56"/>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="57"/>
+        <source>Extra large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Hide advanced options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Show advanced options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="71"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Enter port number here!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
+        <location filename="../qml/SettingsPage.qml" line="81"/>
         <source>Local server listening port number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="99"/>
         <source>Port number is invalid! Allowed port range is 1024-65535.</source>
         <translation type="unfinished"></translation>
     </message>

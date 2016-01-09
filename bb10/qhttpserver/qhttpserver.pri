@@ -11,7 +11,7 @@ HEADERS += \
     ./qhttpserver/qhttpserverfwd.h
 
 SOURCES += \
-    ./qhttpserver/http_parser.c \
+    ./qhttpserver/http_parser.cc \
     ./qhttpserver/qhttpconnection.cpp \
     ./qhttpserver/qhttprequest.cpp \
     ./qhttpserver/qhttpresponse.cpp \

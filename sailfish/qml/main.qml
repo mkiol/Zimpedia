@@ -15,7 +15,6 @@ import Sailfish.Silica 1.0
 ApplicationWindow {
     id: app
 
-    //initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
@@ -31,11 +30,6 @@ ApplicationWindow {
             pageStack.replaceAbove(null,Qt.resolvedUrl("FilesPage.qml"))
         }
     }
-
-    /*Connections {
-        target: settings
-        onZimFileChanged: zimServer.loadZimFile();
-    }*/
 
     Connections {
         target: zimServer

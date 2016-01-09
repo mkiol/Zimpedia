@@ -30,14 +30,9 @@ Rectangle {
         //bottomMargin: Theme.horizontalPageMargin
     }
 
-    height: label.height + 2 * Theme.paddingMedium
+    height: label.height + 2 * Theme.horizontalPageMargin
 
-    /*border {
-        width: 2
-        color: Theme.secondaryHighlightColor
-    }
-    radius: Theme.paddingSmall*/
-    color: Theme.highlightDimmerColor //"transparent"
+    color: Theme.highlightDimmerColor
 
     Label {
         id: label
@@ -45,7 +40,7 @@ Rectangle {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
-            margins: Theme.paddingMedium
+            margins: Theme.horizontalPageMargin
         }
         color: Theme.highlightColor
         wrapMode: Text.WordWrap

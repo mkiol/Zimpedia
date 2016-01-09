@@ -85,13 +85,13 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "QHTTPServer: Copyright &copy; 2011-2013 Nikhil Marathe"
+                text: "QHTTPServer - Copyright &copy; 2011-2013 Nikhil Marathe"
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "ZimLib: Copyright &copy; 2003-2010 Tommi Maekitalo"
+                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo"
             }
 
             Spacer {}

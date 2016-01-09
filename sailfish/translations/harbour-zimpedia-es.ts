@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES">
+<TS version="2.1" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
@@ -47,12 +47,12 @@
         <translation>Elegir fichero ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="58"/>
+        <location filename="../qml/FilesPage.qml" line="59"/>
         <source>No files were found</source>
         <translation>No se ha encontrado ningún fichero</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="63"/>
+        <location filename="../qml/FilesPage.qml" line="64"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM es un formato de archivo abierto que almacena el contenido wiki para usarlo sin conexión. La colección de buenos wikis pueden descargarse desde &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt; esta página &lt;/a&gt;. Si ya dispones de algunos ficheros ZIM, ubícalos en cualquier carpeta dentro del directorio Home o en la tarjeta SD.</translation>
     </message>
@@ -78,12 +78,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../qml/SearchPage.qml" line="66"/>
+        <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Find article, by typing in the search field</source>
         <translation>Buscar artículo, escribiendo en el campo de búsqueda</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="92"/>
+        <location filename="../qml/SearchPage.qml" line="93"/>
         <source>Search</source>
         <translation>Buscar</translation>
     </message>
@@ -91,22 +91,62 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="40"/>
+        <location filename="../qml/SettingsPage.qml" line="41"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="48"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="55"/>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="56"/>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="57"/>
+        <source>Extra large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Hide advanced options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="65"/>
+        <source>Show advanced options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="71"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Enter port number here!</source>
         <translation>¡Introduce el puerto aquí!</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
+        <location filename="../qml/SettingsPage.qml" line="81"/>
         <source>Local server listening port number</source>
         <translation>El servidor local está escuchando en el puerto</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="99"/>
         <source>Port number is invalid! Allowed port range is 1024-65535.</source>
         <translation>¡El puerto no es correcto! El rango de puertos permitido es 1024-65535.</translation>
     </message>
