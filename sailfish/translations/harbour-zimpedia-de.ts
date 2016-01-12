@@ -98,42 +98,42 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberfläche</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="55"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="56"/>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="57"/>
         <source>Extra large</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr groß</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Hide advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstecke fortgeschrittene Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Show advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige fortgeschrittene Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="71"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation type=>Fortgeschritten</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>
