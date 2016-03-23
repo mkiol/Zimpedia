@@ -91,7 +91,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo"
+                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo, openZIM project"
             }
 
             Spacer {}

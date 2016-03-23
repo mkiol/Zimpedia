@@ -13,20 +13,18 @@ Name:       harbour-zimpedia
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Zimpedia
-Version:    1.0
-Release:    4
+Version:    1.1
+Release:    0
 Group:      Qt/Qt
 License:    LICENSE
 URL:        https://github.com/mkiol/Zimpedia
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-zimpedia.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   zlib
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(zlib)
 BuildRequires:  desktop-file-utils
 
 %description

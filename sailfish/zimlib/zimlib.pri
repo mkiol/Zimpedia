@@ -71,6 +71,7 @@ SOURCES += \
     ./zimlib/src/zintstream.cpp \
     ./zimlib/src/md5.c
 
-#LIBS += -lzlib
+LIBS += -lz
 LIBS += -llzma
 LIBS += -lbz2
+

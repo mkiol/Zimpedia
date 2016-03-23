@@ -45,7 +45,7 @@ static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
 static const char *PAGE = "https://github.com/mkiol/Zimpedia";
 static const char *LICENSE = "http://mozilla.org/MPL/2.0/";
-static const char *VERSION = "1.0";
+static const char *VERSION = "1.1";
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {

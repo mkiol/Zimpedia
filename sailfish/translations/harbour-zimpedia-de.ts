@@ -133,7 +133,7 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="71"/>
         <source>Advanced</source>
-        <translation type=>Fortgeschritten</translation>
+        <translation>Fortgeschritten</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>

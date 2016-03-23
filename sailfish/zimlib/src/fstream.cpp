@@ -80,6 +80,7 @@ streambuf::OpenfileInfo::~OpenfileInfo()
 streambuf::FileInfo::FileInfo(const std::string& fname_, int fd)
   : fname(fname_)
 {
+#define HAVE_LSEEK64
 #if defined(_WIN32)
   __int64 ret = ::_lseeki64(fd, 0, SEEK_END);
 #elif defined(HAVE_LSEEK64)

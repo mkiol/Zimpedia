@@ -23,16 +23,7 @@ Page {
         height: page.height
         clip:true
 
-        //height: page.height - panel.height
-        /*Behavior on height {
-            NumberAnimation {
-                duration: 500; easing.type: Easing.OutQuad
-            }
-        }*/
-
         model: articleModel
-
-        //header: Spacer {}
 
         /*header: PageHeader {
             title: qsTr("")
@@ -43,6 +34,10 @@ Page {
             width: parent.width
             placeholderText: qsTr("Search")
             onTextChanged: zimServer.findTitle(text);
+            EnterKey.iconSource: "image://theme/icon-m-enter-close"
+            EnterKey.onClicked: {
+                Qt.inputMethod.hide();
+            }
         }
 
         // prevent newly added list delegates from stealing focus away from the search field
@@ -63,9 +58,8 @@ Page {
             }
 
             onClicked: {
-                //console.log("model.url:",model.url);
                 zimServer.setScreenSize(Math.min(page.width,page.height));
-                Qt.openUrlExternally(model.url);
+                Qt.openUrlExternally(encodeURI(model.url));
             }
 
             onEntered: {
@@ -86,30 +80,6 @@ Page {
     VerticalScrollDecorator {
         flickable: listView
     }
-
-    /*DockedPanel {
-        id: panel
-
-        width: parent.width
-        height: searchField.height + Theme.paddingLarge //Theme.itemSizeExtraLarge
-        open: true
-
-        dock: Dock.Bottom
-
-        TextField {
-            id: searchField
-            anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
-            anchors.left: parent.left; anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            placeholderText: qsTr("Search")
-            onTextChanged: zimServer.findTitle(text);
-
-            EnterKey.iconSource: "image://theme/icon-m-enter-close"
-            EnterKey.onClicked: {
-                listView.focus = true;
-            }
-        }
-    }*/
 }
 
 

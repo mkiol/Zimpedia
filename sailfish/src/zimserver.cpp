@@ -152,8 +152,8 @@ QString ZimServer::getContentType(const QString & file)
 
 void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 {
-    //qDebug() << "requestHandler, URL:" << req->url().path();
-    //qDebug() << "requestHandler, URL:" << QString::fromStdString(zim::urldecode(req->url().path().toStdString()));
+    //qDebug() << "requestHandler";
+    //qDebug() << "req->url():" << req->url().path() << QString::fromStdString(zim::urldecode(req->url().path().toStdString()));
 
     if (!getLoaded()) {
         qWarning() << "ZIM file not loaded!";
@@ -199,9 +199,6 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 
     QString zimUrl = QStringList(pathlist.mid(1,pathlist.size()-1)).join("/");
 
-    //qDebug() << "zimUrl:" << zimUrl;
-    //qDebug() << "query:" << req->url().query();
-
     /*QString resUrl = "";
     if (req->url().query().contains("&modules=jquery%2Cmediawiki&only=scripts"))
         resUrl = "/r/jquery.js";
@@ -225,7 +222,7 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
       return;
     }
 
-    /*qDebug() << "Url:" << QString::fromStdString(it->getLongUrl())
+    /*qDebug() << "LongUrl:" << QString::fromStdString(it->getLongUrl())
              << "Title:" << QString::fromStdString(it->getTitle())
              << "Redirection:" << it->isRedirect();*/
 
@@ -328,6 +325,7 @@ void ZimServer::findTitle(const QString &title)
     zim::File::const_iterator it = zimfile->findByTitle('A', std_title);
 
     for (int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
+        //qDebug() << QString::fromStdString(it->getLongUrl()) << QString::fromUtf8(it->getLongUrl().data());
         s->articleModel->appendRow(new ArticleItem(QString::number(i), QString::fromUtf8(it->getTitle().data()), getLocalUrl(QString::fromStdString(it->getLongUrl()))));
         ++i;
     }
