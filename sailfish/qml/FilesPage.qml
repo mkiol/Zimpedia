@@ -16,6 +16,24 @@ import harbour.zimpedia.FileModel 1.0
 Page {
     id: page
 
+    function bytesToSize(bytes) {
+       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+       if (bytes == 0) return '0 Byte';
+       var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+       return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
+    function folderName(dir) {
+        if (dir.lastIndexOf("/home/nemo/") === 0) {
+            return dir.replace("/home/nemo/", "~/");
+        }
+        if (dir.lastIndexOf("/media/sdcard/") === 0) {
+            return dir.replace(/\/media\/sdcard\/[^\/]*\//i, "[SD]/");
+        }
+
+        return dir
+    }
+
     SilicaListView {
         id: listView
         anchors { top: parent.top; left: parent.left; right: parent.right }
@@ -34,18 +52,31 @@ Page {
         delegate: ListItem {
             id: listItem
 
-            //enabled: settings.zimFile !== model.id
+            property bool active: settings.zimFile === model.id
 
             contentHeight: Theme.itemSizeMedium
 
-            Label {
-                wrapMode: Text.AlignLeft
+            Column {
                 anchors.left: parent.left; anchors.right: parent.right;
-                anchors.leftMargin: Theme.horizontalPageMargin; anchors.rightMargin: Theme.horizontalPageMargin
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: Theme.fontSizeMedium
-                color: listItem.enabled ? Theme.primaryColor : Theme.secondaryColor
-                text: model.name
+                anchors.leftMargin: Theme.horizontalPageMargin
+                anchors.verticalCenter: parent.verticalCenter; anchors.rightMargin: Theme.horizontalPageMargin
+                spacing: Theme.paddingSmall
+
+                Label {
+                    truncationMode: TruncationMode.Fade
+                    anchors.left: parent.left; anchors.right: parent.right;
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: listItem.active ? Theme.highlightColor : Theme.primaryColor
+                    text: model.name
+                }
+
+                Label {
+                    truncationMode: TruncationMode.Fade
+                    anchors.left: parent.left; anchors.right: parent.right;
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: listItem.active ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                    text: bytesToSize(model.size) + " • " + folderName(model.dir)
+                }
             }
 
             onClicked: {

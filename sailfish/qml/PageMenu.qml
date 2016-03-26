@@ -16,6 +16,10 @@ PullDownMenu {
 
     property alias showChangeZIM: changeZIMItem.visible
 
+    function fileName(path) {
+        return path.replace(/^.*[\\\/]/, '');
+    }
+
     MenuItem {
         text: qsTr("About")
         onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
@@ -30,5 +34,9 @@ PullDownMenu {
         id: changeZIMItem
         text: qsTr("Change ZIM file")
         onClicked: pageStack.push(Qt.resolvedUrl("FilesPage.qml"))
+    }
+
+    MenuLabel {
+        text: fileName(settings.zimFile)
     }
 }

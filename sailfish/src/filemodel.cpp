@@ -84,7 +84,7 @@ bool FileModel::getSearching()
 
 void FileModel::fileFoundHandler(const QFileInfo &fileInfo)
 {
-    appendRow(new FileItem(fileInfo.absoluteFilePath(), fileInfo.fileName(), fileInfo.filePath()));
+    appendRow(new FileItem(fileInfo.absoluteFilePath(), fileInfo.fileName(), fileInfo.path(), fileInfo.size()));
 }
 
 void FileModel::finderStatusHandler()
@@ -100,11 +100,13 @@ void FileModel::clear()
 FileItem::FileItem(const QString &id,
                    const QString &name,
                    const QString &dir,
+                   const qint64 size,
                    QObject *parent) :
     ListItem(parent),
     m_id(id),
     m_name(name),
-    m_dir(dir)
+    m_dir(dir),
+    m_size(size)
 {}
 
 QHash<int, QByteArray> FileItem::roleNames() const
@@ -113,6 +115,7 @@ QHash<int, QByteArray> FileItem::roleNames() const
     names[IdRole] = "id";
     names[NameRole] = "name";
     names[DirRole] = "dir";
+    names[SizeRole] = "size";
     return names;
 }
 
@@ -125,6 +128,8 @@ QVariant FileItem::data(int role) const
         return name();
     case DirRole:
         return dir();
+    case SizeRole:
+        return size();
     default:
         return QVariant();
     }

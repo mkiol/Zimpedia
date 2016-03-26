@@ -32,7 +32,8 @@ public:
     enum Roles {
         IdRole = Qt::UserRole + 1,
         NameRole = Qt::UserRole + 2,
-        DirRole = Qt::UserRole + 3
+        DirRole = Qt::UserRole + 3,
+        SizeRole = Qt::UserRole + 4
     };
 
 public:
@@ -40,17 +41,20 @@ public:
     explicit FileItem(const QString &id,
                       const QString &name,
                       const QString &dir,
+                      const qint64 size,
                       QObject *parent = 0);
     QVariant data(int role) const;
     QHash<int, QByteArray> roleNames() const;
     inline QString id() const { return m_id; }
     inline QString name() const { return m_name; }
     inline QString dir() const { return m_dir; }
+    inline qint64 size() const { return m_size; }
 
 private:
     QString m_id;
     QString m_name;
     QString m_dir;
+    qint64 m_size;
 };
 
 class FileFinder : public QThread

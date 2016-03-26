@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Mar 26 2016 Michal Kosciesza <michal@mkiol.net> 1.1-1
+- UI improvements
+
 * Wed Mar 23 2016 Michal Kosciesza <michal@mkiol.net> 1.1-0
 - Large ZIM files support for Jolla Tablet
 - DE translation update

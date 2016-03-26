@@ -14,7 +14,7 @@ Name:       harbour-zimpedia
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Zimpedia
 Version:    1.1
-Release:    0
+Release:    1
 Group:      Qt/Qt
 License:    LICENSE
 URL:        https://github.com/mkiol/Zimpedia
