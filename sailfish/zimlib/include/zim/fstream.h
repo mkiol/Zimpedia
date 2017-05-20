@@ -60,7 +60,6 @@ namespace zim
       FilesType files;
       OpenFilesCacheType openFilesCache;
       OpenfileInfoPtr currentFile;
-      zim::offset_type currentPos;
 
       std::streambuf::int_type overflow(std::streambuf::int_type ch);
       std::streambuf::int_type underflow();
@@ -75,7 +74,7 @@ namespace zim
 
       void seekg(zim::offset_type off);
       void setBufsize(unsigned s)
-      { buffer.resize(s); }
+      { buffer.resize(s); setg(0, 0, 0);}
       zim::offset_type fsize() const;
       time_t getMTime() const;
   };

@@ -20,16 +20,17 @@
 #ifndef ZIM_WRITER_ARTICLESOURCE_H
 #define ZIM_WRITER_ARTICLESOURCE_H
 
+#include <stdexcept>
+#include <zim/blob.h>
 #include <zim/zim.h>
 #include <zim/fileheader.h>
 #include <string>
 
 namespace zim
 {
-  class Blob;
-
   namespace writer
   {
+    class ArticleSource;
     class Article
     {
       public:
@@ -45,6 +46,7 @@ namespace zim
         virtual bool shouldCompress() const;
         virtual std::string getRedirectAid() const;
         virtual std::string getParameter() const;
+        virtual Blob getData() const = 0;
 
         // returns the next category id, to which the article is assigned to
         virtual std::string getNextCategory();
@@ -63,7 +65,6 @@ namespace zim
       public:
         virtual void setFilename(const std::string& fname) { }
         virtual const Article* getNextArticle() = 0;
-        virtual Blob getData(const std::string& aid) = 0;
         virtual Uuid getUuid();
         virtual std::string getMainPage();
         virtual std::string getLayoutPage();

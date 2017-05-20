@@ -80,7 +80,6 @@ streambuf::OpenfileInfo::~OpenfileInfo()
 streambuf::FileInfo::FileInfo(const std::string& fname_, int fd)
   : fname(fname_)
 {
-#define HAVE_LSEEK64
 #if defined(_WIN32)
   __int64 ret = ::_lseeki64(fd, 0, SEEK_END);
 #elif defined(HAVE_LSEEK64)
@@ -259,12 +258,12 @@ void streambuf::setCurrentFile(const std::string& fname, zim::offset_type off)
       throw std::runtime_error(msg.str());
     }
   }
+  setg(0, 0, 0);
 }
 
 void streambuf::seekg(zim::offset_type off)
 {
   setg(0, 0, 0);
-  currentPos = off;
 
   zim::offset_type o = off;
   FilesType::iterator it;
@@ -296,7 +295,7 @@ time_t streambuf::getMTime() const
 
   const char* fname = files.front()->fname.c_str();
 
-#ifdef HAVE_STAT64
+#if defined(HAVE_STAT64) && ! defined(__APPLE__)
   struct stat64 st;
   int ret = ::stat64(fname, &st);
 #else

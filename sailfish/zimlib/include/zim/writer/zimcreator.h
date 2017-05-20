@@ -33,6 +33,7 @@ namespace zim
     {
       public:
         typedef std::vector<Dirent> DirentsType;
+        typedef std::vector<DirentsType::size_type> DirentPtrsType;
         typedef std::vector<size_type> SizeVectorType;
         typedef std::vector<offset_type> OffsetsType;
         typedef std::map<std::string, uint16_t> MimeTypes;
@@ -52,10 +53,10 @@ namespace zim
         CompressionType compression;
         bool isEmpty;
         offset_type clustersSize;
+        offset_type currentSize;
 
-        void createDirents(ArticleSource& src);
+        void createDirentsAndClusters(ArticleSource& src, const std::string& tmpfname);
         void createTitleIndex(ArticleSource& src);
-        void createClusters(ArticleSource& src, const std::string& tmpfname);
         void fillHeader(ArticleSource& src);
         void write(const std::string& fname, const std::string& tmpfname);
 
@@ -84,6 +85,10 @@ namespace zim
         void setMinChunkSize(int s)   { minChunkSize = s; }
 
         void create(const std::string& fname, ArticleSource& src);
+
+        /* The user can query `currentSize` after each article has been
+         * added to the ZIM file. */
+        offset_type getCurrentSize() { return currentSize; }
     };
 
   }
