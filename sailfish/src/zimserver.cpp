@@ -31,13 +31,16 @@
 #endif
 
 ZimServer::ZimServer(QObject *parent) :
-    QObject(parent)
+    QThread(parent)
 {
     zimfile = Q_NULLPTR;
 
+    // Thread
+    QObject::connect(this, &QThread::finished, this, &ZimServer::finishedHandler);
+
     // Local HTTP server
     server = new QHttpServer;
-    connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
+    QObject::connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
             this, SLOT(requestHandler(QHttpRequest*, QHttpResponse*)));
 
     Settings* s = Settings::instance();
@@ -48,6 +51,39 @@ ZimServer::ZimServer(QObject *parent) :
     }
 
     emit listeningChanged();
+}
+
+void ZimServer::finishedHandler()
+{
+    qDebug() << "finishedHandler";
+}
+
+void ZimServer::run()
+{
+    if (!getLoaded()) {
+        qWarning() << "ZIM file not loaded!";
+        emit articleReady("");
+        return;
+    }
+
+    QString zimUrl = urlToAsyncGet;
+
+    QByteArray data;
+    QString mimeType;
+    if (!getArticle(zimUrl, data, mimeType)) {
+        emit articleReady("");
+        return;
+    }
+
+    if (mimeType == "text/html") {
+        mimeType == "text/html; charset=utf-8";
+        QString dd = QString::fromUtf8(data);
+        filter(dd);
+        emit articleReady(dd);
+        data = dd.toUtf8();
+    } else {
+        emit articleReady(QString(data));
+    }
 }
 
 bool ZimServer::loadZimFile()
@@ -129,12 +165,6 @@ bool ZimServer::getResContent(const QString &filename, QByteArray &data)
     return true;
 }
 
-void ZimServer::setScreenSize(int width)
-{
-    //qDebug() << "setScreenSize" << width;
-    this->width = width;
-}
-
 QString ZimServer::getContentType(const QString & file)
 {
     QStringList l = file.split(".");
@@ -150,10 +180,43 @@ QString ZimServer::getContentType(const QString & file)
            "text/html; charset=utf-8";
 }
 
+bool ZimServer::getArticle(const QString zimUrl, QByteArray &data, QString &mimeType)
+{
+    zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
+
+    if (it == zimfile->end()) {
+      qWarning() << "Article not found!";
+      return false;
+    }
+
+    if (it->isDeleted()) {
+      qWarning() << "Article deleted!";
+      return false;
+    }
+
+    zim::Article article = it->isRedirect() ? it->getRedirectArticle() : *it;
+    zim::Blob zimblob = article.getData();
+
+    data = QByteArray(zimblob.data(), zimblob.size());
+    mimeType = QString::fromStdString(article.getMimeType());
+
+    return true;
+}
+
+void ZimServer::getArticleAsync(const QString &zimUrl)
+{
+    QString url = QUrl(zimUrl).path();
+    if (url.startsWith("/"))
+        url = url.right(url.length()-1);
+    urlToAsyncGet = url;
+    qDebug() << "urlToAsyncGet: " + urlToAsyncGet;
+    this->start(QThread::IdlePriority);
+}
+
 void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 {
-    //qDebug() << "requestHandler";
-    //qDebug() << "req->url():" << req->url().path() << QString::fromStdString(zim::urldecode(req->url().path().toStdString()));
+    qDebug() << "requestHandler";
+    qDebug() << "req->url():" << req->url().path();
 
     if (!getLoaded()) {
         qWarning() << "ZIM file not loaded!";
@@ -198,20 +261,19 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
     }
 
     QString zimUrl = QStringList(pathlist.mid(1,pathlist.size()-1)).join("/");
+    //qDebug() << "zimUrl: " << zimUrl;
 
-    /*QString resUrl = "";
-    if (req->url().query().contains("&modules=jquery%2Cmediawiki&only=scripts"))
-        resUrl = "/r/jquery.js";
-    if (!resUrl.isEmpty()) {
+    QByteArray data;
+    QString mimeType;
+    if (!getArticle(zimUrl, data, mimeType)) {
         resp->setHeader("Content-Length", "0");
-        resp->setHeader("Location", resUrl);
         resp->setHeader("Connection", "close");
-        resp->writeHead(302);
+        resp->writeHead(404);
         resp->end();
         return;
-    }*/
+    }
 
-    zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
+    /*zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
 
     if (it == zimfile->end()) {
       qWarning() << "Article not found!";
@@ -220,7 +282,7 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
       resp->writeHead(404);
       resp->end();
       return;
-    }
+    }*/
 
     /*qDebug() << "LongUrl:" << QString::fromStdString(it->getLongUrl())
              << "Title:" << QString::fromStdString(it->getTitle())
@@ -237,28 +299,28 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
       return;
     }*/
 
-    if (it->isDeleted()) {
+    /*if (it->isDeleted()) {
       qWarning() << "Article deleted!";
       resp->setHeader("Content-Length", "0");
       resp->setHeader("Connection", "close");
       resp->writeHead(404);
       resp->end();
       return;
-    }
+    }*/
 
-    zim::Article article = it->isRedirect() ? it->getRedirectArticle() : *it;
+    /*zim::Article article = it->isRedirect() ? it->getRedirectArticle() : *it;
     zim::Blob zimblob = article.getData();
 
-    QByteArray data;
-    QString mimeType = QString::fromStdString(article.getMimeType());
-    //qDebug() << mimeType;
+    QString mimeType = QString::fromStdString(article.getMimeType());*/
+
+    //qDebug() << "MimeType: " + mimeType;
+    //qDebug() << data;
+
     if (mimeType == "text/html") {
         mimeType == "text/html; charset=utf-8";
-        QString dd = QString::fromUtf8(zimblob.data(), zimblob.size());
+        QString dd = QString::fromUtf8(data);
         filter(dd);
         data = dd.toUtf8();
-    } else {
-        data = QByteArray(zimblob.data(), zimblob.size());
     }
 
     resp->setHeader("Content-Length", QString::number(data.size()));
@@ -272,35 +334,6 @@ QString ZimServer::getLocalUrl(const QString &zimUrl)
 {
     Settings* s = Settings::instance();
     return QString("http://localhost:%1/%2").arg(s->getPort()).arg(zimUrl);
-}
-
-void ZimServer::filter(QString &data)
-{
-    QString scale;
-    QString width;
-
-    Settings* s = Settings::instance();
-    switch (s->getFontSize()) {
-    case 1:
-        return;
-        //scale = "1"; width = "device-width"; break;
-#ifdef BB10
-    case 2:
-        scale = "1.3"; width = QString::number(this->width/2.6)+"px"; break;
-    case 3:
-        scale = "1.6"; width = QString::number(this->width/3.2)+"px"; break;
-#elif SAILFISH
-    case 2:
-        scale = "1.3"; width = QString::number(this->width/2)+"px"; break;
-    case 3:
-        scale = "1.6"; width = QString::number(this->width/3)+"px"; break;
-#endif
-    default:
-        scale = "1"; width = "device-width"; break;
-    }
-
-    QRegExp rxMetaViewport("<meta\\s[^>]*name\\s*=(\"viewport\"|'viewport')[^>]*>", Qt::CaseInsensitive);
-    data.replace(rxMetaViewport,QString("<meta name=\"viewport\" content=\"width=%1px, initial-scale=%2\">").arg(width).arg(scale));
 }
 
 void ZimServer::findTitle(const QString &title)
@@ -331,4 +364,79 @@ void ZimServer::findTitle(const QString &title)
     }
 
     emit searchReady();
+}
+
+QString ZimServer::serverUrl()
+{
+    Settings* s = Settings::instance();
+    return QString("http://localhost:%1/").arg(s->getPort());
+}
+
+void ZimServer::filter(QString &data)
+{
+    int pos;
+    auto fixUrl = [](QString& url) {
+        if (url.startsWith("..")) {
+            url = url.right(url.length()-2);
+        }
+        if (url.startsWith("/")) {
+            url = url.right(url.length()-1);
+        }
+    };
+
+    // <link href=\"../-/s/css_modules/ext.kartographer.link.css\" rel=\"stylesheet\" type=\"text/css\">
+    QRegExp rxStyle("<link\\s[^>]*href\\s*=\\s*\"(\\S*)\"[^>]*>", Qt::CaseInsensitive);
+    pos = 0;
+    while (pos >= 0) {
+        pos = rxStyle.indexIn(data, pos);
+        if (pos >= 0) {
+            QString url = rxStyle.cap(1); fixUrl(url);
+            QByteArray emData; QString mimeType;
+            if (getArticle(url, emData, mimeType)) {
+                data.replace(pos, rxStyle.cap(0).length(), "<style type=\"text/css\">" + emData + "</style>");
+            } else {
+                qWarning() << "Can't get embeded style content!";
+            }
+
+            ++pos;
+        }
+    }
+
+    // <script src=\"../-/j/js_modules/startup.js\"></script>
+    QRegExp rxScript("<script\\s[^>]*src\\s*=\\s*\"(\\S*)\"[^>]*></script>", Qt::CaseInsensitive);
+    pos = 0;
+    while (pos >= 0) {
+        pos = rxScript.indexIn(data, pos);
+        if (pos >= 0) {
+            QString url = rxScript.cap(1); fixUrl(url);
+            QByteArray emData; QString mimeType;
+            if (getArticle(url, emData, mimeType)) {
+                data.replace(pos, rxScript.cap(0).length(), "<script type=\"text/javascript\">" + emData + "</script>");
+            } else {
+                qWarning() << "Can't get embeded script content!";
+            }
+
+            ++pos;
+        }
+    }
+
+    // <img src=\"../I/m/AloraMountain.JPG\" data-file-width=\"3648\" data-file-height=\"2736\" data-file-type=\"bitmap\" height=\"150\" width=\"200\" id=\"mwBQ\">
+    QRegExp rxImg("<img\\s[^>]*src\\s*=\\s*\"(\\S*)\"[^>]*>", Qt::CaseInsensitive);
+    pos = 0;
+    while (pos >= 0) {
+        pos = rxImg.indexIn(data, pos);
+        if (pos >= 0) {
+            QString url = rxImg.cap(1); fixUrl(url);
+            QByteArray emData; QString mimeType;
+            if (getArticle(url, emData, mimeType)) {
+                QString imgTag = rxImg.cap(0);
+                imgTag.replace(rxImg.cap(1),"data:"+mimeType+";base64,"+emData.toBase64());
+                data.replace(pos, rxImg.cap(0).length(), imgTag);
+            } else {
+                qWarning() << "Can't get embeded image content!";
+            }
+
+            ++pos;
+        }
+    }
 }

@@ -13,6 +13,7 @@
 #define ZIMSERVER_H
 
 #include <QObject>
+#include <QThread>
 
 #include <zim/file.h>
 
@@ -20,7 +21,7 @@
 #include <qhttprequest.h>
 #include <qhttpresponse.h>
 
-class ZimServer : public QObject
+class ZimServer : public QThread
 {
     Q_OBJECT
 
@@ -30,8 +31,9 @@ class ZimServer : public QObject
 public:
     explicit ZimServer(QObject *parent = 0);
     Q_INVOKABLE bool loadZimFile();
-    Q_INVOKABLE void findTitle(const QString & title);
-    Q_INVOKABLE void setScreenSize(int width);
+    Q_INVOKABLE void findTitle(const QString &title);
+    Q_INVOKABLE QString serverUrl();
+    Q_INVOKABLE void getArticleAsync(const QString &zimUrl);
 
     bool getLoaded();
     bool getListening();
@@ -41,20 +43,24 @@ signals:
     void loadedChanged();
     void listeningChanged();
     void searchReady();
+    void articleReady(QString article);
 
-public slots:
+private slots:
     void requestHandler(QHttpRequest *req, QHttpResponse *resp);
+    void finishedHandler();
 
 private:
     QHttpServer * server;
     zim::File * zimfile;
     bool isListening;
-    int width;
+    QString urlToAsyncGet;
 
+    void run();
     QString getLocalUrl(const QString & zimUrl);
     bool getResContent(const QString &filename, QByteArray &data);
     QString getContentType(const QString & file);
     void filter(QString & data);
+    bool getArticle(const QString zimUrl, QByteArray &data, QString &mimeType);
 };
 
 #endif // ZIMSERVER_H

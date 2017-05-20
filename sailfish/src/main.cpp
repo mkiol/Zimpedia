@@ -33,6 +33,7 @@ using namespace bb::cascades;
 #include <QQuickView>
 #include <QQmlContext>
 #include <sailfishapp.h>
+#include "iconprovider.h"
 #endif
 
 #include "zimserver.h"
@@ -45,7 +46,7 @@ static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
 static const char *PAGE = "https://github.com/mkiol/Zimpedia";
 static const char *LICENSE = "http://mozilla.org/MPL/2.0/";
-static const char *VERSION = "1.1";
+static const char *VERSION = "2.0";
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
@@ -70,6 +71,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     QQmlContext* context = view->rootContext();
     QQmlEngine* engine = view->engine();
+    engine->addImageProvider(QLatin1String("icons"), new IconProvider);
 #endif
 
 #ifdef SAILFISH

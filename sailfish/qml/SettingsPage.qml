@@ -12,20 +12,21 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Dialog {
+Page {
     id: root
 
     property bool advancedVisible: false
 
     function isPortValid() {
-      var result = parseInt(portField.text).toString()==portField.text && parseInt(portField.text) > 1023 && parseInt(portField.text) <= 65535;
+      var result = parseInt(portField.text).toString()===portField.text && parseInt(portField.text) > 1023 && parseInt(portField.text) <= 65535;
       portErrorLabel.error = !result;
       return result;
     }
 
-    canAccept: isPortValid()
+    //canAccept: isPortValid()
 
     SilicaFlickable {
+        id: flick
         anchors.fill: parent
         contentHeight: column.height
 
@@ -37,7 +38,9 @@ Dialog {
                 right: parent.right
             }
 
-            DialogHeader {
+            spacing: Theme.paddingMedium
+
+            PageHeader {
                 title: qsTr("Settings")
             }
 
@@ -46,15 +49,35 @@ Dialog {
             }
 
             ComboBox {
-                id: fontSizeBox
                 width: root.width
-                label: qsTr("Font size")
-                currentIndex: settings.fontSize - 1
+                label: qsTr("Default viewer")
+                currentIndex: settings.browser
 
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("Normal") }
-                    MenuItem { text: qsTr("Large") }
-                    MenuItem { text: qsTr("Extra large") }
+                    MenuItem { text: qsTr("Web wiew") }
+                    MenuItem { text: qsTr("External browser") }
+                }
+
+                onCurrentIndexChanged: {
+                    settings.browser = currentIndex;
+                }
+
+                description: qsTr("Wiki pages can be opened in the built-in Web View or in an external browser.")
+            }
+
+            IconSlider {
+                leftIconSource: "image://icons/icon-m-fontdown"
+                rightIconSource: "image://icons/icon-m-fontup"
+                label: qsTr("Viewer font size level")
+                minimumValue: 50
+                maximumValue: 200
+                value: Math.round(settings.zoom * 100)
+                valueText: value + "%"
+                stepSize: 10
+                onValueChanged: settings.zoom = value/100
+                onClicked: {
+                    // Default value
+                    value = 100;
                 }
             }
 
@@ -105,8 +128,12 @@ Dialog {
         }
     }
 
-    onAccepted: {
+    VerticalScrollDecorator {
+        flickable: flick
+    }
+
+    /*onAccepted: {
         settings.port = portField.text
         settings.fontSize = fontSizeBox.currentIndex + 1;
-    }
+    }*/
 }

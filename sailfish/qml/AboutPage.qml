@@ -32,7 +32,7 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "icon.png"
+                source: "image://icons/icon-i-zimpedia"
             }
 
             PaddedLabel {
@@ -54,6 +54,12 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Website");
                 onClicked: Qt.openUrlExternally(PAGE)
+            }
+
+            Button {
+                text: qsTr("Changelog")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
             }
 
             SectionHeader {

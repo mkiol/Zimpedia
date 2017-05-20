@@ -37,6 +37,7 @@ Page {
             EnterKey.iconSource: "image://theme/icon-m-enter-close"
             EnterKey.onClicked: {
                 Qt.inputMethod.hide();
+                listView.focus = true
             }
         }
 
@@ -58,12 +59,18 @@ Page {
             }
 
             onClicked: {
-                zimServer.setScreenSize(Math.min(page.width,page.height));
-                Qt.openUrlExternally(encodeURI(model.url));
+                listView.focus = true
+
+                if (settings.browser === 1) {
+                    Qt.openUrlExternally(encodeURI(model.url));
+                } else {
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                   {"url": model.url, "title": model.title});
+                }
             }
 
             onEntered: {
-                listView.focus = true;
+                listView.focus = true
             }
         }
 

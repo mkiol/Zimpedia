@@ -35,7 +35,7 @@ void FileFinder::run()
 #elif SAILFISH
     // All dirs under home directory
     const QStringList homeLocationList = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-    const QString homeLocation = homeLocationList.isEmpty() ? "/home/nemo" : homeLocationList.first();
+    const QString homeLocation = homeLocationList.first();
 #endif
     findFiles(homeLocation);
 

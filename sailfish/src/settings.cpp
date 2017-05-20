@@ -54,6 +54,25 @@ int Settings::getFontSize()
     return settings.value("fontsize", 1).toInt();
 }
 
+float Settings::getZoom()
+{
+    float size = settings.value("zoom", 1.0).toFloat();
+    return size <= 0.5 ? 0.5 : size >= 2.0 ? 2.0 : size;
+}
+
+void Settings::setZoom(float value)
+{
+    // Min value is 0.5 & max value is 2.0
+    if (value <= 0.5)
+        value = 0.5;
+    else if (value >= 2.0)
+        value = 2.0;
+
+    if (getZoom() != value) {
+        settings.setValue("zoom", value);
+        emit zoomChanged();
+    }
+}
 
 void Settings::setZimFile(const QString & value)
 {
@@ -66,4 +85,17 @@ void Settings::setZimFile(const QString & value)
 QString Settings::getZimFile()
 {
     return settings.value("zimfile", "").toString();
+}
+
+void Settings::setBrowser(int value)
+{
+    if (getBrowser() != value) {
+        settings.setValue("browser", value);
+        emit browserChanged();
+    }
+}
+
+int Settings::getBrowser()
+{
+    return settings.value("browser", 0).toInt();
 }

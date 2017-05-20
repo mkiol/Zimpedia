@@ -13,21 +13,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Column {
-        anchors.centerIn: parent
-        spacing: Theme.paddingMedium
-
-        Image {
-            anchors.horizontalCenter: parent.horizontalCenter
-            source: "icon-cover.png"
-        }
-
-        Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: APP_NAME
-        }
-
+    CoverPlaceholder {
+        text: APP_NAME
+        icon.source: "image://icons/icon-a-zimpedia"
     }
 }
-
-
