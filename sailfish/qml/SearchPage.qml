@@ -17,6 +17,11 @@ Page {
 
     property real preferredItemHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
 
+    function openUrlEntryInBrowser(url) {
+        notification.show(qsTr("Launching an external browser..."))
+        Qt.openUrlExternally(encodeURI(url))
+    }
+
     SilicaListView {
         id: listView
         anchors { top: parent.top; left: parent.left; right: parent.right }
@@ -58,19 +63,31 @@ Page {
                 text: model.title
             }
 
+            menu: ContextMenu {
+                MenuItem {
+                    text: settings.browser === 1 ? qsTr("Open in built-in viewer") : qsTr("Open in browser")
+                    onClicked: {
+                        listView.focus = true
+
+                        if (settings.browser === 1) {
+                            pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                           {"url": model.url, "title": model.title});
+                        } else {
+                            openUrlEntryInBrowser(model.url)
+                        }
+                    }
+                }
+            }
+
             onClicked: {
                 listView.focus = true
 
                 if (settings.browser === 1) {
-                    Qt.openUrlExternally(encodeURI(model.url));
+                    openUrlEntryInBrowser(model.url)
                 } else {
                     pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
                                    {"url": model.url, "title": model.title});
                 }
-            }
-
-            onEntered: {
-                listView.focus = true
             }
         }
 
@@ -80,7 +97,18 @@ Page {
 
         }
 
-        PageMenu {}
+        PageMenu {
+            onOpenMainPageClicked: {
+                listView.focus = true
+                var url = zimServer.serverUrl()+"A/mainpage";
+                if (settings.browser === 1) {
+                    openUrlEntryInBrowser(url)
+                } else {
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                   {"url": url, "title": "Main page"});
+                }
+            }
+        }
 
     }
 

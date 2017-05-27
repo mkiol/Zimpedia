@@ -1,8 +1,11 @@
 TARGET = harbour-zimpedia
 
-CONFIG += sailfishapp
+CONFIG += c++11 sailfishapp dbus
+PKGCONFIG += mlite5
 
 DEFINES += SAILFISH
+
+INCLUDEPATH += /usr/include/c++/6
 
 # QHttpServer
 include(qhttpserver/qhttpserver.pri)
@@ -14,25 +17,53 @@ SOURCES += src/main.cpp \
     src/articlemodel.cpp \
     src/listmodel.cpp \
     src/settings.cpp \
-    src/filemodel.cpp
+    src/filemodel.cpp \
+    src/utils.cpp \
+    src/iconprovider.cpp \
+    src/bookmarkmodel.cpp \
+    src/filefinder.cpp \
+    src/zimmetadatareader.cpp
     
 HEADERS += \
     src/zimserver.h \
     src/articlemodel.h \
     src/listmodel.h \
     src/settings.h \
-    src/filemodel.h
+    src/filemodel.h \
+    src/utils.h \
+    src/iconprovider.h \
+    src/bookmarkmodel.h \
+    src/filefinder.h \
+    src/zimmetadata.h \
+    src/zimmetadatareader.h
 
 OTHER_FILES += \
     qml/CoverPage.qml \
     qml/AboutPage.qml \
     qml/SettingsPage.qml \
+    qml/main.qml \
+    qml/Spacer.qml \
+    qml/PaddedLabel.qml \
+    qml/SearchPage.qml \
+    qml/FilesPage.qml \
+    qml/PageMenu.qml \
+    qml/Bubble.qml \
+    qml/ChangelogPage.qml \
+    qml/LogItem.qml \
+    qml/WebViewPage.qml \
+    qml/IconBar.qml \
+    qml/IconBarItem.qml \
+    qml/TempBaner.qml \
+    qml/ProgressPanel.qml \
+    qml/IconSlider.qml \
+    qml/Notification.qml \
+    qml/Icon.qml \
+    qml/IconPlaceholder.qml \
+    qml/ZimInfoPage.qml \
     translations/*.ts \
     harbour-zimpedia.desktop
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
-
-#CONFIG += sailfishapp_i18n
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 150x150 256x256
 
 TRANSLATIONS += translations/harbour-zimpedia-en.ts \
                 translations/harbour-zimpedia-pl.ts \
@@ -45,18 +76,13 @@ translations.files = translations
 translations.path = /usr/share/$${TARGET}
 res.files = res
 res.path = /usr/share/$${TARGET}
-INSTALLS += translations res
+images.files = images/*
+images.path = /usr/share/$${TARGET}/images
+INSTALLS += translations res images
 
 DISTFILES += \
-    qml/main.qml \
-    qml/Spacer.qml \
-    qml/PaddedLabel.qml \
-    qml/SearchPage.qml \
-    qml/FilesPage.qml \
-    qml/PageMenu.qml \
     rpm/harbour-zimpedia.changes.in \
     rpm/harbour-zimpedia.spec \
     rpm/harbour-zimpedia.yaml \
-    qml/Bubble.qml
-
-PKGCONFIG += zlib
+    qml/tools.js \
+    qml/AttValue.qml

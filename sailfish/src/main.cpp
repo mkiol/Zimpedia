@@ -41,12 +41,14 @@ using namespace bb::cascades;
 #include "settings.h"
 #include "filemodel.h"
 #include "utils.h"
+#include "filefinder.h"
+#include "zimmetadatareader.h"
 
 static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
 static const char *PAGE = "https://github.com/mkiol/Zimpedia";
 static const char *LICENSE = "http://mozilla.org/MPL/2.0/";
-static const char *VERSION = "2.0";
+static const char *VERSION = "2.0.0";
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
@@ -56,8 +58,10 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType <AbstractItemModel> ("com.kdab.components", 1, 0, "AbstractItemModel");
 #elif SAILFISH
     qmlRegisterType<FileModel>("harbour.zimpedia.FileModel", 1, 0, "FileModel");
+    qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
 #endif
     qRegisterMetaType<QFileInfo>("QFileInfo");
+    qRegisterMetaType<ZimMetaData>("ZimMetaData");
 
 #ifdef BB10
     Application app(argc, argv);

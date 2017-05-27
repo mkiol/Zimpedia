@@ -8,6 +8,15 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat May 20 2016 Michal Kosciesza <michal@mkiol.net> 2.0.0-1
+- Zimlib update to version 1.4
+- Web view
+- Open main page
+- ZIM details
+
+* Mon Mar 28 2016 Michal Kosciesza <michal@mkiol.net> 1.1-2
+- UI improvements
+
 * Sat Mar 26 2016 Michal Kosciesza <michal@mkiol.net> 1.1-1
 - UI improvements
 

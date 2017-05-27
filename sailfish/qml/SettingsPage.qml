@@ -54,15 +54,15 @@ Page {
                 currentIndex: settings.browser
 
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("Web wiew") }
-                    MenuItem { text: qsTr("External browser") }
+                    MenuItem { text: qsTr("Built-in viewer") }
+                    MenuItem { text: qsTr("Browser") }
                 }
 
                 onCurrentIndexChanged: {
                     settings.browser = currentIndex;
                 }
 
-                description: qsTr("Wiki pages can be opened in the built-in Web View or in an external browser.")
+                description: qsTr("Wiki pages can be opened in the built-in web viewer or in an external browser.")
             }
 
             IconSlider {

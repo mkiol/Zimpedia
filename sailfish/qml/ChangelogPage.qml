@@ -38,8 +38,23 @@ Page {
             }
 
             LogItem {
-                title: "Web view"
-                description: "Wiki pages can be opened in the built-in Web view or in an external browser.";
+                title: "Built-in web viewer"
+                description: "Wiki pages can be opened in the built-in web viewer or in an external browser.";
+            }
+
+            LogItem {
+                title: "Night mode"
+                description: "Night mode reduces the brightness of websites by inverting colors (heavily inspired and code partially borrowed from harbour-webpirate project).";
+            }
+
+            LogItem {
+                title: "Main page"
+                description: "If ZIM file contains main page, pull-down menu will show option to open it.";
+            }
+
+            LogItem {
+                title: "ZIM details view"
+                description: "Context menu has option to show details of ZIM repository.";
             }
 
             Spacer {}

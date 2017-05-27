@@ -21,12 +21,19 @@
 #include <qhttprequest.h>
 #include <qhttpresponse.h>
 
+#include "zimmetadata.h"
+
 class ZimServer : public QThread
 {
     Q_OBJECT
 
     Q_PROPERTY (bool loaded READ getLoaded NOTIFY loadedChanged)
     Q_PROPERTY (bool listening READ getListening NOTIFY listeningChanged)
+    Q_PROPERTY (bool hasMainPage READ getHasMainPage NOTIFY listeningChanged)
+    Q_PROPERTY (QString title READ getTitle NOTIFY listeningChanged)
+    Q_PROPERTY (QString language READ getLanguage NOTIFY listeningChanged)
+    Q_PROPERTY (QString uuid READ getUuid NOTIFY listeningChanged)
+    Q_PROPERTY (QString favicon READ getFavicon NOTIFY listeningChanged)
 
 public:
     explicit ZimServer(QObject *parent = 0);
@@ -35,8 +42,15 @@ public:
     Q_INVOKABLE QString serverUrl();
     Q_INVOKABLE void getArticleAsync(const QString &zimUrl);
 
+    static bool getArticle(zim::File *zimfile, const QString zimUrl, QByteArray &data, QString &mimeType);
+
     bool getLoaded();
     bool getListening();
+    bool getHasMainPage();
+    QString getTitle();
+    QString getLanguage();
+    QString getUuid();
+    QString getFavicon();
 
 signals:
     void error();
@@ -53,6 +67,8 @@ private:
     QHttpServer * server;
     zim::File * zimfile;
     bool isListening;
+    bool hasMainPage;
+    ZimMetaData metadata;
     QString urlToAsyncGet;
 
     void run();

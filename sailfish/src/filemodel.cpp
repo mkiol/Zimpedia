@@ -9,69 +9,12 @@
   obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include <QDir>
-#include <QFileInfoList>
-#include <QFile>
-
-#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
-#include <QStandardPaths>
-#else
-#include <QtGui/QDesktopServices>
-#endif
-
 #include "filemodel.h"
-
-FileFinder::FileFinder(QObject *parent) : QThread(parent)
-{
-}
-
-void FileFinder::run()
-{
-    // Start search for ZIM files
-
-#ifdef BB10
-    // All dirs under shared folder
-    const QString homeLocation = QDir::currentPath() + "/shared";
-#elif SAILFISH
-    // All dirs under home directory
-    const QStringList homeLocationList = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-    const QString homeLocation = homeLocationList.first();
-#endif
-    findFiles(homeLocation);
-
-    // All dirs on SD card
-#ifdef SAILFISH
-    const QString sdLocation = "/media/sdcard";
-#elif BB10
-    const QString sdLocation = QDir::currentPath() + "/shared/misc/android/external_sd";
-#endif
-    findFiles(sdLocation);
-}
-
-void FileFinder::findFiles(const QString &dirName)
-{
-    QDir dir(dirName);
-    //qDebug() << "dirName" << dirName;
-
-    if (dir.exists(dirName)) {
-        // Not following symlinks to avoid duplicates!
-        QFileInfoList infoList = dir.entryInfoList(QStringList("*.zim"),QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::NoSymLinks | QDir::Readable, QDir::DirsFirst);
-
-        Q_FOREACH(QFileInfo info, infoList) {
-            if (info.isDir()) {
-                findFiles(info.absoluteFilePath());
-            } else {
-                //qDebug() << info.absoluteFilePath();
-                emit fileFound(info);
-            }
-        }
-    }
-}
 
 FileModel::FileModel(QObject *parent) :
     ListModel(new FileItem, parent), finder(parent)
 {
-    connect(&finder, SIGNAL(fileFound(QFileInfo)), this, SLOT(fileFoundHandler(QFileInfo)));
+    connect(&finder, SIGNAL(fileFound(ZimMetaData)), this, SLOT(fileFoundHandler(ZimMetaData)));
     connect(&finder, SIGNAL(finished()), this, SLOT(finderStatusHandler()));
     connect(&finder, SIGNAL(started()), this, SLOT(finderStatusHandler()));
     finder.start(QThread::IdlePriority);
@@ -82,9 +25,13 @@ bool FileModel::getSearching()
     return finder.isRunning();
 }
 
-void FileModel::fileFoundHandler(const QFileInfo &fileInfo)
+void FileModel::fileFoundHandler(const ZimMetaData &metaData)
 {
-    appendRow(new FileItem(fileInfo.absoluteFilePath(), fileInfo.fileName(), fileInfo.path(), fileInfo.size()));
+    appendRow(new FileItem(metaData.path, metaData.name, metaData.path,
+                           metaData.time, metaData.checksum, metaData.size,
+                           metaData.title, metaData.creator, metaData.date,
+                           metaData.description, metaData.language,
+                           metaData.favicon));
 }
 
 void FileModel::finderStatusHandler()
@@ -100,13 +47,29 @@ void FileModel::clear()
 FileItem::FileItem(const QString &id,
                    const QString &name,
                    const QString &dir,
+                   const QString &time,
+                   const QString &checksum,
                    const qint64 size,
+                   const QString &title,
+                   const QString &creator,
+                   const QString &date,
+                   const QString &description,
+                   const QString &language,
+                   const QString &favicon,
                    QObject *parent) :
     ListItem(parent),
     m_id(id),
     m_name(name),
     m_dir(dir),
-    m_size(size)
+    m_time(time),
+    m_checksum(checksum),
+    m_size(size),
+    m_title(title),
+    m_creator(creator),
+    m_date(date),
+    m_description(description),
+    m_language(language),
+    m_favicon(favicon)
 {}
 
 QHash<int, QByteArray> FileItem::roleNames() const
@@ -115,7 +78,15 @@ QHash<int, QByteArray> FileItem::roleNames() const
     names[IdRole] = "id";
     names[NameRole] = "name";
     names[DirRole] = "dir";
+    names[TimeRole] = "time";
+    names[ChecksumRole] = "checksum";
     names[SizeRole] = "size";
+    names[TitleRole] = "title";
+    names[FaviconRole] = "favicon";
+    names[CreatorRole] = "creator";
+    names[DescriptionRole] = "description";
+    names[DateRole] = "date";
+    names[LanguageRole] = "language";
     return names;
 }
 
@@ -128,8 +99,24 @@ QVariant FileItem::data(int role) const
         return name();
     case DirRole:
         return dir();
+    case TimeRole:
+        return time();
+    case ChecksumRole:
+        return checksum();
     case SizeRole:
         return size();
+    case TitleRole:
+        return title();
+    case FaviconRole:
+        return favicon();
+    case CreatorRole:
+        return creator();
+    case DescriptionRole:
+        return description();
+    case DateRole:
+        return date();
+    case LanguageRole:
+        return language();
     default:
         return QVariant();
     }

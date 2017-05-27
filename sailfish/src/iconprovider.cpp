@@ -18,6 +18,12 @@
 #include <QFile>
 #include <QDir>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#include <QStandardPaths>
+#else
+#include <QtGui/QDesktopServices>
+#endif
+
 #include "iconprovider.h"
 
 IconProvider::IconProvider() : QQuickImageProvider(QQuickImageProvider::Pixmap)
@@ -46,33 +52,64 @@ IconProvider::IconProvider() : QQuickImageProvider(QQuickImageProvider::Pixmap)
         themeDir = SailfishApp::pathTo("images/z1.0").toString(QUrl::RemoveScheme);
     }
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+    cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+#else
+    cacheDir = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+#endif
 }
 
 QPixmap IconProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
+    //qDebug() << id;
+
     QStringList parts = id.split('?');
-    QString filepath = themeDir + "/" + parts.at(0) + ".png";
-    if (!QFile::exists(filepath)) {
-        // Icon file is not exist -> fallback to default icon
-        filepath = themeDir + "/icon-m-item.png";
-    }
+    QString filepath;
 
-    QPixmap sourcePixmap(filepath);
-
-    if (size)
-        *size  = sourcePixmap.size();
-
-    if (parts.length() > 1)
-        if (QColor::isValidColor(parts.at(1)))
-        {
-            QPainter painter(&sourcePixmap);
-            painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-            painter.fillRect(sourcePixmap.rect(), parts.at(1));
-            painter.end();
+    if (id.startsWith("zim-")) {
+        filepath = cacheDir + "/" + parts.at(0) + ".png";
+        if (!QFile::exists(filepath)) {
+            return QPixmap();
         }
 
-    if (requestedSize.width() > 0 && requestedSize.height() > 0)
-        return sourcePixmap.scaled(requestedSize.width(), requestedSize.height(), Qt::IgnoreAspectRatio);
-    else
-        return sourcePixmap;
+        QPixmap sourcePixmap(filepath);
+        QPixmap newPixmap(sourcePixmap.size());
+        QPainter painter(&newPixmap);
+        painter.fillRect(newPixmap.rect(), QColor(Qt::white));
+        painter.drawPixmap(newPixmap.rect(), sourcePixmap, sourcePixmap.rect());
+        painter.end();
+
+        if (size)
+            *size  = newPixmap.size();
+        if (requestedSize.width() > 0 && requestedSize.height() > 0)
+            return newPixmap.scaled(requestedSize.width(), requestedSize.height(), Qt::IgnoreAspectRatio);
+        else
+            return newPixmap;
+
+    } else {
+        filepath = themeDir + "/" + parts.at(0) + ".png";
+        if (!QFile::exists(filepath)) {
+            // Icon file is not exist -> fallback to default icon
+            filepath = themeDir + "/icon-m-item.png";
+        }
+
+        QPixmap sourcePixmap(filepath);
+
+        if (size)
+            *size  = sourcePixmap.size();
+
+        if (parts.length() > 1)
+            if (QColor::isValidColor(parts.at(1))) {
+                QPainter painter(&sourcePixmap);
+                painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+                painter.fillRect(sourcePixmap.rect(), parts.at(1));
+                painter.end();
+            }
+
+        if (requestedSize.width() > 0 && requestedSize.height() > 0)
+            return sourcePixmap.scaled(requestedSize.width(), requestedSize.height(), Qt::IgnoreAspectRatio);
+        else
+            return sourcePixmap;
+    }
 }

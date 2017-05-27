@@ -14,7 +14,9 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
     CoverPlaceholder {
-        text: APP_NAME
-        icon.source: "image://icons/icon-a-zimpedia"
+        text: zimServer.loaded ? zimServer.title + " (" + zimServer.language + ")" : APP_NAME
+        icon.source: zimServer.loaded ? zimServer.favicon : "image://icons/icon-a-zimpedia"
+        icon.width: Theme.iconSizeLarge
+        icon.height: Theme.iconSizeLarge
     }
 }

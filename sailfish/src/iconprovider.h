@@ -25,6 +25,7 @@ public:
 
 private:
     QString themeDir;
+    QString cacheDir;
 };
 
 #endif // ICONPROVIDER_H

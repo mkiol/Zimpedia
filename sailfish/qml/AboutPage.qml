@@ -69,7 +69,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "Copyright &copy; 2016 Michal Kosciesza"
+                text: "Copyright &copy; 2016-1017 Michal Kosciesza"
             }
 
             PaddedLabel {

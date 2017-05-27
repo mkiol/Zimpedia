@@ -12,28 +12,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.zimpedia.FileModel 1.0
+import "tools.js" as Tools
 
 Page {
     id: page
-
-    function bytesToSize(bytes) {
-       var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-       if (bytes == 0) return '0 B';
-       var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-       return Math.round((bytes / Math.pow(1024, i))*100)/100 + ' ' + sizes[i];
-    }
-
-    function folderName(dir) {
-        var home = utils.homeDir() + "/";
-        if (dir.lastIndexOf(home) === 0) {
-            return dir.replace(home, "~/");
-        }
-        if (dir.lastIndexOf("/media/sdcard/") === 0) {
-            return dir.replace(/\/media\/sdcard\/[^\/]*\//i, "[SD Card]/");
-        }
-
-        return dir
-    }
 
     SilicaListView {
         id: listView
@@ -57,26 +39,72 @@ Page {
 
             contentHeight: Theme.itemSizeMedium
 
+            /*Rectangle {
+                anchors.fill: parent
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightColor, 0.0) }
+                    GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightColor, 0.1) }
+                }
+                visible: listItem.active
+            }*/
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Show details")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"),
+                                       {"path": model.dir,
+                                       "icon": model.favicon,
+                                       "title": model.title});
+                    }
+                }
+            }
+
+            Icon {
+                id: icon
+                anchors {
+                    left: parent.left
+                    leftMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                showPlaceholder: true
+                source: model.favicon
+                text: model.title
+                height: Theme.iconSizeMedium
+                width: Theme.iconSizeMedium
+            }
+
             Column {
-                anchors.left: parent.left; anchors.right: parent.right;
-                anchors.leftMargin: Theme.horizontalPageMargin
-                anchors.verticalCenter: parent.verticalCenter; anchors.rightMargin: Theme.horizontalPageMargin
+                anchors {
+                    left: icon.right
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: Theme.paddingLarge
+                    rightMargin: Theme.paddingLarge
+                }
                 spacing: Theme.paddingSmall
 
                 Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
                     truncationMode: TruncationMode.Fade
-                    anchors.left: parent.left; anchors.right: parent.right;
                     font.pixelSize: Theme.fontSizeMedium
-                    color: listItem.active ? Theme.highlightColor : Theme.primaryColor
-                    text: model.name
+                    color: listItem.active || listItem.down ? Theme.highlightColor : Theme.primaryColor
+                    text: model.title + " (" + model.language + ")"
                 }
 
                 Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
                     truncationMode: TruncationMode.Fade
-                    anchors.left: parent.left; anchors.right: parent.right;
                     font.pixelSize: Theme.fontSizeExtraSmall
-                    color: listItem.active ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    text: bytesToSize(model.size) + " • " + folderName(model.dir)
+                    color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                    //text: Tools.bytesToSize(model.size) + " • " + Tools.friendlyPath(model.dir, utils.homeDir())
+                    text: Tools.friendlyPath(model.dir, utils.homeDir())
                 }
             }
 
@@ -99,6 +127,8 @@ Page {
         PageMenu {
             id: menu
             showChangeZIM: false
+            showOpenMainPage: false
+            showTitle: false
         }
     }
 
