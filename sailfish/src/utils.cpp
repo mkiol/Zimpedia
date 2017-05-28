@@ -9,17 +9,35 @@
   obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <QStringList>
+
 #ifdef BB10
 #include <bps/navigator.h>
 #include <bb/platform/PlatformInfo>
-#include <QString>
-#include <QStringList>
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#include <QStandardPaths>
+#else
+#include <QtGui/QDesktopServices>
 #endif
 
 #include "utils.h"
 
 Utils::Utils(QObject *parent) : QObject(parent)
 {}
+
+const QString Utils::homeDir()
+{
+#ifdef BB10
+    // shared folder
+    const QString homeLocation = QDir::currentPath() + "/shared";
+#elif SAILFISH
+    const QStringList homeLocationList = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    const QString homeLocation = homeLocationList.first();
+#endif
+    return homeLocation;
+}
 
 #ifdef BB10
 void Utils::launchBrowser(const QString &url)

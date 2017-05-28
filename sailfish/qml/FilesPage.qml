@@ -12,6 +12,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.zimpedia.FileModel 1.0
+import "tools.js" as Tools
 
 Page {
     id: page
@@ -34,18 +35,77 @@ Page {
         delegate: ListItem {
             id: listItem
 
-            //enabled: settings.zimFile !== model.id
+            property bool active: settings.zimFile === model.id
 
             contentHeight: Theme.itemSizeMedium
 
-            Label {
-                wrapMode: Text.AlignLeft
-                anchors.left: parent.left; anchors.right: parent.right;
-                anchors.leftMargin: Theme.horizontalPageMargin; anchors.rightMargin: Theme.horizontalPageMargin
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: Theme.fontSizeMedium
-                color: listItem.enabled ? Theme.primaryColor : Theme.secondaryColor
-                text: model.name
+            /*Rectangle {
+                anchors.fill: parent
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightColor, 0.0) }
+                    GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightColor, 0.1) }
+                }
+                visible: listItem.active
+            }*/
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Show details")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"),
+                                       {"path": model.dir,
+                                       "icon": model.favicon,
+                                       "title": model.title});
+                    }
+                }
+            }
+
+            Icon {
+                id: icon
+                anchors {
+                    left: parent.left
+                    leftMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                showPlaceholder: true
+                source: model.favicon
+                text: model.title
+                height: Theme.iconSizeMedium
+                width: Theme.iconSizeMedium
+            }
+
+            Column {
+                anchors {
+                    left: icon.right
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: Theme.paddingLarge
+                    rightMargin: Theme.paddingLarge
+                }
+                spacing: Theme.paddingSmall
+
+                Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: listItem.active || listItem.down ? Theme.highlightColor : Theme.primaryColor
+                    text: model.title + " (" + model.language + ")"
+                }
+
+                Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                    //text: Tools.bytesToSize(model.size) + " • " + Tools.friendlyPath(model.dir, utils.homeDir())
+                    text: Tools.friendlyPath(model.dir, utils.homeDir())
+                }
             }
 
             onClicked: {
@@ -67,8 +127,9 @@ Page {
         PageMenu {
             id: menu
             showChangeZIM: false
+            showOpenMainPage: false
+            showTitle: false
         }
-
     }
 
     BusyIndicator {

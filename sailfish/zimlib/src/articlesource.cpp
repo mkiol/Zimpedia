@@ -17,6 +17,7 @@
  *
  */
 
+#include <zim/blob.h>
 #include <zim/writer/articlesource.h>
 
 namespace zim

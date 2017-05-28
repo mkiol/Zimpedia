@@ -2,9 +2,6 @@
 
 Offline reader for Wikipedia and other Wiki projects.
 
-![Screenshots: Sailfish OS](https://raw.githubusercontent.com/mkiol/Zimpedia/master/screenshots/jolla.png)
-![Screenshots: BB10](https://raw.githubusercontent.com/mkiol/Zimpedia/master/screenshots/bb10.png)
-
 ## Description
 Zimpedia provides localhost HTTP server that serves content of
 local [ZIM](https://en.wikipedia.org/wiki/ZIM_%28file_format%29) repository.
@@ -13,8 +10,11 @@ Its primary focus is on the contents of Wikipedia but also other Wiki projects
 like Wikivoyage are supported.
 
 ## Downloads
-The binary packages for Jolla phone and Jolla tablet can be downloaded
-from [OpenRepos](https://openrepos.net/content/mkiol/zimpedia).
+Binary packages for Jolla phone and Jolla tablet can be downloaded
+from [OpenRepos](https://openrepos.net/content/mkiol/zimpedia) and Jolla Store.
+
+Package for BlackBerry 10 devices can be downloaded 
+from [BlackBerry World](https://appworld.blackberry.com/webstore/content/59988411).
 
 ## ZIM repositories downloads
 * Wikipedia dumps can be downloaded from

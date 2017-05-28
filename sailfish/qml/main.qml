@@ -39,5 +39,9 @@ ApplicationWindow {
     Component.onCompleted: {
         zimServer.loadZimFile();
     }
+
+    Notification {
+        id: notification
+    }
 }
 

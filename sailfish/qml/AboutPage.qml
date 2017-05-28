@@ -32,7 +32,7 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "icon.png"
+                source: "image://icons/icon-i-zimpedia"
             }
 
             PaddedLabel {
@@ -56,6 +56,12 @@ Page {
                 onClicked: Qt.openUrlExternally(PAGE)
             }
 
+            Button {
+                text: qsTr("Changelog")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
+            }
+
             SectionHeader {
                 text: qsTr("Copyright & license")
             }
@@ -63,7 +69,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "Copyright &copy; 2016 Michal Kosciesza"
+                text: "Copyright &copy; 2016-1017 Michal Kosciesza"
             }
 
             PaddedLabel {
@@ -91,7 +97,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo"
+                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo, openZIM project"
             }
 
             Spacer {}

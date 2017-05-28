@@ -17,22 +17,18 @@ Page {
 
     property real preferredItemHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
 
+    function openUrlEntryInBrowser(url) {
+        notification.show(qsTr("Launching an external browser..."))
+        Qt.openUrlExternally(encodeURI(url))
+    }
+
     SilicaListView {
         id: listView
         anchors { top: parent.top; left: parent.left; right: parent.right }
         height: page.height
         clip:true
 
-        //height: page.height - panel.height
-        /*Behavior on height {
-            NumberAnimation {
-                duration: 500; easing.type: Easing.OutQuad
-            }
-        }*/
-
         model: articleModel
-
-        //header: Spacer {}
 
         /*header: PageHeader {
             title: qsTr("")
@@ -43,6 +39,11 @@ Page {
             width: parent.width
             placeholderText: qsTr("Search")
             onTextChanged: zimServer.findTitle(text);
+            EnterKey.iconSource: "image://theme/icon-m-enter-close"
+            EnterKey.onClicked: {
+                Qt.inputMethod.hide();
+                listView.focus = true
+            }
         }
 
         // prevent newly added list delegates from stealing focus away from the search field
@@ -62,14 +63,31 @@ Page {
                 text: model.title
             }
 
-            onClicked: {
-                //console.log("model.url:",model.url);
-                zimServer.setScreenSize(Math.min(page.width,page.height));
-                Qt.openUrlExternally(model.url);
+            menu: ContextMenu {
+                MenuItem {
+                    text: settings.browser === 1 ? qsTr("Open in built-in viewer") : qsTr("Open in browser")
+                    onClicked: {
+                        listView.focus = true
+
+                        if (settings.browser === 1) {
+                            pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                           {"url": model.url, "title": model.title});
+                        } else {
+                            openUrlEntryInBrowser(model.url)
+                        }
+                    }
+                }
             }
 
-            onEntered: {
-                listView.focus = true;
+            onClicked: {
+                listView.focus = true
+
+                if (settings.browser === 1) {
+                    openUrlEntryInBrowser(model.url)
+                } else {
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                   {"url": model.url, "title": model.title});
+                }
             }
         }
 
@@ -79,37 +97,24 @@ Page {
 
         }
 
-        PageMenu {}
+        PageMenu {
+            onOpenMainPageClicked: {
+                listView.focus = true
+                var url = zimServer.serverUrl()+"A/mainpage";
+                if (settings.browser === 1) {
+                    openUrlEntryInBrowser(url)
+                } else {
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
+                                   {"url": url, "title": "Main page"});
+                }
+            }
+        }
 
     }
 
     VerticalScrollDecorator {
         flickable: listView
     }
-
-    /*DockedPanel {
-        id: panel
-
-        width: parent.width
-        height: searchField.height + Theme.paddingLarge //Theme.itemSizeExtraLarge
-        open: true
-
-        dock: Dock.Bottom
-
-        TextField {
-            id: searchField
-            anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
-            anchors.left: parent.left; anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            placeholderText: qsTr("Search")
-            onTextChanged: zimServer.findTitle(text);
-
-            EnterKey.iconSource: "image://theme/icon-m-enter-close"
-            EnterKey.onClicked: {
-                listView.focus = true;
-            }
-        }
-    }*/
 }
 
 

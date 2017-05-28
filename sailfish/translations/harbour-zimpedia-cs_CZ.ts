@@ -98,42 +98,42 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafické rozhraní</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost písma</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="55"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="56"/>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Velké</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="57"/>
         <source>Extra large</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra velké</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Hide advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt pokročilé možnosti</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="65"/>
         <source>Show advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit pokročilé možnosti</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="71"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokročilé</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>
