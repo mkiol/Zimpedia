@@ -13,7 +13,7 @@
 
 #include "settings.h"
 
-Settings* Settings::inst = 0;
+Settings* Settings::inst = Q_NULLPTR;
 
 Settings::Settings(QObject *parent) : QObject(parent), settings()
 {
@@ -21,7 +21,7 @@ Settings::Settings(QObject *parent) : QObject(parent), settings()
 
 Settings* Settings::instance()
 {
-    if (Settings::inst == NULL) {
+    if (Settings::inst == Q_NULLPTR) {
         Settings::inst = new Settings();
     }
 

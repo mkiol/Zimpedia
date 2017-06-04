@@ -16,6 +16,12 @@
 #include <QFileInfo>
 #include <QDebug>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#include <QStandardPaths>
+#else
+#include <QtGui/QDesktopServices>
+#endif
+
 #include <zim/file.h>
 
 #include <string>
@@ -23,8 +29,40 @@
 #include "filefinder.h"
 #include "zimserver.h"
 
+FileFinder* FileFinder::inst = Q_NULLPTR;
+
 FileFinder::FileFinder(QObject *parent) : QThread(parent)
 {
+    connect(this, &QThread::finished, this, &FileFinder::finishedHandler);
+    connect(this, &QThread::started, this, &FileFinder::startedHandler);
+    init();
+}
+
+void FileFinder::init()
+{
+    files.clear();
+    this->start(QThread::IdlePriority);
+}
+
+void FileFinder::startedHandler()
+{
+    busy = true;
+    emit busyChanged();
+}
+
+void FileFinder::finishedHandler()
+{
+    busy = false;
+    emit busyChanged();
+}
+
+FileFinder* FileFinder::instance()
+{
+    if (FileFinder::inst == Q_NULLPTR) {
+        FileFinder::inst = new FileFinder();
+    }
+
+    return FileFinder::inst;
 }
 
 void FileFinder::run()
@@ -77,9 +115,12 @@ void FileFinder::findFiles(const QString &dirName)
                 metaData.fields =
                         ZimMetaData::Title |
                         ZimMetaData::Language |
-                        ZimMetaData::Favicon;
-                if (FileFinder::scanZimFile(metaData))
+                        ZimMetaData::Favicon |
+                        ZimMetaData::Checksum;
+                if (FileFinder::scanZimFile(metaData)) {
+                    files.insert(metaData.checksum, metaData);
                     emit fileFound(metaData);
+                }
             }
         }
     }
@@ -100,14 +141,19 @@ bool FileFinder::scanZimFile(ZimMetaData &metaData)
         return false;
     }
 
+
+    metaData.filename = QFileInfo(metaData.path).fileName();
+    metaData.checksum = QString::fromStdString(zimfile->getChecksum());
+    if (metaData.checksum == "") {
+        qWarning() << "Metadata Checksum is missing!";
+        metaData.checksum = metaData.filename.toLocal8Bit().toHex();
+        qDebug() << "Hex checksum:" << metaData.checksum;
+    }
+
     if (metaData.fields & ZimMetaData::Time)
         metaData.time = QDateTime::fromTime_t(zimfile->getMTime()).toLocalTime().toString("d MMMM yyyy");
-    if (metaData.fields & ZimMetaData::Checksum)
-        metaData.checksum = QString::fromStdString(zimfile->getChecksum());
     if (metaData.fields & ZimMetaData::Size)
         metaData.size = QFileInfo(metaData.path).size();
-    if (metaData.fields & ZimMetaData::Filename)
-        metaData.filename = QFileInfo(metaData.path).fileName();
     if (metaData.fields & ZimMetaData::ArticleCount)
         metaData.article_count = zimfile->getCountArticles();
 
@@ -120,10 +166,12 @@ bool FileFinder::scanZimFile(ZimMetaData &metaData)
             qWarning() << "Metadata Name is missing!";
     }
     if (metaData.fields & ZimMetaData::Title) {
-        if (ZimServer::getArticle(zimfile, "M/Title", data, mimeType))
+        if (ZimServer::getArticle(zimfile, "M/Title", data, mimeType)) {
             metaData.title = QString::fromUtf8(data);
-        else
+        } else {
             qWarning() << "Metadata Title is missing!";
+            metaData.title = metaData.filename;
+        }
     }
     if (metaData.fields & ZimMetaData::Creator) {
         if (ZimServer::getArticle(zimfile, "M/Creator", data, mimeType))
@@ -169,8 +217,7 @@ bool FileFinder::scanZimFile(ZimMetaData &metaData)
     }
     if (metaData.fields & ZimMetaData::Favicon) {
         if (ZimServer::getArticle(zimfile, "-/favicon", data, mimeType)) {
-            QString checksum = metaData.checksum != "" ? metaData.checksum : QString::fromStdString(zimfile->getChecksum());
-            QString filename = "zim-favicon-" + checksum;
+            QString filename = "zim-favicon-" + metaData.checksum ;
     #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
             const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     #else

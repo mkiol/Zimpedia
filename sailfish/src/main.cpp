@@ -43,6 +43,8 @@ using namespace bb::cascades;
 #include "utils.h"
 #include "filefinder.h"
 #include "zimmetadatareader.h"
+#include "bookmarkmodel.h"
+#include "bookmarks.h"
 
 static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
@@ -59,6 +61,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 #elif SAILFISH
     qmlRegisterType<FileModel>("harbour.zimpedia.FileModel", 1, 0, "FileModel");
     qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
+    qmlRegisterType<BookmarkModel>("harbour.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
 #endif
     qRegisterMetaType<QFileInfo>("QFileInfo");
     qRegisterMetaType<ZimMetaData>("ZimMetaData");
@@ -95,6 +98,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("LICENSE", LICENSE);
 
     Settings* s = Settings::instance();
+    Bookmarks* b = Bookmarks::instance();
     ZimServer zimServer;
     ArticleModel articleModel;
     Utils utils;
@@ -104,6 +108,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("zimServer", &zimServer);
     context->setContextProperty("articleModel", &articleModel);
     context->setContextProperty("utils", &utils);
+    context->setContextProperty("bookmarks", b);
 
     QObject::connect(engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
 

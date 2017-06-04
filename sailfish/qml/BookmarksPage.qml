@@ -1,0 +1,135 @@
+/*
+  Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
+
+  This file is part of Zimpedia application.
+
+  This Source Code Form is subject to the terms of
+  the Mozilla Public License, v.2.0. If a copy of
+  the MPL was not distributed with this file, You can
+  obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+import QtQuick 2.2
+import Sailfish.Silica 1.0
+import harbour.zimpedia.BookmarkModel 1.0
+
+Page {
+    id: root
+    objectName: "bookmarks"
+
+    BookmarkModel {
+        id: bookmarkModel
+    }
+
+    SilicaListView {
+        id: listView
+
+        anchors.fill: parent
+        model: bookmarkModel
+        header: PageHeader {
+            title: qsTr("Bookmarks")
+        }
+
+        delegate: ListItem {
+            id: listItem
+
+            contentHeight: Theme.itemSizeMedium
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Edit")
+                    onClicked: {
+                        var obj = pageStack.push(Qt.resolvedUrl("BookmarkEditPage.qml"),
+                                    {"url": url,
+                                     "title": model.title,
+                                     "favicon": model.favicon,
+                                     "valid": model.valid,
+                                     "zimTitle": model.zimTitle,
+                                     "zimLanguage": model.zimLanguage,
+                                     "zimUuid": model.zimUuid,
+                                    });
+                        obj.accepted.connect(function(){bookmarkModel.refreshModel()})
+                    }
+                }
+                MenuItem {
+                    text: qsTr("Delete")
+                    onClicked: {
+                        bookmarks.deleteBookmark(model.url)
+                        bookmarkModel.refreshModel()
+                    }
+                }
+            }
+
+            Icon {
+                id: icon
+                anchors {
+                    left: parent.left
+                    leftMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                showPlaceholder: true
+                source: model.valid ? model.favicon : ""
+                text: model.valid ? model.zimTitle : "?"
+                height: Theme.iconSizeMedium
+                width: Theme.iconSizeMedium
+            }
+
+            Column {
+                anchors {
+                    left: icon.right
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: Theme.paddingLarge
+                    rightMargin: Theme.paddingLarge
+                }
+                spacing: Theme.paddingSmall
+
+                Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: listItem.active || listItem.down ? Theme.highlightColor : model.valid ? Theme.primaryColor : Theme.secondaryColor
+                    text: model.title
+                }
+
+                Label {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    truncationMode: TruncationMode.Fade
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                    text: model.valid ? model.zimTitle + (model.zimLanguage === "" ? "" : " (" + model.zimLanguage + ")") :
+                                        qsTr("ZIM file is missing")
+                    font.italic: !model.valid
+                }
+            }
+
+            onClicked: {
+                if (model.valid)
+                    zimServer.openUrl(model.url, model.title)
+                else
+                    notification.show(qsTr("Bookmark's ZIM file is missing"))
+            }
+        }
+
+        ViewPlaceholder {
+            enabled: listView.count == 0 && !bookmarkModel.busy
+            text: qsTr("No bookmarks")
+        }
+    }
+
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: bookmarkModel.busy
+        size: BusyIndicatorSize.Large
+    }
+
+    VerticalScrollDecorator {
+        flickable: listView
+    }
+}

@@ -22,11 +22,11 @@
 
 #include "listmodel.h"
 #include "filefinder.h"
+#include "zimmetadata.h"
 
 class FileItem : public ListItem
 {
     Q_OBJECT
-
 public:
     enum Roles {
         IdRole = Qt::UserRole + 1,
@@ -90,22 +90,23 @@ private:
 class FileModel : public ListModel
 {
     Q_OBJECT
-    Q_PROPERTY (bool searching READ getSearching NOTIFY searchingChanged)
+    Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
 
 public:
     explicit FileModel(QObject *parent = 0);
+    Q_INVOKABLE void init(bool refresh);
     void clear();
-    bool getSearching();
+    bool getBusy();
 
 signals:
-    void searchingChanged();
+    void busyChanged();
 
 public slots:
     void fileFoundHandler(const ZimMetaData &metaData);
-    void finderStatusHandler();
+    void finderBusyHandler();
 
 private:
-    FileFinder finder;
+    bool busy = false;
 };
 
 #endif // FILEMODEL_H

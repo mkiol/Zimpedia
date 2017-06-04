@@ -16,7 +16,7 @@ Item {
     id: root
 
     property alias att: _att.text
-    property alias value: _value.text
+    property string value: ""
     property alias attColor: _att.color
     property alias valueColor: _value.color
 
@@ -48,5 +48,7 @@ Item {
         truncationMode: TruncationMode.Fade
         font.pixelSize: Theme.fontSizeSmall
         color: Theme.highlightColor
+        text: root.value === "" ? "-" : root.value
+        font.italic: root.value === ""
     }
 }
