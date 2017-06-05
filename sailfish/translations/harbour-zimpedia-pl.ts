@@ -26,7 +26,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
         <source>Changelog</source>
-        <translation>Dziennik zmian</translation>
+        <translation>Zmiany</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
