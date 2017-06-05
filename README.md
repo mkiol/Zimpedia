@@ -23,6 +23,11 @@ from [BlackBerry World](https://appworld.blackberry.com/webstore/content/5998841
 from [Kiwix project](http://www.kiwix.org/wiki/Content_in_all_languages)
 website.
 
+## Translations
+If you would like to contribute to the project by doing translation, feel free to make pull request 
+with new [translation file](https://github.com/mkiol/Zimpedia/tree/master/sailfish/translations) or 
+add translation using [Transifex](https://www.transifex.com/mkiol/zimpedia/) service.
+
 ## Third-party components
 Zimpedia uses and completely relies on following third-party open source
 components:
