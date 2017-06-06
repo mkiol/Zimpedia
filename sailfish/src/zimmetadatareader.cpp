@@ -74,6 +74,11 @@ QString ZimMetaDataReader::getSource()
     return this->m_data.source;
 }
 
+QString ZimMetaDataReader::getChecksum()
+{
+    return this->m_data.checksum;
+}
+
 /*QString ZimMetaDataReader::getVersion()
 {
     return this->m_data.version;
@@ -106,7 +111,8 @@ void ZimMetaDataReader::setPath(const QString &path)
                 ZimMetaData::Tags |
                 ZimMetaData::Source |
                 ZimMetaData::Filename |
-                ZimMetaData::ArticleCount;
+                ZimMetaData::ArticleCount |
+                ZimMetaData::Checksum;
         if (!FileFinder::scanZimFile(this->m_data)) {
             qWarning() << "Error while getting ZIM file info!";
             return;

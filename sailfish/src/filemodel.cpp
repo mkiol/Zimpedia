@@ -12,17 +12,17 @@
 #include "filemodel.h"
 
 FileModel::FileModel(QObject *parent) :
-    ListModel(new FileItem, parent), finder(parent)
+    ListModel(new FileItem, parent)
 {
-    connect(&finder, SIGNAL(fileFound(ZimMetaData)), this, SLOT(fileFoundHandler(ZimMetaData)));
-    connect(&finder, SIGNAL(finished()), this, SLOT(finderStatusHandler()));
-    connect(&finder, SIGNAL(started()), this, SLOT(finderStatusHandler()));
-    finder.start(QThread::IdlePriority);
+    FileFinder* f = FileFinder::instance();
+    //connect(f, &FileFinder::fileFound, this, &FileModel::fileFoundHandler);
+    connect(f, &FileFinder::busyChanged, this, &FileModel::finderBusyHandler);
+    //init();
 }
 
-bool FileModel::getSearching()
+bool FileModel::getBusy()
 {
-    return finder.isRunning();
+    return busy;
 }
 
 void FileModel::fileFoundHandler(const ZimMetaData &metaData)
@@ -34,9 +34,33 @@ void FileModel::fileFoundHandler(const ZimMetaData &metaData)
                            metaData.favicon));
 }
 
-void FileModel::finderStatusHandler()
+void FileModel::finderBusyHandler()
 {
-    emit searchingChanged();
+    FileFinder* f = FileFinder::instance();
+    if (!f->busy) {
+        for (auto file : f->files) {
+            fileFoundHandler(file);
+        }
+
+        busy = false;
+        emit busyChanged();
+    }
+}
+
+void FileModel::init(bool refresh = true)
+{
+    FileFinder* f = FileFinder::instance();
+
+    if (refresh) {
+        busy = true;
+        emit busyChanged();
+        clear();
+        f->init();
+    } else {
+        clear();
+        for (auto file : f->files)
+            fileFoundHandler(file);
+    }
 }
 
 void FileModel::clear()

@@ -14,13 +14,9 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    objectName: "search"
 
     property real preferredItemHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
-
-    function openUrlEntryInBrowser(url) {
-        notification.show(qsTr("Launching an external browser..."))
-        Qt.openUrlExternally(encodeURI(url))
-    }
 
     SilicaListView {
         id: listView
@@ -59,6 +55,7 @@ Page {
                 anchors.left: parent.left; anchors.right: parent.right;
                 anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
                 anchors.verticalCenter: parent.verticalCenter
+                truncationMode: TruncationMode.Fade
                 font.pixelSize: Theme.fontSizeMedium
                 text: model.title
             }
@@ -70,11 +67,17 @@ Page {
                         listView.focus = true
 
                         if (settings.browser === 1) {
-                            pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
-                                           {"url": model.url, "title": model.title});
+                            pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
                         } else {
-                            openUrlEntryInBrowser(model.url)
+                            app.openUrlEntryInBrowser(model.url)
                         }
+                    }
+                }
+                MenuItem {
+                    text: qsTr("Add to bookmarks")
+                    onClicked: {
+                        listView.focus = true
+                        bookmarks.addBookmark(model.title, model.url, zimServer.favicon)
                     }
                 }
             }
@@ -83,10 +86,9 @@ Page {
                 listView.focus = true
 
                 if (settings.browser === 1) {
-                    openUrlEntryInBrowser(model.url)
+                    app.openUrlEntryInBrowser(model.url)
                 } else {
-                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
-                                   {"url": model.url, "title": model.title});
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
                 }
             }
         }
@@ -97,15 +99,67 @@ Page {
 
         }
 
-        PageMenu {
-            onOpenMainPageClicked: {
-                listView.focus = true
-                var url = zimServer.serverUrl()+"A/mainpage";
-                if (settings.browser === 1) {
-                    openUrlEntryInBrowser(url)
-                } else {
-                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),
-                                   {"url": url, "title": "Main page"});
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("About")
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Change ZIM file")
+                onClicked: pageStack.push(Qt.resolvedUrl("FilesPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Bookmarks")
+                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Open main page")
+                visible: zimServer.hasMainPage
+                onClicked: {
+                    listView.focus = true
+                    var url = zimServer.serverUrl()+"A/mainpage";
+                    if (settings.browser === 1) {
+                        app.openUrlEntryInBrowser(url)
+                    } else {
+                        pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": url});
+                    }
+                }
+            }
+
+            /*MenuLabel {
+                visible: zimServer.title != ""
+                text: zimServer.title + (zimServer.language != "" ? " (" + zimServer.language + ")" : "")
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+            }*/
+
+            Item {
+                visible: zimServer.title != ""
+
+                height: Theme.itemSizeExtraSmall - (screen.sizeCategory <= Screen.Medium ? Theme.paddingLarge : Theme.paddingMedium)
+                width: parent ? parent.width : Screen.width
+                Label {
+                    opacity: 0.6
+                    color: Theme.highlightColor
+                    font.pixelSize: Theme.fontSizeSmall
+                    width: parent.width - Theme.horizontalPageMargin*2
+                    anchors {
+                        centerIn: parent
+                    }
+                    //truncationMode: TruncationMode.Fade
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                    text: zimServer.title + (zimServer.language != "" ? " (" + zimServer.language + ")" : "")
                 }
             }
         }

@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QDateTime>
 #include <QRegExp>
+#include <QUrl>
 #include <string>
 
 #include <zim/fileiterator.h>
@@ -91,35 +92,98 @@ void ZimServer::run()
     }
 }
 
+void ZimServer::openUrl(const QString &url, const QString &title)
+{
+    //qDebug() << "ZimServer::openUrl" << url;
+
+    QStringList parts = url.split("/");
+    if (parts.length()<4) {
+        qWarning() << "Invalid Url!";
+        return;
+    }
+
+    QString uuid = parts.at(parts.length()-3);
+    //qDebug() << "length" << parts.length();
+    //qDebug() << "UUID:" << uuid;
+
+    if (uuid.startsWith("uuid:")) {
+        uuid = uuid.right(uuid.length()-5);
+        if (loadZimFileByUuid(uuid)) {
+            emit urlReady(url, title);
+        } else {
+            qWarning() << "Unable to load ZIM file with" << uuid << "UUID!";
+        }
+    } else {
+        qWarning() << "Invalid UUID!";
+    }
+}
+
+bool ZimServer::loadZimFileByUuid(const QString& uuid)
+{
+    if (!uuid.isEmpty() && uuid == this->metadata.checksum) {
+        //qDebug() << "ZIM file with UUID" << uuid << "already loaded!";
+        return true;
+    }
+
+    FileFinder* f = FileFinder::instance();
+    ZimMetaData metadata = f->files.value(uuid);
+    if (metadata.isEmpty()) {
+        qWarning() << "ZIM file with UUID" << uuid << "doesn't exist!";
+        return false;
+    }
+
+    Settings* s = Settings::instance();
+    s->setZimFile(metadata.path);
+
+    bool ok = loadZimPath(metadata.path);
+    if (!ok)
+        emit loadedChanged();
+
+    return ok;
+}
+
 bool ZimServer::loadZimFile()
 {
+    Settings* s = Settings::instance();
+    bool ok = loadZimPath(s->getZimFile());
+    emit loadedChanged();
+    return ok;
+}
+
+bool ZimServer::loadZimPath(const QString& path)
+{
+    if (!path.isEmpty() && path == this->metadata.path) {
+        qWarning() << "ZIM file" << path << "already loaded!";
+        return true;
+    }
+
     Settings* s = Settings::instance();
 
     s->articleModel->clear();
     this->hasMainPage = false;
     this->metadata.clear();
 
-    this->metadata.path = s->getZimFile();
-    if (this->metadata.path.isEmpty()) {
+    if (path.isEmpty()) {
         if (zimfile != Q_NULLPTR) {
             delete zimfile;
             zimfile = Q_NULLPTR;
         }
-        emit loadedChanged();
+        emit zimChanged();
         return false;
     }
 
-    if (!QFile::exists(this->metadata.path)) {
-        qWarning() << "ZIM file" << this->metadata.path << "doesn't exist!";
+    if (!QFile::exists(path)) {
+        qWarning() << "ZIM file" << path << "doesn't exist!";
         if (zimfile != Q_NULLPTR) {
             delete zimfile;
             zimfile = Q_NULLPTR;
         }
         s->setZimFile("");
-        emit loadedChanged();
+        emit zimChanged();
         return false;
     }
 
+    this->metadata.path = path;
     this->metadata.fields =
             ZimMetaData::Title |
             ZimMetaData::Checksum |
@@ -131,7 +195,7 @@ bool ZimServer::loadZimFile()
             zimfile = Q_NULLPTR;
         }
         this->metadata.clear();
-        emit loadedChanged();
+        emit zimChanged();
         return false;
     }
 
@@ -149,7 +213,7 @@ bool ZimServer::loadZimFile()
         }
         s->setZimFile("");
         this->metadata.clear();
-        emit loadedChanged();
+        emit zimChanged();
         return false;
     }
 
@@ -162,8 +226,7 @@ bool ZimServer::loadZimFile()
         this->hasMainPage = getArticle("A/mainpage", data, mimeType);
     }
 
-    emit loadedChanged();
-
+    emit zimChanged();
     return true;
 }
 
@@ -318,54 +381,53 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
     //qDebug() << "requestHandler";
     //qDebug() << "req->url():" << req->url().path();
 
-    if (!getLoaded()) {
-        qWarning() << "ZIM file not loaded!";
+    QStringList parts = req->url().path().split("/");
+
+    QString uuid = parts.at(1);
+    //qDebug() << "length" << parts.length();
+    //qDebug() << "UUID:" << uuid;
+
+    if (parts.length() < 4) {
+        qWarning() << "Invalid Url!";
         resp->setHeader("Content-Length", "0");
         resp->setHeader("Connection", "close");
-        resp->writeHead(500);
+        resp->writeHead(404);
         resp->end();
         return;
     }
 
-    QStringList pathlist = req->url().path().split("/");
     QString zimUrl;
-    if (pathlist.last() == "mainpage") {
-        zimUrl = "A/mainpage";
-    } else {
-        if (pathlist.length() < 2) {
-            qWarning() << "Invalid Url!";
+
+    if (uuid.startsWith("uuid:")) {
+        uuid = uuid.right(uuid.length()-5);
+        //qDebug() << uuid;
+        if (!loadZimFileByUuid(uuid)) {
+            qWarning() << "Unable to load ZIM file with" << uuid << "UUID!";
             resp->setHeader("Content-Length", "0");
             resp->setHeader("Connection", "close");
-            resp->writeHead(404);
+            resp->writeHead(500);
             resp->end();
             return;
         }
 
-        // Internal Zimpedia resources, namespace = R
-        /*if (pathlist.at(1) == "R" || pathlist.at(1) == "r") {
-            qWarning() << "Resource namespace request!";
-            QString filename = pathlist.at(2);
-            QByteArray body;
-            if (getResContent(filename, body)) {
-                QString contentType = getContentType(filename);
-                resp->setHeader("Content-Length", QString::number(body.size()));
-                resp->setHeader("Content-Type", contentType);
-                resp->setHeader("Connection", "close");
-                resp->writeHead(200);
-                resp->end(body);
-                return;
-            } else {
-                qWarning() << "Unable to get resource file:" << filename;
-                resp->setHeader("Content-Length", "0");
-                resp->setHeader("Connection", "close");
-                resp->writeHead(404);
-                resp->end();
-                return;
-            }
-        }*/
+        zimUrl = parts.last() == "mainpage" ?
+                    "A/mainpage" : parts.mid(2).join("/");
+    } else {
+        qWarning() << "Invalid UUID!";
 
-        zimUrl = pathlist.mid(pathlist.length()-2).join("/");
+        if (!getLoaded()) {
+            qWarning() << "ZIM file not loaded!";
+            resp->setHeader("Content-Length", "0");
+            resp->setHeader("Connection", "close");
+            resp->writeHead(500);
+            resp->end();
+            return;
+        }
+
+        zimUrl = parts.mid(1).join("/");
     }
+
+    //qDebug() << "zimUrl:" << zimUrl;
 
     QByteArray data;
     QString mimeType;
@@ -394,7 +456,39 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 QString ZimServer::getLocalUrl(const QString &zimUrl)
 {
     Settings* s = Settings::instance();
-    return QString("http://localhost:%1/%2/%3").arg(s->getPort()).arg(this->metadata.checksum).arg(zimUrl);
+    return QString("http://localhost:%1/uuid:%2/%3")
+            .arg(s->getPort())
+            .arg(getUuid())
+            .arg(zimUrl);
+}
+
+QString ZimServer::getTitleFromUrl(const QString &url)
+{
+    if (!getLoaded()) {
+        qWarning() << "ZIM file not loaded!";
+        return "";
+    }
+
+    QStringList parts = url.split("/");
+    if (parts.length() < 6) {
+        qWarning() << "Url is invalid!";
+        return "";
+    }
+
+    QString zimuuid = parts.at(3);
+    if (zimuuid.startsWith("uuid:")) {
+        zimuuid = zimuuid.right(zimuuid.length()-5);
+    } else {
+        qWarning() << "Url UUID is invalid or missing!";
+        return "";
+    }
+
+    QString _url = parts.mid(parts.length()-2).join("/");
+    //qDebug() << "URL:" << url << _url;
+
+    zim::File::const_iterator it = zimfile->find(_url.toStdString());
+
+    return QString::fromStdString(it->getTitle());
 }
 
 void ZimServer::findTitle(const QString &title)
@@ -420,10 +514,9 @@ void ZimServer::findTitle(const QString &title)
 
     for (int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
         //qDebug() << QString::fromStdString(it->getLongUrl()) << QString::fromUtf8(it->getLongUrl().data());
-        s->articleModel->appendRow(new ArticleItem(QString::number(i),
-                                                   QString::fromUtf8(it->getTitle().data()),
-                                                   getLocalUrl(QString::fromStdString(it->getLongUrl())))
-                                   );
+        QString _title = QString::fromUtf8(it->getTitle().data());
+        QString _url = getLocalUrl(QString::fromStdString(it->getLongUrl()));
+        s->articleModel->appendRow(new ArticleItem(QString::number(i),_title, _url));
         ++i;
     }
 
@@ -433,7 +526,7 @@ void ZimServer::findTitle(const QString &title)
 QString ZimServer::serverUrl()
 {
     Settings* s = Settings::instance();
-    return QString("http://localhost:%1/%2/").arg(s->getPort()).arg(this->metadata.checksum);
+    return QString("http://localhost:%1/uuid:%2/").arg(s->getPort()).arg(getUuid());
 }
 
 void ZimServer::filter(QString &data)

@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
+  Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
 
   This file is part of Zimpedia application.
 
@@ -16,7 +16,12 @@ import "tools.js" as Tools
 
 Page {
     id: root
-    objectName: "files"
+    objectName: "bookmarkfiles"
+
+    property string uuid
+    property string title
+    property string language
+    property string favicon
 
     SilicaListView {
         id: listView
@@ -25,7 +30,7 @@ Page {
 
         model: FileModel {
             id: fileModel
-            Component.onCompleted: init(true)
+            Component.onCompleted: init(false)
         }
 
         header: PageHeader {
@@ -35,30 +40,9 @@ Page {
         delegate: ListItem {
             id: listItem
 
-            property bool active: settings.zimFile === model.id
+            property bool active: model.checksum === root.uuid
 
             contentHeight: Theme.itemSizeMedium
-
-            /*Rectangle {
-                anchors.fill: parent
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightColor, 0.0) }
-                    GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightColor, 0.1) }
-                }
-                visible: listItem.active
-            }*/
-
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Show details")
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"),
-                                       {"path": model.dir,
-                                       "icon": model.favicon,
-                                       "title": model.title});
-                    }
-                }
-            }
 
             Icon {
                 id: icon
@@ -91,7 +75,7 @@ Page {
                     }
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeMedium
-                    color: listItem.active || listItem.down ? Theme.highlightColor : Theme.primaryColor
+                    color:  listItem.active || listItem.down ? Theme.highlightColor : Theme.primaryColor
                     text: model.title + (model.language === "" ? "" : " (" + model.language + ")")
                 }
 
@@ -103,14 +87,17 @@ Page {
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    //text: Tools.bytesToSize(model.size) + " • " + Tools.friendlyPath(model.dir, utils.homeDir())
                     text: Tools.friendlyPath(model.dir, utils.homeDir())
                 }
             }
 
             onClicked: {
-                settings.zimFile = model.id;
-                zimServer.loadZimFile();
+                root.title = model.title
+                root.language = model.language
+                root.favicon = model.favicon
+
+                root.uuid = model.checksum
+                pageStack.pop()
             }
         }
 
@@ -119,35 +106,7 @@ Page {
             text: qsTr("No files were found")
         }
 
-        Bubble {
-            enabled: listView.count == 0 && !fileModel.busy && !menu.active
-            text: qsTr("The ZIM is an open file format that stores wiki content for offline usage. "+
-                       "The collection of nice wikis can be downloaded from "+
-                       "<a href='http://www.kiwix.org/wiki/Content_in_all_languages'>this page</a>. "+
-                       "If you already have some ZIM files, put them to any folder you like under your home directory or SD card.")
-        }
-
         PullDownMenu {
-            id: menu
-
-            MenuItem {
-                text: qsTr("About")
-                visible: !zimServer.loaded
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-            }
-
-            MenuItem {
-                text: qsTr("Settings")
-                visible: !zimServer.loaded
-                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-            }
-
-            MenuItem {
-                text: qsTr("Bookmarks")
-                visible: !zimServer.loaded
-                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
-            }
-
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: fileModel.init(true)
@@ -165,5 +124,3 @@ Page {
         flickable: listView
     }
 }
-
-

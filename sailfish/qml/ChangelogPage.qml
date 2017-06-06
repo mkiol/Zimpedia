@@ -34,7 +34,7 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("Version %1").arg("2.0")
+                text: qsTr("Version %1").arg("2.0.0")
             }
 
             LogItem {
@@ -55,6 +55,11 @@ Page {
             LogItem {
                 title: "ZIM details view"
                 description: "Context menu has option to show details of ZIM repository.";
+            }
+
+            LogItem {
+                title: "Bookmarks"
+                description: "Bookmark is a link to an article that is stored in specific ZIM file. An appropriate ZIM file will be automatically loaded if you click on a bookmark.";
             }
 
             Spacer {}

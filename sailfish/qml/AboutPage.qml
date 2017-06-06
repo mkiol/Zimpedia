@@ -14,6 +14,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: root
+    objectName: "about"
 
     SilicaFlickable {
         anchors.fill: parent
@@ -62,6 +63,22 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
             }
 
+            /*SectionHeader {
+                text: qsTr("ZIM repositories downloads");
+            }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Kiwix");
+                onClicked: Qt.openUrlExternally("http://wiki.kiwix.org/wiki/Content_in_all_languages")
+            }
+
+            Button {
+                text: qsTr("Wikipedia dumps")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: Qt.openUrlExternally("https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/")
+            }*/
+
             SectionHeader {
                 text: qsTr("Copyright & license")
             }
@@ -69,7 +86,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "Copyright &copy; 2016-1017 Michal Kosciesza"
+                text: "Copyright &copy; 2016-2017 Michal Kosciesza"
             }
 
             PaddedLabel {

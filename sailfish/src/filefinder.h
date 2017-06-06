@@ -15,30 +15,37 @@
 #include <QObject>
 #include <QThread>
 #include <QString>
-
-#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
-#include <QStandardPaths>
-#else
-#include <QtGui/QDesktopServices>
-#endif
+#include <QMap>
 
 #include "zimmetadata.h"
 
 class FileFinder : public QThread
 {
     Q_OBJECT
-
 public:
-    explicit FileFinder(QObject *parent = 0);
+    static FileFinder* instance();
     static bool scanZimFile(ZimMetaData &metaData);
+
+    QMap<QString, ZimMetaData> files;
+    bool busy = false;
+
+    void init();
 
 protected:
     void run();
 
 signals:
     void fileFound(const ZimMetaData &metaData);
+    void busyChanged();
+
+private slots:
+    void startedHandler();
+    void finishedHandler();
 
 private:
+    static FileFinder* inst;
+
+    explicit FileFinder(QObject *parent = Q_NULLPTR);
     void findFiles(const QString &dirName);
 };
 

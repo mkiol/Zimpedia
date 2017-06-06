@@ -18,8 +18,8 @@ import QtWebKit 3.0
 
 Page {
     id: root
+    objectName: "webview"
 
-    property string title
     property string url
 
     property variant _settings: settings
@@ -27,6 +27,12 @@ Page {
     property bool nightModePossible: true
     property int toolbarHideTime: 4000
     property var history
+    property bool local: false
+    property string title: ""
+
+    function isLocal(url) {
+        return url.lastIndexOf(zimServer.serverUrl()) === 0
+    }
 
     function init() {
         history = []
@@ -40,17 +46,22 @@ Page {
     }
 
     function navigate(url) {
-        var local = url.lastIndexOf(zimServer.serverUrl()) === 0;
+        local = isLocal(url)
         console.log("Opening " + (local ? "local" : "non-local") + " url: " + url)
         if (local) {
+            title = zimServer.getTitleFromUrl(url)
             // WORKAROUND for https://github.com/mkiol/kaktus/issues/14
             zimServer.getArticleAsync(url)
         } else {
+            title = ""
             view.url = url
         }
     }
 
     function navigateBack() {
+        /*for (var i=0; i < history.length; i++) {
+            console.log("#" + i + " - " + history[i])
+        }*/
         if (history.length > 1) {
             navigate(history[history.length-2])
             history.pop()
@@ -153,16 +164,10 @@ Page {
                 break;
             case WebView.LoadSucceededStatus:
                 proggressPanel.open = false;
-
                 break;
             case WebView.LoadFailedStatus:
                 proggressPanel.open = false;
-
-                if (_settings.offlineMode) {
-                    notification.show(qsTr("Failed to load page from local cache."));
-                } else {
-                    notification.show(qsTr("Failed to load page content."));
-                }
+                notification.show(qsTr("Failed to load page content"));
                 break;
             default:
                 proggressPanel.open = false;
@@ -190,12 +195,15 @@ Page {
                 var url = request.url.toString()
                 if (url !== root.history[root.history.length-1])
                     root.history.push(url)
-                var local = request.url.toString().lastIndexOf(zimServer.serverUrl()) === 0
+                var local = root.isLocal(request.url.toString());
                 //console.log(" local:", local);
                 if (local) {
                     request.action = WebView.IgnoreRequest
                     root.navigate(request.url.toString())
                     return
+                } else {
+                    root.local = false
+                    root.title = ""
                 }
             }
 
@@ -229,6 +237,19 @@ Page {
             visible: true
             onClicked: {
                 root.switchNightMode()
+            }
+        }
+
+        IconBarItem {
+            text: qsTr("Add to bookmarks")
+            theme: parent.theme
+            icon: "image://theme/icon-m-favorite-selected"
+            enabled: root.title !== ""
+            visible: true
+            onClicked: {
+                bookmarks.addBookmark(root.title,
+                                      root.history[root.history.length-1],
+                                      zimServer.favicon)
             }
         }
 

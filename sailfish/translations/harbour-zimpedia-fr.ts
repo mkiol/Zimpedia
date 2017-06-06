@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../qml/AboutPage.qml" line="31"/>
         <source>About</source>
-        <translation>O aplikaci</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
         <source>Version: %1</source>
-        <translation>Verze: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="51"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
-        <translation>Offline čtečka pro Wikipedia a jiné Wiki projekty</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="56"/>
         <source>Website</source>
-        <translation>Web</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
@@ -31,17 +31,17 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
         <source>Copyright &amp; license</source>
-        <translation>Copyright a licence</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="79"/>
         <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>Tento software je distribuován pod licencí Mozilla Public License v2.0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="89"/>
         <source>Third party components copyrights</source>
-        <translation>Copyright kompnentů třetích stran</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -83,12 +83,12 @@
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
         <source>Choose ZIM file</source>
-        <translation type="unfinished">Zvolte ZIM soubor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
         <source>No files were found</source>
-        <translation type="unfinished">Žádné soubory nenalezeny</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="32"/>
         <source>Choose ZIM file</source>
-        <translation>Zvolte ZIM soubor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
@@ -157,22 +157,22 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
         <source>No files were found</source>
-        <translation>Žádné soubory nenalezeny</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="124"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation>ZIM je otevřený formát, který ukládá obsah wiki pro offline použití. Kolekce různých wiki může být stažena z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;této stránky&lt;/a&gt;. Pokud už nějaké ZIM soubory máte, dejte je do jakékoliv složky ve vaší domovské složce, nebo na SD kartě.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="134"/>
         <source>About</source>
-        <translation type="unfinished">O aplikaci</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="140"/>
         <source>Settings</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="146"/>
@@ -186,22 +186,12 @@
     </message>
 </context>
 <context>
-    <name>PageMenu</name>
-    <message>
-        <source>About</source>
-        <translation type="vanished">O aplikaci</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Nastavení</translation>
-    </message>
-    <message>
-        <source>Change ZIM file</source>
-        <translation type="vanished">Změnit ZIM soubor</translation>
-    </message>
-</context>
-<context>
     <name>SearchPage</name>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="36"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in built-in viewer</source>
@@ -220,22 +210,22 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="98"/>
         <source>Find article, by typing in the search field</source>
-        <translation>Vyhledejte článek psaním do vyhledávacího pole</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="104"/>
         <source>About</source>
-        <translation type="unfinished">O aplikaci</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="109"/>
         <source>Settings</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="114"/>
         <source>Change ZIM file</source>
-        <translation type="unfinished">Změnit ZIM soubor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="119"/>
@@ -247,39 +237,18 @@
         <source>Open main page</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="36"/>
-        <source>Search</source>
-        <translation>Hledat</translation>
-    </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>Settings</source>
-        <translation>Nastavení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>UI</source>
-        <translation>Grafické rozhraní</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="vanished">Velikost písma</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normální</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="vanished">Velké</translation>
-    </message>
-    <message>
-        <source>Extra large</source>
-        <translation type="vanished">Extra velké</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="54"/>
@@ -309,32 +278,32 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="89"/>
         <source>Hide advanced options</source>
-        <translation>Skrýt pokročilé možnosti</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="89"/>
         <source>Show advanced options</source>
-        <translation>Zobrazit pokročilé možnosti</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="95"/>
         <source>Advanced</source>
-        <translation>Pokročilé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="104"/>
         <source>Enter port number here!</source>
-        <translation>Vložte číslo portu!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="105"/>
         <source>Local server listening port number</source>
-        <translation>Lokální server naslouchá na portu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="123"/>
         <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation>Číslo portu je neplatné! Povolený rozsah je 1024 - 65535.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

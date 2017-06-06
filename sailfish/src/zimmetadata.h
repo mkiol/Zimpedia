@@ -63,6 +63,10 @@ struct ZimMetaData {
         tags.clear();
         article_count = 0;
     }
+
+    bool isEmpty() {
+        return fields == None;
+    }
 };
 
 #endif // ZIMMETADATA_H

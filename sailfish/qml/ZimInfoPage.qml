@@ -16,6 +16,7 @@ import "tools.js" as Tools
 
 Page {
     id: root
+    objectName: "ziminfo"
 
     property string title
     property string path
@@ -116,13 +117,18 @@ Page {
                 }
 
                 AttValue {
-                    att: qsTr("Path")
+                    att: qsTr("Directory")
                     value: Tools.friendlyDir(zim.path, utils.homeDir())
                 }
 
                 AttValue {
                     att: qsTr("Size")
                     value: Tools.bytesToSize(zim.size)
+                }
+
+                AttValue {
+                    att: qsTr("Checksum")
+                    value: zim.checksum
                 }
             }
 
