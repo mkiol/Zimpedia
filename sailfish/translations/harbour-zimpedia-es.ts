@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.0" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
@@ -26,7 +26,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Registro de cambios</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
@@ -49,33 +49,33 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="45"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
         <location filename="../qml/BookmarkEditPage.qml" line="55"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="69"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="109"/>
         <source>ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Falta el fichero ZIM</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
         <source>Url</source>
-        <translation type="unfinished"></translation>
+        <translation>Url</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="160"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Algo salió mal y el marcador no se pudo actualizar</translation>
     </message>
 </context>
 <context>
@@ -83,17 +83,17 @@
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
         <source>Choose ZIM file</source>
-        <translation type="unfinished">Elegir fichero ZIM</translation>
+        <translation>Elegir fichero ZIM</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
         <source>No files were found</source>
-        <translation type="unfinished">No se ha encontrado ningún fichero</translation>
+        <translation>No se ha encontrado ningún fichero</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
 </context>
 <context>
@@ -101,32 +101,32 @@
     <message>
         <location filename="../qml/BookmarksPage.qml" line="30"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcadores</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="40"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="55"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="107"/>
         <source>ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Falta el fichero ZIM</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="116"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltan los marcadores del fichero ZIM</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>No bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay marcadores</translation>
     </message>
 </context>
 <context>
@@ -134,12 +134,12 @@
     <message>
         <location filename="../qml/ChangelogPage.qml" line="33"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Registro de cambios</translation>
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="37"/>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión %1</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
         <source>Show details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar detalles</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
@@ -167,37 +167,37 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="134"/>
         <source>About</source>
-        <translation type="unfinished">Acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="140"/>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="146"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcadores</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="152"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
 </context>
 <context>
     <name>PageMenu</name>
     <message>
         <source>About</source>
-        <translation type="vanished">Acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="vanished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <source>Change ZIM file</source>
-        <translation type="vanished">Cambiar fichero ZIM</translation>
+        <translation>Cambiar fichero ZIM</translation>
     </message>
 </context>
 <context>
@@ -205,47 +205,47 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in built-in viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir en el visor incorporado</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir en el navegador</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="77"/>
         <source>Add to bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a marcadores</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="98"/>
         <source>Find article, by typing in the search field</source>
-        <translation>Buscar artículo, escribiendo en el campo de búsqueda</translation>
+        <translation>Escribe en el campo de búsqueda para buscar un artículo</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="104"/>
         <source>About</source>
-        <translation type="unfinished">Acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="109"/>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="114"/>
         <source>Change ZIM file</source>
-        <translation type="unfinished">Cambiar fichero ZIM</translation>
+        <translation>Cambiar fichero ZIM</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcadores</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="124"/>
         <source>Open main page</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir página principal</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="36"/>
@@ -267,44 +267,44 @@
     </message>
     <message>
         <source>Font size</source>
-        <translation type="vanished">Tamaño de la fuente</translation>
+        <translation>Tamaño de la fuente</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="vanished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="vanished">Grande</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Extra large</source>
-        <translation type="vanished">Muy grande</translation>
+        <translation>Muy grande</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="54"/>
         <source>Default viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visor por defecto</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="58"/>
         <source>Built-in viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visor incorporado</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="59"/>
         <source>Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegador</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="66"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las páginas Wiki se pueden abrir en el visor incorporado o en un navegador externo.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="72"/>
         <source>Viewer font size level</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de la fuente del visor</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="89"/>
@@ -329,7 +329,7 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="105"/>
         <source>Local server listening port number</source>
-        <translation>El servidor local está escuchando en el puerto</translation>
+        <translation>Puerto de escucha del servidor local</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="123"/>
@@ -343,52 +343,52 @@
         <location filename="../qml/WebViewPage.qml" line="44"/>
         <location filename="../qml/WebViewPage.qml" line="261"/>
         <source>Launching an external browser...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abriendo navegador externo...</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="162"/>
         <source>Loading page content...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando contenido de la página...</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="170"/>
         <source>Failed to load page content</source>
-        <translation type="unfinished"></translation>
+        <translation>Se produjo un fallo al cargar contenido</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="226"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="233"/>
         <source>Toggle Night View</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar a vista nocturna</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="244"/>
         <source>Add to bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a marcadores</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="257"/>
         <source>Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegador</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="268"/>
         <source>Decrease font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reducir fuente</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="277"/>
         <source>Increase font</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar fuente</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="286"/>
         <source>Hide toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar barra</translation>
     </message>
 </context>
 <context>
@@ -396,77 +396,77 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="45"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="65"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="70"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="75"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="80"/>
         <source>Creator</source>
-        <translation type="unfinished"></translation>
+        <translation>Creador</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="85"/>
         <source>Publisher</source>
-        <translation type="unfinished"></translation>
+        <translation>Publicador</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="90"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="95"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="100"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="105"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="110"/>
         <source>Article count</source>
-        <translation type="unfinished"></translation>
+        <translation>Nº artículos</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="115"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre archivo</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="120"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directorio</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="125"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="130"/>
         <source>Checksum</source>
-        <translation type="unfinished"></translation>
+        <translation>Checksum</translation>
     </message>
 </context>
 <context>
@@ -474,22 +474,22 @@
     <message>
         <location filename="../qml/main.qml" line="44"/>
         <source>Launching an external browser...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abriendo un navegador externo...</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="56"/>
         <source>Bookmark has been added</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcador añadido</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="57"/>
         <source>Bookmark already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>El marcador ya existe</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="59"/>
         <source>Bookmark has been updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Se ha actualizado el marcador</translation>
     </message>
 </context>
 </TS>
