@@ -49,23 +49,23 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="45"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speichern</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
         <location filename="../qml/BookmarkEditPage.qml" line="55"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titel</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="69"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ändern</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="109"/>
         <source>ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="160"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Der Vorgang schlug fehl; Das Lesezeichen konnte nicht aktualisiert werden</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktualisieren</translation>
     </message>
 </context>
 <context>
@@ -101,32 +101,32 @@
     <message>
         <location filename="../qml/BookmarksPage.qml" line="30"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="40"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="55"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Löschen</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="107"/>
         <source>ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="116"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>No bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine Lesezeichen</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
         <source>Show details</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zeige Details</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
@@ -177,12 +177,12 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="146"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="152"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktualisieren</translation>
     </message>
 </context>
 <context>
@@ -205,17 +205,17 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in built-in viewer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öffne im internen Betrachter</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öffne im Browser</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="77"/>
         <source>Add to bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Füge zu Lesezeichen hinzu</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="98"/>
@@ -240,12 +240,12 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="124"/>
         <source>Open main page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öffne Hauptseite</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="36"/>
@@ -299,12 +299,12 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="66"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wiki-Seiten können im internen Betrachter oder einem externen Browser geöffnet werden</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="72"/>
         <source>Viewer font size level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schriftgröße</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="89"/>
@@ -343,32 +343,32 @@
         <location filename="../qml/WebViewPage.qml" line="44"/>
         <location filename="../qml/WebViewPage.qml" line="261"/>
         <source>Launching an external browser...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Starte externen Browser</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="162"/>
         <source>Loading page content...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lade Inhalte ...</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="170"/>
         <source>Failed to load page content</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laden der Seite gescheitert</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="226"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zurück</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="233"/>
         <source>Toggle Night View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nachtansicht</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="244"/>
         <source>Add to bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Füge zu Lesezeichen hinzu</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="257"/>
@@ -378,17 +378,17 @@
     <message>
         <location filename="../qml/WebViewPage.qml" line="268"/>
         <source>Decrease font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schrift verkleinern</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="277"/>
         <source>Increase font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schrift vergrößeren</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="286"/>
         <source>Hide toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verstecke Werkzeugleiste</translation>
     </message>
 </context>
 <context>
@@ -406,32 +406,32 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="70"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titel</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="75"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datum</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="80"/>
         <source>Creator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Urheber</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="85"/>
         <source>Publisher</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Herausgeber</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="90"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beschreibung</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="95"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprache</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="100"/>
@@ -441,32 +441,32 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="105"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quelle</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="110"/>
         <source>Article count</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anzahl Artikel</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="115"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dateiname</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="120"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verzeichnis</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="125"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Größe</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="130"/>
         <source>Checksum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quelle</translation>
     </message>
 </context>
 <context>
@@ -474,22 +474,22 @@
     <message>
         <location filename="../qml/main.qml" line="44"/>
         <source>Launching an external browser...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Starte externen Browser</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="56"/>
         <source>Bookmark has been added</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen wurde hinzugefügt</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="57"/>
         <source>Bookmark already exists</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Das Lesezeichen existiert bereits</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="59"/>
         <source>Bookmark has been updated</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen aktualisiert</translation>
     </message>
 </context>
 </TS>
