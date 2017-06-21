@@ -47,16 +47,19 @@
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>Zimpedia</name>
+    <name>
+       Zimpedia
+    </name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.0.0</versionNumber>
+    <versionNumber>2.0.0</versionNumber>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
     <buildId>1</buildId>
+    <packageLocale>pl</packageLocale>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -68,12 +71,16 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
-    <description>Offline reader for Wikipedia and other Wiki projects</description>
+    <description>
+       Offline reader for Wikipedia and other Wiki projects
+       <text xml:lang="pl">Niewymagaj&#x105;cy dost&#x119;pu do Internetu, czytnik Wikipedii oraz innych projekt&#xf3;w typu Wiki</text>
+    </description>
     <icon>
-       <image>icon144.png</image>
        <image>icon110.png</image>
        <image>icon90.png</image>
        <image>icon96.png</image>
+       <image>icon144.png</image>
+       <image>icon86.png</image>
     </icon>
     <authorId>gYAAgCJQlmpIp4weW4nXTq966vY</authorId>
     <author>Michal Kosciesza</author>
@@ -97,6 +104,7 @@
     <asset path="icon110.png">icon110.png</asset>
     <asset path="icon90.png">icon90.png</asset>
     <asset path="icon96.png">icon96.png</asset>
+    <asset path="icon86.png">icon86.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

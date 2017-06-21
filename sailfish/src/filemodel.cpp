@@ -12,11 +12,12 @@
 #include "filemodel.h"
 
 FileModel::FileModel(QObject *parent) :
-    ListModel(new FileItem, parent)
+    ListModel(new FileItem, parent), busy(false)
 {
     FileFinder* f = FileFinder::instance();
     //connect(f, &FileFinder::fileFound, this, &FileModel::fileFoundHandler);
-    connect(f, &FileFinder::busyChanged, this, &FileModel::finderBusyHandler);
+    //connect(f, &FileFinder::busyChanged, this, &FileModel::finderBusyHandler);
+    QObject::connect(f, SIGNAL(busyChanged()), this, SLOT(finderBusyHandler()));
     //init();
 }
 
@@ -38,10 +39,11 @@ void FileModel::finderBusyHandler()
 {
     FileFinder* f = FileFinder::instance();
     if (!f->busy) {
-        for (auto file : f->files) {
-            fileFoundHandler(file);
+        QMap<QString, ZimMetaData>::iterator it = f->files.begin();
+        QMap<QString, ZimMetaData>::iterator end = f->files.end();
+        for (;it != end; ++it) {
+            fileFoundHandler(*it);
         }
-
         busy = false;
         emit busyChanged();
     }
@@ -58,8 +60,11 @@ void FileModel::init(bool refresh = true)
         f->init();
     } else {
         clear();
-        for (auto file : f->files)
-            fileFoundHandler(file);
+        QMap<QString, ZimMetaData>::iterator it = f->files.begin();
+        QMap<QString, ZimMetaData>::iterator end = f->files.end();
+        for (;it != end; ++it) {
+            fileFoundHandler(*it);
+        }
     }
 }
 

@@ -1,17 +1,17 @@
 /* src/config.h.  Generated from config.h.in by configure.  */
-/* src/config.h.in.  Generated from configure.in by autoheader.  */
+/* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* set cluster cache size to number of cached chunks */
-#define CLUSTER_CACHE_SIZE 1
+#define CLUSTER_CACHE_SIZE 16
 
 /* set dirent cache size to number of cached chunks */
 #define DIRENT_CACHE_SIZE 512
 
 /* defined if bzip2 compression is enabled */
-  #define ENABLE_BZIP2 1
+/* #undef ENABLE_BZIP2 */
 
 /* defined if lzma compression is enabled */
- #define ENABLE_LZMA 1
+#define ENABLE_LZMA 1
 
 /* defined if zlib compression is enabled */
 /* #undef ENABLE_ZLIB */
@@ -22,11 +22,17 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
+/* Define to 1 if you have the `lseek64' function. */
+#define HAVE_LSEEK64 1
+
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
 
+/* Define to 1 if you have the `open64' function. */
+#define HAVE_OPEN64 1
+
 /* Define to 1 if you have the `stat64' function. */
-/* #undef HAVE_STAT64 */
+#define HAVE_STAT64 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -66,7 +72,7 @@
 #define PACKAGE_NAME "zimlib"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "zimlib 0.92.20091227-3"
+#define PACKAGE_STRING "zimlib 1.4"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "zimlib"
@@ -75,13 +81,13 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.92.20091227-3"
+#define PACKAGE_VERSION "1.4"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.92.20091227-3"
+#define VERSION "1.4"
 
 /* defined if cxxtools is used */
 /* #undef WITH_CXXTOOLS */

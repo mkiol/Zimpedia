@@ -84,7 +84,7 @@ Page {
 
             Spacer {}
 
-            Button {
+            /*Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: advancedVisible ? qsTr("Hide advanced options") : qsTr("Show advanced options")
                 onClicked: advancedVisible = !advancedVisible;
@@ -124,7 +124,7 @@ Page {
                 wrapMode: Text.WordWrap
             }
 
-            Spacer {}
+            Spacer {}*/
 
         }
     }

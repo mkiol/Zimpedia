@@ -37,12 +37,12 @@
 #endif
 
 ZimServer::ZimServer(QObject *parent) :
-    QThread(parent)
+    QThread(parent), busy(false)
 {
     zimfile = Q_NULLPTR;
 
     // Thread
-    QObject::connect(this, &QThread::finished, this, &ZimServer::finishedHandler);
+    //QObject::connect(this, SIGNAL(finished()), this, SLOT(finishedHandler()));
 
     // Local HTTP server
     server = new QHttpServer;
@@ -57,6 +57,11 @@ ZimServer::ZimServer(QObject *parent) :
     }
 
     emit listeningChanged();
+}
+
+bool ZimServer::getBusy()
+{
+    return this->busy;
 }
 
 void ZimServer::finishedHandler()
@@ -102,13 +107,14 @@ void ZimServer::openUrl(const QString &url, const QString &title)
         return;
     }
 
-    QString uuid = parts.at(parts.length()-3);
+    QString uuid = parts.at(3);
     //qDebug() << "length" << parts.length();
     //qDebug() << "UUID:" << uuid;
 
     if (uuid.startsWith("uuid:")) {
         uuid = uuid.right(uuid.length()-5);
         if (loadZimFileByUuid(uuid)) {
+            //qDebug() << "ZimServer::openUrl urlReady" << url << title;
             emit urlReady(url, title);
         } else {
             qWarning() << "Unable to load ZIM file with" << uuid << "UUID!";
@@ -183,6 +189,9 @@ bool ZimServer::loadZimPath(const QString& path)
         return false;
     }
 
+    this->busy = true;
+    emit busyChanged();
+
     this->metadata.path = path;
     this->metadata.fields =
             ZimMetaData::Title |
@@ -195,6 +204,8 @@ bool ZimServer::loadZimPath(const QString& path)
             zimfile = Q_NULLPTR;
         }
         this->metadata.clear();
+        this->busy = false;
+        emit busyChanged();
         emit zimChanged();
         return false;
     }
@@ -213,6 +224,8 @@ bool ZimServer::loadZimPath(const QString& path)
         }
         s->setZimFile("");
         this->metadata.clear();
+        this->busy = false;
+        emit busyChanged();
         emit zimChanged();
         return false;
     }
@@ -226,6 +239,8 @@ bool ZimServer::loadZimPath(const QString& path)
         this->hasMainPage = getArticle("A/mainpage", data, mimeType);
     }
 
+    this->busy = false;
+    emit busyChanged();
     emit zimChanged();
     return true;
 }
@@ -310,6 +325,7 @@ bool ZimServer::getArticle(const QString zimUrl, QByteArray &data, QString &mime
 bool ZimServer::getArticle(zim::File *zimfile, const QString zimUrl, QByteArray &data, QString &mimeType)
 {
     //qDebug() << "getArticle static, zimUrl:" << zimUrl;
+    //qDebug() << "getArticle static, zimUrl:" << QString::fromUtf8(zim::urldecode(zimUrl.toStdString()).data());
 
     zim::Article article;
 
@@ -330,8 +346,8 @@ bool ZimServer::getArticle(zim::File *zimfile, const QString zimUrl, QByteArray 
         }
 
     } else {
-        zim::File::const_iterator it = zimfile->find(zim::urldecode(zimUrl.toStdString()));
-
+        zim::File::const_iterator it = zimfile->find(zim::urldecode(ZimServer::stringQtoStd(zimUrl)));
+        //zim::File::const_iterator it = zimfile->find(zim::urldecode(ZimServer::stringQtoStd(zimUrl)));
         if (it == zimfile->end()) {
           qWarning() << "Article not found!";
           return false;
@@ -356,7 +372,7 @@ bool ZimServer::getArticle(zim::File *zimfile, const QString zimUrl, QByteArray 
 
     try {
         mimeType = QString::fromStdString(article.getMimeType());
-    } catch (std::runtime_error e) {
+    } catch (std::runtime_error &e) {
         qWarning() << e.what();
         qWarning() << "Unable to get mimeType!";
     }
@@ -372,7 +388,7 @@ void ZimServer::getArticleAsync(const QString &zimUrl)
         qWarning() << "Bad url!";
         return;
     }
-    urlToAsyncGet = parts.mid(parts.length()-2).join("/");
+    urlToAsyncGet = QStringList(parts.mid(parts.length()-2)).join("/");
     this->start(QThread::IdlePriority);
 }
 
@@ -411,7 +427,7 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
         }
 
         zimUrl = parts.last() == "mainpage" ?
-                    "A/mainpage" : parts.mid(2).join("/");
+                    "A/mainpage" : QStringList(parts.mid(2)).join("/");
     } else {
         qWarning() << "Invalid UUID!";
 
@@ -424,7 +440,7 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
             return;
         }
 
-        zimUrl = parts.mid(1).join("/");
+        zimUrl = QStringList(parts.mid(1)).join("/");
     }
 
     //qDebug() << "zimUrl:" << zimUrl;
@@ -456,10 +472,29 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp)
 QString ZimServer::getLocalUrl(const QString &zimUrl)
 {
     Settings* s = Settings::instance();
+
+    /*QUrl _url;
+    _url.setScheme("http");
+    _url.setHost("localhost");
+    _url.setPort(s->getPort());
+    _url.setPath("/uuid:" + getUuid() + "/" + zimUrl);
+    return QString(_url.toEncoded());*/
+
     return QString("http://localhost:%1/uuid:%2/%3")
             .arg(s->getPort())
             .arg(getUuid())
             .arg(zimUrl);
+}
+
+std::string ZimServer::stringQtoStd(const QString &s)
+{
+    QByteArray b = s.toUtf8();
+    return std::string(b.data(), b.length());
+}
+
+QString ZimServer::stringStdToQ(const std::string &s)
+{
+    return QString::fromUtf8(s.data());
 }
 
 QString ZimServer::getTitleFromUrl(const QString &url)
@@ -468,6 +503,8 @@ QString ZimServer::getTitleFromUrl(const QString &url)
         qWarning() << "ZIM file not loaded!";
         return "";
     }
+
+    //qDebug() << "getTitleFromUrl:" << url;
 
     QStringList parts = url.split("/");
     if (parts.length() < 6) {
@@ -483,12 +520,17 @@ QString ZimServer::getTitleFromUrl(const QString &url)
         return "";
     }
 
-    QString _url = parts.mid(parts.length()-2).join("/");
-    //qDebug() << "URL:" << url << _url;
+    //QString _url = QStringList(parts.mid(parts.length()-2)).join("/");
+    QString _url = QStringList(parts.mid(4)).join("/");
+    if (_url == "A/mainpage") {
+        return tr("Main page");
+    }
 
-    zim::File::const_iterator it = zimfile->find(_url.toStdString());
+    zim::File::const_iterator it = zimfile->find(zim::urldecode(ZimServer::stringQtoStd(_url)));
 
-    return QString::fromStdString(it->getTitle());
+    QString title = ZimServer::stringStdToQ(it->getTitle());
+    //qDebug() << "title:" << title;
+    return title;
 }
 
 void ZimServer::findTitle(const QString &title)
@@ -501,21 +543,21 @@ void ZimServer::findTitle(const QString &title)
     }
 
     Settings* s = Settings::instance();
-
     s->articleModel->clear();
 
-    if (title.trimmed().isEmpty()) {
+    QString t_title = title.trimmed();
+    if (t_title.isEmpty()) {
         emit searchReady();
         return;
     }
 
-    std::string std_title(title.toUtf8().constData());
+    std::string std_title(t_title.toUtf8().constData());
     zim::File::const_iterator it = zimfile->findByTitle('A', std_title);
 
     for (int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
         //qDebug() << QString::fromStdString(it->getLongUrl()) << QString::fromUtf8(it->getLongUrl().data());
-        QString _title = QString::fromUtf8(it->getTitle().data());
-        QString _url = getLocalUrl(QString::fromStdString(it->getLongUrl()));
+        QString _title = ZimServer::stringStdToQ(it->getTitle());
+        QString _url = getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()));
         s->articleModel->appendRow(new ArticleItem(QString::number(i),_title, _url));
         ++i;
     }
@@ -529,17 +571,19 @@ QString ZimServer::serverUrl()
     return QString("http://localhost:%1/uuid:%2/").arg(s->getPort()).arg(getUuid());
 }
 
+void ZimServer::fixUrl(QString &url)
+{
+    if (url.startsWith("..")) {
+        url = url.right(url.length()-2);
+    }
+    if (url.startsWith("/")) {
+        url = url.right(url.length()-1);
+    }
+}
+
 void ZimServer::filter(QString &data)
 {
     int pos;
-    auto fixUrl = [](QString& url) {
-        if (url.startsWith("..")) {
-            url = url.right(url.length()-2);
-        }
-        if (url.startsWith("/")) {
-            url = url.right(url.length()-1);
-        }
-    };
 
     // <link href=\"../-/s/css_modules/ext.kartographer.link.css\" rel=\"stylesheet\" type=\"text/css\">
     QRegExp rxStyle("<link\\s[^>]*href\\s*=\\s*\"(\\S*)\"[^>]*>", Qt::CaseInsensitive);

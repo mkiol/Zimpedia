@@ -1,161 +1,124 @@
 /*
- Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
- 
- This file is part of Zimpedia application.
- 
- This Source Code Form is subject to the terms of
- the Mozilla Public License, v.2.0. If a copy of
- the MPL was not distributed with this file, You can
- obtain one at http://mozilla.org/MPL/2.0/.
+ * Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
+ * 
+ * This file is part of Zimpedia application.
+ * 
+ * This Source Code Form is subject to the terms of
+ * the Mozilla Public License, v.2.0. If a copy of
+ * the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/.
  */
 
 import bb.cascades 1.3
 
 Page {
     id: root
-    
-    property bool advancedVisible: false
+    objectName: "settings"
 
-    /*titleBar: TitleBar {
-        title: qsTr("Settings")
-    }*/
-    
+    property bool dark: Application.themeSupport.theme.colorTheme.style === VisualStyle.Dark
+
     titleBar: TitleBar {
-        acceptAction: ActionItem {
-            title: qsTr("Save")
-            onTriggered: {
-                accept();
-            }
-        }
-        
-        dismissAction: ActionItem {
-            title: qsTr("Cancel")
-            onTriggered: {
-                nav.pop();
-            }
-        }
-        
         title: qsTr("Settings")
         appearance: TitleBarAppearance.Plain
     }
 
-    function validatePort(port) {
-        return parseInt(port).toString() == port && parseInt(port) > 1023 && parseInt(port) <= 65535;
-    }
-
-    function accept() {
-
-        if (! validatePort(portField.text)) {
-            notification.show(qsTr("Port number is invalid! Allowed port range is 1024-65535!"));
-            return;
+    shortcuts: [
+        Shortcut {
+            key: "Backspace"
+            onTriggered: {
+                if (nav.count() > 1)
+                    nav.pop();
+            }
+        },
+        Shortcut {
+            key: "Delete"
+            onTriggered: {
+                if (nav.count() > 1)
+                    nav.pop();
+            }
         }
-
-        settings.port = portField.text;
-        settings.fontSize = fontSizeBox.selectedOption.value;
-
-        nav.pop();
-    }
-
-    /*actions: ActionItem {
-        title: qsTr("Save")
-        imageSource: "asset:///ic_save.png"
-        ActionBar.placement: ActionBarPlacement.OnBar
-
-        onTriggered: {
-            accept();
-        }
-    }*/
+    ]
 
     Container {
-
         ScrollView {
             Container {
-                Header {
-                    title: qsTr("UI")
-                }
-                
                 Container {
                     leftPadding: ui.du(2)
                     rightPadding: ui.du(2)
                     topPadding: ui.du(2)
                     bottomPadding: ui.du(2)
-                    
-                    DropDown {
-                        id: fontSizeBox
-                        title: qsTr("Font size")
+
+                    DropWithDescription {
+                        title: qsTr("Default viewer")
+                        description: qsTr("Wiki pages can be opened in the built-in web viewer or in an external browser.")
                         options: [
                             Option {
-                                selected: settings.fontSize == 1
+                                selected: settings.browser === value
+                                value: 0
+                                imageSource: dark ? "asset:///webview.png" : "asset:///webviewd.png"
+                                text: qsTr("Built-in viewer")
+                            },
+                            Option {
+                                selected: settings.browser === value
                                 value: 1
-                                text: qsTr("Normal")
-                            },
-                            Option {
-                                selected: settings.fontSize == 2
-                                value: 2
-                                text: qsTr("Large")
-                            },
-                            Option {
-                                selected: settings.fontSize == 3
-                                value: 3
-                                text: qsTr("Extra large")
+                                imageSource: dark ? "asset:///browser.png" : "asset:///browserd.png"
+                                text: qsTr("Browser")
                             }
                         ]
-                    }
-                }
-                
-                Container {
-                    topPadding: ui.du(1)
-                }
-                
-                Button {
-                    horizontalAlignment: HorizontalAlignment.Center
-                    text: advancedVisible ? qsTr("Hide advanced options") : qsTr("Show advanced options")
-                    onClicked: advancedVisible = !advancedVisible;
-                }
-                
-                Container {
-                    topPadding: ui.du(1)
-                }
-                
-                Header {
-                    visible: root.advancedVisible
-                    title: qsTr("Advanced")
-                }
-
-                Container {
-                    visible: root.advancedVisible
-                    
-                    leftPadding: ui.du(2)
-                    rightPadding: ui.du(2)
-                    topPadding: ui.du(2)
-                    bottomPadding: ui.du(2)
-
-                    Label {
-                        text: qsTr("Define a listening port number. Changes will take effect after app restart.")
-                        multiline: true
+                        onSelectedOptionChanged: {
+                            settings.browser = selectedOption.value;
+                        }
                     }
 
                     Container {
-                        topPadding: ui.du(1)
-                    }
-
-                    TextField {
-                        id: portField
-                        hintText: qsTr("Enter port number here!")
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
-                        validator: Validator {
-                            mode: ValidationMode.FocusLost
-                            errorMessage: qsTr("Port number is invalid! Allowed port range is 1024-65535!")
-                            onValidate: {
-                                if (validatePort(portField.text))
-                                    state = ValidationState.Valid;
-                                else
-                                    state = ValidationState.Invalid;
+                        topPadding: ui.du(2)
+                        Container {
+                            layout: DockLayout {
+                            }
+                            preferredWidth: display.pixelSize.width
+                            Label {
+                                horizontalAlignment: HorizontalAlignment.Left
+                                text: qsTr("Viewer font size level")
+                            }
+                            Label {
+                                horizontalAlignment: HorizontalAlignment.Right
+                                text: Math.floor(fontSizeSlider.value) + "%"
+                                onTouch: {
+                                    fontSizeSlider.value = 100.0;
+                                }
                             }
                         }
 
-                        onCreationCompleted: {
-                            text = settings.port;
+                        Container {
+                            topPadding: ui.du(1)
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.LeftToRight
+                            }
+
+                            ImageView {
+                                imageSource: dark ? "asset:///fontdown.png" : "asset:///fontdownd.png"
+                                minWidth: 96
+                            }
+
+                            Slider {
+                                id: fontSizeSlider
+                                property bool created: false
+                                fromValue: 50.0
+                                toValue: 200.0
+                                onValueChanged: {
+                                    if (created)
+                                        settings.zoom = Math.floor(value) / 100;
+                                }
+                                onCreationCompleted: {
+                                    created = true
+                                    value = Math.floor(settings.zoom * 100)
+                                }
+                            }
+
+                            ImageView {
+                                imageSource: dark ? "asset:///fontup.png" : "asset:///fontupd.png"
+                                minWidth: 96
+                            }
                         }
                     }
                 }

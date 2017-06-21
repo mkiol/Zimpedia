@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 Tommi Maekitalo
+ * Copyright (C) 2009 Tommi Maekitalo
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,35 +17,5 @@
  *
  */
 
-#include <iostream>
-#include <zim/zintstream.h>
-#include <cxxtools/loginit.h>
-
-int main(int argc, char* argv[])
-{
-  try
-  {
-    log_init();
-
-    unsigned col = 0;
-
-    zim::ZIntStream z(std::cin);
-    unsigned n;
-    while (z.get(n))
-    {
-      std::cout << n;
-      if (col++ >= 10)
-      {
-        std::cout << std::endl;
-        col = 0;
-      }
-      else
-        std::cout << ' ';
-    }
-  }
-  catch (const std::exception& e)
-  {
-    std::cerr << e.what() << std::endl;
-  }
-}
+#include <cxxtools/unit/testmain.h>
 

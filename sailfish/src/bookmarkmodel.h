@@ -36,7 +36,7 @@ public:
     };
 
 public:
-    BookmarkItem(QObject *parent = 0): ListItem(parent) {}
+    BookmarkItem(QObject *parent = 0): ListItem(parent), busy(false) {}
     explicit BookmarkItem(
                       const QString &id,
                       const QString &title,
@@ -67,6 +67,7 @@ private:
     QString m_zimlang;
     QString m_zimuuid;
     bool m_valid;
+    bool busy;
 };
 
 class BookmarkModel : public ListModel
@@ -75,7 +76,7 @@ class BookmarkModel : public ListModel
     Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
 
 public:
-    explicit BookmarkModel(QObject *parent = Q_NULLPTR);
+    explicit BookmarkModel(QObject *parent = 0);
     Q_INVOKABLE void refreshModel();
     void clear();
     bool getBusy();
@@ -87,7 +88,7 @@ private slots:
     void bookmarksBusyChangedHandler();
 
 private:
-    bool busy = false;
+    bool busy;
 
     void init();
 };

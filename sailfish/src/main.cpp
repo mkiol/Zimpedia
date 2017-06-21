@@ -23,7 +23,9 @@
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QAbstractItemModel>
+#include <QTimer>
 #include "abstractitemmodel.hpp"
+#include "webimageview.h"
 using namespace bb::cascades;
 #elif SAILFISH
 #include <QGuiApplication>
@@ -56,8 +58,12 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 {
 #ifdef BB10
     qmlRegisterType<QAbstractItemModel>();
-    qmlRegisterType<FileModel>("net.mkiol.zimpedia.FileModel", 1, 0, "FileModel");
     qmlRegisterType <AbstractItemModel> ("com.kdab.components", 1, 0, "AbstractItemModel");
+    qmlRegisterType<WebImageView> ("org.labsquare", 1, 0, "WebImageView");
+    qmlRegisterType<FileModel>("net.mkiol.zimpedia.FileModel", 1, 0, "FileModel");
+    qmlRegisterType<ZimMetaDataReader>("net.mkiol.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
+    qmlRegisterType<BookmarkModel>("net.mkiol.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
+    qmlRegisterType<QTimer>("net.mkiol.zimpedia.QTimer", 1, 0, "QTimer");
 #elif SAILFISH
     qmlRegisterType<FileModel>("harbour.zimpedia.FileModel", 1, 0, "FileModel");
     qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
@@ -81,14 +87,24 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     engine->addImageProvider(QLatin1String("icons"), new IconProvider);
 #endif
 
-#ifdef SAILFISH
     QTranslator translator;
+#ifdef BB10
     QString locale = QLocale::system().name();
-    //locale="de";
-    if(!translator.load("harbour-zimpedia-" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
+    qDebug() << locale;
+    if (translator.load("Zimpedia_" + locale, "app/native/qm")) {
+        app.installTranslator(&translator);
+    } else {
+        qWarning() << "Couldn't load translation for locale " + locale + " from app/native/qm";
+    }
+#elif SAILFISH
+    QString locale = QLocale::system().name();
+    qDebug() << locale;
+    locale="pl";
+    if(translator.load("Zimpedia_" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
+        app->installTranslator(&translator);
+    } else {
         qDebug() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
     }
-    app->installTranslator(&translator);
 #endif
 
     context->setContextProperty("APP_NAME", APP_NAME);

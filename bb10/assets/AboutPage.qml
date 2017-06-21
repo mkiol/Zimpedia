@@ -19,10 +19,39 @@ Page {
         appearance: TitleBarAppearance.Plain
     }
     
+    shortcuts: [
+        Shortcut {
+            key: "Backspace"
+            onTriggered: {
+                if (nav.count() > 1)
+                    nav.pop();
+            }
+        },
+        Shortcut {
+            key: "Delete"
+            onTriggered: {
+                if (nav.count() > 1)
+                    nav.pop();
+            }
+        }
+    ]
+    
+    actions: [
+        ActionItem {
+            title: qsTr("Changelog")
+            ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "asset:///changelog.png"
+            onTriggered: {
+                var obj = changelogPageDefinition.createObject();
+                nav.push(obj);
+            }
+        }
+    ]
+    
     ScrollView {
 
         Container {
-            preferredWidth: display.pixelSize.width
+            preferredWidth: Qt.display.pixelSize.width
             verticalAlignment: VerticalAlignment.Center
             
             Container {
@@ -46,7 +75,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center
                 textStyle.textAlign: TextAlign.Center
                 textStyle.color: ui.palette.primary
-                text: qsTr("Version: %1").arg(VERSION)
+                text: qsTr("Version %1").arg(VERSION)
             }
 
             PaddedLabel {
@@ -55,12 +84,6 @@ Page {
                 text: qsTr("Offline reader for Wikipedia and other Wiki projects")
             }
 
-            /*PaddedLabel {
-                horizontalAlignment: HorizontalAlignment.Center
-                textFormat: TextFormat.Html
-                text: "<a href='%1'>Website</a>".arg(PAGE)
-            }*/
-            
             Container {
                 topPadding: ui.du(2)
             }
@@ -73,6 +96,15 @@ Page {
                 }
             }
             
+            /*Button {
+                horizontalAlignment: HorizontalAlignment.Center
+                text: qsTr("Changelog")
+                onClicked: {
+                    var obj = changelogPageDefinition.createObject();
+                    nav.push(obj);
+                }
+            }*/
+            
             Container {
                 topPadding: ui.du(2)
             }
@@ -84,13 +116,13 @@ Page {
             PaddedLabel {
                 textStyle.textAlign: TextAlign.Left
                 textFormat: TextFormat.Html
-                text: "Copyright &copy; 2016 Michal Kosciesza"
+                text: "Copyright &copy; 2016-2017 Michal Kosciesza"
             }
             
             PaddedLabel {
                 textStyle.textAlign: TextAlign.Left
                 textFormat: TextFormat.Html
-                text: qsTr("This software is distributed under <a href='https://www.mozilla.org/MPL/2.0/'>Mozilla Public License Version 2.0</a>")
+                text: qsTr("This software is distributed under the terms of the Mozilla Public License v.2.0")
             }
             
             Container {
@@ -101,10 +133,10 @@ Page {
                 title: qsTr("Third party components copyrights")
             }
             
-            PaddedLabel {
+            /*PaddedLabel {
                 textStyle.textAlign: TextAlign.Left
                 text: qsTr("%1 utilizes third party open source software. Such third party software is copyrighted by their owners as indicated below.").arg(APP_NAME)
-            }
+            }*/
             
             PaddedLabel {
                 textFormat: TextFormat.Html
@@ -114,6 +146,11 @@ Page {
             PaddedLabel {
                 textFormat: TextFormat.Html
                 text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo"
+            }
+            
+            PaddedLabel {
+                textFormat: TextFormat.Html
+                text: "Qjson - Copyright &copy; 2009 Flavio Castelli"
             }
             
             Container {

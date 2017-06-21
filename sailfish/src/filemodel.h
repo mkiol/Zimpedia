@@ -106,7 +106,7 @@ public slots:
     void finderBusyHandler();
 
 private:
-    bool busy = false;
+    bool busy;
 };
 
 #endif // FILEMODEL_H
