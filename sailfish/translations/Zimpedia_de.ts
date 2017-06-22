@@ -96,17 +96,17 @@
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">URL wurde in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="66"/>
         <source>Edit bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
@@ -223,7 +223,7 @@
         <location filename="../qml/FilesPage.qml" line="124"/>
         <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation>ZIM ist ein Dateiformat, welches Wiki Inhalte für die Offline_Nutzung enthält. Eine Auswahl von tollen Wikis can hier heruntergeladen werden: &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Solltest Du schon einige ZIM Dateien haben, speichere sie in einem beliebigen Ordner Deines Home-Verzeichnisses oder der SD-Karte.</translation>
+        <translation>ZIM ist ein Dateiformat, welches Wiki Inhalte für die Offline-Nutzung enthält. Eine Auswahl von tollen Wikis kann hier heruntergeladen werden: &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Solltest Du schon einige ZIM Dateien haben, speichere sie in einem beliebigen Ordner Deines Home-Verzeichnisses oder der SD-Karte.</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="134"/>
@@ -361,13 +361,13 @@
         <location filename="../qml/SettingsPage.qml" line="54"/>
         <location filename="../../bb10/assets/SettingsPage.qml" line="52"/>
         <source>Default viewer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Standard Betrachter</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="58"/>
         <location filename="../../bb10/assets/SettingsPage.qml" line="59"/>
         <source>Built-in viewer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">interner Betrachter</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="59"/>
@@ -567,7 +567,7 @@
         <location filename="../qml/ZimInfoPage.qml" line="130"/>
         <location filename="../../bb10/assets/ZimInfoPage.qml" line="139"/>
         <source>Checksum</source>
-        <translation>Quelle</translation>
+        <translation>Prüfsumme</translation>
     </message>
 </context>
 <context>
@@ -607,7 +607,7 @@
     <message>
         <location filename="../../bb10/assets/main.qml" line="70"/>
         <source>Preparing ZIM file...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bereite Zim Datei vor...</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/main.qml" line="148"/>
