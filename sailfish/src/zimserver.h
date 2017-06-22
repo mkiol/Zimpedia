@@ -14,6 +14,7 @@
 
 #include <QObject>
 #include <QThread>
+#include <string>
 
 #include <zim/file.h>
 
@@ -30,12 +31,16 @@ class ZimServer : public QThread
     Q_PROPERTY (bool loaded READ getLoaded NOTIFY loadedChanged)
     Q_PROPERTY (bool listening READ getListening NOTIFY listeningChanged)
     Q_PROPERTY (bool hasMainPage READ getHasMainPage NOTIFY zimChanged)
+    Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
     Q_PROPERTY (QString title READ getTitle NOTIFY zimChanged)
     Q_PROPERTY (QString language READ getLanguage NOTIFY zimChanged)
     Q_PROPERTY (QString uuid READ getUuid NOTIFY zimChanged)
     Q_PROPERTY (QString favicon READ getFavicon NOTIFY zimChanged)
 
 public:
+    static std::string stringQtoStd(const QString &s);
+    static QString stringStdToQ(const std::string &s);
+
     explicit ZimServer(QObject *parent = 0);
     Q_INVOKABLE bool loadZimFile();
     Q_INVOKABLE void findTitle(const QString &title);
@@ -53,6 +58,7 @@ public:
     QString getLanguage();
     QString getUuid();
     QString getFavicon();
+    bool getBusy();
 
 signals:
     void error();
@@ -62,6 +68,7 @@ signals:
     void searchReady();
     void articleReady(QString article);
     void urlReady(QString url, QString title);
+    void busyChanged();
 
 private slots:
     void requestHandler(QHttpRequest *req, QHttpResponse *resp);
@@ -74,6 +81,7 @@ private:
     bool hasMainPage;
     ZimMetaData metadata;
     QString urlToAsyncGet;
+    bool busy;
 
     void run();
     QString getLocalUrl(const QString & zimUrl);
@@ -83,6 +91,7 @@ private:
     bool getArticle(const QString zimUrl, QByteArray &data, QString &mimeType);
     bool loadZimPath(const QString& path);
     bool loadZimFileByUuid(const QString& uuid);
+    void fixUrl(QString& url);
 };
 
 #endif // ZIMSERVER_H

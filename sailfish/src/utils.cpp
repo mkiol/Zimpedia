@@ -14,12 +14,13 @@
 #ifdef BB10
 #include <bps/navigator.h>
 #include <bb/platform/PlatformInfo>
+#include <bb/system/Clipboard>
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
 #include <QStandardPaths>
 #else
-#include <QtGui/QDesktopServices>
+#include <QDesktopServices>
 #endif
 
 #include "utils.h"
@@ -41,9 +42,32 @@ const QString Utils::homeDir()
 }
 
 #ifdef BB10
+void Utils::copyToClipboard(const QString &text)
+{
+    bb::system::Clipboard clipboard;
+    clipboard.clear();
+    clipboard.insert("text/plain", text.toUtf8());
+}
+
 void Utils::launchBrowser(const QString &url)
 {
+    qDebug() << "launchBrowser" << url;
     navigator_invoke(url.toStdString().c_str(),0);
+}
+
+QString Utils::readAsset(const QString &path)
+{
+    QFile file("app/native/assets/" + path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Could not open" << path << "for reading: " << file.errorString();
+        file.close();
+        return "";
+    }
+
+    QString data = QString(file.readAll());
+    file.close();
+
+    return data;
 }
 
 // Source: http://hecgeek.blogspot.com/2014/10/blackberry-10-multiple-os-versions-from.html

@@ -25,10 +25,10 @@ struct ZimMetaData {
         ArticleCount = 32768
     };
 
-    int fields = None;
+    int fields;
     QString path;
     QString filename;
-    qint64 size = 0;
+    qint64 size;
     QString time;
     QString checksum;
     QString name;
@@ -42,7 +42,11 @@ struct ZimMetaData {
     QString source;
     QString tags;
     //QString version;
-    int article_count = 0;
+    int article_count;
+
+    ZimMetaData() {
+        clear();
+    }
 
     void clear() {
         fields = None;

@@ -15,6 +15,7 @@ Container {
     id: root
     
     property alias text: label.text
+    property alias textFormat: label.textFormat
 
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
@@ -22,9 +23,10 @@ Container {
     Label {
         id: label
         horizontalAlignment: HorizontalAlignment.Center
-        //textStyle.base: SystemDefaults.TextStyles.BodyText
-        textStyle.fontWeight: FontWeight.W100
+        textStyle.base: SystemDefaults.TextStyles.TitleText
+        textStyle.fontStyle: FontStyle.Italic
         textStyle.textAlign: TextAlign.Center
+        textStyle.color: ui.palette.secondaryTextOnPlain
         multiline: true
     }
 }

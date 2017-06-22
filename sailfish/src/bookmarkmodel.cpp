@@ -14,10 +14,10 @@
 #include "bookmarkmodel.h"
 
 BookmarkModel::BookmarkModel(QObject *parent) :
-    ListModel(new BookmarkItem, parent)
+    ListModel(new BookmarkItem, parent), busy(true)
 {
-    connect(Bookmarks::instance(), &Bookmarks::busyChanged,
-            this, &BookmarkModel::bookmarksBusyChangedHandler);
+    QObject::connect(Bookmarks::instance(), SIGNAL(busyChanged()),
+            this, SLOT(bookmarksBusyChangedHandler()));
     refreshModel();
 }
 
@@ -31,6 +31,8 @@ void BookmarkModel::bookmarksBusyChangedHandler()
     if (!Bookmarks::instance()->getBusy()) {
         refreshModel();
     }
+
+    this->busy = true;
     emit busyChanged();
 }
 
@@ -85,10 +87,13 @@ void BookmarkModel::bookmarksBusyChangedHandler()
 
 void BookmarkModel::refreshModel()
 {
-    auto list = Bookmarks::instance()->getBookmarks();
-
     clear();
-    for (auto b : list) {
+
+    QList<Bookmarks::Bookmark> list = Bookmarks::instance()->getBookmarks();
+    QList<Bookmarks::Bookmark>::iterator it = list.begin();
+    QList<Bookmarks::Bookmark>::iterator end = list.end();
+    while (it != end) {
+        Bookmarks::Bookmark b = *it;
         appendRow(new BookmarkItem(
                       b.url,
                       b.title,
@@ -99,12 +104,16 @@ void BookmarkModel::refreshModel()
                       b.zimUuid,
                       b.valid
                   ));
-        }
+        ++it;
+    }
+
+    this->busy = false;
+    emit busyChanged();
 }
 
 bool BookmarkModel::getBusy()
 {
-    return Bookmarks::instance()->getBusy();
+    return this->busy;
 }
 
 void BookmarkModel::clear()

@@ -59,7 +59,7 @@ Page {
 
             LogItem {
                 title: "Bookmarks"
-                description: "Bookmark is a link to an article that is stored in specific ZIM file. An appropriate ZIM file will be automatically loaded if you click on a bookmark.";
+                description: "Every article can be added to bookmarks. Click on a bookmark will automatically load an appropriate ZIM file.";
             }
 
             Spacer {}

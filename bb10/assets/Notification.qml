@@ -9,8 +9,8 @@
  obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import bb.cascades 1.3
-import bb.system 1.3
+import bb.cascades 1.4
+import bb.system 1.2
 
 Container {
     id: root

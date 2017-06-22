@@ -27,7 +27,7 @@ public:
     static bool scanZimFile(ZimMetaData &metaData);
 
     QMap<QString, ZimMetaData> files;
-    bool busy = false;
+    bool busy;
 
     void init();
 
@@ -45,7 +45,7 @@ private slots:
 private:
     static FileFinder* inst;
 
-    explicit FileFinder(QObject *parent = Q_NULLPTR);
+    explicit FileFinder(QObject *parent = 0);
     void findFiles(const QString &dirName);
 };
 

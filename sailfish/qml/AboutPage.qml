@@ -44,7 +44,7 @@ Page {
             PaddedLabel {
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
-                text: qsTr("Version: %1").arg(VERSION);
+                text: qsTr("Version %1").arg(VERSION);
             }
 
             PaddedLabel {

@@ -19,7 +19,7 @@
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
 #include <QStandardPaths>
 #else
-#include <QtGui/QDesktopServices>
+#include <QDesktopServices>
 #endif
 
 #include <zim/file.h>
@@ -29,12 +29,12 @@
 #include "filefinder.h"
 #include "zimserver.h"
 
-FileFinder* FileFinder::inst = Q_NULLPTR;
+FileFinder* FileFinder::inst = 0;
 
 FileFinder::FileFinder(QObject *parent) : QThread(parent)
 {
-    connect(this, &QThread::finished, this, &FileFinder::finishedHandler);
-    connect(this, &QThread::started, this, &FileFinder::startedHandler);
+    QObject::connect(this, SIGNAL(finished()), this, SLOT(finishedHandler()));
+    QObject::connect(this, SIGNAL(started()), this, SLOT(startedHandler()));
     init();
 }
 
@@ -58,7 +58,7 @@ void FileFinder::finishedHandler()
 
 FileFinder* FileFinder::instance()
 {
-    if (FileFinder::inst == Q_NULLPTR) {
+    if (FileFinder::inst == 0) {
         FileFinder::inst = new FileFinder();
     }
 
@@ -128,7 +128,7 @@ void FileFinder::findFiles(const QString &dirName)
 
 bool FileFinder::scanZimFile(ZimMetaData &metaData)
 {
-    zim::File *zimfile = Q_NULLPTR;
+    zim::File *zimfile = 0;
 
     try
     {
@@ -217,30 +217,34 @@ bool FileFinder::scanZimFile(ZimMetaData &metaData)
     }
     if (metaData.fields & ZimMetaData::Favicon) {
         if (ZimServer::getArticle(zimfile, "-/favicon", data, mimeType)) {
-            QString filename = "zim-favicon-" + metaData.checksum ;
-    #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
-            const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
-    #else
-            const QString cacheDir = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-    #endif
-            QFile file(cacheDir + "/" + filename + ".png");
-            if (!file.exists()) {
-                if (file.open(QFile::WriteOnly)) {
-                    file.write(data);
-                    file.close();
-                    metaData.favicon = "image://icons/" + filename;
+            if (mimeType == "image/png") {
+                QString filename = "zim-favicon-" + metaData.checksum ;
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+                const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+#else
+                const QString cacheDir = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+#endif
+                QFile file(cacheDir + "/" + filename + ".png");
+                if (!file.exists()) {
+                    if (file.open(QFile::WriteOnly)) {
+                        file.write(data);
+                        file.close();
+                        metaData.favicon = "image://icons/" + filename;
+                    } else {
+                        qWarning() << "Unable to open file" << file.fileName() << " to write!";
+                    }
                 } else {
-                    qWarning() << "Unable to open file" << file.fileName() << " to write!";
+                    metaData.favicon = "image://icons/" + filename;
                 }
             } else {
-                metaData.favicon = "image://icons/" + filename;
+                qWarning() << "Favicon mimeType is not image/png!";
             }
         } else {
             qWarning() << "Favicon is missing!";
         }
     }
 
-    if (zimfile != Q_NULLPTR)
+    if (zimfile != 0)
         delete zimfile;
 
     return true;

@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
+  Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
 
   This file is part of Zimpedia application.
 

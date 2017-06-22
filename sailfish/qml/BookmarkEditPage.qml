@@ -68,7 +68,7 @@ Dialog {
                     MenuItem {
                         text: qsTr("Change")
                         onClicked: {
-                            pageStack.push(Qt.resolvedUrl("BookmarkFileChoose.qml"));
+                            pageStack.push(Qt.resolvedUrl("BookmarkFileChoose.qml"),{"uuid": root.uuid});
                         }
                     }
                 }
@@ -125,7 +125,7 @@ Dialog {
             }
 
             SectionHeader {
-                text: qsTr("Url")
+                text: qsTr("URL")
             }
 
             Label {

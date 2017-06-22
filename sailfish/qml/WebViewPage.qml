@@ -26,7 +26,7 @@ Page {
     property bool nightMode: false
     property bool nightModePossible: true
     property int toolbarHideTime: 4000
-    property var history
+    property variant history
     property bool local: false
     property string title: ""
 

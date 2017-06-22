@@ -12,7 +12,12 @@
 #ifndef BOOKMARKS_H
 #define BOOKMARKS_H
 
+#ifdef BB10
+#include <QVariantList>
+#endif
+#ifdef SAILFISH
 #include <QJsonArray>
+#endif
 #include <QList>
 #include <QString>
 #include <QObject>
@@ -21,6 +26,8 @@ class Bookmarks : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
+
+public:
 
     struct Bookmark {
         QString title;
@@ -36,7 +43,6 @@ class Bookmarks : public QObject
         }
     };
 
-public:
     static Bookmarks* instance();
     Q_INVOKABLE void addBookmark(const QString &title,
                                  const QString &url,
@@ -67,12 +73,18 @@ private:
     static const QString bookmarkFilename;
     static Bookmarks *inst;
 
-    bool busy = false;
+    bool busy;
 
-    explicit Bookmarks(QObject *parent = Q_NULLPTR);
+    explicit Bookmarks(QObject *parent = 0);
+    const QString articleUrl(const QString &url);
+#ifdef BB10
+    QVariantList readBookmarks();
+    bool writeBookmarks(const QVariantList &json);
+#endif
+#ifdef SAILFISH
     QJsonArray readBookmarks();
     bool writeBookmarks(const QJsonArray &json);
-    const QString articleUrl(const QString &url);
+#endif
 };
 
 #endif // BOOKMARKS_H
