@@ -88,22 +88,19 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 #endif
 
     QTranslator translator;
-#ifdef BB10
     QString locale = QLocale::system().name();
-    qDebug() << locale;
+    //qDebug() << locale;
+#ifdef BB10
     if (translator.load("Zimpedia_" + locale, "app/native/qm")) {
         app.installTranslator(&translator);
     } else {
         qWarning() << "Couldn't load translation for locale " + locale + " from app/native/qm";
     }
 #elif SAILFISH
-    QString locale = QLocale::system().name();
-    qDebug() << locale;
-    locale="pl";
     if(translator.load("Zimpedia_" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
         app->installTranslator(&translator);
     } else {
-        qDebug() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
+        qWarning() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
     }
 #endif
 

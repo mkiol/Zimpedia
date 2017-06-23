@@ -145,6 +145,7 @@ Page {
             MenuItem {
                 text: qsTr("Bookmarks")
                 visible: !zimServer.loaded
+                enabled: !bookmarks.busy
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
             }
 

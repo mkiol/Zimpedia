@@ -15,6 +15,9 @@
 #include <bps/navigator.h>
 #include <bb/platform/PlatformInfo>
 #include <bb/system/Clipboard>
+#elif SAILFISH
+#include <QGuiApplication>
+#include <QClipboard>
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
@@ -41,14 +44,20 @@ const QString Utils::homeDir()
     return homeLocation;
 }
 
-#ifdef BB10
+
 void Utils::copyToClipboard(const QString &text)
 {
+#ifdef BB10
     bb::system::Clipboard clipboard;
     clipboard.clear();
     clipboard.insert("text/plain", text.toUtf8());
+#elif SAILFISH
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(text);
+#endif
 }
 
+#ifdef BB10
 void Utils::launchBrowser(const QString &url)
 {
     qDebug() << "launchBrowser" << url;

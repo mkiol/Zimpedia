@@ -118,6 +118,7 @@ Page {
             MenuItem {
                 text: qsTr("Bookmarks")
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
+                enabled: !bookmarks.busy
             }
 
             MenuItem {

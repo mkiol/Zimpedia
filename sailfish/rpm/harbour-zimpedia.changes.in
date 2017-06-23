@@ -8,7 +8,18 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sat May 20 2016 Michal Kosciesza <michal@mkiol.net> 2.0.0-1
+* Fri Jun 23 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-4
+- Update for ES, DE, PL & SV translations
+- Copy URL
+- C++ code update to support BB10
+
+* Mon Jun 04 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-3
+- SV translation
+
+* Sun Jun 03 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-2
+- Bookmarks
+
+* Sat May 20 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-1
 - Zimlib update to version 1.4
 - Web view
 - Open main page

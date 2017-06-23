@@ -23,7 +23,9 @@
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QAbstractItemModel>
+#include <QTimer>
 #include "abstractitemmodel.hpp"
+#include "webimageview.h"
 using namespace bb::cascades;
 #elif SAILFISH
 #include <QGuiApplication>
@@ -33,6 +35,7 @@ using namespace bb::cascades;
 #include <QQuickView>
 #include <QQmlContext>
 #include <sailfishapp.h>
+#include "iconprovider.h"
 #endif
 
 #include "zimserver.h"
@@ -40,23 +43,34 @@ using namespace bb::cascades;
 #include "settings.h"
 #include "filemodel.h"
 #include "utils.h"
+#include "filefinder.h"
+#include "zimmetadatareader.h"
+#include "bookmarkmodel.h"
+#include "bookmarks.h"
 
 static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
 static const char *PAGE = "https://github.com/mkiol/Zimpedia";
 static const char *LICENSE = "http://mozilla.org/MPL/2.0/";
-static const char *VERSION = "1.0";
+static const char *VERSION = "2.0.0";
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
 #ifdef BB10
     qmlRegisterType<QAbstractItemModel>();
-    qmlRegisterType<FileModel>("net.mkiol.zimpedia.FileModel", 1, 0, "FileModel");
     qmlRegisterType <AbstractItemModel> ("com.kdab.components", 1, 0, "AbstractItemModel");
+    qmlRegisterType<WebImageView> ("org.labsquare", 1, 0, "WebImageView");
+    qmlRegisterType<FileModel>("net.mkiol.zimpedia.FileModel", 1, 0, "FileModel");
+    qmlRegisterType<ZimMetaDataReader>("net.mkiol.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
+    qmlRegisterType<BookmarkModel>("net.mkiol.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
+    qmlRegisterType<QTimer>("net.mkiol.zimpedia.QTimer", 1, 0, "QTimer");
 #elif SAILFISH
     qmlRegisterType<FileModel>("harbour.zimpedia.FileModel", 1, 0, "FileModel");
+    qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
+    qmlRegisterType<BookmarkModel>("harbour.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
 #endif
     qRegisterMetaType<QFileInfo>("QFileInfo");
+    qRegisterMetaType<ZimMetaData>("ZimMetaData");
 
 #ifdef BB10
     Application app(argc, argv);
@@ -70,16 +84,24 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     QQmlContext* context = view->rootContext();
     QQmlEngine* engine = view->engine();
+    engine->addImageProvider(QLatin1String("icons"), new IconProvider);
 #endif
 
-#ifdef SAILFISH
     QTranslator translator;
     QString locale = QLocale::system().name();
-    //locale="de";
-    if(!translator.load("harbour-zimpedia-" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
-        qDebug() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
+    //qDebug() << locale;
+#ifdef BB10
+    if (translator.load("Zimpedia_" + locale, "app/native/qm")) {
+        app.installTranslator(&translator);
+    } else {
+        qWarning() << "Couldn't load translation for locale " + locale + " from app/native/qm";
     }
-    app->installTranslator(&translator);
+#elif SAILFISH
+    if(translator.load("Zimpedia_" + locale, SailfishApp::pathTo("translations").toLocalFile())) {
+        app->installTranslator(&translator);
+    } else {
+        qWarning() << "Couldn't load translation for locale " + locale + " from " + SailfishApp::pathTo("translations").toLocalFile();
+    }
 #endif
 
     context->setContextProperty("APP_NAME", APP_NAME);
@@ -89,6 +111,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("LICENSE", LICENSE);
 
     Settings* s = Settings::instance();
+    Bookmarks* b = Bookmarks::instance();
     ZimServer zimServer;
     ArticleModel articleModel;
     Utils utils;
@@ -98,6 +121,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("zimServer", &zimServer);
     context->setContextProperty("articleModel", &articleModel);
     context->setContextProperty("utils", &utils);
+    context->setContextProperty("bookmarks", b);
 
     QObject::connect(engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
 

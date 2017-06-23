@@ -23,11 +23,11 @@ public:
     explicit Utils(QObject *parent = 0);
 
     Q_INVOKABLE const QString homeDir();
+    Q_INVOKABLE void copyToClipboard(const QString &text);
 #ifdef BB10
     Q_INVOKABLE bool checkOSVersion(int major, int minor, int patch = 0, int build = 0);
     Q_INVOKABLE void launchBrowser(const QString &url);
     Q_INVOKABLE QString readAsset(const QString &path);
-    Q_INVOKABLE void copyToClipboard(const QString &text);
 #endif
 
 };

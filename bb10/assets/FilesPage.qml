@@ -65,6 +65,7 @@ Page {
             title: qsTr("Bookmarks")
             imageSource: "asset:///bookmark.png"
             ActionBar.placement: ActionBarPlacement.OnBar
+            enabled: !bookmarks.busy
             shortcuts: Shortcut {
                 key: "b"
             }
