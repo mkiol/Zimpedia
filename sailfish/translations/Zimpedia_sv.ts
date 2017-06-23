@@ -10,10 +10,6 @@
         <translation>Om</translation>
     </message>
     <message>
-        <source>Version: %1</source>
-        <translation type="vanished">Version: %1</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="51"/>
         <location filename="../../bb10/assets/AboutPage.qml" line="84"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
@@ -72,45 +68,43 @@
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="69"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
         <source>Change</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="109"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="106"/>
         <source>ZIM file is missing</source>
         <translation>ZIM-fil saknas</translation>
     </message>
     <message>
-        <source>Url</source>
-        <translation type="vanished">URL</translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="160"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="36"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
         <translation>Något blev fel och bokmärket kan inte uppdateras</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera URL</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:en kopierades till urklipp</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="66"/>
         <source>Edit bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera bokmärke</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
@@ -197,10 +191,6 @@
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
-    <message>
-        <source>Version: %1</source>
-        <translation type="obsolete">Version: %1</translation>
-    </message>
 </context>
 <context>
     <name>FilesPage</name>
@@ -212,20 +202,20 @@
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="118"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="119"/>
         <source>Show details</source>
         <translation>Visa detaljerat</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="151"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="154"/>
         <source>No files were found</source>
         <translation>Inga filer hittades</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="124"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM är ett öppet filformat som lagrar wiki-innehåll för offline-användning. Samlingen av trevliga wikis kan laddas ner från &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. Om du redan har några ZIM-filer, kan du placera dem i valfri mapp i din hemkatalog eller på ditt SD-kort.</translation>
     </message>
@@ -246,8 +236,8 @@
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="152"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="78"/>
+        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="79"/>
         <source>Refresh</source>
         <translation>Uppdatera</translation>
     </message>
@@ -301,7 +291,7 @@
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="124"/>
+        <location filename="../qml/SearchPage.qml" line="125"/>
         <location filename="../../bb10/assets/SearchPage.qml" line="50"/>
         <source>Open main page</source>
         <translation>Öppna huvudsidan</translation>
@@ -314,7 +304,7 @@
     <message>
         <location filename="../../bb10/assets/SearchPage.qml" line="39"/>
         <source>Enter search entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange söksträng</translation>
     </message>
 </context>
 <context>
@@ -359,30 +349,6 @@
         <location filename="../../bb10/assets/SettingsPage.qml" line="81"/>
         <source>Viewer font size level</source>
         <translation>Teckenstorlek i läsaren</translation>
-    </message>
-    <message>
-        <source>Hide advanced options</source>
-        <translation type="vanished">Dölj avancerade alternativ</translation>
-    </message>
-    <message>
-        <source>Show advanced options</source>
-        <translation type="vanished">Visa avancerade alternativ</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="vanished">Avancerat</translation>
-    </message>
-    <message>
-        <source>Enter port number here!</source>
-        <translation type="vanished">Ange portnummer här!</translation>
-    </message>
-    <message>
-        <source>Local server listening port number</source>
-        <translation type="vanished">Lyssningsport för lokal server</translation>
-    </message>
-    <message>
-        <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation type="vanished">Portnummret är ogiltigt! Giltigt intervall är 1024-65535.</translation>
     </message>
 </context>
 <context>
@@ -548,7 +514,7 @@
     <message>
         <location filename="../src/zimserver.cpp" line="526"/>
         <source>Main page</source>
-        <translation type="unfinished"></translation>
+        <translation>Huvudsida</translation>
     </message>
 </context>
 <context>
@@ -580,7 +546,7 @@
     <message>
         <location filename="../../bb10/assets/main.qml" line="70"/>
         <source>Preparing ZIM file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Förbereder ZIM-fil...</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/main.qml" line="148"/>

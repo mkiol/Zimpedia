@@ -10,10 +10,6 @@
         <translation>Acerca de</translation>
     </message>
     <message>
-        <source>Version: %1</source>
-        <translation type="vanished">Versión: %1</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="51"/>
         <location filename="../../bb10/assets/AboutPage.qml" line="84"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
@@ -72,32 +68,30 @@
         <translation>Título</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="69"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
         <source>Change</source>
         <translation>Cambiar</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="109"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="106"/>
         <source>ZIM file is missing</source>
         <translation>Falta el fichero ZIM</translation>
     </message>
     <message>
-        <source>Url</source>
-        <translation type="vanished">Url</translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="160"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="36"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
         <translation>Algo salió mal y el marcador no se pudo actualizar</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
         <translation>Copiar URL</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
         <translation>Se ha copiado URL al portapapeles</translation>
@@ -197,10 +191,6 @@
         <source>Version %1</source>
         <translation>Versión %1</translation>
     </message>
-    <message>
-        <source>Version: %1</source>
-        <translation type="obsolete">Versión: %1</translation>
-    </message>
 </context>
 <context>
     <name>FilesPage</name>
@@ -212,20 +202,20 @@
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="118"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="119"/>
         <source>Show details</source>
         <translation>Mostrar detalles</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="151"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="154"/>
         <source>No files were found</source>
         <translation>No se ha encontrado ningún fichero</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="124"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM es un formato de archivo abierto que almacena el contenido wiki para usarlo sin conexión. La colección de buenos wikis pueden descargarse desde &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt; esta página &lt;/a&gt;. Si ya dispones de algunos ficheros ZIM, ubícalos en cualquier carpeta dentro del directorio Home o en la tarjeta SD.</translation>
     </message>
@@ -246,25 +236,10 @@
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="152"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="78"/>
+        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="79"/>
         <source>Refresh</source>
         <translation>Actualizar</translation>
-    </message>
-</context>
-<context>
-    <name>PageMenu</name>
-    <message>
-        <source>About</source>
-        <translation type="vanished">Acerca de</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Ajustes</translation>
-    </message>
-    <message>
-        <source>Change ZIM file</source>
-        <translation type="vanished">Cambiar fichero ZIM</translation>
     </message>
 </context>
 <context>
@@ -316,7 +291,7 @@
         <translation>Marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="124"/>
+        <location filename="../qml/SearchPage.qml" line="125"/>
         <location filename="../../bb10/assets/SearchPage.qml" line="50"/>
         <source>Open main page</source>
         <translation>Abrir página principal</translation>
@@ -344,22 +319,6 @@
         <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>UI</source>
         <translation>Interfaz</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="vanished">Tamaño de la fuente</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="vanished">Grande</translation>
-    </message>
-    <message>
-        <source>Extra large</source>
-        <translation type="vanished">Muy grande</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="54"/>
@@ -390,30 +349,6 @@
         <location filename="../../bb10/assets/SettingsPage.qml" line="81"/>
         <source>Viewer font size level</source>
         <translation>Tamaño de la fuente del visor</translation>
-    </message>
-    <message>
-        <source>Hide advanced options</source>
-        <translation type="vanished">Ocultar opciones avanzadas</translation>
-    </message>
-    <message>
-        <source>Show advanced options</source>
-        <translation type="vanished">Mostrar opciones avanzadas</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="vanished">Avanzado</translation>
-    </message>
-    <message>
-        <source>Enter port number here!</source>
-        <translation type="vanished">¡Introduce el puerto aquí!</translation>
-    </message>
-    <message>
-        <source>Local server listening port number</source>
-        <translation type="vanished">Puerto de escucha del servidor local</translation>
-    </message>
-    <message>
-        <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation type="vanished">¡El puerto no es correcto! El rango de puertos permitido es 1024-65535.</translation>
     </message>
 </context>
 <context>

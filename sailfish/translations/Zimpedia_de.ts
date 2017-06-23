@@ -10,10 +10,6 @@
         <translation>Über Zimpedia</translation>
     </message>
     <message>
-        <source>Version: %1</source>
-        <translation type="vanished">Version %1</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="51"/>
         <location filename="../../bb10/assets/AboutPage.qml" line="84"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
@@ -72,41 +68,43 @@
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="69"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
         <source>Change</source>
         <translation>Ändern</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="109"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="106"/>
         <source>ZIM file is missing</source>
         <translation>ZIM Datei nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="160"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="36"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
         <translation>Der Vorgang schlug fehl; Das Lesezeichen konnte nicht aktualisiert werden</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
         <translation>URL kopieren</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
-        <translation type="unfinished">URL wurde in die Zwischenablage kopiert</translation>
+        <translation>URL wurde in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="66"/>
         <source>Edit bookmark</source>
-        <translation type="unfinished">Lesezeichen bearbeiten</translation>
+        <translation>Lesezeichen bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
@@ -193,10 +191,6 @@
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
-    <message>
-        <source>Version: %1</source>
-        <translation type="obsolete">Version %1</translation>
-    </message>
 </context>
 <context>
     <name>FilesPage</name>
@@ -208,22 +202,22 @@
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="118"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="119"/>
         <source>Show details</source>
         <translation>Zeige Details</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="151"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="154"/>
         <source>No files were found</source>
         <translation>Es wurden keine Dateien gefunden</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="124"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation>ZIM ist ein Dateiformat, welches Wiki Inhalte für die Offline-Nutzung enthält. Eine Auswahl von tollen Wikis kann hier heruntergeladen werden: &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Solltest Du schon einige ZIM Dateien haben, speichere sie in einem beliebigen Ordner Deines Home-Verzeichnisses oder der SD-Karte.</translation>
+        <translation>ZIM ist ein Dateiformat, welches Wiki Inhalte für die Offline-Nutzung enthält. Eine Auswahl von tollen Wikis kann hier heruntergeladen werden: &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;Kiwix.org&lt;/a&gt;. Solltest Du schon einige ZIM Dateien haben, speichere sie in einem beliebigen Ordner Deines Home-Verzeichnisses oder der SD-Karte.</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="134"/>
@@ -242,25 +236,10 @@
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="152"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="78"/>
+        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="79"/>
         <source>Refresh</source>
         <translation>Aktualisieren</translation>
-    </message>
-</context>
-<context>
-    <name>PageMenu</name>
-    <message>
-        <source>About</source>
-        <translation type="vanished">Über...</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Einstellungen</translation>
-    </message>
-    <message>
-        <source>Change ZIM file</source>
-        <translation type="vanished">Wechsle die ZIM Datei</translation>
     </message>
 </context>
 <context>
@@ -312,7 +291,7 @@
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="124"/>
+        <location filename="../qml/SearchPage.qml" line="125"/>
         <location filename="../../bb10/assets/SearchPage.qml" line="50"/>
         <source>Open main page</source>
         <translation>Öffne Hauptseite</translation>
@@ -342,32 +321,16 @@
         <translation>Oberfläche</translation>
     </message>
     <message>
-        <source>Font size</source>
-        <translation type="vanished">Schriftgröße</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="vanished">Groß</translation>
-    </message>
-    <message>
-        <source>Extra large</source>
-        <translation type="vanished">Sehr groß</translation>
-    </message>
-    <message>
         <location filename="../qml/SettingsPage.qml" line="54"/>
         <location filename="../../bb10/assets/SettingsPage.qml" line="52"/>
         <source>Default viewer</source>
-        <translation type="unfinished">Standard Betrachter</translation>
+        <translation>Standard Betrachter</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="58"/>
         <location filename="../../bb10/assets/SettingsPage.qml" line="59"/>
         <source>Built-in viewer</source>
-        <translation type="unfinished">interner Betrachter</translation>
+        <translation>interner Betrachter</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="59"/>
@@ -386,30 +349,6 @@
         <location filename="../../bb10/assets/SettingsPage.qml" line="81"/>
         <source>Viewer font size level</source>
         <translation>Schriftgröße</translation>
-    </message>
-    <message>
-        <source>Hide advanced options</source>
-        <translation type="vanished">Verstecke fortgeschrittene Einstellungen</translation>
-    </message>
-    <message>
-        <source>Show advanced options</source>
-        <translation type="vanished">Zeige fortgeschrittene Einstellungen</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="vanished">Fortgeschritten</translation>
-    </message>
-    <message>
-        <source>Enter port number here!</source>
-        <translation type="vanished">Gib die Port-Nummer hier ein!</translation>
-    </message>
-    <message>
-        <source>Local server listening port number</source>
-        <translation type="vanished">Empfangende Port-Nummer des lokalen Servers</translation>
-    </message>
-    <message>
-        <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation type="vanished">Die Port-Nummer ist ungültig! Erlaubter Bereich ist 1024-65535.</translation>
     </message>
 </context>
 <context>
@@ -607,7 +546,7 @@
     <message>
         <location filename="../../bb10/assets/main.qml" line="70"/>
         <source>Preparing ZIM file...</source>
-        <translation type="unfinished">bereite Zim Datei vor...</translation>
+        <translation>bereite Zim Datei vor...</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/main.qml" line="148"/>

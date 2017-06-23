@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../assets/AboutPage.qml" line="18"/>
         <source>About</source>
-        <translation>O Zimpedii</translation>
+        <translation>Über Zimpedia</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="84"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
-        <translation>Niewymagający dostępu do Internetu, czytnik Wikipedii oraz innych projektów typu Wiki</translation>
+        <translation>Offline Reader für die Wikipedia und andere Wiki-Projekte</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="93"/>
         <source>Website</source>
-        <translation>Strona internetowa</translation>
+        <translation>Webseite</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="41"/>
         <source>Changelog</source>
-        <translation>Lista zmian</translation>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="113"/>
         <source>Copyright &amp; license</source>
-        <translation>Prawa autorskie i licencja</translation>
+        <translation>Copyright und Lizenz</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="125"/>
         <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>Oprogramowanie dystrybuowane zgodnie z postanowieniami licencji Mozilla Public License w wersji 2.0</translation>
+        <translation>Diese Software wird unter den Bestimmungen der Mozilla Public License v.2.0 vertrieben</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="133"/>
         <source>Third party components copyrights</source>
-        <translation>Prawa autorskie stron trzecich</translation>
+        <translation>Copyright-Bestandteile von Dritten</translation>
     </message>
     <message>
         <location filename="../assets/AboutPage.qml" line="78"/>
         <source>Version %1</source>
-        <translation>Wersja %1</translation>
+        <translation>Version %1</translation>
     </message>
 </context>
 <context>
@@ -49,46 +49,46 @@
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="53"/>
         <source>Save</source>
-        <translation>Zapisz</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="97"/>
         <source>Title</source>
-        <translation>Tytuł</translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="obsolete">Zmień</translation>
+        <translation type="obsolete">Ändern</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="106"/>
         <source>ZIM file is missing</source>
-        <translation>Brak pliku ZIM</translation>
+        <translation>ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="36"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation>Coś poszło nie tak i nie można uaktualnić zakładki</translation>
+        <translation>Der Vorgang schlug fehl; Das Lesezeichen konnte nicht aktualisiert werden</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
-        <translation>Kopiuj URL</translation>
+        <translation>URL kopieren</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
-        <translation>URL został skopiowany do schowka</translation>
+        <translation>URL wurde in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="61"/>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="66"/>
         <source>Edit bookmark</source>
-        <translation>Edycja zakładki</translation>
+        <translation>Lesezeichen bearbeiten</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkEditPage.qml" line="124"/>
@@ -100,22 +100,22 @@
     <name>BookmarkFileChoose</name>
     <message>
         <source>Choose ZIM file</source>
-        <translation type="obsolete">Wybierz plik ZIM</translation>
+        <translation type="obsolete">Wähle eine ZIM Datei</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkFileChoose.qml" line="124"/>
         <source>No files were found</source>
-        <translation>Brak plików</translation>
+        <translation>Es wurden keine Dateien gefunden</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkFileChoose.qml" line="69"/>
         <source>Refresh</source>
-        <translation>Odśwież</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="../assets/BookmarkFileChoose.qml" line="47"/>
         <source>Change ZIM file</source>
-        <translation>Zmień plik ZIM</translation>
+        <translation>Wechsle die ZIM Datei</translation>
     </message>
 </context>
 <context>
@@ -123,32 +123,32 @@
     <message>
         <location filename="../assets/BookmarksPage.qml" line="57"/>
         <source>Bookmarks</source>
-        <translation>Zakładki</translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <location filename="../assets/BookmarksPage.qml" line="86"/>
         <source>Edit</source>
-        <translation>Edytuj</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <location filename="../assets/BookmarksPage.qml" line="105"/>
         <source>Delete</source>
-        <translation>Usuń</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../assets/BookmarksPage.qml" line="77"/>
         <source>ZIM file is missing</source>
-        <translation>Brak pliku ZIM</translation>
+        <translation>ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../assets/BookmarksPage.qml" line="126"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
-        <translation>Brak pliku ZIM skojarzonego z zakładką</translation>
+        <translation>ZIM Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../assets/BookmarksPage.qml" line="134"/>
         <source>No bookmarks</source>
-        <translation>Brak zakładek</translation>
+        <translation>Keine Lesezeichen</translation>
     </message>
 </context>
 <context>
@@ -156,12 +156,12 @@
     <message>
         <location filename="../assets/ChangelogPage.qml" line="19"/>
         <source>Changelog</source>
-        <translation>Lista zmian</translation>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="../assets/ChangelogPage.qml" line="44"/>
         <source>Version %1</source>
-        <translation>Wersja %1</translation>
+        <translation>Version %1</translation>
     </message>
 </context>
 <context>
@@ -169,41 +169,41 @@
     <message>
         <location filename="../assets/FilesPage.qml" line="43"/>
         <source>Choose ZIM file</source>
-        <translation>Wybierz plik ZIM</translation>
+        <translation>Wähle eine ZIM Datei</translation>
     </message>
     <message>
         <location filename="../assets/FilesPage.qml" line="119"/>
         <source>Show details</source>
-        <translation>Pokaż szczegóły</translation>
+        <translation>Zeige Details</translation>
     </message>
     <message>
         <location filename="../assets/FilesPage.qml" line="152"/>
         <location filename="../assets/FilesPage.qml" line="154"/>
         <source>No files were found</source>
-        <translation>Brak plików</translation>
+        <translation>Es wurden keine Dateien gefunden</translation>
     </message>
     <message>
         <location filename="../assets/FilesPage.qml" line="153"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation>ZIM jest otwartym formatem umożliwiającym przechowywanie i korzystanie ze stron typu Wiki bez dostępu do Internetu. Zbiór ciekawych Wiki można pobrać z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze znajdującym się w katalogu domowym lub na karcie SD.</translation>
+        <translation>ZIM ist ein Dateiformat, welches Wiki Inhalte für die Offline-Nutzung enthält. Eine Auswahl von tollen Wikis kann hier heruntergeladen werden: &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;Kiwix.org&lt;/a&gt;. Solltest Du schon einige ZIM Dateien haben, speichere sie in einem beliebigen Ordner Deines Home-Verzeichnisses oder der SD-Karte.</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="obsolete">O Zimpedii</translation>
+        <translation type="obsolete">Über Zimpedia</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="obsolete">Ustawienia</translation>
+        <translation type="obsolete">Einstellungen</translation>
     </message>
     <message>
         <location filename="../assets/FilesPage.qml" line="65"/>
         <source>Bookmarks</source>
-        <translation>Zakładki</translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <location filename="../assets/FilesPage.qml" line="79"/>
         <source>Refresh</source>
-        <translation>Odśwież</translation>
+        <translation>Aktualisieren</translation>
     </message>
 </context>
 <context>
@@ -211,54 +211,54 @@
     <message>
         <location filename="../assets/SearchPage.qml" line="121"/>
         <source>Open in built-in viewer</source>
-        <translation>Otwórz w wewnętrznym podglądzie</translation>
+        <translation>Öffne im internen Betrachter</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="134"/>
         <source>Open in browser</source>
-        <translation>Otwórz w przeglądarce</translation>
+        <translation>Öffne im Browser</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="144"/>
         <source>Add to bookmarks</source>
-        <translation>Dodaj do zakładek</translation>
+        <translation>Füge zu Lesezeichen hinzu</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="178"/>
         <source>Find article, by typing in the search field</source>
-        <translation>Znajdź artykuł, wpisując szukane słowo</translation>
+        <translation>Finde Artikel über die Eingabe im Suchfeld</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="obsolete">O Zimpedii</translation>
+        <translation type="obsolete">Über Zimpedia</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="obsolete">Ustawienia</translation>
+        <translation type="obsolete">Einstellungen</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="85"/>
         <source>Change ZIM file</source>
-        <translation>Zmień plik ZIM</translation>
+        <translation>Wechsle die ZIM Datei</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="71"/>
         <source>Bookmarks</source>
-        <translation>Zakładki</translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="50"/>
         <source>Open main page</source>
-        <translation>Otwórz główną stronę</translation>
+        <translation>Öffne Hauptseite</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="obsolete">Szukaj</translation>
+        <translation type="obsolete">Suche</translation>
     </message>
     <message>
         <location filename="../assets/SearchPage.qml" line="39"/>
         <source>Enter search entry</source>
-        <translation>Wpisz szukane słowo</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -266,90 +266,90 @@
     <message>
         <location filename="../assets/SettingsPage.qml" line="21"/>
         <source>Settings</source>
-        <translation>Ustawienia</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>UI</source>
-        <translation type="obsolete">Interfejs</translation>
+        <translation type="obsolete">Oberfläche</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="52"/>
         <source>Default viewer</source>
-        <translation>Sposób przeglądania</translation>
+        <translation>Standard Betrachter</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="59"/>
         <source>Built-in viewer</source>
-        <translation>Wbudowany podgląd</translation>
+        <translation>interner Betrachter</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="65"/>
         <source>Browser</source>
-        <translation>Przeglądarka</translation>
+        <translation>Browser</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="53"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
-        <translation>Strony wiki mogą być otwierane poprzez wbudowany podgląd albo w zewnętrznej przeglądarce.</translation>
+        <translation>Wiki-Seiten können im internen Betrachter oder einem externen Browser geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="81"/>
         <source>Viewer font size level</source>
-        <translation>Wiekość liter w podglądzie</translation>
+        <translation>Schriftgröße</translation>
     </message>
 </context>
 <context>
     <name>WebViewPage</name>
     <message>
         <source>Launching an external browser...</source>
-        <translation type="obsolete">Uruchamiam zewnętrzną przeglądarkę...</translation>
+        <translation type="obsolete">Starte externen Browser...</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="50"/>
         <location filename="../assets/WebViewPage.qml" line="282"/>
         <source>Loading page content...</source>
-        <translation>Wczytuję zawartość strony...</translation>
+        <translation>Lade Inhalte...</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="288"/>
         <source>Failed to load page content</source>
-        <translation>Nie udało się wczytać strony</translation>
+        <translation>Laden der Seite gescheitert</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="obsolete">Cofnij</translation>
+        <translation type="obsolete">Zurück</translation>
     </message>
     <message>
         <source>Toggle Night View</source>
-        <translation type="obsolete">Tryb nocny</translation>
+        <translation type="obsolete">Nachtansicht</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="151"/>
         <source>Add to bookmarks</source>
-        <translation>Dodaj do zakładek</translation>
+        <translation>Füge zu Lesezeichen hinzu</translation>
     </message>
     <message>
         <source>Browser</source>
-        <translation type="obsolete">Przeglądarka</translation>
+        <translation type="obsolete">Browser</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="196"/>
         <source>Decrease font</source>
-        <translation>Zmniejsz litery</translation>
+        <translation>Schrift verkleinern</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="185"/>
         <source>Increase font</source>
-        <translation>Powiększ litery</translation>
+        <translation>Schrift vergrößeren</translation>
     </message>
     <message>
         <source>Hide toolbar</source>
-        <translation type="obsolete">Ukryj</translation>
+        <translation type="obsolete">Verstecke Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../assets/WebViewPage.qml" line="174"/>
         <source>Open in browser</source>
-        <translation>Otwórz w przeglądarce</translation>
+        <translation>Öffne im Browser</translation>
     </message>
 </context>
 <context>
@@ -357,77 +357,77 @@
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="52"/>
         <source>Details</source>
-        <translation>Szczegóły</translation>
+        <translation>Details</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="74"/>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="79"/>
         <source>Title</source>
-        <translation>Tytuł</translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="84"/>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="89"/>
         <source>Creator</source>
-        <translation>Twórca</translation>
+        <translation>Urheber</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="94"/>
         <source>Publisher</source>
-        <translation>Wydawca</translation>
+        <translation>Herausgeber</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="99"/>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="104"/>
         <source>Language</source>
-        <translation>Język</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="109"/>
         <source>Tags</source>
-        <translation>Tagi</translation>
+        <translation>Tags</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="114"/>
         <source>Source</source>
-        <translation>Źródło</translation>
+        <translation>Quelle</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="119"/>
         <source>Article count</source>
-        <translation>Liczba artykułów</translation>
+        <translation>Anzahl Artikel</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="124"/>
         <source>Filename</source>
-        <translation>Nazwa pliku</translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="129"/>
         <source>Directory</source>
-        <translation>Katalog</translation>
+        <translation>Verzeichnis</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="134"/>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../assets/ZimInfoPage.qml" line="139"/>
         <source>Checksum</source>
-        <translation>Suma kontrolna</translation>
+        <translation>Prüfsumme</translation>
     </message>
 </context>
 <context>
@@ -435,7 +435,7 @@
     <message>
         <location filename="../src/zimserver.cpp" line="526"/>
         <source>Main page</source>
-        <translation>Strona główna</translation>
+        <translation>Hauptseite</translation>
     </message>
 </context>
 <context>
@@ -443,32 +443,32 @@
     <message>
         <location filename="../assets/main.qml" line="137"/>
         <source>Launching an external browser...</source>
-        <translation>Uruchamiam zewnętrzną przeglądarkę...</translation>
+        <translation>Starte externen Browser...</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="86"/>
         <source>Bookmark has been added</source>
-        <translation>Dodano zakładkę</translation>
+        <translation>Lesezeichen wurde hinzugefügt</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="87"/>
         <source>Bookmark already exists</source>
-        <translation>Zakładka już istnieje</translation>
+        <translation>Das Lesezeichen existiert bereits</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="88"/>
         <source>Bookmark has been updated</source>
-        <translation>Uaktualniono zakładkę</translation>
+        <translation>Lesezeichen aktualisiert</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="70"/>
         <source>Preparing ZIM file...</source>
-        <translation>Przygotowuję plik ZIM...</translation>
+        <translation>bereite Zim Datei vor...</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="148"/>
         <source>About</source>
-        <translation>O Zimpedii</translation>
+        <translation>Über Zimpedia</translation>
     </message>
 </context>
 </TS>
