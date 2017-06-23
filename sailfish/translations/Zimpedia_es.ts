@@ -95,22 +95,22 @@
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Se ha copiado URL al portapapeles</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="66"/>
         <source>Edit bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar marcador</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="128"/>
@@ -329,7 +329,7 @@
     <message>
         <location filename="../../bb10/assets/SearchPage.qml" line="39"/>
         <source>Enter search entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir entrada de búsqueda</translation>
     </message>
 </context>
 <context>
@@ -611,7 +611,7 @@
     <message>
         <location filename="../../bb10/assets/main.qml" line="70"/>
         <source>Preparing ZIM file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparando fichero ZIM...</translation>
     </message>
     <message>
         <location filename="../../bb10/assets/main.qml" line="148"/>
