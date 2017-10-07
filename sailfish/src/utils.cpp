@@ -10,6 +10,9 @@
 */
 
 #include <QStringList>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 
 #ifdef BB10
 #include <bps/navigator.h>
@@ -30,7 +33,9 @@
 #include "bookmarks.h"
 
 Utils::Utils(QObject *parent) : QObject(parent)
-{}
+{
+    createCacheDir();
+}
 
 const QString Utils::homeDir()
 {
@@ -44,6 +49,21 @@ const QString Utils::homeDir()
     return homeLocation;
 }
 
+#ifdef SAILFISH
+bool Utils::createCacheDir()
+{
+    const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+
+    if (!QFile::exists(cacheDir)) {
+        if (!QDir::root().mkpath(cacheDir)) {
+            qWarning() << "Unable to create cache dir!";
+            return false;
+        }
+    }
+
+    return true;
+}
+#endif
 
 void Utils::copyToClipboard(const QString &text)
 {

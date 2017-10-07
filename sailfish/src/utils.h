@@ -24,6 +24,9 @@ public:
 
     Q_INVOKABLE const QString homeDir();
     Q_INVOKABLE void copyToClipboard(const QString &text);
+#ifdef SAILFISH
+    bool createCacheDir();
+#endif
 #ifdef BB10
     Q_INVOKABLE bool checkOSVersion(int major, int minor, int patch = 0, int build = 0);
     Q_INVOKABLE void launchBrowser(const QString &url);
