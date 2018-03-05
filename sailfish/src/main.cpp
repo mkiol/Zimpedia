@@ -52,7 +52,7 @@ static const char *APP_NAME = "Zimpedia";
 static const char *AUTHOR = "Michal Kosciesza <michal@mkiol.net>";
 static const char *PAGE = "https://github.com/mkiol/Zimpedia";
 static const char *LICENSE = "http://mozilla.org/MPL/2.0/";
-static const char *VERSION = "2.0.0";
+static const char *APP_VERSION = "2.0.1";
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
@@ -105,7 +105,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 #endif
 
     context->setContextProperty("APP_NAME", APP_NAME);
-    context->setContextProperty("VERSION", VERSION);
+    context->setContextProperty("APP_VERSION", APP_VERSION);
     context->setContextProperty("AUTHOR", AUTHOR);
     context->setContextProperty("PAGE", PAGE);
     context->setContextProperty("LICENSE", LICENSE);

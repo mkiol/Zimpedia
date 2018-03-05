@@ -1,6 +1,6 @@
 TARGET = harbour-zimpedia
 
-CONFIG += c++11 sailfishapp dbus
+CONFIG += c++11 sailfishapp dbus json
 PKGCONFIG += mlite5
 
 DEFINES += SAILFISH
@@ -22,7 +22,8 @@ SOURCES += src/main.cpp \
     src/iconprovider.cpp \
     src/bookmarkmodel.cpp \
     src/filefinder.cpp \
-    src/zimmetadatareader.cpp
+    src/zimmetadatareader.cpp \
+    src/bookmarks.cpp
     
 HEADERS += \
     src/zimserver.h \
@@ -35,7 +36,8 @@ HEADERS += \
     src/bookmarkmodel.h \
     src/filefinder.h \
     src/zimmetadata.h \
-    src/zimmetadatareader.h
+    src/zimmetadatareader.h \
+    src/bookmarks.h
 
 OTHER_FILES += \
     qml/CoverPage.qml \
@@ -46,7 +48,6 @@ OTHER_FILES += \
     qml/PaddedLabel.qml \
     qml/SearchPage.qml \
     qml/FilesPage.qml \
-    qml/PageMenu.qml \
     qml/Bubble.qml \
     qml/ChangelogPage.qml \
     qml/LogItem.qml \
@@ -60,17 +61,26 @@ OTHER_FILES += \
     qml/Icon.qml \
     qml/IconPlaceholder.qml \
     qml/ZimInfoPage.qml \
+    qml/tools.js \
+    qml/AttValue.qml \
+    qml/BookmarksPage.qml \
+    qml/BookmarkEditPage.qml \
     translations/*.ts \
+    rpm/harbour-zimpedia.changes.in \
+    rpm/harbour-zimpedia.spec \
+    rpm/harbour-zimpedia.yaml \
     harbour-zimpedia.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 150x150 256x256
 
-TRANSLATIONS += translations/harbour-zimpedia-en.ts \
-                translations/harbour-zimpedia-pl.ts \
-                translations/harbour-zimpedia-sv.ts \
-                translations/harbour-zimpedia-cs_CZ.ts \
-                translations/harbour-zimpedia-es.ts \
-                translations/harbour-zimpedia-de.ts
+TRANSLATIONS += translations/Zimpedia_en.ts \
+                translations/Zimpedia_pl.ts \
+                translations/Zimpedia_sv.ts \
+                translations/Zimpedia_cs.ts \
+                translations/Zimpedia_es.ts \
+                translations/Zimpedia_de.ts \
+                translations/Zimpedia_fr.ts \
+                translations/Zimpedia_zh_TW.ts
 
 translations.files = translations
 translations.path = /usr/share/$${TARGET}
@@ -81,8 +91,4 @@ images.path = /usr/share/$${TARGET}/images
 INSTALLS += translations res images
 
 DISTFILES += \
-    rpm/harbour-zimpedia.changes.in \
-    rpm/harbour-zimpedia.spec \
-    rpm/harbour-zimpedia.yaml \
-    qml/tools.js \
-    qml/AttValue.qml
+    qml/BookmarkFileChoose.qml

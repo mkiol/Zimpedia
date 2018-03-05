@@ -22,15 +22,26 @@ Page {
 
         Column {
             id: content
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
 
+            width: root.width
             spacing: Theme.paddingMedium
 
             PageHeader {
                 title: qsTr("Changelog")
+            }
+
+            SectionHeader {
+                text: qsTr("Version %1").arg("2.0.1")
+            }
+
+            LogItem {
+                title: "Chinese translation"
+                description: "Chinese translation thanks to Jeff Huang";
+            }
+
+            LogItem {
+                title: "French translation"
+                description: "French translation thanks to lutinotmalin";
             }
 
             SectionHeader {

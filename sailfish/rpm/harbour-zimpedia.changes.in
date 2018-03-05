@@ -8,6 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Mar 04 2018 Michal Kosciesza <michal@mkiol.net> 2.0.1-1
+- New fr translation (thanks lutinotmalin)
+
+* Sat Oct 07 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-5
+- Update for CS translation
+- New zh_TW translation (thanks Jeff Huang)
+- BUG FIX: Creating cache dir if doesn't exist
+
 * Fri Jun 23 2017 Michal Kosciesza <michal@mkiol.net> 2.0.0-4
 - Update for ES, DE, PL & SV translations
 - Copy URL

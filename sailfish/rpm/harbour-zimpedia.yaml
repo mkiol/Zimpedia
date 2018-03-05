@@ -1,7 +1,7 @@
 Name: harbour-zimpedia
 Summary: Zimpedia
-Version: 2.0.0
-Release: 4
+Version: 2.0.1
+Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
 Group: Qt/Qt
@@ -34,8 +34,7 @@ PkgBR:
 
 # Runtime dependencies which are not automatically detected
 Requires:
-  - sailfishsilica-qt5 >= 0.10.9 
-  - xz
+  - sailfishsilica-qt5 >= 0.10.9
 
 # All installed files
 Files:

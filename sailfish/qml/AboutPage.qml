@@ -36,18 +36,18 @@ Page {
                 source: "image://icons/icon-i-zimpedia"
             }
 
-            PaddedLabel {
-                font.pixelSize: Theme.fontSizeHuge
+            InfoLabel {
                 text: APP_NAME
             }
 
             PaddedLabel {
+                horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
-                text: qsTr("Version %1").arg(VERSION);
+                text: qsTr("Version %1").arg(APP_VERSION);
             }
 
-            PaddedLabel {
+            /*PaddedLabel {
                 text: qsTr("Offline reader for Wikipedia and other Wiki projects");
             }
 
@@ -55,7 +55,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Website");
                 onClicked: Qt.openUrlExternally(PAGE)
-            }
+            }*/
 
             Button {
                 text: qsTr("Changelog")
