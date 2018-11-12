@@ -1,0 +1,141 @@
+libzim 4.0.4
+============
+
+ * Fix opening of multi-part zim.
+ * Fix convertion of path to wpath on Windows.
+
+libzim 4.0.3
+============
+
+ * Implement low level file manipilation using different backends
+
+libzim 4.0.2
+============
+
+ * [Windows] Fix opening of zim file bigger than 4GiB
+
+libzim 4.0.1
+============
+
+ * [Writer] Fix wrong redirectyon log message
+ * Make libzim compile natively on windows using MSVC
+ * Better message when failing to read a zim file.
+ * Make libzim on windows correctly open unicode path.
+ * Add compilation option to use less memory (but more I/O).
+   Usefull on low memory devices (android)
+ * Small fixes
+
+libzim 4.0.0
+============
+
+ * [Writer] Remove a lot of memory copy.
+ * [Writer] Add xapian indexing directly in libzim.
+ * [Writer] Better API.
+ * [Writer] Use multi-threading to write clusters.
+ * [Writer] Ensure mimetype of articles article is not null.
+ * Extend test timeout for cluster's test.
+ * Less memory copy for cluster's test.
+ * Allow skipping test using a lot memory using env variable
+   `SKIP_BIG_MEMORY_TEST=1`
+ * Explicitly use the icu namespace to allow using of packaged icu lib.
+ * Use a temporary file name as long as the ZIM writting process is
+ not finished (#163)
+ * [Travis] Do no compile using gcc-5 (but the default trusty's one 4.8)
+
+libzim 3.3.0
+============
+
+ * Fix handling of big cluster (>4GiB) on 32 bits architecture. This is mainly
+ done by :
+   * Do not mmap the whole cluster by default.
+   * MMap only the memory asociated to an article.
+   * If an article is > 4GiB, the blob associated to it is invalid
+     (data==size==0).
+   * Other information are still valid (directAccessInformation, ...)
+ * Fix writing of extended cluster in writer.
+ * Compile libzim on macos.
+ * Build libzim setting RPATH.
+ * Search result urls are now what is stored in the zim file. They should not
+   start with a `/`. This is a revert of the change made in last release.
+   (See kiwix/kiwix-lib#123)
+ * Spelling corrections in README.
+
+libzim 3.2.0
+============
+
+ * Support geo query if the xapian database has indexed localisation.
+ * Handle articles bigger than 4Go in the zim file (#110).
+ * Use AND operator between search term.
+ * Fix compilation with recent clang (#95).
+ * Add method to get article's data localisation in the zim file.
+ * Be able to get only a part of article (#77).
+ * Do not crash if we cannot open the xapian Database for some reasons.
+   (kiwix/kiwix-tools#153)
+ * Do not assumen there is always a checksum in the zim file.
+   (kiwix/kiwix-tools#150)
+ * Try to do some sanity checks when opening a zim file.
+ * Use pytest to do some tests (when cython is available).
+ * Use levenshtein distance to sort and have better suggestion results.
+ * Search result urls are now always absolute (starts with a '/').
+   (kiwix/kiwix-lib#110)
+ * Open the file readonly when checking the zim file (and so be able to check
+   read only file).
+ * Accept absolute url starting with '/' when searching for article.
+ * Fix various bugs
+
+libzim 3.1.0
+============
+
+ * Lzma is not a optional dependency anymore.
+ * Better handle (report and not crash) invalid zim file.
+ * Embed source of gtest (used only if gtest is not available on the system)
+ * Move zimDump tools out of libzim repository to zim-tools
+ * ZimCreator tools doesn't not read command line to set options.
+
+libzim 3.0.0
+============
+
+This is a major change of the libzim.
+Expect a lot new improvement and API changes.
+
+ * Add a suggestion mode to the search
+ * Fix licensing issues
+ * Fix wrong stemming of the query when searching
+ * Deactivate searching (and so crash) in the embedded database if the zim is
+   splitted
+ * Rewrite the low level memory management of libzim when reading a zim file:
+    * We use a buffer base entity to handle memory and reading file instead of
+      reading file using stream.
+    * MMap the memory when posible to avoid memory copy.
+    * Use const when posible (API break)
+ * Move to googletest instead of cxxtools for unit-tests.
+ * Fix endiannes bug on arm.
+ * Do not install private headers. Those headers declare private structure and
+   should not be visible (API break)
+ * Compile libzim with `-Werror` and `-Wall` options.
+ * Make libzim thread safe for reading article.
+   The search part is not thread safe, and all search operation must be
+   protected by a lock.
+ * Add method to get only a part of a article.
+ * Move some tools to zim-tools repository.
+
+
+libzim 2.0.0
+============
+
+ * Move to meson build system
+   `libzim` now use `meson` as build system instead of `autotools`
+ * Move to C++11 standard.
+ * Fulltext search in zim file.
+   We have integrated the xapian fulltext search in libzim.
+   So now, libzim provide an API to search in a zim containing embeded fulltext
+   index. This means that :
+    *libzim need xapian as (optional) dependencies (if you want compile with
+     xapian support).
+    * The old and unused search API has been removed.
+ * Remove bzip2 support.
+ * Remove Symbian support.
+ * Few API hanges
+   * Make some header files private (not installed);
+   * A `Blob` can now be cast to a `string` directly;
+   * Change a lot of `File` methods to const methods.

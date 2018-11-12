@@ -1,45 +1,35 @@
 TARGET = harbour-zimpedia
 
-CONFIG += c++11 sailfishapp dbus json
+CONFIG += c++11 sailfishapp dbus json libzim
+
 PKGCONFIG += mlite5
+
+linux-g++-32: CONFIG += x86
+linux-g++: CONFIG += arm
 
 DEFINES += SAILFISH
 
-INCLUDEPATH += /usr/include/c++/6
+PROJECTDIR = $$PWD
 
-# QHttpServer
-include(qhttpserver/qhttpserver.pri)
-# ZimLib
-include(zimlib/zimlib.pri)
+INCLUDEPATH += /usr/include/c++/7
 
-SOURCES += src/main.cpp \
-    src/zimserver.cpp \
-    src/articlemodel.cpp \
-    src/listmodel.cpp \
-    src/settings.cpp \
-    src/filemodel.cpp \
-    src/utils.cpp \
-    src/iconprovider.cpp \
-    src/bookmarkmodel.cpp \
-    src/filefinder.cpp \
-    src/zimmetadatareader.cpp \
-    src/bookmarks.cpp
-    
-HEADERS += \
-    src/zimserver.h \
-    src/articlemodel.h \
-    src/listmodel.h \
-    src/settings.h \
-    src/filemodel.h \
-    src/utils.h \
-    src/iconprovider.h \
-    src/bookmarkmodel.h \
-    src/filefinder.h \
-    src/zimmetadata.h \
-    src/zimmetadatareader.h \
-    src/bookmarks.h
+CONFIG += sailfish
+DEFINES += SAILFISH
+
+libzim {
+    DEFINES += LIBZIM
+    include($$PROJECTDIR/libs/libzim/libzim.pri)
+}
+zimlib {
+    DEFINES += ZIMLIB
+    include($$PROJECTDIR/libs/zimlib/zimlib.pri)
+}
+
+include($$PROJECTDIR/libs/qhttpserver/qhttpserver.pri)
+include($$PROJECTDIR/core/zimpedia_core.pri)
 
 OTHER_FILES += \
+    translations/*.ts \
     qml/CoverPage.qml \
     qml/AboutPage.qml \
     qml/SettingsPage.qml \
@@ -65,14 +55,11 @@ OTHER_FILES += \
     qml/AttValue.qml \
     qml/BookmarksPage.qml \
     qml/BookmarkEditPage.qml \
-    translations/*.ts \
-    rpm/harbour-zimpedia.changes.in \
-    rpm/harbour-zimpedia.spec \
-    rpm/harbour-zimpedia.yaml \
-    harbour-zimpedia.desktop
+    qml/BookmarkFileChoose.qml
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 150x150 256x256
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
+CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_pl.ts \
                 translations/Zimpedia_sv.ts \
@@ -82,13 +69,18 @@ TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_fr.ts \
                 translations/Zimpedia_zh_TW.ts
 
-translations.files = translations
-translations.path = /usr/share/$${TARGET}
-res.files = res
-res.path = /usr/share/$${TARGET}
 images.files = images/*
 images.path = /usr/share/$${TARGET}/images
-INSTALLS += translations res images
+INSTALLS += images
 
-DISTFILES += \
-    qml/BookmarkFileChoose.qml
+res.files = res
+res.path = /usr/share/$${TARGET}
+INSTALLS += res
+
+DEPENDPATH += $$INCLUDEPATH
+
+OTHER_FILES += \
+    rpm/$${TARGET}.yaml \
+    rpm/$${TARGET}.changes.in \
+    rpm/$${TARGET}.spec
+

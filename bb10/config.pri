@@ -4,10 +4,40 @@ BASEDIR = $$quote($$_PRO_FILE_PWD_)
 device {
     CONFIG(debug, debug|release) {
         profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            LIBS += -lQtCore \
+                -lQtGui \
+                -lQtMultimedia \
+                -lQtNetwork
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
         } else {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            LIBS += -lQtCore \
+                -lQtGui \
+                -lQtMultimedia \
+                -lQtNetwork
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -17,6 +47,21 @@ device {
 
     CONFIG(release, debug|release) {
         !profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            LIBS += -lQtCore \
+                -lQtGui \
+                -lQtMultimedia \
+                -lQtNetwork
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -27,6 +72,21 @@ device {
 simulator {
     CONFIG(debug, debug|release) {
         !profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtMultimedia) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtGui) \
+                $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
+
+            LIBS += -lQtCore \
+                -lQtGui \
+                -lQtMultimedia \
+                -lQtNetwork
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -37,40 +97,88 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/AboutPage.qml) \
-        $$quote($$BASEDIR/assets/DetailsPage.qml) \
+        $$quote($$BASEDIR/assets/AttValue.qml) \
+        $$quote($$BASEDIR/assets/BookmarkEditPage.qml) \
+        $$quote($$BASEDIR/assets/BookmarkFileChoose.qml) \
+        $$quote($$BASEDIR/assets/BookmarksPage.qml) \
+        $$quote($$BASEDIR/assets/ChangelogPage.qml) \
+        $$quote($$BASEDIR/assets/DropWithDescription.qml) \
         $$quote($$BASEDIR/assets/FilesPage.qml) \
+        $$quote($$BASEDIR/assets/Icon.qml) \
+        $$quote($$BASEDIR/assets/IconPlaceholder.qml) \
+        $$quote($$BASEDIR/assets/LogItem.qml) \
         $$quote($$BASEDIR/assets/Notification.qml) \
         $$quote($$BASEDIR/assets/PaddedLabel.qml) \
+        $$quote($$BASEDIR/assets/PressableContainer.qml) \
+        $$quote($$BASEDIR/assets/ProgressPanel.qml) \
         $$quote($$BASEDIR/assets/SearchPage.qml) \
         $$quote($$BASEDIR/assets/SettingsPage.qml) \
+        $$quote($$BASEDIR/assets/TempBaner.qml) \
         $$quote($$BASEDIR/assets/ViewPlaceholder.qml) \
-        $$quote($$BASEDIR/assets/ic_save.png) \
+        $$quote($$BASEDIR/assets/WebImageListItem.qml) \
+        $$quote($$BASEDIR/assets/WebViewPage.qml) \
+        $$quote($$BASEDIR/assets/ZimInfoPage.qml) \
+        $$quote($$BASEDIR/assets/add_bookmark.png) \
+        $$quote($$BASEDIR/assets/bookmark.png) \
+        $$quote($$BASEDIR/assets/browser.png) \
+        $$quote($$BASEDIR/assets/browserd.png) \
+        $$quote($$BASEDIR/assets/cancel-red.png) \
+        $$quote($$BASEDIR/assets/changelog.png) \
+        $$quote($$BASEDIR/assets/copy_link.png) \
+        $$quote($$BASEDIR/assets/delete.png) \
+        $$quote($$BASEDIR/assets/details.png) \
+        $$quote($$BASEDIR/assets/edit.png) \
+        $$quote($$BASEDIR/assets/file.png) \
+        $$quote($$BASEDIR/assets/fontdown.png) \
+        $$quote($$BASEDIR/assets/fontdownd.png) \
+        $$quote($$BASEDIR/assets/fontup.png) \
+        $$quote($$BASEDIR/assets/fontupd.png) \
+        $$quote($$BASEDIR/assets/home.png) \
         $$quote($$BASEDIR/assets/icon.png) \
-        $$quote($$BASEDIR/assets/main.qml)
+        $$quote($$BASEDIR/assets/js/Console.js) \
+        $$quote($$BASEDIR/assets/js/MessageListener.js) \
+        $$quote($$BASEDIR/assets/js/NightMode.js) \
+        $$quote($$BASEDIR/assets/js/Theme.js) \
+        $$quote($$BASEDIR/assets/js/Zimpedia.js) \
+        $$quote($$BASEDIR/assets/js/init.js) \
+        $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/refresh.png) \
+        $$quote($$BASEDIR/assets/tools.js) \
+        $$quote($$BASEDIR/assets/webview.png) \
+        $$quote($$BASEDIR/assets/webviewd.png)
 }
 
 config_pri_source_group1 {
     SOURCES += \
         $$quote($$BASEDIR/src/abstractitemmodel.cpp) \
         $$quote($$BASEDIR/src/articlemodel.cpp) \
+        $$quote($$BASEDIR/src/bookmarkmodel.cpp) \
+        $$quote($$BASEDIR/src/bookmarks.cpp) \
+        $$quote($$BASEDIR/src/filefinder.cpp) \
         $$quote($$BASEDIR/src/filemodel.cpp) \
         $$quote($$BASEDIR/src/listmodel.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/settings.cpp) \
         $$quote($$BASEDIR/src/utils.cpp) \
+        $$quote($$BASEDIR/src/webimageview.cpp) \
+        $$quote($$BASEDIR/src/zimmetadatareader.cpp) \
         $$quote($$BASEDIR/src/zimserver.cpp)
 
     HEADERS += \
         $$quote($$BASEDIR/src/abstractitemmodel.hpp) \
         $$quote($$BASEDIR/src/articlemodel.h) \
+        $$quote($$BASEDIR/src/bookmarkmodel.h) \
+        $$quote($$BASEDIR/src/bookmarks.h) \
+        $$quote($$BASEDIR/src/filefinder.h) \
         $$quote($$BASEDIR/src/filemodel.h) \
         $$quote($$BASEDIR/src/listmodel.h) \
         $$quote($$BASEDIR/src/settings.h) \
         $$quote($$BASEDIR/src/utils.h) \
+        $$quote($$BASEDIR/src/webimageview.h) \
+        $$quote($$BASEDIR/src/zimmetadata.h) \
+        $$quote($$BASEDIR/src/zimmetadatareader.h) \
         $$quote($$BASEDIR/src/zimserver.h)
 }
-
-INCLUDEPATH += $$quote($$BASEDIR/src)
 
 CONFIG += precompile_header
 
@@ -85,7 +193,10 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.cxx) \
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
-        $$quote($$BASEDIR/../assets/*.qs)
+        $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/js/*.qml) \
+        $$quote($$BASEDIR/../assets/js/*.js) \
+        $$quote($$BASEDIR/../assets/js/*.qs)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \
@@ -95,4 +206,8 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.hxx)
 }
 
-TRANSLATIONS = $$quote($${TARGET}.ts)
+TRANSLATIONS = $$quote($${TARGET}_de.ts) \
+    $$quote($${TARGET}_es.ts) \
+    $$quote($${TARGET}_pl.ts) \
+    $$quote($${TARGET}_sv.ts) \
+    $$quote($${TARGET}.ts)

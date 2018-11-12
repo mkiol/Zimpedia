@@ -25,7 +25,7 @@ Page {
 
         model: FileModel {
             id: fileModel
-            Component.onCompleted: init(true)
+            Component.onCompleted: init(false)
         }
 
         header: PageHeader {
