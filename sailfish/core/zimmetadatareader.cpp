@@ -69,15 +69,20 @@ QString ZimMetaDataReader::getTags()
     return this->m_data.tags;
 }
 
-QString ZimMetaDataReader::getSource()
+bool ZimMetaDataReader::getFtindex()
 {
-    return this->m_data.source;
+    return this->m_data.tags.split(';').contains("_ftindex");
 }
 
-QString ZimMetaDataReader::getChecksum()
+/*QString ZimMetaDataReader::getSource()
+{
+    return this->m_data.source;
+}*/
+
+/*QString ZimMetaDataReader::getChecksum()
 {
     return this->m_data.checksum;
-}
+}*/
 
 /*QString ZimMetaDataReader::getVersion()
 {
@@ -109,10 +114,8 @@ void ZimMetaDataReader::setPath(const QString &path)
                 ZimMetaData::Description |
                 ZimMetaData::Publisher |
                 ZimMetaData::Tags |
-                ZimMetaData::Source |
                 ZimMetaData::Filename |
-                ZimMetaData::ArticleCount |
-                ZimMetaData::Checksum;
+                ZimMetaData::ArticleCount;
         if (!FileFinder::scanZimFile(this->m_data)) {
             qWarning() << "Error while getting ZIM file info!";
             return;

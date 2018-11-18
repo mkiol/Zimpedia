@@ -108,16 +108,17 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("LICENSE", Zimpedia::LICENSE);
     context->setContextProperty("LICENSE_URL", Zimpedia::LICENSE_URL);
 
-    Settings* s = Settings::instance();
-    Bookmarks* b = Bookmarks::instance();
-    ZimServer zimServer;
-    ArticleModel articleModel;
+    auto s = Settings::instance();
+    auto b = Bookmarks::instance();
+    auto fileFinder = FileFinder::instance();
+    auto zimServer = ZimServer::instance();
+    auto articleModel = ArticleModel::instance();
     Utils utils;
-    s->articleModel = &articleModel;
 
     context->setContextProperty("settings", s);
-    context->setContextProperty("zimServer", &zimServer);
-    context->setContextProperty("articleModel", &articleModel);
+    context->setContextProperty("zimServer", zimServer);
+    context->setContextProperty("fileFinder", fileFinder);
+    context->setContextProperty("articleModel", articleModel);
     context->setContextProperty("utils", &utils);
     context->setContextProperty("bookmarks", b);
 

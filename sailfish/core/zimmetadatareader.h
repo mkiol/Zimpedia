@@ -28,10 +28,11 @@ class ZimMetaDataReader : public QObject
     Q_PROPERTY (QString description READ getDescription NOTIFY dataChanged)
     Q_PROPERTY (QString language READ getLanguage NOTIFY dataChanged)
     Q_PROPERTY (QString filename READ getFilename NOTIFY dataChanged)
-    Q_PROPERTY (QString source READ getSource NOTIFY dataChanged)
+    //Q_PROPERTY (QString source READ getSource NOTIFY dataChanged)
     Q_PROPERTY (QString publisher READ getPublisher NOTIFY dataChanged)
     Q_PROPERTY (QString tags READ getTags NOTIFY dataChanged)
-    Q_PROPERTY (QString checksum READ getChecksum NOTIFY dataChanged)
+    Q_PROPERTY (bool ftindex READ getFtindex NOTIFY dataChanged)
+    //Q_PROPERTY (QString checksum READ getChecksum NOTIFY dataChanged)
     //Q_PROPERTY (QString version READ getVersion NOTIFY dataChanged)
     Q_PROPERTY (int articleCount READ getArticleCount NOTIFY dataChanged)
     Q_PROPERTY (qint64 size READ getSize NOTIFY dataChanged)
@@ -53,9 +54,10 @@ public slots:
     QString getLanguage();
     QString getFilename();
     QString getPublisher();
-    QString getSource();
+    //QString getSource();
     QString getTags();
-    QString getChecksum();
+    bool getFtindex();
+    //QString getChecksum();
     //QString getVersion();
     qint64 getSize();
     int getArticleCount();

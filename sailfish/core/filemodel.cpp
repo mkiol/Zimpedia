@@ -14,11 +14,8 @@
 FileModel::FileModel(QObject *parent) :
     ListModel(new FileItem, parent), busy(false)
 {
-    FileFinder* f = FileFinder::instance();
-    //connect(f, &FileFinder::fileFound, this, &FileModel::fileFoundHandler);
-    //connect(f, &FileFinder::busyChanged, this, &FileModel::finderBusyHandler);
-    QObject::connect(f, SIGNAL(busyChanged()), this, SLOT(finderBusyHandler()));
-    //init();
+    auto f = FileFinder::instance();
+    connect(f, &FileFinder::busyChanged, this, &FileModel::update);
 }
 
 bool FileModel::getBusy()
@@ -26,45 +23,35 @@ bool FileModel::getBusy()
     return busy;
 }
 
-void FileModel::fileFoundHandler(const ZimMetaData &metaData)
+void FileModel::refresh()
 {
-    appendRow(new FileItem(metaData.path, metaData.name, metaData.path,
-                           metaData.time, metaData.checksum, metaData.size,
-                           metaData.title, metaData.creator, metaData.date,
-                           metaData.description, metaData.language,
-                           metaData.favicon));
+    auto f = FileFinder::instance();
+
+    busy = true; emit busyChanged();
+    clear();
+
+    f->init();
 }
 
-void FileModel::finderBusyHandler()
+void FileModel::update()
 {
-    FileFinder* f = FileFinder::instance();
-    if (!f->busy) {
+    auto f = FileFinder::instance();
+
+    if (!f->getBusy()) {
+        clear();
+
         QMap<QString, ZimMetaData>::iterator it = f->files.begin();
         QMap<QString, ZimMetaData>::iterator end = f->files.end();
         for (;it != end; ++it) {
-            fileFoundHandler(*it);
+            const auto& metaData = it.value();
+            appendRow(new FileItem(metaData.path, metaData.name, metaData.path,
+                                   metaData.time, metaData.checksum, metaData.size,
+                                   metaData.title, metaData.creator, metaData.date,
+                                   metaData.description, metaData.language,
+                                   metaData.favicon));
         }
-        busy = false;
-        emit busyChanged();
-    }
-}
 
-void FileModel::init(bool refresh = true)
-{
-    FileFinder* f = FileFinder::instance();
-
-    if (refresh) {
-        busy = true;
-        emit busyChanged();
-        clear();
-        f->init();
-    } else {
-        clear();
-        QMap<QString, ZimMetaData>::iterator it = f->files.begin();
-        QMap<QString, ZimMetaData>::iterator end = f->files.end();
-        for (;it != end; ++it) {
-            fileFoundHandler(*it);
-        }
+        busy = false; emit busyChanged();
     }
 }
 

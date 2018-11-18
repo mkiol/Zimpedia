@@ -13,37 +13,36 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: page
+    id: root
+
     objectName: "search"
 
-    property real preferredItemHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
+    property real preferredItemHeight: root && root.isLandscape ?
+                                           Theme.itemSizeSmall :
+                                           Theme.itemSizeLarge
+
+    Component.onCompleted: articleModel.updateModel()
 
     SilicaListView {
         id: listView
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        height: page.height
-        clip:true
+
+        anchors.fill: parent
+
+        currentIndex: -1
 
         model: articleModel
-
-        /*header: PageHeader {
-            title: qsTr("")
-        }*/
 
         header: SearchField {
             id: searchField
             width: parent.width
             placeholderText: qsTr("Search")
-            onTextChanged: zimServer.findTitle(text);
+            onTextChanged: articleModel.filter = text.trim()
             EnterKey.iconSource: "image://theme/icon-m-enter-close"
             EnterKey.onClicked: {
                 Qt.inputMethod.hide();
                 listView.focus = true
             }
         }
-
-        // prevent newly added list delegates from stealing focus away from the search field
-        currentIndex: -1
 
         delegate: ListItem {
             id: listItem
@@ -93,12 +92,6 @@ Page {
             }
         }
 
-        ViewPlaceholder {
-            enabled: listView.count == 0
-            text: qsTr("Find article, by typing in the search field")
-
-        }
-
         PullDownMenu {
             MenuItem {
                 text: qsTr("About")
@@ -126,7 +119,7 @@ Page {
                 visible: zimServer.hasMainPage
                 onClicked: {
                     listView.focus = true
-                    var url = zimServer.serverUrl()+"A/mainpage";
+                    var url = zimServer.serverUrl() + "A/mainpage";
                     if (settings.browser === 1) {
                         app.openUrlEntryInBrowser(url)
                     } else {
@@ -165,6 +158,18 @@ Page {
             }
         }
 
+        ViewPlaceholder {
+            enabled: listView.count === 0 && !articleModel.busy
+            text: articleModel.filter.length > 0 ?
+                      qsTr("No articles") :
+                      qsTr("Find article, by typing in the search field")
+        }
+    }
+
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: articleModel.busy
+        size: BusyIndicatorSize.Large
     }
 
     VerticalScrollDecorator {

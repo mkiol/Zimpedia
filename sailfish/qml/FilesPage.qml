@@ -18,6 +18,8 @@ Page {
     id: root
     objectName: "files"
 
+    Component.onCompleted: fileModel.update()
+
     SilicaListView {
         id: listView
 
@@ -25,7 +27,6 @@ Page {
 
         model: FileModel {
             id: fileModel
-            Component.onCompleted: init(false)
         }
 
         header: PageHeader {
@@ -38,15 +39,6 @@ Page {
             property bool active: settings.zimFile === model.id
 
             contentHeight: Theme.itemSizeMedium
-
-            /*Rectangle {
-                anchors.fill: parent
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightColor, 0.0) }
-                    GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightColor, 0.1) }
-                }
-                visible: listItem.active
-            }*/
 
             menu: ContextMenu {
                 MenuItem {
@@ -103,7 +95,6 @@ Page {
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    //text: Tools.bytesToSize(model.size) + " • " + Tools.friendlyPath(model.dir, utils.homeDir())
                     text: Tools.friendlyPath(model.dir, utils.homeDir())
                 }
             }
@@ -115,7 +106,8 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: listView.count == 0 && !fileModel.busy
+            id: placeholder
+            enabled: listView.count == 0 && !fileFinder.busy
             text: qsTr("No files were found")
         }
 
@@ -151,14 +143,14 @@ Page {
 
             MenuItem {
                 text: qsTr("Refresh")
-                onClicked: fileModel.init(true)
+                onClicked: fileModel.refresh()
             }
         }
     }
 
     BusyIndicator {
         anchors.centerIn: parent
-        running: fileModel.busy
+        running: fileFinder.busy
         size: BusyIndicatorSize.Large
     }
 

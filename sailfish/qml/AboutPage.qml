@@ -24,7 +24,7 @@ Page {
         Column {
             id: column
 
-            anchors.left: parent.left; anchors.right: parent.right
+            width: root.width
             spacing: Theme.paddingLarge
 
             PageHeader {
@@ -49,12 +49,6 @@ Page {
 
             /*PaddedLabel {
                 text: qsTr("Offline reader for Wikipedia and other Wiki projects");
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Website");
-                onClicked: Qt.openUrlExternally(PAGE)
             }*/
 
             Button {
@@ -63,58 +57,57 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
             }
 
-            /*SectionHeader {
-                text: qsTr("ZIM repositories downloads");
-            }
-
             Button {
+                text: qsTr("Project website")
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Kiwix");
-                onClicked: Qt.openUrlExternally("http://wiki.kiwix.org/wiki/Content_in_all_languages")
+                onClicked: Qt.openUrlExternally(PAGE)
             }
-
-            Button {
-                text: qsTr("Wikipedia dumps")
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: Qt.openUrlExternally("https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/")
-            }*/
 
             SectionHeader {
-                text: qsTr("Copyright & license")
+                text: qsTr("Authors")
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "Copyright &copy; 2016-2017 Michal Kosciesza"
+                text: qsTr("Copyright &copy; %1 %2")
+                .arg(COPYRIGHT_YEAR)
+                .arg(AUTHOR)
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                textFormat: Text.RichText
-                text: qsTr("This software is distributed under the terms of the Mozilla Public License v.2.0")
+                text: qsTr("Translations are provided by:")
             }
 
-            /*Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("View license");
-                onClicked: Qt.openUrlExternally(LICENSE)
-            }*/
+            PaddedLabel {
+                horizontalAlignment: Text.AlignLeft
+                text: "lutinotmalin \nJeff Huang \nRikudouSage \npopanz \nCarmen F. B \n" +
+                      "Åke Engelbrektson \nNathan Follens \nSzabó G."
+            }
+
+            PaddedLabel {
+                horizontalAlignment: Text.AlignLeft
+                textFormat: Text.StyledText
+                text: qsTr("%1 is developed as an open source project under %2.")
+                .arg(APP_NAME)
+                .arg("<a href=\"" + LICENSE_URL + "\">" + LICENSE + "</a>")
+            }
 
             SectionHeader {
-                text: qsTr("Third party components copyrights")
+                text: qsTr("Libraries")
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "QHTTPServer - Copyright &copy; 2011-2013 Nikhil Marathe"
+                text: "QHTTPServer - Copyright &copy; 2011-2014 Nikhil Marathe"
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: "ZimLib - Copyright &copy; 2003-2010 Tommi Maekitalo, openZIM project"
+                text: "LibZIM - Copyright &copy; 2003-2010 Tommi Maekitalo, openZIM project team"
             }
 
             Spacer {}

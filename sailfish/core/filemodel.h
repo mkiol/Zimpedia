@@ -94,7 +94,7 @@ class FileModel : public ListModel
 
 public:
     explicit FileModel(QObject *parent = 0);
-    Q_INVOKABLE void init(bool refresh);
+    Q_INVOKABLE void refresh();
     void clear();
     bool getBusy();
 
@@ -102,8 +102,7 @@ signals:
     void busyChanged();
 
 public slots:
-    void fileFoundHandler(const ZimMetaData &metaData);
-    void finderBusyHandler();
+    void update();
 
 private:
     bool busy;

@@ -40,10 +40,7 @@ public:
     float getZoom();
     void setBrowser(int value);
     int getBrowser();
-
     QString getZimFile();
-
-    ArticleModel* articleModel;
 
 signals:
     void portChanged();

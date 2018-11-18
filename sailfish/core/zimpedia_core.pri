@@ -13,7 +13,8 @@ SOURCES += \
     $$CORE_DIR/bookmarkmodel.cpp \
     $$CORE_DIR/filefinder.cpp \
     $$CORE_DIR/zimmetadatareader.cpp \
-    $$CORE_DIR/bookmarks.cpp
+    $$CORE_DIR/bookmarks.cpp \
+    $$CORE_DIR/itemmodel.cpp
 
 HEADERS += \
     $$CORE_DIR/zimserver.h \
@@ -28,6 +29,7 @@ HEADERS += \
     $$CORE_DIR/zimmetadatareader.h \
     $$CORE_DIR/bookmarks.h \
     $$CORE_DIR/info.h \
+    $$CORE_DIR/itemmodel.h
 
 sailfish {
     HEADERS += \

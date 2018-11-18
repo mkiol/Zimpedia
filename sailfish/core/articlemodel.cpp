@@ -10,23 +10,47 @@
 */
 
 #include "articlemodel.h"
+#include "zimserver.h"
+
+ArticleModel* ArticleModel::m_instance = nullptr;
+
+ArticleModel* ArticleModel::instance(QObject *parent)
+{
+    if (ArticleModel::m_instance == nullptr) {
+        ArticleModel::m_instance = new ArticleModel(parent);
+    }
+
+    return ArticleModel::m_instance;
+}
 
 ArticleModel::ArticleModel(QObject *parent) :
-    ListModel(new ArticleItem, parent)
+    SelectableItemModel(new ArticleItem, parent)
 {
 }
 
-void ArticleModel::clear()
+QList<ListItem*> ArticleModel::makeItems()
 {
-    if(rowCount()>0) removeRows(0,rowCount());
+    QList<ListItem*> items;
+
+    auto results = ZimServer::instance()->findTitle(getFilter());
+
+    if (!results.isEmpty()) {
+        int i = 0;
+        for (const auto &result : results) {
+            items << new ArticleItem(QString::number(i), result.title, result.url);
+            ++i;
+        }
+    }
+
+    return items;
 }
 
-ArticleItem::ArticleItem(const QString &uid,
+ArticleItem::ArticleItem(const QString &id,
                    const QString &title,
                    const QString &url,
                    QObject *parent) :
-    ListItem(parent),
-    m_uid(uid),
+    SelectableItem(parent),
+    m_id(id),
     m_title(title),
     m_url(url)
 {}
@@ -34,7 +58,7 @@ ArticleItem::ArticleItem(const QString &uid,
 QHash<int, QByteArray> ArticleItem::roleNames() const
 {
     QHash<int, QByteArray> names;
-    names[UidRole] = "uid";
+    names[IdRole] = "id";
     names[TitleRole] = "title";
     names[UrlRole] = "url";
     return names;
@@ -43,8 +67,8 @@ QHash<int, QByteArray> ArticleItem::roleNames() const
 QVariant ArticleItem::data(int role) const
 {
     switch(role) {
-    case UidRole:
-        return uid();
+    case IdRole:
+        return id();
     case TitleRole:
         return title();
     case UrlRole:

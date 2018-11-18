@@ -29,12 +29,14 @@
 #include "filefinder.h"
 #include "zimserver.h"
 
-FileFinder* FileFinder::inst = 0;
+FileFinder* FileFinder::inst = nullptr;
 
 FileFinder::FileFinder(QObject *parent) : QThread(parent)
 {
-    QObject::connect(this, SIGNAL(finished()), this, SLOT(finishedHandler()));
-    QObject::connect(this, SIGNAL(started()), this, SLOT(startedHandler()));
+    auto fun = [this]{emit busyChanged();};
+    QObject::connect(this, &QThread::finished, fun);
+    QObject::connect(this, &QThread::started, fun);
+
     init();
 }
 
@@ -44,22 +46,15 @@ void FileFinder::init()
     this->start(QThread::IdlePriority);
 }
 
-void FileFinder::startedHandler()
+bool FileFinder::getBusy()
 {
-    busy = true;
-    emit busyChanged();
+    return isRunning();
 }
 
-void FileFinder::finishedHandler()
+FileFinder* FileFinder::instance(QObject *parent)
 {
-    busy = false;
-    emit busyChanged();
-}
-
-FileFinder* FileFinder::instance()
-{
-    if (FileFinder::inst == 0) {
-        FileFinder::inst = new FileFinder();
+    if (FileFinder::inst == nullptr) {
+        FileFinder::inst = new FileFinder(parent);
     }
 
     return FileFinder::inst;
@@ -71,8 +66,11 @@ void FileFinder::run()
     // All dirs under home, SD cards and other media
 #ifdef SAILFISH
     findFiles(QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first());
-    findFiles("/media/sdcard");
-    findFiles("/run/media/nemo");
+    if (QFileInfo::exists("/media/sdcard")) {
+        findFiles("/media/sdcard");
+    } else {
+        findFiles("/run/media/nemo");
+    }
 #elif BB10
     findFiles(QDir::currentPath() + "/shared");
     findFiles(QDir::currentPath() + "/shared/misc/android/external_sd");
@@ -110,7 +108,6 @@ void FileFinder::findFiles(const QString &dirName)
                         ZimMetaData::Checksum;
                 if (FileFinder::scanZimFile(metaData)) {
                     files.insert(metaData.checksum, metaData);
-                    emit fileFound(metaData);
                 }
             }
         }
@@ -119,7 +116,7 @@ void FileFinder::findFiles(const QString &dirName)
 
 bool FileFinder::scanZimFile(ZimMetaData &metaData)
 {
-    zim::File *zimfile = 0;
+    zim::File *zimfile = nullptr;
 
     try
     {
@@ -263,7 +260,7 @@ bool FileFinder::scanZimFile(ZimMetaData &metaData)
         }
     }
 
-    if (zimfile != 0)
+    if (zimfile)
         delete zimfile;
 
     return true;

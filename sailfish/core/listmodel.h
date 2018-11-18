@@ -12,6 +12,7 @@
 #include <QList>
 #include <QVariant>
 #include <QDebug>
+#include <QString>
 
 class ListItem: public QObject {
     Q_OBJECT
@@ -47,14 +48,17 @@ public:
     ListItem* readRow(int row);
     ListItem* find(const QString &id) const;
     QModelIndex indexFromItem( const ListItem* item) const;
+    int indexFromId(const QString& id) const;
     void clear();
 
 private slots:
     void handleItemChange();
 
+protected:
+    QList<ListItem*> m_list;
+
 private:
     ListItem* m_prototype;
-    QList<ListItem*> m_list;
 };
 
 #endif // LISTMODEL_H

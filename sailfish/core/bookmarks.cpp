@@ -56,8 +56,8 @@ void Bookmarks::init()
 void Bookmarks::finderBusyHandler()
 {
     FileFinder* f = qobject_cast<FileFinder*>(sender());
-    if (f->busy != this->busy) {
-        this->busy = f->busy;
+    if (f->getBusy() != this->busy) {
+        this->busy = f->getBusy();
         emit busyChanged();
     }
 }

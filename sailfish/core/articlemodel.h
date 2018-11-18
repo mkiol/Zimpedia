@@ -12,53 +12,56 @@
 #ifndef ARTICLEMODEL_H
 #define ARTICLEMODEL_H
 
-#include <QAbstractListModel>
 #include <QString>
 #include <QList>
-#include <QStringList>
-#include <QDebug>
 #include <QByteArray>
-#include <QModelIndex>
+#include <QDebug>
+#include <QVariant>
+#include <QHash>
 
-#include "listmodel.h"
+#include "itemmodel.h"
 
-class ArticleItem : public ListItem
+class ArticleItem : public SelectableItem
 {
     Q_OBJECT
 
 public:
     enum Roles {
-        UidRole = Qt::UserRole,
         TitleRole = Qt::DisplayRole,
+        IdRole = Qt::UserRole,
         UrlRole
     };
 
 public:
-    ArticleItem(QObject *parent = 0): ListItem(parent) {}
-    explicit ArticleItem(const QString &uid,
+    ArticleItem(QObject *parent = nullptr): SelectableItem(parent) {}
+    explicit ArticleItem(const QString &id,
                       const QString &title,
                       const QString &url,
-                      QObject *parent = 0);
+                      QObject *parent = nullptr);
     QVariant data(int role) const;
     QHash<int, QByteArray> roleNames() const;
-    inline QString id() const { return m_uid; }
-    inline QString uid() const { return m_uid; }
+    inline QString id() const { return m_id; }
     inline QString title() const { return m_title; }
     inline QString url() const { return m_url; }
 
 private:
-    QString m_uid;
+    QString m_id;
     QString m_title;
     QString m_url;
 };
 
-class ArticleModel : public ListModel
+class ArticleModel : public SelectableItemModel
 {
     Q_OBJECT
-
 public:
-    explicit ArticleModel(QObject *parent = 0);
-    void clear();
+    static ArticleModel* instance(QObject *parent = nullptr);
+
+private:
+    static ArticleModel* m_instance;
+
+    explicit ArticleModel(QObject *parent = nullptr);
+
+    QList<ListItem*> makeItems();
 };
 
 #endif // ARTICLEMODEL_H

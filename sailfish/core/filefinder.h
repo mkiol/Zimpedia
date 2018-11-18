@@ -22,31 +22,26 @@
 class FileFinder : public QThread
 {
     Q_OBJECT
+    Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
+
 public:
-    static FileFinder* instance();
+    static FileFinder* instance(QObject *parent = nullptr);
     static bool scanZimFile(ZimMetaData &metaData);
 
     QMap<QString, ZimMetaData> files;
-    bool busy;
 
+    bool getBusy();
     void init();
 
-protected:
-    void run();
-
 signals:
-    void fileFound(const ZimMetaData &metaData);
     void busyChanged();
-
-private slots:
-    void startedHandler();
-    void finishedHandler();
 
 private:
     static const int max_size = 50; // maximum size of title
     static FileFinder* inst;
 
-    explicit FileFinder(QObject *parent = 0);
+    explicit FileFinder(QObject *parent = nullptr);
+    void run();
     void findFiles(const QString &dirName);
 };
 

@@ -36,6 +36,17 @@
 #define Q_NULLPTR 0
 #endif
 
+ZimServer* ZimServer::m_instance = nullptr;
+
+ZimServer* ZimServer::instance(QObject *parent)
+{
+    if (ZimServer::m_instance == nullptr) {
+        ZimServer::m_instance = new ZimServer(parent);
+    }
+
+    return ZimServer::m_instance;
+}
+
 ZimServer::ZimServer(QObject *parent) :
     QThread(parent), busy(false)
 {
@@ -62,11 +73,6 @@ ZimServer::ZimServer(QObject *parent) :
 bool ZimServer::getBusy()
 {
     return this->busy;
-}
-
-void ZimServer::finishedHandler()
-{
-    //qDebug() << "finishedHandler";
 }
 
 void ZimServer::run()
@@ -163,9 +169,11 @@ bool ZimServer::loadZimPath(const QString& path)
         return true;
     }
 
-    Settings* s = Settings::instance();
+    // Cleating article model
+    ArticleModel::instance()->setFilter(QString());
 
-    s->articleModel->clear();
+    auto s = Settings::instance();
+
     this->hasMainPage = false;
     this->metadata.clear();
 
@@ -197,7 +205,8 @@ bool ZimServer::loadZimPath(const QString& path)
             ZimMetaData::Title |
             ZimMetaData::Checksum |
             ZimMetaData::Language |
-            ZimMetaData::Favicon;
+            ZimMetaData::Favicon |
+            ZimMetaData::Tags;
     if (!FileFinder::scanZimFile(this->metadata)) {
         if (zimfile != Q_NULLPTR) {
             delete zimfile;
@@ -238,6 +247,10 @@ bool ZimServer::loadZimPath(const QString& path)
         // Wikipedia ZIM returns true for hasMainPage but has empty main page
         this->hasMainPage = getArticle("A/mainpage", data, mimeType);
     }
+
+    qDebug() << "ZIM file tags:" << metadata.tags;
+    this->ftindex = metadata.tags.split(';').contains("_ftindex");
+    qDebug() << "ZIM file has ftindex:" << this->ftindex;
 
     this->busy = false;
     emit busyChanged();
@@ -324,8 +337,7 @@ bool ZimServer::getArticle(const QString zimUrl, QByteArray &data, QString &mime
 
 bool ZimServer::getArticle(zim::File *zimfile, const QString zimUrl, QByteArray &data, QString &mimeType)
 {
-    qDebug() << "getArticle static, zimUrl:" << zimUrl;
-    //qDebug() << "getArticle static, zimUrl:" << QString::fromUtf8(zim::urldecode(zimUrl.toStdString()).data());
+    //qDebug() << "getArticle static, zimUrl:" << zimUrl;
 
     zim::Article article;
 
@@ -361,19 +373,15 @@ bool ZimServer::getArticle(zim::File *zimfile, const QString zimUrl, QByteArray 
         }
 
         data = QByteArray(zimblob.data(), zimblob.size());
-    } catch (std::runtime_error &e) {
-        qWarning() << "Runtime error: Cannot get an article:" << e.what();
-        return false;
     } catch (std::exception &e) {
-        qWarning() << "General error: Cannot get an article:" << e.what();
+        qWarning() << "Cannot get an article:" << e.what();
         return false;
     }
 
     try {
         mimeType = QString::fromStdString(article.getMimeType());
     } catch (std::runtime_error &e) {
-        qWarning() << e.what();
-        qWarning() << "Unable to get mimeType!";
+        qWarning() << "Unable to get mimeType:" << e.what();
     }
 
     return true;
@@ -472,13 +480,6 @@ QString ZimServer::getLocalUrl(const QString &zimUrl)
 {
     Settings* s = Settings::instance();
 
-    /*QUrl _url;
-    _url.setScheme("http");
-    _url.setHost("localhost");
-    _url.setPort(s->getPort());
-    _url.setPath("/uuid:" + getUuid() + "/" + zimUrl);
-    return QString(_url.toEncoded());*/
-
     return QString("http://localhost:%1/uuid:%2/%3")
             .arg(s->getPort())
             .arg(getUuid())
@@ -537,41 +538,50 @@ QString ZimServer::getTitleFromUrl(const QString &url)
     return title;
 }
 
-void ZimServer::findTitle(const QString &title)
+QList<SearchResult> ZimServer::findTitle(const QString &title)
 {
-    //qDebug() << "findTitle:" << title;
+    qDebug() << "findTitle:" << title;
 
-    if (!getLoaded()) {
-        qWarning() << "ZIM file not loaded!";
-        return;
-    }
+    QList<SearchResult> result;
 
-    Settings* s = Settings::instance();
-    s->articleModel->clear();
+    if (getLoaded()) {
+        auto t = title.trimmed();
+        if (!t.isEmpty()) {
+            std::string st(t.toUtf8().constData());
+            try {
+                if (ftindex) {
+                    // Trying full text search
+                    auto search = zimfile->search(st, 0, 10);
+                    auto it = search->begin();
 
-    QString t_title = title.trimmed();
-    if (t_title.isEmpty()) {
-        emit searchReady();
-        return;
-    }
+                    for(int i = 0; it != search->end() && i < 10; ++it, ++i) {
+                        result << SearchResult {
+                                    ZimServer::stringStdToQ(it->getTitle()),
+                                    getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()))
+                                  };
+                    }
+                }
 
-    std::string std_title(t_title.toUtf8().constData());
+                if (result.isEmpty()) {
+                    // Trying title search
+                    auto it = zimfile->findByTitle('A', st);
 
-    try {
-        zim::File::const_iterator it = zimfile->findByTitle('A', std_title);
-
-        for (int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
-            //qDebug() << QString::fromStdString(it->getLongUrl()) << QString::fromUtf8(it->getLongUrl().data());
-            QString _title = ZimServer::stringStdToQ(it->getTitle());
-            QString _url = getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()));
-            s->articleModel->appendRow(new ArticleItem(QString::number(i),_title, _url));
-            ++i;
+                    for(int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
+                        result << SearchResult {
+                                    ZimServer::stringStdToQ(it->getTitle()),
+                                    getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()))
+                                  };
+                    }
+                }
+            } catch (zim::ZimFileFormatError &e) {
+                qWarning() << "Exception:" << e.what();
+            }
         }
-    } catch (zim::ZimFileFormatError &e) {
-        qWarning() << "Exception:" << e.what();
+    } else {
+        qWarning() << "ZIM file not loaded!";
     }
 
-    emit searchReady();
+    return result;
 }
 
 QString ZimServer::serverUrl()

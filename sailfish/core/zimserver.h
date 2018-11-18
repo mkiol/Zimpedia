@@ -14,15 +14,19 @@
 
 #include <QObject>
 #include <QThread>
+#include <QList>
 #include <string>
-
 #include <zim/file.h>
-
 #include <qhttpserver.h>
 #include <qhttprequest.h>
 #include <qhttpresponse.h>
 
 #include "zimmetadata.h"
+
+struct SearchResult {
+    QString title;
+    QString url;
+};
 
 class ZimServer : public QThread
 {
@@ -38,18 +42,19 @@ class ZimServer : public QThread
     Q_PROPERTY (QString favicon READ getFavicon NOTIFY zimChanged)
 
 public:
+    static ZimServer* instance(QObject *parent = nullptr);
+
     static std::string stringQtoStd(const QString &s);
     static QString stringStdToQ(const std::string &s);
+    static bool getArticle(zim::File *zimfile, const QString zimUrl,
+                           QByteArray &data, QString &mimeType);
 
-    explicit ZimServer(QObject *parent = 0);
     Q_INVOKABLE bool loadZimFile();
-    Q_INVOKABLE void findTitle(const QString &title);
     Q_INVOKABLE QString serverUrl();
     Q_INVOKABLE void getArticleAsync(const QString &zimUrl);
     Q_INVOKABLE void openUrl(const QString &url, const QString &title);
     Q_INVOKABLE QString getTitleFromUrl(const QString &url);
-
-    static bool getArticle(zim::File *zimfile, const QString zimUrl, QByteArray &data, QString &mimeType);
+    QList<SearchResult> findTitle(const QString &title);
 
     bool getLoaded();
     bool getListening();
@@ -72,13 +77,17 @@ signals:
 
 private slots:
     void requestHandler(QHttpRequest *req, QHttpResponse *resp);
-    void finishedHandler();
 
 private:
+    static ZimServer* m_instance;
+
+    explicit ZimServer(QObject *parent = nullptr);
+
     QHttpServer * server;
     zim::File * zimfile;
     bool isListening;
     bool hasMainPage;
+    bool ftindex;
     ZimMetaData metadata;
     QString urlToAsyncGet;
     bool busy;

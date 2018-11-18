@@ -8,7 +8,7 @@
 #include "listmodel.h"
 
 ListModel::ListModel(ListItem* prototype, QObject *parent) :
-    QAbstractListModel(parent), m_prototype(prototype)
+    QAbstractListModel(parent), m_prototype(prototype), m_list()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
 #else
@@ -37,6 +37,18 @@ QVariant ListModel::data(const QModelIndex &index, int role) const
 ListModel::~ListModel() {
   delete m_prototype;
   clear();
+}
+
+int ListModel::indexFromId(const QString& id) const
+{
+    auto item = find(id);
+
+    if (item == 0) {
+        return -1;
+    }
+
+    auto indx = indexFromItem(item);
+    return indx.row();
 }
 
 void ListModel::appendRow(ListItem *item)
@@ -82,7 +94,7 @@ ListItem * ListModel::find(const QString &id) const
   foreach(ListItem* item, m_list) {
     if(item->id() == id) return item;
   }
-  return 0;
+  return nullptr;
 }
 
 QModelIndex ListModel::indexFromItem(const ListItem *item) const
@@ -117,8 +129,8 @@ bool ListModel::removeRows(int row, int count, const QModelIndex &parent)
   beginRemoveRows(QModelIndex(), row, row+count-1);
 
   for(int i=0; i<count; ++i) {
-    //delete m_list.takeAt(row);
-    m_list.takeAt(row);
+    delete m_list.takeAt(row);
+    //m_list.takeAt(row);
   }
   endRemoveRows();
   return true;
