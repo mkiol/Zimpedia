@@ -9,24 +9,34 @@
         <translation>O Zimpedii</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="61"/>
+        <location filename="../qml/AboutPage.qml" line="55"/>
         <source>Changelog</source>
         <translation>Lista zmian</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="83"/>
-        <source>Copyright &amp; license</source>
-        <translation>Prawa autorskie i licencja</translation>
+        <location filename="../qml/AboutPage.qml" line="61"/>
+        <source>Project website</source>
+        <translation>Strona projektu</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="95"/>
-        <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>Oprogramowanie dystrybuowane zgodnie z postanowieniami licencji Mozilla Public License w wersji 2.0</translation>
+        <location filename="../qml/AboutPage.qml" line="67"/>
+        <source>Authors</source>
+        <translation>Autorzy</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="105"/>
-        <source>Third party components copyrights</source>
-        <translation>Prawa autorskie stron trzecich</translation>
+        <location filename="../qml/AboutPage.qml" line="80"/>
+        <source>Translations are provided by:</source>
+        <translation>Tłumaczenia przygotowali:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="92"/>
+        <source>%1 is developed as an open source project under %2.</source>
+        <translation>%1 jest tworzona jako oprogramowanie Open Source zgodnie z licencją %2.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="98"/>
+        <source>Libraries</source>
+        <translation>Wykorzystane biblioteki</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -37,43 +47,43 @@
 <context>
     <name>BookmarkEditPage</name>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="45"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="44"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
-        <location filename="../qml/BookmarkEditPage.qml" line="55"/>
         <source>Title</source>
         <translation>Tytuł</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="80"/>
         <source>Change</source>
         <translation>Zmień</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="118"/>
         <source>ZIM file is missing</source>
         <translation>Brak pliku ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
-        <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation>Coś poszło nie tak i nie można uaktualnić zakładki</translation>
+        <location filename="../qml/BookmarkEditPage.qml" line="180"/>
+        <source>Something went wrong and bookmark cannot be updated</source>
+        <translation>Nie można zaktualizować zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="153"/>
         <source>Copy URL</source>
         <translation>Kopiuj URL</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="155"/>
         <source>URL was copied to the clipboard</source>
         <translation>URL został skopiowany do schowka</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="128"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="127"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
@@ -81,17 +91,17 @@
 <context>
     <name>BookmarkFileChoose</name>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="32"/>
         <source>Choose ZIM file</source>
         <translation>Wybierz plik ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="103"/>
         <source>No files were found</source>
         <translation>Brak plików</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="108"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>
@@ -99,32 +109,32 @@
 <context>
     <name>BookmarksPage</name>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="30"/>
+        <location filename="../qml/BookmarksPage.qml" line="35"/>
         <source>Bookmarks</source>
         <translation>Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="40"/>
+        <location filename="../qml/BookmarksPage.qml" line="47"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="55"/>
+        <location filename="../qml/BookmarksPage.qml" line="62"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="107"/>
+        <location filename="../qml/BookmarksPage.qml" line="113"/>
         <source>ZIM file is missing</source>
         <translation>Brak pliku ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="116"/>
+        <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
         <translation>Brak pliku ZIM skojarzonego z zakładką</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="122"/>
+        <location filename="../qml/BookmarksPage.qml" line="128"/>
         <source>No bookmarks</source>
         <translation>Brak zakładek</translation>
     </message>
@@ -138,7 +148,8 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="48"/>
+        <location filename="../qml/ChangelogPage.qml" line="52"/>
+        <location filename="../qml/ChangelogPage.qml" line="66"/>
         <source>Version %1</source>
         <translation>Wersja %1</translation>
     </message>
@@ -146,42 +157,47 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="32"/>
-        <source>Choose ZIM file</source>
-        <translation>Wybierz plik ZIM</translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="53"/>
+        <location filename="../qml/FilesPage.qml" line="57"/>
         <source>Show details</source>
         <translation>Pokaż szczegóły</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="119"/>
+        <location filename="../qml/FilesPage.qml" line="158"/>
         <source>No files were found</source>
         <translation>Brak plików</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="124"/>
+        <location filename="../qml/FilesPage.qml" line="122"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM jest otwartym formatem umożliwiającym przechowywanie i korzystanie ze stron typu Wiki bez dostępu do Internetu. Zbiór ciekawych Wiki można pobrać z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze znajdującym się w katalogu domowym lub na karcie SD.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="134"/>
+        <location filename="../qml/FilesPage.qml" line="35"/>
+        <source>ZIM files</source>
+        <translation>Pliki ZIM</translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="49"/>
+        <source>Open file</source>
+        <translation>Otwórz plik</translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="132"/>
         <source>About</source>
         <translation>O Zimpedii</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="140"/>
+        <location filename="../qml/FilesPage.qml" line="138"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="146"/>
+        <location filename="../qml/FilesPage.qml" line="144"/>
         <source>Bookmarks</source>
         <translation>Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../qml/FilesPage.qml" line="151"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>
@@ -204,37 +220,42 @@
         <translation>Dodaj do zakładek</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="98"/>
+        <location filename="../qml/SearchPage.qml" line="165"/>
+        <source>No articles</source>
+        <translation>Brak artykułów</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="166"/>
         <source>Find article, by typing in the search field</source>
         <translation>Znajdź artykuł, wpisując szukane słowo</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="104"/>
+        <location filename="../qml/SearchPage.qml" line="98"/>
         <source>About</source>
         <translation>O Zimpedii</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="109"/>
+        <location filename="../qml/SearchPage.qml" line="103"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="114"/>
+        <location filename="../qml/SearchPage.qml" line="108"/>
         <source>Change ZIM file</source>
         <translation>Zmień plik ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="119"/>
+        <location filename="../qml/SearchPage.qml" line="113"/>
         <source>Bookmarks</source>
         <translation>Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="125"/>
+        <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Open main page</source>
         <translation>Otwórz główną stronę</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="36"/>
+        <location filename="../qml/SearchPage.qml" line="37"/>
         <source>Search</source>
         <translation>Szukaj</translation>
     </message>
@@ -242,37 +263,52 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <location filename="../qml/SettingsPage.qml" line="40"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
-        <source>UI</source>
-        <translation>Interfejs</translation>
+        <location filename="../qml/SettingsPage.qml" line="44"/>
+        <source>Search mode</source>
+        <translation>Tryb szukania</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="54"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
+        <translation>Domyślnie artykuły są wyszukiwane tylko po tytułach. Inny tryb polega na przeszukiwaniu także treści artykułów. Wyszukiwanie po treści działa tylko wtedy gdy plik ZIM zawiera w sobie odpowiedni indeks.</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="50"/>
+        <source>By title</source>
+        <translation>Po tytułach</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Full-text</source>
+        <translation>Po treści</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <source>Web view</source>
+        <translation>Podgląd (web view)</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Sposób przeglądania</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="58"/>
-        <source>Built-in viewer</source>
-        <translation>Wbudowany podgląd</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="59"/>
+        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Browser</source>
         <translation>Przeglądarka</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
         <translation>Strony wiki mogą być otwierane poprzez wbudowany podgląd albo w zewnętrznej przeglądarce.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="72"/>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Viewer font size level</source>
         <translation>Wiekość liter w podglądzie</translation>
     </message>
@@ -339,74 +375,69 @@
         <translation>Szczegóły</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="65"/>
+        <location filename="../qml/ZimInfoPage.qml" line="62"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="70"/>
+        <location filename="../qml/ZimInfoPage.qml" line="67"/>
         <source>Title</source>
         <translation>Tytuł</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="75"/>
+        <location filename="../qml/ZimInfoPage.qml" line="72"/>
         <source>Date</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="80"/>
+        <location filename="../qml/ZimInfoPage.qml" line="77"/>
         <source>Creator</source>
         <translation>Twórca</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="85"/>
+        <location filename="../qml/ZimInfoPage.qml" line="82"/>
         <source>Publisher</source>
         <translation>Wydawca</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="90"/>
+        <location filename="../qml/ZimInfoPage.qml" line="87"/>
         <source>Description</source>
         <translation>Opis</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="95"/>
+        <location filename="../qml/ZimInfoPage.qml" line="92"/>
         <source>Language</source>
         <translation>Język</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="100"/>
-        <source>Tags</source>
-        <translation>Tagi</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="102"/>
+        <source>Full-text index</source>
+        <translation>Indeks treści</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="105"/>
-        <source>Source</source>
-        <translation>Źródło</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>Yes</source>
+        <translation>Tak</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="110"/>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>No</source>
+        <translation>Nie</translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="97"/>
         <source>Article count</source>
         <translation>Liczba artykułów</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="115"/>
-        <source>Filename</source>
-        <translation>Nazwa pliku</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="112"/>
+        <source>Path</source>
+        <translation>Ścieżka do pliku</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="120"/>
-        <source>Directory</source>
-        <translation>Katalog</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="125"/>
+        <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Rozmiar</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="130"/>
-        <source>Checksum</source>
-        <translation>Suma kontrolna</translation>
     </message>
 </context>
 <context>

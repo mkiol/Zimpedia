@@ -9,24 +9,34 @@
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="61"/>
+        <location filename="../qml/AboutPage.qml" line="55"/>
         <source>Changelog</source>
         <translation>變更紀錄</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="83"/>
-        <source>Copyright &amp; license</source>
-        <translation>版權與授權條款</translation>
+        <location filename="../qml/AboutPage.qml" line="61"/>
+        <source>Project website</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="95"/>
-        <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>這個軟體以 Mozilla公眾授權條款 v2.0 散佈</translation>
+        <location filename="../qml/AboutPage.qml" line="67"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="105"/>
-        <source>Third party components copyrights</source>
-        <translation>第三方元件的版權</translation>
+        <location filename="../qml/AboutPage.qml" line="80"/>
+        <source>Translations are provided by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="92"/>
+        <source>%1 is developed as an open source project under %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="98"/>
+        <source>Libraries</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -37,43 +47,43 @@
 <context>
     <name>BookmarkEditPage</name>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="45"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="44"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
-        <location filename="../qml/BookmarkEditPage.qml" line="55"/>
         <source>Title</source>
         <translation>標題</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="80"/>
         <source>Change</source>
         <translation>變更</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="118"/>
         <source>ZIM file is missing</source>
         <translation>ZIM 檔案遺失</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
-        <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation>似乎有些東西出了點問題，書籤無法更新</translation>
+        <location filename="../qml/BookmarkEditPage.qml" line="180"/>
+        <source>Something went wrong and bookmark cannot be updated</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="153"/>
         <source>Copy URL</source>
         <translation>複製 URL</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="155"/>
         <source>URL was copied to the clipboard</source>
         <translation>URL 已經複製到剪貼簿了</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="128"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="127"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
@@ -81,17 +91,17 @@
 <context>
     <name>BookmarkFileChoose</name>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="32"/>
         <source>Choose ZIM file</source>
         <translation>選擇 ZIM 檔案</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="103"/>
         <source>No files were found</source>
         <translation>找不到檔案</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="108"/>
         <source>Refresh</source>
         <translation>重新整理</translation>
     </message>
@@ -99,32 +109,32 @@
 <context>
     <name>BookmarksPage</name>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="30"/>
+        <location filename="../qml/BookmarksPage.qml" line="35"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="40"/>
+        <location filename="../qml/BookmarksPage.qml" line="47"/>
         <source>Edit</source>
         <translation>編輯</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="55"/>
+        <location filename="../qml/BookmarksPage.qml" line="62"/>
         <source>Delete</source>
         <translation>刪除</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="107"/>
+        <location filename="../qml/BookmarksPage.qml" line="113"/>
         <source>ZIM file is missing</source>
         <translation>ZIM 檔案遺失</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="116"/>
+        <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
         <translation>書籤的 ZIM 檔案遺失</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="122"/>
+        <location filename="../qml/BookmarksPage.qml" line="128"/>
         <source>No bookmarks</source>
         <translation>沒有書籤</translation>
     </message>
@@ -138,7 +148,8 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="48"/>
+        <location filename="../qml/ChangelogPage.qml" line="52"/>
+        <location filename="../qml/ChangelogPage.qml" line="66"/>
         <source>Version %1</source>
         <translation>版本 %1</translation>
     </message>
@@ -146,42 +157,47 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="32"/>
-        <source>Choose ZIM file</source>
-        <translation>選擇 ZIM 檔案</translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="53"/>
+        <location filename="../qml/FilesPage.qml" line="57"/>
         <source>Show details</source>
         <translation>顯示詳細資訊</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="119"/>
+        <location filename="../qml/FilesPage.qml" line="158"/>
         <source>No files were found</source>
         <translation>找不到檔案</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="124"/>
+        <location filename="../qml/FilesPage.qml" line="122"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM 是一個儲存 wiki 內容供離線使用的開放檔案格式。不錯的 wiki 的收藏集可以從&lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;此頁面&lt;/a&gt;下載。若您已經有一些 ZIM 檔案，將它們放在任何您喜歡的資料夾，像是家目錄或是 SD 記憶卡中。</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="134"/>
+        <location filename="../qml/FilesPage.qml" line="35"/>
+        <source>ZIM files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="49"/>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="132"/>
         <source>About</source>
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="140"/>
+        <location filename="../qml/FilesPage.qml" line="138"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="146"/>
+        <location filename="../qml/FilesPage.qml" line="144"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../qml/FilesPage.qml" line="151"/>
         <source>Refresh</source>
         <translation>重新整理</translation>
     </message>
@@ -204,37 +220,42 @@
         <translation>加入到書籤</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="98"/>
+        <location filename="../qml/SearchPage.qml" line="165"/>
+        <source>No articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="166"/>
         <source>Find article, by typing in the search field</source>
         <translation>透過在搜尋欄中輸入來尋找文章</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="104"/>
+        <location filename="../qml/SearchPage.qml" line="98"/>
         <source>About</source>
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="109"/>
+        <location filename="../qml/SearchPage.qml" line="103"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="114"/>
+        <location filename="../qml/SearchPage.qml" line="108"/>
         <source>Change ZIM file</source>
         <translation>變更 ZIM 檔案</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="119"/>
+        <location filename="../qml/SearchPage.qml" line="113"/>
         <source>Bookmarks</source>
         <translation>書籤</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="125"/>
+        <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Open main page</source>
         <translation>開啟主頁面</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="36"/>
+        <location filename="../qml/SearchPage.qml" line="37"/>
         <source>Search</source>
         <translation>搜尋</translation>
     </message>
@@ -242,37 +263,52 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <location filename="../qml/SettingsPage.qml" line="40"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
-        <source>UI</source>
-        <translation>使用者介面</translation>
+        <location filename="../qml/SettingsPage.qml" line="44"/>
+        <source>Search mode</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="54"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="50"/>
+        <source>By title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Full-text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <source>Web view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>預設檢視器</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="58"/>
-        <source>Built-in viewer</source>
-        <translation>內建檢視器</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="59"/>
+        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Browser</source>
         <translation>瀏覽器</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
         <translation>Wiki 頁面可以在內建的網路檢視器或是在外部瀏覽器中開啟。</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="72"/>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Viewer font size level</source>
         <translation>檢視器字型大小</translation>
     </message>
@@ -339,74 +375,69 @@
         <translation>詳細資訊</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="65"/>
+        <location filename="../qml/ZimInfoPage.qml" line="62"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="70"/>
+        <location filename="../qml/ZimInfoPage.qml" line="67"/>
         <source>Title</source>
         <translation>標題</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="75"/>
+        <location filename="../qml/ZimInfoPage.qml" line="72"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="80"/>
+        <location filename="../qml/ZimInfoPage.qml" line="77"/>
         <source>Creator</source>
         <translation>建立者</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="85"/>
+        <location filename="../qml/ZimInfoPage.qml" line="82"/>
         <source>Publisher</source>
         <translation>發佈者</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="90"/>
+        <location filename="../qml/ZimInfoPage.qml" line="87"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="95"/>
+        <location filename="../qml/ZimInfoPage.qml" line="92"/>
         <source>Language</source>
         <translation>語言</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="100"/>
-        <source>Tags</source>
-        <translation>標籤</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="102"/>
+        <source>Full-text index</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="105"/>
-        <source>Source</source>
-        <translation>來源</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="110"/>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="97"/>
         <source>Article count</source>
         <translation>文章計數</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="115"/>
-        <source>Filename</source>
-        <translation>檔案名稱</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="112"/>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="120"/>
-        <source>Directory</source>
-        <translation>目錄</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="125"/>
+        <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>大小</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="130"/>
-        <source>Checksum</source>
-        <translation>檢查碼</translation>
     </message>
 </context>
 <context>

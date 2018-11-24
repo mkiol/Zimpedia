@@ -9,24 +9,34 @@
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="61"/>
+        <location filename="../qml/AboutPage.qml" line="55"/>
         <source>Changelog</source>
         <translation>Změny</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="83"/>
-        <source>Copyright &amp; license</source>
-        <translation>Copyright a licence</translation>
+        <location filename="../qml/AboutPage.qml" line="61"/>
+        <source>Project website</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="95"/>
-        <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>Tento software je distribuován pod licencí Mozilla Public License v2.0</translation>
+        <location filename="../qml/AboutPage.qml" line="67"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="105"/>
-        <source>Third party components copyrights</source>
-        <translation>Copyright komponent třetích stran</translation>
+        <location filename="../qml/AboutPage.qml" line="80"/>
+        <source>Translations are provided by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="92"/>
+        <source>%1 is developed as an open source project under %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="98"/>
+        <source>Libraries</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -37,43 +47,43 @@
 <context>
     <name>BookmarkEditPage</name>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="45"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="44"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
-        <location filename="../qml/BookmarkEditPage.qml" line="55"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="80"/>
         <source>Change</source>
         <translation>Změnit</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="118"/>
         <source>ZIM file is missing</source>
         <translation>ZIM soubor není k dispozici</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
-        <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation>Něco se pokazilo a záložku nelze upravit</translation>
+        <location filename="../qml/BookmarkEditPage.qml" line="180"/>
+        <source>Something went wrong and bookmark cannot be updated</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="153"/>
         <source>Copy URL</source>
         <translation>Kopírovat URL</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="155"/>
         <source>URL was copied to the clipboard</source>
         <translation>URL zkopírována do schránky</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="128"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="127"/>
         <source>URL</source>
         <translation></translation>
     </message>
@@ -81,17 +91,17 @@
 <context>
     <name>BookmarkFileChoose</name>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="32"/>
         <source>Choose ZIM file</source>
         <translation>Zvolte ZIM soubor</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="103"/>
         <source>No files were found</source>
         <translation>Žádné soubory nenalezeny</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="108"/>
         <source>Refresh</source>
         <translation>Obnovit</translation>
     </message>
@@ -99,32 +109,32 @@
 <context>
     <name>BookmarksPage</name>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="30"/>
+        <location filename="../qml/BookmarksPage.qml" line="35"/>
         <source>Bookmarks</source>
         <translation>Záložky</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="40"/>
+        <location filename="../qml/BookmarksPage.qml" line="47"/>
         <source>Edit</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="55"/>
+        <location filename="../qml/BookmarksPage.qml" line="62"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="107"/>
+        <location filename="../qml/BookmarksPage.qml" line="113"/>
         <source>ZIM file is missing</source>
         <translation>ZIM soubor není k dispozici</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="116"/>
+        <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
         <translation>ZIM soubor pro záložku není k dispozici</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="122"/>
+        <location filename="../qml/BookmarksPage.qml" line="128"/>
         <source>No bookmarks</source>
         <translation>Žádné záložky</translation>
     </message>
@@ -138,7 +148,8 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="48"/>
+        <location filename="../qml/ChangelogPage.qml" line="52"/>
+        <location filename="../qml/ChangelogPage.qml" line="66"/>
         <source>Version %1</source>
         <translation>Verze %1</translation>
     </message>
@@ -146,42 +157,47 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="32"/>
-        <source>Choose ZIM file</source>
-        <translation>Zvolte ZIM soubor</translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="53"/>
+        <location filename="../qml/FilesPage.qml" line="57"/>
         <source>Show details</source>
         <translation>Zobrazit podrobnosti</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="119"/>
+        <location filename="../qml/FilesPage.qml" line="158"/>
         <source>No files were found</source>
         <translation>Žádné soubory nenalezeny</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="124"/>
+        <location filename="../qml/FilesPage.qml" line="122"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM je otevřený formát, který ukládá obsah wiki pro offline použití. Kolekce různých wiki může být stažena z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;této stránky&lt;/a&gt;. Pokud už nějaké ZIM soubory máte, dejte je do jakékoliv složky ve vaší domovské složce, nebo na SD kartě.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="134"/>
+        <location filename="../qml/FilesPage.qml" line="35"/>
+        <source>ZIM files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="49"/>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="132"/>
         <source>About</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="140"/>
+        <location filename="../qml/FilesPage.qml" line="138"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="146"/>
+        <location filename="../qml/FilesPage.qml" line="144"/>
         <source>Bookmarks</source>
         <translation>Záložky</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../qml/FilesPage.qml" line="151"/>
         <source>Refresh</source>
         <translation>Obnovit</translation>
     </message>
@@ -204,37 +220,42 @@
         <translation>Přidat do záložek</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="98"/>
+        <location filename="../qml/SearchPage.qml" line="165"/>
+        <source>No articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="166"/>
         <source>Find article, by typing in the search field</source>
         <translation>Vyhledejte článek psaním do vyhledávacího pole</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="104"/>
+        <location filename="../qml/SearchPage.qml" line="98"/>
         <source>About</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="109"/>
+        <location filename="../qml/SearchPage.qml" line="103"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="114"/>
+        <location filename="../qml/SearchPage.qml" line="108"/>
         <source>Change ZIM file</source>
         <translation>Změnit ZIM soubor</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="119"/>
+        <location filename="../qml/SearchPage.qml" line="113"/>
         <source>Bookmarks</source>
         <translation>Záložky</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="125"/>
+        <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Open main page</source>
         <translation>Otevřít hlavní stránku</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="36"/>
+        <location filename="../qml/SearchPage.qml" line="37"/>
         <source>Search</source>
         <translation>Hledat</translation>
     </message>
@@ -242,37 +263,52 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <location filename="../qml/SettingsPage.qml" line="40"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
-        <source>UI</source>
-        <translation>Grafické rozhraní</translation>
+        <location filename="../qml/SettingsPage.qml" line="44"/>
+        <source>Search mode</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="54"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="50"/>
+        <source>By title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Full-text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <source>Web view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Výchozí prohlížeč</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="58"/>
-        <source>Built-in viewer</source>
-        <translation>Vestavěný prohlížeč</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="59"/>
+        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Browser</source>
         <translation>Prohlížeč</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
         <translation>Wiki stránky mohou být otevřeny ve vestavěném prohlížeči, nebo v externím prohlížeči.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="72"/>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Viewer font size level</source>
         <translation>Velikost písma prohlížeče</translation>
     </message>
@@ -339,74 +375,69 @@
         <translation>Podrobnosti</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="65"/>
+        <location filename="../qml/ZimInfoPage.qml" line="62"/>
         <source>Name</source>
         <translation>Jméno</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="70"/>
+        <location filename="../qml/ZimInfoPage.qml" line="67"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="75"/>
+        <location filename="../qml/ZimInfoPage.qml" line="72"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="80"/>
+        <location filename="../qml/ZimInfoPage.qml" line="77"/>
         <source>Creator</source>
         <translation>Tvůrce</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="85"/>
+        <location filename="../qml/ZimInfoPage.qml" line="82"/>
         <source>Publisher</source>
         <translation>Vydavatel</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="90"/>
+        <location filename="../qml/ZimInfoPage.qml" line="87"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="95"/>
+        <location filename="../qml/ZimInfoPage.qml" line="92"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="100"/>
-        <source>Tags</source>
-        <translation>Tagy</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="102"/>
+        <source>Full-text index</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="105"/>
-        <source>Source</source>
-        <translation>Zdroj</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="110"/>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="97"/>
         <source>Article count</source>
         <translation>Počet článků</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="115"/>
-        <source>Filename</source>
-        <translation>Název souboru</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="112"/>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="120"/>
-        <source>Directory</source>
-        <translation>Složka</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="125"/>
+        <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Velikost</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="130"/>
-        <source>Checksum</source>
-        <translation>Kontrolní součet</translation>
     </message>
 </context>
 <context>
