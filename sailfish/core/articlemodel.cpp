@@ -32,7 +32,7 @@ QList<ListItem*> ArticleModel::makeItems()
 {
     QList<ListItem*> items;
 
-    auto results = ZimServer::instance()->findTitle(getFilter());
+    auto results = ZimServer::instance()->search(getFilter());
 
     if (!results.isEmpty()) {
         int i = 0;

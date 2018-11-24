@@ -44,10 +44,8 @@ using namespace bb::cascades;
 #include "settings.h"
 #include "filemodel.h"
 #include "utils.h"
-#include "filefinder.h"
 #include "zimmetadatareader.h"
 #include "bookmarkmodel.h"
-#include "bookmarks.h"
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
@@ -60,9 +58,9 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType<BookmarkModel>("net.mkiol.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
     qmlRegisterType<QTimer>("net.mkiol.zimpedia.QTimer", 1, 0, "QTimer");
 #elif SAILFISH
-    qmlRegisterType<FileModel>("harbour.zimpedia.FileModel", 1, 0, "FileModel");
     qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1, 0, "ZimMetaDataReader");
-    qmlRegisterType<BookmarkModel>("harbour.zimpedia.BookmarkModel", 1, 0, "BookmarkModel");
+    qmlRegisterUncreatableType<Settings>("harbour.zimpedia.Settings", 1, 0,
+                                         "Settings", "Settings is a singleton");
 #endif
     qRegisterMetaType<QFileInfo>("QFileInfo");
     qRegisterMetaType<ZimMetaData>("ZimMetaData");
@@ -109,19 +107,20 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     context->setContextProperty("LICENSE_URL", Zimpedia::LICENSE_URL);
 
     auto s = Settings::instance();
-    auto b = Bookmarks::instance();
-    auto fileFinder = FileFinder::instance();
-    auto zimServer = ZimServer::instance();
+    auto fileModel = FileModel::instance();
+    auto bookmarkModel = BookmarkModel::instance();
     auto articleModel = ArticleModel::instance();
+    auto zimServer = ZimServer::instance();
     Utils utils;
 
     context->setContextProperty("settings", s);
     context->setContextProperty("zimServer", zimServer);
-    context->setContextProperty("fileFinder", fileFinder);
+    context->setContextProperty("fileModel", fileModel);
     context->setContextProperty("articleModel", articleModel);
     context->setContextProperty("utils", &utils);
-    context->setContextProperty("bookmarks", b);
+    context->setContextProperty("bookmarkModel", bookmarkModel);
 
+    fileModel->updateModel();
     QObject::connect(engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
 
 #ifdef BB10

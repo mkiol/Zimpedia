@@ -99,3 +99,16 @@ int Settings::getBrowser()
 {
     return settings.value("browser", 0).toInt();
 }
+
+void Settings::setSearchMode(Settings::SearchMode value)
+{
+    if (getSearchMode() != value) {
+        settings.setValue("searchmode", static_cast<int>(value));
+        emit searchModeChanged();
+    }
+}
+
+Settings::SearchMode Settings::getSearchMode()
+{
+    return static_cast<Settings::SearchMode>(settings.value("searchmode", 0).toInt());
+}

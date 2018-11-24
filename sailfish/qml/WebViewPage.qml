@@ -247,7 +247,7 @@ Page {
             enabled: root.title !== ""
             visible: true
             onClicked: {
-                bookmarks.addBookmark(root.title,
+                bookmarkModel.addBookmark(root.title,
                                       root.history[root.history.length-1],
                                       zimServer.favicon)
             }

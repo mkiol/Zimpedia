@@ -41,7 +41,6 @@ Dialog {
             spacing: Theme.paddingLarge
 
             DialogHeader {
-                //title: qsTr("Edit bookmark")
                 acceptText: qsTr("Save")
             }
 
@@ -143,7 +142,7 @@ Dialog {
                         rightMargin: Theme.horizontalPageMargin
                     }
                     wrapMode: Text.WrapAnywhere
-                    text: bookmarks.changeUuid(root.url, root.zimUuid)
+                    text: bookmarkModel.changeUuid(root.url, root.zimUuid)
                     color: _urlitem.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
 
@@ -168,17 +167,17 @@ Dialog {
     }
 
     onAccepted: {
-        var newUrl = bookmarks.changeUuid(root.url, root.zimUuid)
-        if (bookmarks.validateUrl(newUrl)) {
+        var newUrl = bookmarkModel.changeUuid(root.url, root.zimUuid)
+        if (bookmarkModel.validateUrl(newUrl)) {
             /*console.log("title: " + root.title)
             console.log("url: " + newUrl)
             console.log("favicon: " + root.favicon)
             console.log("zimTitle: " + root.zimTitle)
             console.log("zimLanguage: " + root.zimLanguage)
             console.log("zimUuid: " + root.zimUuid)*/
-            bookmarks.updateBookmark(root.url, root.title, newUrl, root.favicon)
+            bookmarkModel.updateBookmark(root.url, root.title, newUrl, root.favicon)
         } else {
-            notification.show(qsTr("Something went wrong and bookmark can't be updated"))
+            notification.show(qsTr("Something went wrong and bookmark cannot be updated"))
         }
     }
 }

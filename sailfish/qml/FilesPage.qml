@@ -11,26 +11,28 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.zimpedia.FileModel 1.0
-import "tools.js" as Tools
 
 Page {
     id: root
     objectName: "files"
 
-    Component.onCompleted: fileModel.update()
+    property real preferredItemHeight: root && root.isLandscape ?
+                                           Theme.itemSizeSmall :
+                                           Theme.itemSizeLarge
+
+    Component.onCompleted: fileModel.updateModel()
 
     SilicaListView {
         id: listView
 
         anchors.fill: parent
 
-        model: FileModel {
-            id: fileModel
-        }
+        currentIndex: -1
+
+        model: fileModel
 
         header: PageHeader {
-            title: qsTr("Choose ZIM file")
+            title: qsTr("ZIM files")
         }
 
         delegate: ListItem {
@@ -38,9 +40,19 @@ Page {
 
             property bool active: settings.zimFile === model.id
 
+            visible: !fileModel.busy
+
             contentHeight: Theme.itemSizeMedium
 
             menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Open file")
+                    onClicked: {
+                        settings.zimFile = model.id;
+                        zimServer.loadZimFile();
+                    }
+                }
+
                 MenuItem {
                     text: qsTr("Show details")
                     onClicked: {
@@ -50,6 +62,11 @@ Page {
                                        "title": model.title});
                     }
                 }
+            }
+
+            onClicked: {
+                settings.zimFile = model.id;
+                zimServer.loadZimFile();
             }
 
             Icon {
@@ -95,20 +112,9 @@ Page {
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    text: Tools.friendlyPath(model.dir, utils.homeDir())
+                    text: model.dir
                 }
             }
-
-            onClicked: {
-                settings.zimFile = model.id;
-                zimServer.loadZimFile();
-            }
-        }
-
-        ViewPlaceholder {
-            id: placeholder
-            enabled: listView.count == 0 && !fileFinder.busy
-            text: qsTr("No files were found")
         }
 
         Bubble {
@@ -137,7 +143,7 @@ Page {
             MenuItem {
                 text: qsTr("Bookmarks")
                 visible: !zimServer.loaded
-                enabled: !bookmarks.busy
+                enabled: !bookmarkModel.busy
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
             }
 
@@ -146,11 +152,17 @@ Page {
                 onClicked: fileModel.refresh()
             }
         }
+
+        ViewPlaceholder {
+            enabled: listView.count == 0 && !fileModel.busy
+            text: qsTr("No files were found")
+        }
+
     }
 
     BusyIndicator {
         anchors.centerIn: parent
-        running: fileFinder.busy
+        running: fileModel.busy
         size: BusyIndicatorSize.Large
     }
 

@@ -12,7 +12,6 @@
 #include <QDebug>
 
 #include "zimmetadatareader.h"
-#include "filefinder.h"
 
 ZimMetaDataReader::ZimMetaDataReader(QObject *parent)
     : QObject(parent)
@@ -116,7 +115,7 @@ void ZimMetaDataReader::setPath(const QString &path)
                 ZimMetaData::Tags |
                 ZimMetaData::Filename |
                 ZimMetaData::ArticleCount;
-        if (!FileFinder::scanZimFile(this->m_data)) {
+        if (!FileModel::scanZimFile(this->m_data)) {
             qWarning() << "Error while getting ZIM file info!";
             return;
         }

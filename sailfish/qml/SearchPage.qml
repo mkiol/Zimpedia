@@ -14,7 +14,6 @@ import Sailfish.Silica 1.0
 
 Page {
     id: root
-
     objectName: "search"
 
     property real preferredItemHeight: root && root.isLandscape ?
@@ -47,6 +46,8 @@ Page {
         delegate: ListItem {
             id: listItem
 
+            visible: !articleModel.busy
+
             contentHeight: Theme.itemSizeMedium
 
             Label {
@@ -76,7 +77,7 @@ Page {
                     text: qsTr("Add to bookmarks")
                     onClicked: {
                         listView.focus = true
-                        bookmarks.addBookmark(model.title, model.url, zimServer.favicon)
+                        bookmarkModel.addBookmark(model.title, model.url, zimServer.favicon)
                     }
                 }
             }
@@ -111,7 +112,7 @@ Page {
             MenuItem {
                 text: qsTr("Bookmarks")
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
-                enabled: !bookmarks.busy
+                enabled: !bookmarkModel.busy
             }
 
             MenuItem {
@@ -138,7 +139,7 @@ Page {
             }*/
 
             Item {
-                visible: zimServer.title != ""
+                visible: zimServer.title.length !== 0
 
                 height: Theme.itemSizeExtraSmall - (screen.sizeCategory <= Screen.Medium ? Theme.paddingLarge : Theme.paddingMedium)
                 width: parent ? parent.width : Screen.width
@@ -153,7 +154,7 @@ Page {
                     //truncationMode: TruncationMode.Fade
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignHCenter
-                    text: zimServer.title + (zimServer.language != "" ? " (" + zimServer.language + ")" : "")
+                    text: zimServer.title + (zimServer.language.length !== 0 ? " (" + zimServer.language + ")" : "")
                 }
             }
         }

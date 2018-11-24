@@ -11,8 +11,6 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.zimpedia.FileModel 1.0
-import "tools.js" as Tools
 
 Page {
     id: root
@@ -28,10 +26,7 @@ Page {
 
         anchors.fill: parent
 
-        model: FileModel {
-            id: fileModel
-            Component.onCompleted: init(false)
-        }
+        model: fileModel
 
         header: PageHeader {
             title: qsTr("Choose ZIM file")
@@ -41,6 +36,8 @@ Page {
             id: listItem
 
             property bool active: model.checksum === root.uuid
+
+            visible: !fileModel.busy
 
             contentHeight: Theme.itemSizeMedium
 
@@ -87,7 +84,7 @@ Page {
                     truncationMode: TruncationMode.Fade
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    text: Tools.friendlyPath(model.dir, utils.homeDir())
+                    text: model.dir
                 }
             }
 
@@ -109,7 +106,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Refresh")
-                onClicked: fileModel.init(true)
+                onClicked: fileModel.refresh()
             }
         }
     }

@@ -12,10 +12,10 @@
 #ifndef ARTICLEMODEL_H
 #define ARTICLEMODEL_H
 
+#include <QDebug>
 #include <QString>
 #include <QList>
 #include <QByteArray>
-#include <QDebug>
 #include <QVariant>
 #include <QHash>
 
@@ -53,6 +53,7 @@ private:
 class ArticleModel : public SelectableItemModel
 {
     Q_OBJECT
+
 public:
     static ArticleModel* instance(QObject *parent = nullptr);
 

@@ -70,7 +70,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.RichText
-                text: qsTr("Copyright &copy; %1 %2")
+                text: "Copyright &copy; %1 %2"
                 .arg(COPYRIGHT_YEAR)
                 .arg(AUTHOR)
             }

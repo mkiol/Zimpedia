@@ -27,8 +27,8 @@ public:
     explicit ItemWorker(ItemModel *model, const QString &data = QString());
 
 private:
-    QString data;
     ItemModel *model;
+    QString data;
     QList<ListItem*> items;
     void run();
 };
@@ -44,6 +44,7 @@ friend class ItemWorker;
 public:
     explicit ItemModel(ListItem *prototype, QObject *parent = nullptr);
     int getCount();
+    bool isBusy();
 
 public slots:
     virtual void updateModel(const QString &data = QString());
@@ -60,9 +61,6 @@ protected:
     virtual QList<ListItem*> makeItems() = 0;
     virtual void clear();
     void setBusy(bool busy);
-
-private slots:
-    bool isBusy();
 
 private:
     bool m_busy = true;

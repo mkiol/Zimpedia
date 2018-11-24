@@ -31,6 +31,24 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.0")
+            }
+
+            LogItem {
+                title: "Support for the latest ZIM file format"
+                description: "The LibZIM library has been updated (v4.0.4). " +
+                             "This update brings support for the latest ZIM format.";
+            }
+
+            LogItem {
+                title: "Full-text search"
+                description: "By default when you enter a phase, search only by article title is performed. " +
+                             "The new mode enables a search within full article text. " +
+                             "It works only when ZIM file contains appropriate full-text index. " +
+                             "You can switch between search modes by changing an option in the settings."
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.0.1")
             }
 

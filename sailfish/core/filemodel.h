@@ -21,30 +21,29 @@
 #include <QModelIndex>
 
 #include "listmodel.h"
-#include "filefinder.h"
-#include "zimmetadata.h"
+#include "itemmodel.h"
 
 class FileItem : public ListItem
 {
     Q_OBJECT
 public:
     enum Roles {
-        IdRole = Qt::UserRole + 1,
-        NameRole = Qt::UserRole + 2,
-        DirRole = Qt::UserRole + 3,
-        TimeRole = Qt::UserRole + 4,
-        ChecksumRole = Qt::UserRole + 5,
-        SizeRole = Qt::UserRole + 6,
-        TitleRole = Qt::UserRole + 7,
-        FaviconRole = Qt::UserRole + 8,
-        CreatorRole = Qt::UserRole + 9,
-        DescriptionRole = Qt::UserRole + 10,
-        DateRole = Qt::UserRole + 11,
-        LanguageRole = Qt::UserRole + 12
+        NameRole = Qt::DisplayRole,
+        IdRole = Qt::UserRole,
+        DirRole,
+        TimeRole,
+        ChecksumRole,
+        SizeRole,
+        TitleRole,
+        FaviconRole,
+        CreatorRole,
+        DescriptionRole,
+        DateRole,
+        LanguageRole
     };
 
 public:
-    FileItem(QObject *parent = 0): ListItem(parent) {}
+    FileItem(QObject *parent = nullptr): ListItem(parent) {}
     explicit FileItem(const QString &id,
                       const QString &name,
                       const QString &dir,
@@ -57,7 +56,7 @@ public:
                       const QString &description,
                       const QString &language,
                       const QString &favicon,
-                      QObject *parent = 0);
+                      QObject *parent = nullptr);
     QVariant data(int role) const;
     QHash<int, QByteArray> roleNames() const;
     inline QString id() const { return m_id; }
@@ -87,25 +86,95 @@ private:
     QString m_favicon;
 };
 
-class FileModel : public ListModel
+struct ZimMetaData {
+    enum FieldFlags
+    {
+        None = 0,
+        Size = 1,
+        Time = 2,
+        Checksum = 4,
+        Name = 8,
+        Title = 16,
+        Creator = 32,
+        Date = 64,
+        Description = 128,
+        Language = 256,
+        Favicon = 512,
+        Filename = 1024,
+        Publisher = 2048,
+        Source = 4096,
+        Tags = 8192,
+        //Version = 16384,
+        ArticleCount = 32768
+    };
+
+    int fields;
+    QString path;
+    QString filename;
+    qint64 size;
+    QString time;
+    QString checksum;
+    QString name;
+    QString title;
+    QString creator;
+    QString date;
+    QString description;
+    QString language;
+    QString favicon;
+    QString publisher;
+    QString source;
+    QString tags;
+    int article_count;
+
+    ZimMetaData() {
+        clear();
+    }
+
+    void clear() {
+        fields = None;
+        path.clear();
+        filename.clear();
+        size = 0;
+        time.clear();
+        checksum.clear();
+        name.clear();
+        title.clear();
+        creator.clear();
+        date.clear();
+        description.clear();
+        language.clear();
+        favicon.clear();
+        publisher.clear();
+        source.clear();
+        tags.clear();
+        article_count = 0;
+    }
+
+    bool isEmpty() {
+        return fields == None;
+    }
+};
+
+class FileModel : public ItemModel
 {
     Q_OBJECT
-    Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
 
 public:
-    explicit FileModel(QObject *parent = 0);
+    QMap<QString, ZimMetaData> files;
+
+    static FileModel* instance(QObject *parent = nullptr);
+    static bool scanZimFile(ZimMetaData &metaData);
+
     Q_INVOKABLE void refresh();
-    void clear();
-    bool getBusy();
-
-signals:
-    void busyChanged();
-
-public slots:
-    void update();
 
 private:
-    bool busy;
+    static const int max_size = 50; // maximum size of title
+    static FileModel* m_instance;
+
+    explicit FileModel(QObject *parent = nullptr);
+    void findFiles(const QString &dirName);
+
+    QList<ListItem*> makeItems();
 };
 
 #endif // FILEMODEL_H

@@ -26,7 +26,6 @@
 
 #include "zimserver.h"
 #include "settings.h"
-#include "filefinder.h"
 
 #ifdef SAILFISH
 #include <sailfishapp.h>
@@ -64,7 +63,7 @@ ZimServer::ZimServer(QObject *parent) :
 
     isListening = server->listen(s->getPort());
     if (!isListening) {
-        qWarning() << "Unable to start HTTP server!";
+        qWarning() << "Unable to start HTTP server";
     }
 
     emit listeningChanged();
@@ -78,7 +77,7 @@ bool ZimServer::getBusy()
 void ZimServer::run()
 {
     if (!getLoaded()) {
-        qWarning() << "ZIM file not loaded!";
+        qWarning() << "ZIM file not loaded";
         emit articleReady("");
         return;
     }
@@ -97,7 +96,6 @@ void ZimServer::run()
         QString dd = QString::fromUtf8(data);
         filter(dd);
         emit articleReady(dd);
-        //data = dd.toUtf8();
     } else {
         emit articleReady(QString(data));
     }
@@ -109,7 +107,7 @@ void ZimServer::openUrl(const QString &url, const QString &title)
 
     QStringList parts = url.split("/");
     if (parts.length()<4) {
-        qWarning() << "Invalid Url!";
+        qWarning() << "Invalid Url";
         return;
     }
 
@@ -123,10 +121,10 @@ void ZimServer::openUrl(const QString &url, const QString &title)
             //qDebug() << "ZimServer::openUrl urlReady" << url << title;
             emit urlReady(url, title);
         } else {
-            qWarning() << "Unable to load ZIM file with" << uuid << "UUID!";
+            qWarning() << "Unable to load ZIM file with" << uuid << "UUID";
         }
     } else {
-        qWarning() << "Invalid UUID!";
+        qWarning() << "Invalid UUID";
     }
 }
 
@@ -137,10 +135,10 @@ bool ZimServer::loadZimFileByUuid(const QString& uuid)
         return true;
     }
 
-    FileFinder* f = FileFinder::instance();
-    ZimMetaData metadata = f->files.value(uuid);
+    auto fm = FileModel::instance();
+    ZimMetaData metadata = fm->files.value(uuid);
     if (metadata.isEmpty()) {
-        qWarning() << "ZIM file with UUID" << uuid << "doesn't exist!";
+        qWarning() << "ZIM file with UUID" << uuid << "doesn't exist";
         return false;
     }
 
@@ -165,7 +163,7 @@ bool ZimServer::loadZimFile()
 bool ZimServer::loadZimPath(const QString& path)
 {
     if (!path.isEmpty() && path == this->metadata.path) {
-        qWarning() << "ZIM file" << path << "already loaded!";
+        qWarning() << "ZIM file already loaded:" << path;
         return true;
     }
 
@@ -187,7 +185,7 @@ bool ZimServer::loadZimPath(const QString& path)
     }
 
     if (!QFile::exists(path)) {
-        qWarning() << "ZIM file" << path << "doesn't exist!";
+        qWarning() << "ZIM file doesn't exist:" << path;
         if (zimfile != Q_NULLPTR) {
             delete zimfile;
             zimfile = Q_NULLPTR;
@@ -207,7 +205,8 @@ bool ZimServer::loadZimPath(const QString& path)
             ZimMetaData::Language |
             ZimMetaData::Favicon |
             ZimMetaData::Tags;
-    if (!FileFinder::scanZimFile(this->metadata)) {
+
+    if (!FileModel::scanZimFile(this->metadata)) {
         if (zimfile != Q_NULLPTR) {
             delete zimfile;
             zimfile = Q_NULLPTR;
@@ -500,7 +499,7 @@ QString ZimServer::stringStdToQ(const std::string &s)
 QString ZimServer::getTitleFromUrl(const QString &url)
 {
     if (!getLoaded()) {
-        qWarning() << "ZIM file not loaded!";
+        qWarning() << "ZIM file not loaded";
         return "";
     }
 
@@ -516,7 +515,7 @@ QString ZimServer::getTitleFromUrl(const QString &url)
     if (zimuuid.startsWith("uuid:")) {
         zimuuid = zimuuid.right(zimuuid.length()-5);
     } else {
-        qWarning() << "Url UUID is invalid or missing!";
+        qWarning() << "Url UUID is invalid or missing";
         return "";
     }
 
@@ -538,18 +537,20 @@ QString ZimServer::getTitleFromUrl(const QString &url)
     return title;
 }
 
-QList<SearchResult> ZimServer::findTitle(const QString &title)
+QList<SearchResult> ZimServer::search(const QString &value)
 {
-    qDebug() << "findTitle:" << title;
+    //qDebug() << "search:" << value;
 
     QList<SearchResult> result;
 
+    auto sm = Settings::instance()->getSearchMode();
+
     if (getLoaded()) {
-        auto t = title.trimmed();
+        auto t = value.trimmed();
         if (!t.isEmpty()) {
             std::string st(t.toUtf8().constData());
             try {
-                if (ftindex) {
+                if (ftindex && sm == Settings::FullTextSearch) {
                     // Trying full text search
                     auto search = zimfile->search(st, 0, 10);
                     auto it = search->begin();
@@ -578,7 +579,7 @@ QList<SearchResult> ZimServer::findTitle(const QString &title)
             }
         }
     } else {
-        qWarning() << "ZIM file not loaded!";
+        qWarning() << "ZIM file not loaded";
     }
 
     return result;
@@ -615,7 +616,7 @@ void ZimServer::filter(QString &data)
             if (getArticle(url, emData, mimeType)) {
                 data.replace(pos, rxStyle.cap(0).length(), "<style type=\"text/css\">" + emData + "</style>");
             } else {
-                qWarning() << "Cannot get embeded style content!";
+                qWarning() << "Cannot get embeded style content";
             }
 
             ++pos;
@@ -633,7 +634,7 @@ void ZimServer::filter(QString &data)
             if (getArticle(url, emData, mimeType)) {
                 data.replace(pos, rxScript.cap(0).length(), "<script type=\"text/javascript\">" + emData + "</script>");
             } else {
-                qWarning() << "Cannot get embeded script content!";
+                qWarning() << "Cannot get embeded script content";
             }
 
             ++pos;
@@ -654,7 +655,7 @@ void ZimServer::filter(QString &data)
                 imgTag.replace(rxImg.cap(1),"data:"+mimeType+";base64,"+emData.toBase64());
                 data.replace(pos, rxImg.cap(0).length(), imgTag);
             } else {
-                qWarning() << "Cannot get embeded image content!";
+                qWarning() << "Cannot get embeded image content";
             }
 
             ++pos;

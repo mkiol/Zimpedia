@@ -12,31 +12,44 @@
 #ifndef BOOKMARKMODEL_H
 #define BOOKMARKMODEL_H
 
+#include <QDebug>
 #include <QString>
-#include <QVariant>
+#include <QList>
 #include <QByteArray>
+#include <QVariant>
 #include <QHash>
+#include <QJsonArray>
 
-#include "listmodel.h"
+#include "itemmodel.h"
 
-class BookmarkItem : public ListItem
+struct Bookmark {
+    QString title;
+    QString url;
+    QString favicon;
+    QString zimUuid;
+    QString zimTitle;
+    QString zimLanguage;
+    bool valid;
+};
+
+class BookmarkItem : public SelectableItem
 {
     Q_OBJECT
 
 public:
     enum Roles {
-        IdRole = Qt::UserRole + 1,
-        TitleRole = Qt::UserRole + 2,
-        UrlRole = Qt::UserRole + 3,
-        IconRole = Qt::UserRole + 4,
-        ValidRole = Qt::UserRole + 5,
-        ZimTitleRole = Qt::UserRole + 6,
-        ZimLangRole = Qt::UserRole + 7,
-        ZimUuidRole = Qt::UserRole + 8
+        TitleRole = Qt::DisplayRole,
+        IdRole = Qt::UserRole,
+        UrlRole,
+        IconRole,
+        ValidRole,
+        ZimTitleRole,
+        ZimLangRole,
+        ZimUuidRole
     };
 
 public:
-    BookmarkItem(QObject *parent = 0): ListItem(parent), busy(false) {}
+    BookmarkItem(QObject *parent = nullptr): SelectableItem(parent) {}
     explicit BookmarkItem(
                       const QString &id,
                       const QString &title,
@@ -67,30 +80,42 @@ private:
     QString m_zimlang;
     QString m_zimuuid;
     bool m_valid;
-    bool busy;
 };
 
-class BookmarkModel : public ListModel
+class BookmarkModel : public SelectableItemModel
 {
     Q_OBJECT
-    Q_PROPERTY (bool busy READ getBusy NOTIFY busyChanged)
 
 public:
-    explicit BookmarkModel(QObject *parent = 0);
-    Q_INVOKABLE void refreshModel();
-    void clear();
-    bool getBusy();
+    static BookmarkModel* instance(QObject *parent = nullptr);
+
+    Q_INVOKABLE void addBookmark(const QString &title,
+                                 const QString &url,
+                                 const QString &favicon);
+    Q_INVOKABLE void updateBookmark(const QString &oldUrl,
+                                    const QString &title,
+                                    const QString &url,
+                                    const QString &favicon);
+    Q_INVOKABLE void deleteBookmark(const QString &url);
+    Q_INVOKABLE const QString changeUuid(const QString &url,
+                                         const QString &newUuid);
+    Q_INVOKABLE bool validateUrl(const QString &url);
 
 signals:
-    void busyChanged();
-
-private slots:
-    void bookmarksBusyChangedHandler();
+    void bookmarkAdded();
+    void bookmarkDeleted();
+    void bookmarkUpdated();
+    void bookmarkExists();
 
 private:
-    bool busy;
+    static BookmarkModel* m_instance;
+    static const QString bookmarkFilename;
 
-    void init();
+    explicit BookmarkModel(QObject *parent = nullptr);
+    const QString articleUrl(const QString &url);
+    QList<ListItem*> makeItems();
+    QJsonArray readBookmarks();
+    bool writeBookmarks(const QJsonArray &json);
 };
 
 #endif // BOOKMARKMODEL_H

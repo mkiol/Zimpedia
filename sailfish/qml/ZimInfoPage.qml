@@ -99,7 +99,7 @@ Page {
                 }
 
                 DetailItem {
-                    label: qsTr("Full text search possible")
+                    label: qsTr("Full-text index")
                     value: zim.ftindex ? qsTr("Yes") : qsTr("No")
                 }
 

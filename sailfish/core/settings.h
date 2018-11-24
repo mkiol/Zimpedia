@@ -27,8 +27,15 @@ class Settings: public QObject
     Q_PROPERTY (float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
     Q_PROPERTY (QString zimFile READ getZimFile WRITE setZimFile NOTIFY zimFileChanged)
     Q_PROPERTY (int browser READ getBrowser WRITE setBrowser NOTIFY browserChanged)
+    Q_PROPERTY (SearchMode searchMode READ getSearchMode WRITE setSearchMode NOTIFY searchModeChanged)
 
 public:
+    enum SearchMode {
+        TitleSearch = 0,
+        FullTextSearch = 1,
+    };
+    Q_ENUM(SearchMode)
+
     static Settings* instance();
 
     void setPort(int value);
@@ -40,6 +47,8 @@ public:
     float getZoom();
     void setBrowser(int value);
     int getBrowser();
+    void setSearchMode(SearchMode value);
+    SearchMode getSearchMode();
     QString getZimFile();
 
 signals:
@@ -48,6 +57,7 @@ signals:
     void zimFileChanged();
     void browserChanged();
     void zoomChanged();
+    void searchModeChanged();
 
 private:
     QSettings settings;

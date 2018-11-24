@@ -21,7 +21,7 @@
 #include <qhttprequest.h>
 #include <qhttpresponse.h>
 
-#include "zimmetadata.h"
+#include "filemodel.h"
 
 struct SearchResult {
     QString title;
@@ -54,7 +54,7 @@ public:
     Q_INVOKABLE void getArticleAsync(const QString &zimUrl);
     Q_INVOKABLE void openUrl(const QString &url, const QString &title);
     Q_INVOKABLE QString getTitleFromUrl(const QString &url);
-    QList<SearchResult> findTitle(const QString &title);
+    QList<SearchResult> search(const QString &value);
 
     bool getLoaded();
     bool getListening();

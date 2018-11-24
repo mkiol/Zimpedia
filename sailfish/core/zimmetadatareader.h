@@ -15,7 +15,7 @@
 #include <QObject>
 #include <QString>
 
-#include "zimmetadata.h"
+#include "filemodel.h"
 
 class ZimMetaDataReader : public QObject
 {

@@ -52,7 +52,7 @@ ApplicationWindow {
     }
 
     Connections {
-        target: bookmarks
+        target: bookmarkModel
         onBookmarkAdded: notification.show(qsTr("Bookmark has been added"))
         onBookmarkExists: notification.show(qsTr("Bookmark already exists"))
         //onBookmarkDeleted: notification.show(qsTr("Bookmark has been deleted"))
