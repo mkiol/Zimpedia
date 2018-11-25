@@ -30,7 +30,6 @@
 #endif
 
 #include "utils.h"
-#include "bookmarks.h"
 
 Utils::Utils(QObject *parent) : QObject(parent)
 {
