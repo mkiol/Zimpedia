@@ -16,27 +16,27 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
         <source>Project website</source>
-        <translation type="unfinished"></translation>
+        <translation>專案網頁</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="80"/>
         <source>Translations are provided by:</source>
-        <translation type="unfinished"></translation>
+        <translation>翻譯提供由：</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="92"/>
         <source>%1 is developed as an open source project under %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 是以 %2 授權的開放原始碼開發專案。</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="98"/>
         <source>Libraries</source>
-        <translation type="unfinished"></translation>
+        <translation>函式庫</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="180"/>
         <source>Something went wrong and bookmark cannot be updated</source>
-        <translation type="unfinished"></translation>
+        <translation>某些東西出錯了，書籤無法更新</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="153"/>
@@ -174,12 +174,12 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="35"/>
         <source>ZIM files</source>
-        <translation type="unfinished"></translation>
+        <translation>ZIM 檔案</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟檔案</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="132"/>
@@ -222,7 +222,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="165"/>
         <source>No articles</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有文章</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="166"/>
@@ -270,27 +270,27 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="44"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋模式</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation type="unfinished"></translation>
+        <translation>在預設情況下，當您輸入詞語時，僅會搜尋文章標題。有一個不同的模式是搜尋全文。全文搜尋模式僅在 ZIM 檔案包含正確的索引時才能運作。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
         <source>By title</source>
-        <translation type="unfinished"></translation>
+        <translation>以標題</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Full-text</source>
-        <translation type="unfinished"></translation>
+        <translation>全文</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="66"/>
         <source>Web view</source>
-        <translation type="unfinished"></translation>
+        <translation>網頁檢視</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="62"/>
@@ -412,17 +412,17 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="102"/>
         <source>Full-text index</source>
-        <translation type="unfinished"></translation>
+        <translation>全文索引</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="97"/>
@@ -432,7 +432,7 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="112"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>路徑</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
