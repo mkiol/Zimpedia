@@ -16,27 +16,27 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
         <source>Project website</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Webseite</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Urheber</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="80"/>
         <source>Translations are provided by:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Übersetzungen von:</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="92"/>
         <source>%1 is developed as an open source project under %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 wird als Open Source Projekt unter der %2 entwickelt</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="98"/>
         <source>Libraries</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bibliotheken</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="180"/>
         <source>Something went wrong and bookmark cannot be updated</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lesezeichen konnten nicht aktualisiert werden</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="153"/>
@@ -174,12 +174,12 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="35"/>
         <source>ZIM files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZIM Dateien</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öffne Datei</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="132"/>
@@ -222,7 +222,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="165"/>
         <source>No articles</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine Artikel</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="166"/>
@@ -270,27 +270,27 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="44"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Such Modus</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Standardmäßig werden nur die Artikeltitel durchsucht. Als Alternative kann auch die Volltextsuche aktiviert werden. Die Volltextsuche funktioniert nur, wenn die ZIM Datei einen Index enthält.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
         <source>By title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Im Titel suchen</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Full-text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Volltextsuche</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="66"/>
         <source>Web view</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interne Anzeige</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="62"/>
@@ -412,17 +412,17 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="102"/>
         <source>Full-text index</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Volltext-Index</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ja</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nein</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="97"/>
@@ -432,7 +432,7 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="112"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pfad</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
