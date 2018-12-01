@@ -26,10 +26,9 @@ zimlib {
 }
 
 include($$PROJECTDIR/libs/qhttpserver/qhttpserver.pri)
-include($$PROJECTDIR/core/zimpedia_core.pri)
+include(core/zimpedia_core.pri)
 
-OTHER_FILES += \
-    translations/*.ts \
+DISTFILES += \
     qml/CoverPage.qml \
     qml/AboutPage.qml \
     qml/SettingsPage.qml \
@@ -57,6 +56,12 @@ OTHER_FILES += \
     qml/BookmarkEditPage.qml \
     qml/BookmarkFileChoose.qml
 
+OTHER_FILES += \
+    translations/*.ts \
+    rpm/$${TARGET}.yaml \
+    rpm/$${TARGET}.changes.in \
+    rpm/$${TARGET}.spec
+
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
 CONFIG += sailfishapp_i18n
@@ -78,9 +83,3 @@ res.path = /usr/share/$${TARGET}
 INSTALLS += res
 
 DEPENDPATH += $$INCLUDEPATH
-
-OTHER_FILES += \
-    rpm/$${TARGET}.yaml \
-    rpm/$${TARGET}.changes.in \
-    rpm/$${TARGET}.spec
-

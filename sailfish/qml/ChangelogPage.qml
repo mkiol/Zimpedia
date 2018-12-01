@@ -31,6 +31,16 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.1")
+            }
+
+            LogItem {
+                title: "Chinese & Swedish translations update"
+                description: "Thanks to Jeff Huang and Åke Engelbrektson " +
+                             "Chinese and Swedish translations have been updated.";
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.2.0")
             }
 
@@ -53,13 +63,8 @@ Page {
             }
 
             LogItem {
-                title: "Chinese translation"
-                description: "Chinese translation thanks to Jeff Huang";
-            }
-
-            LogItem {
-                title: "French translation"
-                description: "French translation thanks to lutinotmalin";
+                title: "Chinese & French translations"
+                description: "Chinese and French translations thanks to Jeff Huang and lutinotmalin";
             }
 
             SectionHeader {
