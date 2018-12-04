@@ -64,7 +64,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: root.theme === "transparent" ? Theme.rgba(Theme.highlightColor, 0.2) :
-               root.theme === "black" ? "black" : root.theme === "highlighted" ? Theme.highlightBackgroundColor :
+               root.theme === "black" ? Theme.overlayBackgroundColor : root.theme === "highlighted" ? Theme.highlightBackgroundColor :
                root.theme === "dimmer" ? Theme.highlightDimmerColor :
                Theme.highlightDimmerColor
     }

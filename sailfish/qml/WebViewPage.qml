@@ -232,7 +232,8 @@ Page {
         IconBarItem {
             text: qsTr("Toggle Night View")
             theme: parent.theme
-            icon: root.nightMode ? "image://icons/icon-m-night-selected" : "image://icons/icon-m-night"
+            icon: root.nightMode ? "image://icons/icon-m-night-selected" :
+                                   "image://icons/icon-m-night"
             enabled: root.nightModePossible
             visible: true
             onClicked: {

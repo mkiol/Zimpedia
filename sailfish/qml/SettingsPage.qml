@@ -75,8 +75,8 @@ Page {
             }
 
             IconSlider {
-                leftIconSource: "image://icons/icon-m-fontdown"
-                rightIconSource: "image://icons/icon-m-fontup"
+                leftIconSource: "image://icons/icon-m-fontdown?" + Theme.primaryColor
+                rightIconSource: "image://icons/icon-m-fontup?" + Theme.primaryColor
                 label: qsTr("Viewer font size level")
                 minimumValue: 50
                 maximumValue: 200
