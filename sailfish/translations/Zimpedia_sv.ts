@@ -1,57 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../qml/AboutPage.qml" line="31"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="18"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <source>Version: %1</source>
-        <translation type="vanished">Version: %1</translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="51"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="84"/>
-        <source>Offline reader for Wikipedia and other Wiki projects</source>
-        <translation>Offline-läsare för Wikipedia och andra Wiki-projekt</translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="93"/>
-        <source>Website</source>
-        <translation>Webbsida</translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="61"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="41"/>
+        <location filename="../qml/AboutPage.qml" line="55"/>
         <source>Changelog</source>
         <translation>Ändringslogg</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="83"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="113"/>
-        <source>Copyright &amp; license</source>
-        <translation>Copyright &amp; licens</translation>
+        <location filename="../qml/AboutPage.qml" line="61"/>
+        <source>Project website</source>
+        <translation>Projektets hemsida</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="95"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="125"/>
-        <source>This software is distributed under the terms of the Mozilla Public License v.2.0</source>
-        <translation>Denna mjukvara distribueras under vilkoren för Mozilla Public License v.2.0</translation>
+        <location filename="../qml/AboutPage.qml" line="67"/>
+        <source>Authors</source>
+        <translation>Utvecklare</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="105"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="133"/>
-        <source>Third party components copyrights</source>
-        <translation>Copyright för tredjepartskomponenter</translation>
+        <location filename="../qml/AboutPage.qml" line="80"/>
+        <source>Translations are provided by:</source>
+        <translation>Översättningar av:</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="92"/>
+        <source>%1 is developed as an open source project under %2.</source>
+        <translation>%1 är utvecklad som ett öppen källkodsprojekt under %2.</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="98"/>
+        <source>Libraries</source>
+        <translation>Bibliotek</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
-        <location filename="../../bb10/assets/AboutPage.qml" line="78"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
@@ -59,62 +45,43 @@
 <context>
     <name>BookmarkEditPage</name>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="45"/>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="53"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="44"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
         <location filename="../qml/BookmarkEditPage.qml" line="54"/>
-        <location filename="../qml/BookmarkEditPage.qml" line="55"/>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="97"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="69"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="80"/>
         <source>Change</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="109"/>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="106"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="118"/>
         <source>ZIM file is missing</source>
         <translation>ZIM-fil saknas</translation>
     </message>
     <message>
-        <source>Url</source>
-        <translation type="vanished">URL</translation>
+        <location filename="../qml/BookmarkEditPage.qml" line="180"/>
+        <source>Something went wrong and bookmark cannot be updated</source>
+        <translation>Något blev fel och bokmärken kan inte uppdateras</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="160"/>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="36"/>
-        <source>Something went wrong and bookmark can&apos;t be updated</source>
-        <translation>Något blev fel och bokmärket kan inte uppdateras</translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="153"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera URL</translation>
     </message>
     <message>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="155"/>
         <source>URL was copied to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:en kopierades till urklipp</translation>
     </message>
     <message>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="61"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="66"/>
-        <source>Edit bookmark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="128"/>
-        <location filename="../../bb10/assets/BookmarkEditPage.qml" line="124"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="127"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
@@ -122,63 +89,50 @@
 <context>
     <name>BookmarkFileChoose</name>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="37"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="32"/>
         <source>Choose ZIM file</source>
         <translation>Välj ZIM-fil</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="106"/>
-        <location filename="../../bb10/assets/BookmarkFileChoose.qml" line="124"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="103"/>
         <source>No files were found</source>
         <translation>Inga filer hittades</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="111"/>
-        <location filename="../../bb10/assets/BookmarkFileChoose.qml" line="69"/>
+        <location filename="../qml/BookmarkFileChoose.qml" line="108"/>
         <source>Refresh</source>
         <translation>Uppdatera</translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/BookmarkFileChoose.qml" line="47"/>
-        <source>Change ZIM file</source>
-        <translation>Byt ZIM-fil</translation>
     </message>
 </context>
 <context>
     <name>BookmarksPage</name>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="30"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="57"/>
+        <location filename="../qml/BookmarksPage.qml" line="35"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="40"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="86"/>
+        <location filename="../qml/BookmarksPage.qml" line="47"/>
         <source>Edit</source>
         <translation>Redigera</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="55"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="105"/>
+        <location filename="../qml/BookmarksPage.qml" line="62"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="107"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="77"/>
+        <location filename="../qml/BookmarksPage.qml" line="113"/>
         <source>ZIM file is missing</source>
         <translation>ZIM-fil saknas</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="116"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="126"/>
+        <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
         <translation>Bokmärkes-ZIM-fil saknas</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="122"/>
-        <location filename="../../bb10/assets/BookmarksPage.qml" line="134"/>
+        <location filename="../qml/BookmarksPage.qml" line="128"/>
         <source>No bookmarks</source>
         <translation>Inga bokmärken</translation>
     </message>
@@ -186,68 +140,62 @@
 <context>
     <name>ChangelogPage</name>
     <message>
-        <location filename="../qml/ChangelogPage.qml" line="33"/>
-        <location filename="../../bb10/assets/ChangelogPage.qml" line="19"/>
+        <location filename="../qml/ChangelogPage.qml" line="30"/>
         <source>Changelog</source>
         <translation>Ändringslogg</translation>
     </message>
     <message>
-        <location filename="../qml/ChangelogPage.qml" line="37"/>
-        <location filename="../../bb10/assets/ChangelogPage.qml" line="44"/>
+        <location filename="../qml/ChangelogPage.qml" line="34"/>
+        <location filename="../qml/ChangelogPage.qml" line="52"/>
+        <location filename="../qml/ChangelogPage.qml" line="66"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
-    </message>
-    <message>
-        <source>Version: %1</source>
-        <translation type="obsolete">Version: %1</translation>
     </message>
 </context>
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="32"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="43"/>
-        <source>Choose ZIM file</source>
-        <translation>Välj ZIM-fil</translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="53"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="118"/>
+        <location filename="../qml/FilesPage.qml" line="57"/>
         <source>Show details</source>
         <translation>Visa detaljerat</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="119"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="151"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
+        <location filename="../qml/FilesPage.qml" line="158"/>
         <source>No files were found</source>
         <translation>Inga filer hittades</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="124"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../qml/FilesPage.qml" line="122"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM är ett öppet filformat som lagrar wiki-innehåll för offline-användning. Samlingen av trevliga wikis kan laddas ner från &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. Om du redan har några ZIM-filer, kan du placera dem i valfri mapp i din hemkatalog eller på ditt SD-kort.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="134"/>
+        <location filename="../qml/FilesPage.qml" line="35"/>
+        <source>ZIM files</source>
+        <translation>ZIM-filer</translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="49"/>
+        <source>Open file</source>
+        <translation>Öppna fil</translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="132"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="140"/>
+        <location filename="../qml/FilesPage.qml" line="138"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="146"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="65"/>
+        <location filename="../qml/FilesPage.qml" line="144"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="152"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="78"/>
+        <location filename="../qml/FilesPage.qml" line="151"/>
         <source>Refresh</source>
         <translation>Uppdatera</translation>
     </message>
@@ -256,133 +204,111 @@
     <name>SearchPage</name>
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="121"/>
         <source>Open in built-in viewer</source>
         <translation>Öppna i inbyggd läsarr</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="65"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="134"/>
         <source>Open in browser</source>
         <translation>Öppna i webbläsare</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="77"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="144"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="98"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="178"/>
+        <location filename="../qml/SearchPage.qml" line="165"/>
+        <source>No articles</source>
+        <translation>Inga artiklar</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="166"/>
         <source>Find article, by typing in the search field</source>
         <translation>Hitta artikeln genom att skriva i sökfältet</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="104"/>
+        <location filename="../qml/SearchPage.qml" line="98"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="109"/>
+        <location filename="../qml/SearchPage.qml" line="103"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="114"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="85"/>
+        <location filename="../qml/SearchPage.qml" line="108"/>
         <source>Change ZIM file</source>
         <translation>Byt ZIM-fil</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="119"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="71"/>
+        <location filename="../qml/SearchPage.qml" line="113"/>
         <source>Bookmarks</source>
         <translation>Bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="124"/>
-        <location filename="../../bb10/assets/SearchPage.qml" line="50"/>
+        <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Open main page</source>
         <translation>Öppna huvudsidan</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="36"/>
+        <location filename="../qml/SearchPage.qml" line="37"/>
         <source>Search</source>
         <translation>Sök</translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/SearchPage.qml" line="39"/>
-        <source>Enter search entry</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="21"/>
+        <location filename="../qml/SettingsPage.qml" line="40"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="49"/>
-        <source>UI</source>
-        <translation>Utseende</translation>
+        <location filename="../qml/SettingsPage.qml" line="44"/>
+        <source>Search mode</source>
+        <translation>Sökläge</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="54"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="52"/>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
+        <translation>Som standard utförs endast sökning efter artikelnamn, när du anger en sökfras. Ett annat läge är sökning i hela artikeltexten. Fulltextläget fungerar endast när ZIM-filen innehåller tillämpligt index.</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="50"/>
+        <source>By title</source>
+        <translation>Efter namn</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <source>Full-text</source>
+        <translation>Fulltext</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <source>Web view</source>
+        <translation>Webbvy</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Standardläsare</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="58"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="59"/>
-        <source>Built-in viewer</source>
-        <translation>Inbyggd läsare</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="59"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="65"/>
+        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Browser</source>
         <translation>Webbläsare</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="53"/>
+        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
         <translation>Wiki-sidor kan öppnas i den inbyggda läsaren eller en extern webbläsare.</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="72"/>
-        <location filename="../../bb10/assets/SettingsPage.qml" line="81"/>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Viewer font size level</source>
         <translation>Teckenstorlek i läsaren</translation>
-    </message>
-    <message>
-        <source>Hide advanced options</source>
-        <translation type="vanished">Dölj avancerade alternativ</translation>
-    </message>
-    <message>
-        <source>Show advanced options</source>
-        <translation type="vanished">Visa avancerade alternativ</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="vanished">Avancerat</translation>
-    </message>
-    <message>
-        <source>Enter port number here!</source>
-        <translation type="vanished">Ange portnummer här!</translation>
-    </message>
-    <message>
-        <source>Local server listening port number</source>
-        <translation type="vanished">Lyssningsport för lokal server</translation>
-    </message>
-    <message>
-        <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation type="vanished">Portnummret är ogiltigt! Giltigt intervall är 1024-65535.</translation>
     </message>
 </context>
 <context>
@@ -395,14 +321,11 @@
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="162"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="50"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="282"/>
         <source>Loading page content...</source>
         <translation>Läser in sidinnehåll...</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="170"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="288"/>
         <source>Failed to load page content</source>
         <translation>Kunde inte läsa in sidinnehåll</translation>
     </message>
@@ -418,7 +341,6 @@
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="244"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="151"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
@@ -429,13 +351,11 @@
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="268"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="196"/>
         <source>Decrease font</source>
         <translation>Minska teckenstorlek</translation>
     </message>
     <message>
         <location filename="../qml/WebViewPage.qml" line="277"/>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="185"/>
         <source>Increase font</source>
         <translation>Öka teckenstorlek</translation>
     </message>
@@ -444,148 +364,101 @@
         <source>Hide toolbar</source>
         <translation>Dölj verktygsfältet</translation>
     </message>
-    <message>
-        <location filename="../../bb10/assets/WebViewPage.qml" line="174"/>
-        <source>Open in browser</source>
-        <translation>Öppna i webbläsare</translation>
-    </message>
 </context>
 <context>
     <name>ZimInfoPage</name>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="45"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="52"/>
         <source>Details</source>
         <translation>Detaljerat</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="65"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="74"/>
+        <location filename="../qml/ZimInfoPage.qml" line="62"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="70"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="79"/>
+        <location filename="../qml/ZimInfoPage.qml" line="67"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="75"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="84"/>
+        <location filename="../qml/ZimInfoPage.qml" line="72"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="80"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="89"/>
+        <location filename="../qml/ZimInfoPage.qml" line="77"/>
         <source>Creator</source>
         <translation>Skapare</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="85"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="94"/>
+        <location filename="../qml/ZimInfoPage.qml" line="82"/>
         <source>Publisher</source>
         <translation>Publicist</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="90"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="99"/>
+        <location filename="../qml/ZimInfoPage.qml" line="87"/>
         <source>Description</source>
         <translation>Beskrivning</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="95"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="104"/>
+        <location filename="../qml/ZimInfoPage.qml" line="92"/>
         <source>Language</source>
         <translation>Språk</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="100"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="109"/>
-        <source>Tags</source>
-        <translation>Taggar</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="102"/>
+        <source>Full-text index</source>
+        <translation>Fulltextindex</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="105"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="114"/>
-        <source>Source</source>
-        <translation>Källa</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>Yes</source>
+        <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="110"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="119"/>
+        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <source>No</source>
+        <translation>Nej</translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="97"/>
         <source>Article count</source>
         <translation>Antal artiklar</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="115"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="124"/>
-        <source>Filename</source>
-        <translation>Finamn</translation>
+        <location filename="../qml/ZimInfoPage.qml" line="112"/>
+        <source>Path</source>
+        <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="120"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="129"/>
-        <source>Directory</source>
-        <translation>Mapp</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="125"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="134"/>
+        <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Storlek</translation>
-    </message>
-    <message>
-        <location filename="../qml/ZimInfoPage.qml" line="130"/>
-        <location filename="../../bb10/assets/ZimInfoPage.qml" line="139"/>
-        <source>Checksum</source>
-        <translation>Kontrollsumma</translation>
-    </message>
-</context>
-<context>
-    <name>ZimServer</name>
-    <message>
-        <location filename="../src/zimserver.cpp" line="526"/>
-        <source>Main page</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <location filename="../qml/main.qml" line="44"/>
-        <location filename="../../bb10/assets/main.qml" line="137"/>
         <source>Launching an external browser...</source>
         <translation>Startar extern webbläsare...</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="56"/>
-        <location filename="../../bb10/assets/main.qml" line="86"/>
         <source>Bookmark has been added</source>
         <translation>Bokmärket har lagts till</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="57"/>
-        <location filename="../../bb10/assets/main.qml" line="87"/>
         <source>Bookmark already exists</source>
         <translation>Bokmärket finns redan</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="59"/>
-        <location filename="../../bb10/assets/main.qml" line="88"/>
         <source>Bookmark has been updated</source>
         <translation>Bokmärket har uppdaterats</translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/main.qml" line="70"/>
-        <source>Preparing ZIM file...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../bb10/assets/main.qml" line="148"/>
-        <source>About</source>
-        <translation>Om</translation>
     </message>
 </context>
 </TS>

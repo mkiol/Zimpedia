@@ -20,7 +20,7 @@ Row {
 
     anchors.left: parent.left; anchors.right: parent.right
     anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
-    spacing: 1.0*Theme.paddingLarge
+    spacing: Theme.paddingLarge
 
     Column {
         spacing: Theme.paddingSmall
@@ -31,21 +31,17 @@ Row {
             id: label1
             width: parent.width
             wrapMode: Text.WordWrap
-            color: Theme.primaryColor
-            font.bold: true
-
+            color: Theme.highlightColor
         }
 
         Label {
             id: label2
             width: parent.width
             wrapMode: Text.WordWrap
-            color: Theme.primaryColor
+            font.pixelSize: Theme.fontSizeSmall
+            color: Theme.highlightColor
         }
 
-        Item {
-            height: Theme.paddingLarge
-            width: parent.width
-        }
+        Spacer {}
     }
 }

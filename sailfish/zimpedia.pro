@@ -1,43 +1,34 @@
 TARGET = harbour-zimpedia
 
-CONFIG += c++11 sailfishapp dbus
+CONFIG += c++11 sailfishapp dbus json libzim
+
 PKGCONFIG += mlite5
+
+linux-g++-32: CONFIG += x86
+linux-g++: CONFIG += arm
 
 DEFINES += SAILFISH
 
-INCLUDEPATH += /usr/include/c++/6
+PROJECTDIR = $$PWD
 
-# QHttpServer
-include(qhttpserver/qhttpserver.pri)
-# ZimLib
-include(zimlib/zimlib.pri)
+INCLUDEPATH += /usr/include/c++/7
 
-SOURCES += src/main.cpp \
-    src/zimserver.cpp \
-    src/articlemodel.cpp \
-    src/listmodel.cpp \
-    src/settings.cpp \
-    src/filemodel.cpp \
-    src/utils.cpp \
-    src/iconprovider.cpp \
-    src/bookmarkmodel.cpp \
-    src/filefinder.cpp \
-    src/zimmetadatareader.cpp
-    
-HEADERS += \
-    src/zimserver.h \
-    src/articlemodel.h \
-    src/listmodel.h \
-    src/settings.h \
-    src/filemodel.h \
-    src/utils.h \
-    src/iconprovider.h \
-    src/bookmarkmodel.h \
-    src/filefinder.h \
-    src/zimmetadata.h \
-    src/zimmetadatareader.h
+CONFIG += sailfish
+DEFINES += SAILFISH
 
-OTHER_FILES += \
+libzim {
+    DEFINES += LIBZIM
+    include($$PROJECTDIR/libs/libzim/libzim.pri)
+}
+zimlib {
+    DEFINES += ZIMLIB
+    include($$PROJECTDIR/libs/zimlib/zimlib.pri)
+}
+
+include($$PROJECTDIR/libs/qhttpserver/qhttpserver.pri)
+include(core/zimpedia_core.pri)
+
+DISTFILES += \
     qml/CoverPage.qml \
     qml/AboutPage.qml \
     qml/SettingsPage.qml \
@@ -46,7 +37,6 @@ OTHER_FILES += \
     qml/PaddedLabel.qml \
     qml/SearchPage.qml \
     qml/FilesPage.qml \
-    qml/PageMenu.qml \
     qml/Bubble.qml \
     qml/ChangelogPage.qml \
     qml/LogItem.qml \
@@ -60,29 +50,36 @@ OTHER_FILES += \
     qml/Icon.qml \
     qml/IconPlaceholder.qml \
     qml/ZimInfoPage.qml \
+    qml/tools.js \
+    qml/AttValue.qml \
+    qml/BookmarksPage.qml \
+    qml/BookmarkEditPage.qml \
+    qml/BookmarkFileChoose.qml
+
+OTHER_FILES += \
     translations/*.ts \
-    harbour-zimpedia.desktop
+    rpm/$${TARGET}.yaml \
+    rpm/$${TARGET}.changes.in \
+    rpm/$${TARGET}.spec
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 150x150 256x256
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
-TRANSLATIONS += translations/harbour-zimpedia-en.ts \
-                translations/harbour-zimpedia-pl.ts \
-                translations/harbour-zimpedia-sv.ts \
-                translations/harbour-zimpedia-cs_CZ.ts \
-                translations/harbour-zimpedia-es.ts \
-                translations/harbour-zimpedia-de.ts
+CONFIG += sailfishapp_i18n
+TRANSLATIONS += translations/Zimpedia_en.ts \
+                translations/Zimpedia_pl.ts \
+                translations/Zimpedia_sv.ts \
+                translations/Zimpedia_cs.ts \
+                translations/Zimpedia_es.ts \
+                translations/Zimpedia_de.ts \
+                translations/Zimpedia_fr.ts \
+                translations/Zimpedia_zh_TW.ts
 
-translations.files = translations
-translations.path = /usr/share/$${TARGET}
-res.files = res
-res.path = /usr/share/$${TARGET}
 images.files = images/*
 images.path = /usr/share/$${TARGET}/images
-INSTALLS += translations res images
+INSTALLS += images
 
-DISTFILES += \
-    rpm/harbour-zimpedia.changes.in \
-    rpm/harbour-zimpedia.spec \
-    rpm/harbour-zimpedia.yaml \
-    qml/tools.js \
-    qml/AttValue.qml
+res.files = res
+res.path = /usr/share/$${TARGET}
+INSTALLS += res
+
+DEPENDPATH += $$INCLUDEPATH

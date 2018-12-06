@@ -24,7 +24,9 @@ class Settings: public QObject
 
     Q_PROPERTY (int port READ getPort WRITE setPort NOTIFY portChanged)
     Q_PROPERTY (int fontSize READ getFontSize WRITE setFontSize NOTIFY fontSizeChanged)
+    Q_PROPERTY (float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
     Q_PROPERTY (QString zimFile READ getZimFile WRITE setZimFile NOTIFY zimFileChanged)
+    Q_PROPERTY (int browser READ getBrowser WRITE setBrowser NOTIFY browserChanged)
 
 public:
     static Settings* instance();
@@ -34,6 +36,11 @@ public:
     void setFontSize(int value);
     int getFontSize();
     void setZimFile(const QString & value);
+    void setZoom(float value);
+    float getZoom();
+    void setBrowser(int value);
+    int getBrowser();
+
     QString getZimFile();
 
     ArticleModel* articleModel;
@@ -42,6 +49,8 @@ signals:
     void portChanged();
     void fontSizeChanged();
     void zimFileChanged();
+    void browserChanged();
+    void zoomChanged();
 
 private:
     QSettings settings;

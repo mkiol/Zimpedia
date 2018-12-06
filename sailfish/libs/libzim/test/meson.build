@@ -1,0 +1,26 @@
+
+
+tests = [
+    'cluster',
+    'dirent',
+    'header',
+    'uuid',
+    'template'
+]
+
+
+gtest_dep = dependency('gtest', fallback: ['gtest', 'gtest_dep'])
+
+foreach test_name : tests
+    test_exe = executable(test_name, [test_name+'.cpp'],
+                          include_directories : [include_directory, src_directory],
+                          link_with : libzim,
+                          link_args: extra_link_args,
+                          dependencies : deps + [gtest_dep],
+                          build_rpath : '$ORIGIN')
+    test(test_name, test_exe, timeout : 60)
+endforeach
+
+if get_option('default_library') != 'static'
+    subdir('pytest')
+endif

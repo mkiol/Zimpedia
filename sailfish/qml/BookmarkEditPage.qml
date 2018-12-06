@@ -41,7 +41,6 @@ Dialog {
             spacing: Theme.paddingLarge
 
             DialogHeader {
-                //title: qsTr("Edit bookmark")
                 acceptText: qsTr("Save")
             }
 
@@ -64,12 +63,22 @@ Dialog {
 
                 contentHeight: Theme.itemSizeMedium
 
+                function edit() {
+                    var obj = pageStack.push(Qt.resolvedUrl("BookmarkFileChoose.qml"),{"uuid": root.zimUuid});
+                    obj.uuidChanged.connect(function() {
+                        //console.log("UUID changed, old=" + root.zimUuid + " new="+obj.uuid);
+                        root.favicon = obj.favicon
+                        root.zimUuid = obj.uuid
+                        root.zimTitle = obj.title
+                        root.zimLanguage = obj.language
+                        root.valid = true
+                    })
+                }
+
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Change")
-                        onClicked: {
-                            pageStack.push(Qt.resolvedUrl("BookmarkFileChoose.qml"),{"uuid": root.uuid});
-                        }
+                        onClicked: _zim.edit()
                     }
                 }
 
@@ -111,33 +120,44 @@ Dialog {
                     }
                 }
 
-                onClicked: {
-                    var obj = pageStack.push(Qt.resolvedUrl("BookmarkFileChoose.qml"),{"uuid": root.zimUuid});
-                    obj.uuidChanged.connect(function() {
-                        //console.log("UUID changed, old=" + root.zimUuid + " new="+obj.uuid);
-                        root.favicon = obj.favicon
-                        root.zimUuid = obj.uuid
-                        root.zimTitle = obj.title
-                        root.zimLanguage = obj.language
-                        root.valid = true
-                    })
-                }
+                onClicked: _zim.edit()
             }
 
             SectionHeader {
                 text: qsTr("URL")
             }
 
-            Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    leftMargin: Theme.horizontalPageMargin
-                    rightMargin: Theme.horizontalPageMargin
+            ListItem {
+                id: _urlitem
+                contentHeight: _urllabel.height + 2 * Theme.paddingMedium
+                menu: _menu
+
+                Label {
+                    id: _urllabel
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: Theme.horizontalPageMargin
+                        rightMargin: Theme.horizontalPageMargin
+                    }
+                    wrapMode: Text.WrapAnywhere
+                    text: bookmarkModel.changeUuid(root.url, root.zimUuid)
+                    color: _urlitem.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
-                wrapMode: Text.WrapAnywhere
-                text: bookmarks.changeUuid(root.url, root.zimUuid)
-                color: Theme.highlightColor
+
+                Component {
+                    id: _menu
+                    ContextMenu {
+                        MenuItem {
+                            text: qsTr("Copy URL")
+                            onClicked: {
+                                notification.show(qsTr("URL was copied to the clipboard"))
+                                utils.copyToClipboard(_urllabel.text)
+                            }
+                        }
+                    }
+                }
             }
 
             Spacer {}
@@ -147,17 +167,17 @@ Dialog {
     }
 
     onAccepted: {
-        var newUrl = bookmarks.changeUuid(root.url, root.zimUuid)
-        if (bookmarks.validateUrl(newUrl)) {
+        var newUrl = bookmarkModel.changeUuid(root.url, root.zimUuid)
+        if (bookmarkModel.validateUrl(newUrl)) {
             /*console.log("title: " + root.title)
             console.log("url: " + newUrl)
             console.log("favicon: " + root.favicon)
             console.log("zimTitle: " + root.zimTitle)
             console.log("zimLanguage: " + root.zimLanguage)
             console.log("zimUuid: " + root.zimUuid)*/
-            bookmarks.updateBookmark(root.url, root.title, newUrl, root.favicon)
+            bookmarkModel.updateBookmark(root.url, root.title, newUrl, root.favicon)
         } else {
-            notification.show(qsTr("Something went wrong and bookmark can't be updated"))
+            notification.show(qsTr("Something went wrong and bookmark cannot be updated"))
         }
     }
 }

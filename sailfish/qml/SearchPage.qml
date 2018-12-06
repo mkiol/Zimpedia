@@ -13,28 +13,29 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: page
+    id: root
     objectName: "search"
 
-    property real preferredItemHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
+    property real preferredItemHeight: root && root.isLandscape ?
+                                           Theme.itemSizeSmall :
+                                           Theme.itemSizeLarge
+
+    Component.onCompleted: articleModel.updateModel()
 
     SilicaListView {
         id: listView
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        height: page.height
-        clip:true
+
+        anchors.fill: parent
+
+        currentIndex: -1
 
         model: articleModel
-
-        /*header: PageHeader {
-            title: qsTr("")
-        }*/
 
         header: SearchField {
             id: searchField
             width: parent.width
             placeholderText: qsTr("Search")
-            onTextChanged: zimServer.findTitle(text);
+            onTextChanged: articleModel.filter = text.trim()
             EnterKey.iconSource: "image://theme/icon-m-enter-close"
             EnterKey.onClicked: {
                 Qt.inputMethod.hide();
@@ -42,11 +43,10 @@ Page {
             }
         }
 
-        // prevent newly added list delegates from stealing focus away from the search field
-        currentIndex: -1
-
         delegate: ListItem {
             id: listItem
+
+            visible: !articleModel.busy
 
             contentHeight: Theme.itemSizeMedium
 
@@ -77,7 +77,7 @@ Page {
                     text: qsTr("Add to bookmarks")
                     onClicked: {
                         listView.focus = true
-                        bookmarks.addBookmark(model.title, model.url, zimServer.favicon)
+                        bookmarkModel.addBookmark(model.title, model.url, zimServer.favicon)
                     }
                 }
             }
@@ -91,12 +91,6 @@ Page {
                     pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
                 }
             }
-        }
-
-        ViewPlaceholder {
-            enabled: listView.count == 0
-            text: qsTr("Find article, by typing in the search field")
-
         }
 
         PullDownMenu {
@@ -118,6 +112,7 @@ Page {
             MenuItem {
                 text: qsTr("Bookmarks")
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
+                enabled: !bookmarkModel.busy
             }
 
             MenuItem {
@@ -125,7 +120,7 @@ Page {
                 visible: zimServer.hasMainPage
                 onClicked: {
                     listView.focus = true
-                    var url = zimServer.serverUrl()+"A/mainpage";
+                    var url = zimServer.serverUrl() + "A/mainpage";
                     if (settings.browser === 1) {
                         app.openUrlEntryInBrowser(url)
                     } else {
@@ -144,7 +139,7 @@ Page {
             }*/
 
             Item {
-                visible: zimServer.title != ""
+                visible: zimServer.title.length !== 0
 
                 height: Theme.itemSizeExtraSmall - (screen.sizeCategory <= Screen.Medium ? Theme.paddingLarge : Theme.paddingMedium)
                 width: parent ? parent.width : Screen.width
@@ -159,11 +154,23 @@ Page {
                     //truncationMode: TruncationMode.Fade
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignHCenter
-                    text: zimServer.title + (zimServer.language != "" ? " (" + zimServer.language + ")" : "")
+                    text: zimServer.title + (zimServer.language.length !== 0 ? " (" + zimServer.language + ")" : "")
                 }
             }
         }
 
+        ViewPlaceholder {
+            enabled: listView.count === 0 && !articleModel.busy
+            text: articleModel.filter.length > 0 ?
+                      qsTr("No articles") :
+                      qsTr("Find article, by typing in the search field")
+        }
+    }
+
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: articleModel.busy
+        size: BusyIndicatorSize.Large
     }
 
     VerticalScrollDecorator {

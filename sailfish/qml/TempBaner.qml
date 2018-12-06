@@ -35,7 +35,7 @@ Rectangle {
     width: 2*Theme.iconSizeLarge
     height: 2*Theme.iconSizeMedium
     radius: 10
-    color: Theme.rgba("black", 0.7)
+    color: Theme.rgba(Theme.overlayBackgroundColor, 0.7)
     opacity: timer.running ? 1.0 : 0.0
     visible: opacity > 0.0
     Behavior on opacity { FadeAnimation {} }

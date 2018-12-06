@@ -55,80 +55,65 @@ Page {
             }
 
             Column {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                width: parent.width
                 spacing: Theme.paddingMedium
 
-                AttValue {
-                    att: qsTr("Name")
+                DetailItem {
+                    label: qsTr("Name")
                     value: zim.name
                 }
 
-                AttValue {
-                    att: qsTr("Title")
+                DetailItem {
+                    label: qsTr("Title")
                     value: root.title
                 }
 
-                AttValue {
-                    att: qsTr("Date")
+                DetailItem {
+                    label: qsTr("Date")
                     value: zim.date
                 }
 
-                AttValue {
-                    att: qsTr("Creator")
+                DetailItem {
+                    label: qsTr("Creator")
                     value: zim.creator
                 }
 
-                AttValue {
-                    att: qsTr("Publisher")
+                DetailItem {
+                    label: qsTr("Publisher")
                     value: zim.creator
                 }
 
-                AttValue {
-                    att: qsTr("Description")
+                DetailItem {
+                    label: qsTr("Description")
                     value: zim.description
                 }
 
-                AttValue {
-                    att: qsTr("Language")
+                DetailItem {
+                    label: qsTr("Language")
                     value: zim.language
                 }
 
-                AttValue {
-                    att: qsTr("Tags")
-                    value: zim.tags
-                }
-
-                AttValue {
-                    att: qsTr("Source")
-                    value: zim.source
-                }
-
-                AttValue {
-                    att: qsTr("Article count")
+                DetailItem {
+                    label: qsTr("Article count")
                     value: zim.articleCount
                 }
 
-                AttValue {
-                    att: qsTr("Filename")
-                    value: zim.filename
+                DetailItem {
+                    label: qsTr("Full-text index")
+                    value: zim.ftindex ? qsTr("Yes") : qsTr("No")
                 }
 
-                AttValue {
-                    att: qsTr("Directory")
-                    value: Tools.friendlyDir(zim.path, utils.homeDir())
-                }
-
-                AttValue {
-                    att: qsTr("Size")
+                DetailItem {
+                    label: qsTr("Size")
                     value: Tools.bytesToSize(zim.size)
                 }
 
-                AttValue {
-                    att: qsTr("Checksum")
-                    value: zim.checksum
+                SectionHeader {
+                    text: qsTr("Path")
+                }
+
+                PaddedLabel {
+                    text: zim.path
                 }
             }
 

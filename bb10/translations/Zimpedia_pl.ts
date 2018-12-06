@@ -10,10 +10,6 @@
         <translation>O Zimpedii</translation>
     </message>
     <message>
-        <source>Version: %1</source>
-        <translation type="vanished">Wersja %1</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="51"/>
         <location filename="../../bb10/assets/AboutPage.qml" line="84"/>
         <source>Offline reader for Wikipedia and other Wiki projects</source>
@@ -72,32 +68,30 @@
         <translation>Tytuł</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="69"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="81"/>
         <source>Change</source>
         <translation>Zmień</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="109"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="119"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="106"/>
         <source>ZIM file is missing</source>
         <translation>Brak pliku ZIM</translation>
     </message>
     <message>
-        <source>Url</source>
-        <translation type="vanished">Odnośnik</translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="160"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="181"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="36"/>
         <source>Something went wrong and bookmark can&apos;t be updated</source>
         <translation>Coś poszło nie tak i nie można uaktualnić zakładki</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="154"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="42"/>
         <source>Copy URL</source>
         <translation>Kopiuj URL</translation>
     </message>
     <message>
+        <location filename="../qml/BookmarkEditPage.qml" line="156"/>
         <location filename="../../bb10/assets/BookmarkEditPage.qml" line="45"/>
         <source>URL was copied to the clipboard</source>
         <translation>URL został skopiowany do schowka</translation>
@@ -189,17 +183,13 @@
         <location filename="../qml/ChangelogPage.qml" line="33"/>
         <location filename="../../bb10/assets/ChangelogPage.qml" line="19"/>
         <source>Changelog</source>
-        <translation>Dziennik zmian</translation>
+        <translation>Lista zmian</translation>
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="37"/>
         <location filename="../../bb10/assets/ChangelogPage.qml" line="44"/>
         <source>Version %1</source>
         <translation>Wersja %1</translation>
-    </message>
-    <message>
-        <source>Version: %1</source>
-        <translation type="obsolete">Wersja %1</translation>
     </message>
 </context>
 <context>
@@ -212,20 +202,20 @@
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="53"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="118"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="119"/>
         <source>Show details</source>
         <translation>Pokaż szczegóły</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="119"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="151"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="154"/>
         <source>No files were found</source>
         <translation>Brak plików</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="124"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="152"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="153"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
         <translation>ZIM jest otwartym formatem umożliwiającym przechowywanie i korzystanie ze stron typu Wiki bez dostępu do Internetu. Zbiór ciekawych Wiki można pobrać z &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;tej strony&lt;/a&gt;. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze znajdującym się w katalogu domowym lub na karcie SD.</translation>
     </message>
@@ -246,25 +236,10 @@
         <translation>Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="152"/>
-        <location filename="../../bb10/assets/FilesPage.qml" line="78"/>
+        <location filename="../qml/FilesPage.qml" line="153"/>
+        <location filename="../../bb10/assets/FilesPage.qml" line="79"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
-    </message>
-</context>
-<context>
-    <name>PageMenu</name>
-    <message>
-        <source>About</source>
-        <translation type="vanished">O Zimpedii</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Ustawienia</translation>
-    </message>
-    <message>
-        <source>Change ZIM file</source>
-        <translation type="vanished">Zmień plik ZIM</translation>
     </message>
 </context>
 <context>
@@ -316,7 +291,7 @@
         <translation>Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="124"/>
+        <location filename="../qml/SearchPage.qml" line="125"/>
         <location filename="../../bb10/assets/SearchPage.qml" line="50"/>
         <source>Open main page</source>
         <translation>Otwórz główną stronę</translation>
@@ -344,22 +319,6 @@
         <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>UI</source>
         <translation>Interfejs</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="vanished">Wiekość liter</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normalna</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="vanished">Duża</translation>
-    </message>
-    <message>
-        <source>Extra large</source>
-        <translation type="vanished">Bardzo duża</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="54"/>
@@ -390,30 +349,6 @@
         <location filename="../../bb10/assets/SettingsPage.qml" line="81"/>
         <source>Viewer font size level</source>
         <translation>Wiekość liter w podglądzie</translation>
-    </message>
-    <message>
-        <source>Hide advanced options</source>
-        <translation type="vanished">Ukryj zaawansowane ustawienia</translation>
-    </message>
-    <message>
-        <source>Show advanced options</source>
-        <translation type="vanished">Pokaż zaawansowane ustawienia</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="vanished">Zaawansowane</translation>
-    </message>
-    <message>
-        <source>Enter port number here!</source>
-        <translation type="vanished">Wpisz tutaj numer portu!</translation>
-    </message>
-    <message>
-        <source>Local server listening port number</source>
-        <translation type="vanished">Numer portu lokalnego serwera WWW</translation>
-    </message>
-    <message>
-        <source>Port number is invalid! Allowed port range is 1024-65535.</source>
-        <translation type="vanished">Numer portu nie jest prawidłowy. Prawidłowy zakres to: 1024-65535.</translation>
     </message>
 </context>
 <context>

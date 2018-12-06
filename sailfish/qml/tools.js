@@ -24,7 +24,7 @@ function friendlyPath(path, home) {
         return path.replace(home, "~/");
     }
     if (path.lastIndexOf("/media/sdcard/") === 0) {
-        return path.replace(/\/media\/sdcard\/[^\/]*\//i, "[SD Card]/");
+        return path.replace(/\/media\/sdcard\/[^\/]*\//i, "SD Card/");
     }
 
     return path;

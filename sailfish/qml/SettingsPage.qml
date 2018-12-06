@@ -11,6 +11,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.zimpedia.Settings 1.0
 
 Page {
     id: root
@@ -24,8 +25,6 @@ Page {
       return result;
     }
 
-    //canAccept: isPortValid()
-
     SilicaFlickable {
         id: flick
         anchors.fill: parent
@@ -33,20 +32,29 @@ Page {
 
         Column {
             id: column
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
 
+            width: root.width
             spacing: Theme.paddingMedium
 
             PageHeader {
                 title: qsTr("Settings")
             }
 
-            SectionHeader {
-                text: qsTr("UI")
+            ComboBox {
+                label: qsTr("Search mode")
+                description: qsTr("By default when you enter a phase, search only by article title is performed. " +
+                                  "A different mode is a search within full article text. " +
+                                  "The full-text search mode works only when ZIM file contains appropriate index.")
+                currentIndex: settings.searchMode === Settings.FullTextSearch ? 1 : 0
+                menu: ContextMenu {
+                    MenuItem { text: qsTr("By title") }
+                    MenuItem { text: qsTr("Full-text") }
+                }
+
+                onCurrentIndexChanged: {
+                    settings.searchMode = currentIndex === 1 ?
+                                Settings.FullTextSearch : Settings.TitleSearch
+                }
             }
 
             ComboBox {
@@ -55,7 +63,7 @@ Page {
                 currentIndex: settings.browser
 
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("Built-in viewer") }
+                    MenuItem { text: qsTr("Web view") }
                     MenuItem { text: qsTr("Browser") }
                 }
 
@@ -67,8 +75,8 @@ Page {
             }
 
             IconSlider {
-                leftIconSource: "image://icons/icon-m-fontdown"
-                rightIconSource: "image://icons/icon-m-fontup"
+                leftIconSource: "image://icons/icon-m-fontdown?" + Theme.primaryColor
+                rightIconSource: "image://icons/icon-m-fontup?" + Theme.primaryColor
                 label: qsTr("Viewer font size level")
                 minimumValue: 50
                 maximumValue: 200
@@ -83,58 +91,10 @@ Page {
             }
 
             Spacer {}
-
-            /*Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: advancedVisible ? qsTr("Hide advanced options") : qsTr("Show advanced options")
-                onClicked: advancedVisible = !advancedVisible;
-            }
-
-            SectionHeader {
-                visible: advancedVisible
-                text: qsTr("Advanced")
-            }
-
-            TextField {
-                id: portField
-                visible: advancedVisible
-                anchors {left: parent.left;right: parent.right}
-
-                inputMethodHints: Qt.ImhDigitsOnly
-                placeholderText: qsTr("Enter port number here!")
-                label: qsTr("Local server listening port number")
-
-                Component.onCompleted: {
-                    text = settings.port
-                }
-
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    Qt.inputMethod.hide();
-                }
-            }
-
-            Label {
-                id: portErrorLabel
-                property bool error: false
-                visible: error && advancedVisible
-                anchors {left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge;rightMargin: Theme.paddingLarge}
-                color: "Red"
-                text: qsTr("Port number is invalid! Allowed port range is 1024-65535.")
-                wrapMode: Text.WordWrap
-            }
-
-            Spacer {}*/
-
         }
     }
 
     VerticalScrollDecorator {
         flickable: flick
     }
-
-    /*onAccepted: {
-        settings.port = portField.text
-        settings.fontSize = fontSizeBox.currentIndex + 1;
-    }*/
 }

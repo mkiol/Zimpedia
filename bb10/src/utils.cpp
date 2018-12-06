@@ -9,22 +9,74 @@
   obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <QStringList>
+
 #ifdef BB10
 #include <bps/navigator.h>
 #include <bb/platform/PlatformInfo>
-#include <QString>
-#include <QStringList>
+#include <bb/system/Clipboard>
+#elif SAILFISH
+#include <QGuiApplication>
+#include <QClipboard>
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
 #endif
 
 #include "utils.h"
+#include "bookmarks.h"
 
 Utils::Utils(QObject *parent) : QObject(parent)
 {}
 
+const QString Utils::homeDir()
+{
+#ifdef BB10
+    // shared folder
+    const QString homeLocation = QDir::currentPath() + "/shared";
+#elif SAILFISH
+    const QStringList homeLocationList = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    const QString homeLocation = homeLocationList.first();
+#endif
+    return homeLocation;
+}
+
+
+void Utils::copyToClipboard(const QString &text)
+{
+#ifdef BB10
+    bb::system::Clipboard clipboard;
+    clipboard.clear();
+    clipboard.insert("text/plain", text.toUtf8());
+#elif SAILFISH
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(text);
+#endif
+}
+
 #ifdef BB10
 void Utils::launchBrowser(const QString &url)
 {
+    qDebug() << "launchBrowser" << url;
     navigator_invoke(url.toStdString().c_str(),0);
+}
+
+QString Utils::readAsset(const QString &path)
+{
+    QFile file("app/native/assets/" + path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Could not open" << path << "for reading: " << file.errorString();
+        file.close();
+        return "";
+    }
+
+    QString data = QString(file.readAll());
+    file.close();
+
+    return data;
 }
 
 // Source: http://hecgeek.blogspot.com/2014/10/blackberry-10-multiple-os-versions-from.html

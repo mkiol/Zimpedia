@@ -58,8 +58,8 @@
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>1</buildId>
-    <packageLocale>pl</packageLocale>
+    <buildId>0</buildId>
+    <packageLocale>pl,de,es,sv</packageLocale>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -74,6 +74,9 @@
     <description>
        Offline reader for Wikipedia and other Wiki projects
        <text xml:lang="pl">Niewymagaj&#x105;cy dost&#x119;pu do Internetu, czytnik Wikipedii oraz innych projekt&#xf3;w typu Wiki</text>
+       <text xml:lang="de">Offline Reader f&#xfc;r die Wikipedia und andere Wiki-Projekte</text>
+       <text xml:lang="es">Lector sin conexi&#xf3;n de Wikipedia y otros proyectos Wiki</text>
+       <text xml:lang="sv">Offline-l&#xe4;sare f&#xf6;r Wikipedia och andra Wiki-projekt</text>
     </description>
     <icon>
        <image>icon110.png</image>

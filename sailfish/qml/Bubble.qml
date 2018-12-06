@@ -12,7 +12,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Rectangle {
+Item {
     id: root
 
     property alias text: label.text
@@ -25,14 +25,9 @@ Rectangle {
         left: parent.left
         right: parent.right
         bottom: parent.bottom
-        //leftMargin: Theme.horizontalPageMargin
-        //rightMargin: Theme.horizontalPageMargin
-        //bottomMargin: Theme.horizontalPageMargin
     }
 
     height: label.height + 2 * Theme.horizontalPageMargin
-
-    color: Theme.highlightDimmerColor
 
     Label {
         id: label
@@ -43,6 +38,7 @@ Rectangle {
             margins: Theme.horizontalPageMargin
         }
         color: Theme.highlightColor
+        linkColor: Theme.primaryColor
         wrapMode: Text.WordWrap
         onLinkActivated: Qt.openUrlExternally(link)
     }
