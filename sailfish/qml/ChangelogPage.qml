@@ -31,13 +31,28 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.2")
+            }
+
+            LogItem {
+                title: "Fixes for the Light Ambiences"
+                description: "A few fixes were added to support the Light ambiences indroduced in Sailfish 3."
+            }
+
+            LogItem {
+                title: "Spanish translation update"
+                description: "Thanks to Carmen F. B. " +
+                             "Spanish translation has been updated.";
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.2.1")
             }
 
             LogItem {
                 title: "Chinese & Swedish translations update"
                 description: "Thanks to Jeff Huang and Åke Engelbrektson " +
-                             "Chinese and Swedish translations have been updated.";
+                             "Chinese and Swedish translations have been updated."
             }
 
             SectionHeader {
@@ -47,7 +62,7 @@ Page {
             LogItem {
                 title: "Support for the latest ZIM file format"
                 description: "The LibZIM library has been updated (v4.0.4). " +
-                             "This update brings support for the latest ZIM format.";
+                             "This update brings support for the latest ZIM format."
             }
 
             LogItem {
@@ -64,7 +79,7 @@ Page {
 
             LogItem {
                 title: "Chinese & French translations"
-                description: "Chinese and French translations thanks to Jeff Huang and lutinotmalin";
+                description: "Chinese and French translations thanks to Jeff Huang and lutinotmalin"
             }
 
             SectionHeader {
@@ -73,27 +88,27 @@ Page {
 
             LogItem {
                 title: "Built-in web viewer"
-                description: "Wiki pages can be opened in the built-in web viewer or in an external browser.";
+                description: "Wiki pages can be opened in the built-in web viewer or in an external browser."
             }
 
             LogItem {
                 title: "Night mode"
-                description: "Night mode reduces the brightness of websites by inverting colors (heavily inspired and code partially borrowed from harbour-webpirate project).";
+                description: "Night mode reduces the brightness of websites by inverting colors (heavily inspired and code partially borrowed from harbour-webpirate project)."
             }
 
             LogItem {
                 title: "Main page"
-                description: "If ZIM file contains main page, pull-down menu will show option to open it.";
+                description: "If ZIM file contains main page, pull-down menu will show option to open it."
             }
 
             LogItem {
                 title: "ZIM details view"
-                description: "Context menu has option to show details of ZIM repository.";
+                description: "Context menu has option to show details of ZIM repository."
             }
 
             LogItem {
                 title: "Bookmarks"
-                description: "Every article can be added to bookmarks. Click on a bookmark will automatically load an appropriate ZIM file.";
+                description: "Every article can be added to bookmarks. Click on a bookmark will automatically load an appropriate ZIM file."
             }
 
             Spacer {}
