@@ -72,7 +72,8 @@ TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_es.ts \
                 translations/Zimpedia_de.ts \
                 translations/Zimpedia_fr.ts \
-                translations/Zimpedia_zh_TW.ts
+                translations/Zimpedia_zh_TW.ts \
+                translations/Zimpedia_zh_CN.ts
 
 images.files = images/*
 images.path = /usr/share/$${TARGET}/images
