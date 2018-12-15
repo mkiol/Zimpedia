@@ -31,6 +31,15 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.3")
+            }
+
+            LogItem {
+                title: "Chinese translation (zh-CN)"
+                description: "Translation provided by 涛 匡."
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.2.2")
             }
 
