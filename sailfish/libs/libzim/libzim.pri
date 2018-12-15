@@ -1,13 +1,19 @@
 INCLUDEPATH += $$PROJECTDIR/libs/libzim/include
 
-LIBS += -lz -llzma -lbz2 -lrt -licuuc -licudata
+LIBS += -lz -llzma -lbz2 -lrt
 x86 {
     LIBS += -L$$PROJECTDIR/libs/libzim/build/i486/ -l:libzim.so.4
     LIBS += -L$$PROJECTDIR/libs/libzim/build/i486/ -l:libxapian.so.30
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/i486/ -l:libicudata.so.52
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/i486/ -l:libicui18n.so.52
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/i486/ -l:libicuuc.so.52
 }
 arm {
     LIBS += -L$$PROJECTDIR/libs/libzim/build/armv7hl/ -l:libzim.so.4
     LIBS += -L$$PROJECTDIR/libs/libzim/build/armv7hl/ -l:libxapian.so.30
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/armv7hl/ -l:libicudata.so.52
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/armv7hl/ -l:libicui18n.so.52
+    LIBS += -L$$PROJECTDIR/libs/libzim/build/armv7hl/ -l:libicuuc.so.52
 }
 
 x86: lib.files = $$PROJECTDIR/libs/libzim/build/i486/*
