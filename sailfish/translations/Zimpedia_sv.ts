@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sv">
 <context>
     <name>AboutPage</name>
     <message>
@@ -146,8 +148,11 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="52"/>
-        <location filename="../qml/ChangelogPage.qml" line="66"/>
+        <location filename="../qml/ChangelogPage.qml" line="43"/>
+        <location filename="../qml/ChangelogPage.qml" line="58"/>
+        <location filename="../qml/ChangelogPage.qml" line="68"/>
+        <location filename="../qml/ChangelogPage.qml" line="86"/>
+        <location filename="../qml/ChangelogPage.qml" line="95"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
@@ -315,7 +320,7 @@
     <name>WebViewPage</name>
     <message>
         <location filename="../qml/WebViewPage.qml" line="44"/>
-        <location filename="../qml/WebViewPage.qml" line="261"/>
+        <location filename="../qml/WebViewPage.qml" line="262"/>
         <source>Launching an external browser...</source>
         <translation>Startar extern webbläsare...</translation>
     </message>
@@ -340,27 +345,27 @@
         <translation>Nattläge av/på</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="245"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="257"/>
+        <location filename="../qml/WebViewPage.qml" line="258"/>
         <source>Browser</source>
         <translation>Webbläsare</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="268"/>
+        <location filename="../qml/WebViewPage.qml" line="269"/>
         <source>Decrease font</source>
         <translation>Minska teckenstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="277"/>
+        <location filename="../qml/WebViewPage.qml" line="278"/>
         <source>Increase font</source>
         <translation>Öka teckenstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="286"/>
+        <location filename="../qml/WebViewPage.qml" line="287"/>
         <source>Hide toolbar</source>
         <translation>Dölj verktygsfältet</translation>
     </message>
@@ -436,6 +441,14 @@
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Storlek</translation>
+    </message>
+</context>
+<context>
+    <name>ZimServer</name>
+    <message>
+        <location filename="../core/zimserver.cpp" line="525"/>
+        <source>Main page</source>
+        <translation>Huvudsida</translation>
     </message>
 </context>
 <context>

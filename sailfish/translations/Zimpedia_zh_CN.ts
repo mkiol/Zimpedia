@@ -148,10 +148,11 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="49"/>
-        <location filename="../qml/ChangelogPage.qml" line="59"/>
-        <location filename="../qml/ChangelogPage.qml" line="77"/>
+        <location filename="../qml/ChangelogPage.qml" line="43"/>
+        <location filename="../qml/ChangelogPage.qml" line="58"/>
+        <location filename="../qml/ChangelogPage.qml" line="68"/>
         <location filename="../qml/ChangelogPage.qml" line="86"/>
+        <location filename="../qml/ChangelogPage.qml" line="95"/>
         <source>Version %1</source>
         <translation>版本%1</translation>
     </message>
@@ -440,6 +441,14 @@
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>大小</translation>
+    </message>
+</context>
+<context>
+    <name>ZimServer</name>
+    <message>
+        <location filename="../core/zimserver.cpp" line="525"/>
+        <source>Main page</source>
+        <translation>主页</translation>
     </message>
 </context>
 <context>

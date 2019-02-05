@@ -64,7 +64,8 @@ OTHER_FILES += \
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
-CONFIG += sailfishapp_i18n
+TRANSLATION_SOURCE_DIRS += $$PROJECTDIR/core
+CONFIG += sailfishapp_i18n_include_obsolete
 TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_pl.ts \
                 translations/Zimpedia_sv.ts \
@@ -72,8 +73,12 @@ TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_es.ts \
                 translations/Zimpedia_de.ts \
                 translations/Zimpedia_fr.ts \
+                translations/Zimpedia_nl.ts \
+                translations/Zimpedia_nl_BE.ts \
                 translations/Zimpedia_zh_TW.ts \
-                translations/Zimpedia_zh_CN.ts
+                translations/Zimpedia_zh_CN.ts \
+                translations/Zimpedia_ru.ts
+include(sailfishapp_i18n.pri)
 
 images.files = images/*
 images.path = /usr/share/$${TARGET}/images

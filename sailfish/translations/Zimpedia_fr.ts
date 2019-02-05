@@ -16,27 +16,27 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="61"/>
         <source>Project website</source>
-        <translation type="unfinished"></translation>
+        <translation>Site web du projet</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="67"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Auteurs</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="80"/>
         <source>Translations are provided by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Traductions fournies par :</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="92"/>
         <source>%1 is developed as an open source project under %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 est développé en tant que projet open source, sous %2.</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="98"/>
         <source>Libraries</source>
-        <translation type="unfinished"></translation>
+        <translation>Librairies</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="180"/>
         <source>Something went wrong and bookmark cannot be updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Il y a un problème, le marque-page ne peut pas être mis à jour</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="153"/>
@@ -148,8 +148,11 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="52"/>
-        <location filename="../qml/ChangelogPage.qml" line="66"/>
+        <location filename="../qml/ChangelogPage.qml" line="43"/>
+        <location filename="../qml/ChangelogPage.qml" line="58"/>
+        <location filename="../qml/ChangelogPage.qml" line="68"/>
+        <location filename="../qml/ChangelogPage.qml" line="86"/>
+        <location filename="../qml/ChangelogPage.qml" line="95"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
@@ -174,12 +177,12 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="35"/>
         <source>ZIM files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers ZIM</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le fichier</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="132"/>
@@ -222,7 +225,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="165"/>
         <source>No articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun article</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="166"/>
@@ -270,27 +273,27 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="44"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode recherche</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut, seul le titre de l&apos;article est recherché. Il est toutefois possible de rechercher un terme particulier au sein d&apos;un article, mais le fichier ZIM doit obligatoirement comporter un index valable pour que cela fonctionne.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
         <source>By title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre uniquement</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Full-text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte intégral</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="66"/>
         <source>Web view</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage web</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="62"/>
@@ -317,7 +320,7 @@
     <name>WebViewPage</name>
     <message>
         <location filename="../qml/WebViewPage.qml" line="44"/>
-        <location filename="../qml/WebViewPage.qml" line="261"/>
+        <location filename="../qml/WebViewPage.qml" line="262"/>
         <source>Launching an external browser...</source>
         <translation>Ouverture du navigateur...</translation>
     </message>
@@ -342,27 +345,27 @@
         <translation>Mode Nuit</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="245"/>
         <source>Add to bookmarks</source>
         <translation>Ajouter aux marque-p.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="257"/>
+        <location filename="../qml/WebViewPage.qml" line="258"/>
         <source>Browser</source>
         <translation>Navigateur</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="268"/>
+        <location filename="../qml/WebViewPage.qml" line="269"/>
         <source>Decrease font</source>
         <translation>Zoom -</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="277"/>
+        <location filename="../qml/WebViewPage.qml" line="278"/>
         <source>Increase font</source>
         <translation>Zoom +</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="286"/>
+        <location filename="../qml/WebViewPage.qml" line="287"/>
         <source>Hide toolbar</source>
         <translation>Masquer la barre d&apos;outils</translation>
     </message>
@@ -412,17 +415,17 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="102"/>
         <source>Full-text index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="103"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="97"/>
@@ -432,12 +435,20 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="112"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Taille</translation>
+    </message>
+</context>
+<context>
+    <name>ZimServer</name>
+    <message>
+        <location filename="../core/zimserver.cpp" line="525"/>
+        <source>Main page</source>
+        <translation>Page d&apos;accueil</translation>
     </message>
 </context>
 <context>
@@ -455,7 +466,7 @@
     <message>
         <location filename="../qml/main.qml" line="57"/>
         <source>Bookmark already exists</source>
-        <translation>Le marque-page existe déjà !</translation>
+        <translation>Le marque-page existe déjà</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="59"/>

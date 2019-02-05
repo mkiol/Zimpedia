@@ -148,8 +148,11 @@
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="34"/>
-        <location filename="../qml/ChangelogPage.qml" line="52"/>
-        <location filename="../qml/ChangelogPage.qml" line="66"/>
+        <location filename="../qml/ChangelogPage.qml" line="43"/>
+        <location filename="../qml/ChangelogPage.qml" line="58"/>
+        <location filename="../qml/ChangelogPage.qml" line="68"/>
+        <location filename="../qml/ChangelogPage.qml" line="86"/>
+        <location filename="../qml/ChangelogPage.qml" line="95"/>
         <source>Version %1</source>
         <translation>Wersja %1</translation>
     </message>
@@ -317,7 +320,7 @@
     <name>WebViewPage</name>
     <message>
         <location filename="../qml/WebViewPage.qml" line="44"/>
-        <location filename="../qml/WebViewPage.qml" line="261"/>
+        <location filename="../qml/WebViewPage.qml" line="262"/>
         <source>Launching an external browser...</source>
         <translation>Uruchamiam zewnętrzną przeglądarkę...</translation>
     </message>
@@ -342,27 +345,27 @@
         <translation>Tryb nocny</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="245"/>
         <source>Add to bookmarks</source>
         <translation>Dodaj do zakładek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="257"/>
+        <location filename="../qml/WebViewPage.qml" line="258"/>
         <source>Browser</source>
         <translation>Przeglądarka</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="268"/>
+        <location filename="../qml/WebViewPage.qml" line="269"/>
         <source>Decrease font</source>
         <translation>Zmniejsz litery</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="277"/>
+        <location filename="../qml/WebViewPage.qml" line="278"/>
         <source>Increase font</source>
         <translation>Powiększ litery</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="286"/>
+        <location filename="../qml/WebViewPage.qml" line="287"/>
         <source>Hide toolbar</source>
         <translation>Ukryj</translation>
     </message>
@@ -438,6 +441,14 @@
         <location filename="../qml/ZimInfoPage.qml" line="107"/>
         <source>Size</source>
         <translation>Rozmiar</translation>
+    </message>
+</context>
+<context>
+    <name>ZimServer</name>
+    <message>
+        <location filename="../core/zimserver.cpp" line="525"/>
+        <source>Main page</source>
+        <translation>Główna strona</translation>
     </message>
 </context>
 <context>
