@@ -17,6 +17,8 @@
 #include <QRegExp>
 #include <QUrl>
 #include <string>
+#include <cctype>
+#include <algorithm>
 
 #include <zim/fileiterator.h>
 #include <zim/fileheader.h>
@@ -548,10 +550,10 @@ QList<SearchResult> ZimServer::search(const QString &value)
     if (getLoaded()) {
         auto t = value.trimmed();
         if (!t.isEmpty()) {
-            std::string st(t.toUtf8().constData());
             try {
                 if (ftindex && sm == Settings::FullTextSearch) {
                     // Trying full text search
+                    std::string st(t.toUtf8().constData());
                     auto search = zimfile->search(st, 0, 10);
                     auto it = search->begin();
 
@@ -565,13 +567,42 @@ QList<SearchResult> ZimServer::search(const QString &value)
 
                 if (result.isEmpty()) {
                     // Trying title search
-                    auto it = zimfile->findByTitle('A', st);
+                    QStringList urls;
 
-                    for(int i = 0; it != zimfile->end() && i < 10; ++it, ++i) {
+                    // first letter is upper case
+                    t[0] = t[0].toUpper();
+                    std::string stu(t.toUtf8().constData());
+                    auto itu = zimfile->findByTitle('A', stu);
+                    for (int i = 0; itu != zimfile->end() && i < 10; ++itu, ++i) {
+                        auto url = ZimServer::stringStdToQ(itu->getLongUrl());
                         result << SearchResult {
-                                    ZimServer::stringStdToQ(it->getTitle()),
-                                    getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()))
+                                    ZimServer::stringStdToQ(itu->getTitle()),
+                                    url
                                   };
+                        urls << url;
+                    }
+
+                    // first letter is lower case
+                    t[0] = t[0].toLower();
+                    std::string stl(t.toUtf8().constData());
+                    auto itl = zimfile->findByTitle('A', stl);
+                    for (int i = 0; itl != zimfile->end() && i < 10; ++itl, ++i) {
+                        auto url = ZimServer::stringStdToQ(itl->getLongUrl());
+                        if (!urls.contains(url)) {
+                            result << SearchResult {
+                                        ZimServer::stringStdToQ(itl->getTitle()),
+                                        url
+                                      };
+                        }
+                    }
+
+                    // sorting
+                    std::sort(result.begin(), result.end(), [](SearchResult a, SearchResult b) {
+                        return a.title.compare(b.title, Qt::CaseInsensitive) < 0;
+                    });
+
+                    if (result.size() > 10) {
+                        result = result.mid(0,10);
                     }
                 }
             } catch (zim::ZimFileFormatError &e) {
