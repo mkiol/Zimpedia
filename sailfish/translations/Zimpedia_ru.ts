@@ -276,9 +276,8 @@
         <translation>Режим поиска</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation>По-умолчанию при вводе фразы поиск ведется только в заголовках статей. Режим поиска по всему тексту статей доступен только для тех ZIM файлов, которые содержат соответствующие индексные данные.</translation>
+        <translation type="vanished">По-умолчанию при вводе фразы поиск ведется только в заголовках статей. Режим поиска по всему тексту статей доступен только для тех ZIM файлов, которые содержат соответствующие индексные данные.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
@@ -299,6 +298,11 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Просмотрщик по умолчанию</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
+        <translation>По-умолчанию при вводе фразы поиск ведется только в заголовках статей. Режим поиска по всему тексту статей доступен только для тех ZIM файлов, которые содержат соответствующие индексные данные.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>

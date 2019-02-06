@@ -42,9 +42,9 @@ Page {
 
             ComboBox {
                 label: qsTr("Search mode")
-                description: qsTr("By default when you enter a phase, search only by article title is performed. " +
-                                  "A different mode is a search within full article text. " +
-                                  "The full-text search mode works only when ZIM file contains appropriate index.")
+                description: qsTr("By default, articles are searched only by titles. " +
+                                  "Another mode is to search through the content of articles as well. " +
+                                  "Full-text search works only if the ZIM file contains the appropriate index.")
                 currentIndex: settings.searchMode === Settings.FullTextSearch ? 1 : 0
                 menu: ContextMenu {
                     MenuItem { text: qsTr("By title") }

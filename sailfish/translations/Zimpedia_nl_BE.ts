@@ -276,9 +276,8 @@
         <translation>Zoekmodus</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation>Standaard wanneer dat ge een zoekopdracht invoert, wordt der enkel gezocht in de titels van artikels. Een andere mogelijkheid is zoeken in de volledigen artikeltekst. Deze modus werkt enkel indien dat het ZIM-bestand ne geschikten index bevat.</translation>
+        <translation type="vanished">Standaard wanneer dat ge een zoekopdracht invoert, wordt der enkel gezocht in de titels van artikels. Een andere mogelijkheid is zoeken in de volledigen artikeltekst. Deze modus werkt enkel indien dat het ZIM-bestand ne geschikten index bevat.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
@@ -299,6 +298,11 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Standaardweergave</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
+        <translation>Standaard wanneer dat ge een zoekopdracht invoert, wordt der enkel gezocht in de titels van artikels. Een andere mogelijkheid is zoeken in de volledigen artikeltekst. Deze modus werkt enkel indien dat het ZIM-bestand ne geschikten index bevat.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>

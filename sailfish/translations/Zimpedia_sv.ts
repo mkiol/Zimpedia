@@ -276,9 +276,8 @@
         <translation>Sökläge</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation>Som standard utförs endast sökning efter artikelnamn, när du anger en sökfras. Ett annat läge är sökning i hela artikeltexten. Fulltextläget fungerar endast när ZIM-filen innehåller tillämpligt index.</translation>
+        <translation type="vanished">Som standard utförs endast sökning efter artikelnamn, när du anger en sökfras. Ett annat läge är sökning i hela artikeltexten. Fulltextläget fungerar endast när ZIM-filen innehåller tillämpligt index.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
@@ -299,6 +298,11 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Standardläsare</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
+        <translation>Som standard utförs endast sökning efter artikelnamn, när du anger en sökfras. Ett annat läge är sökning i hela artikeltexten. Fulltextläget fungerar endast när ZIM-filen innehåller tillämpligt index.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>

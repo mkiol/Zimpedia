@@ -276,9 +276,8 @@
         <translation>搜索模式</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
         <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation>默认情况下，当您进入一个阶段时，只执行文章标题搜索。另一种模式是在全文中进行搜索。只有当ZIM文件包含适当的索引时，全文搜索模式才能工作。</translation>
+        <translation type="vanished">默认情况下，当您进入一个阶段时，只执行文章标题搜索。另一种模式是在全文中进行搜索。只有当ZIM文件包含适当的索引时，全文搜索模式才能工作。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
@@ -299,6 +298,11 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>默认浏览器</translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
+        <translation>默认情况下，当您进入一个阶段时，只执行文章标题搜索。另一种模式是在全文中进行搜索。只有当ZIM文件包含适当的索引时，全文搜索模式才能工作。</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>
