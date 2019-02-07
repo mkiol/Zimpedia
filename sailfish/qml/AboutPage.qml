@@ -82,7 +82,7 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                text: "lutinotmalin \nJeff Huang \nRikudouSage \npopanz \nCarmen F. B \n" +
+                text: "lutinotmalin \nJeff Huang \nВячеслав Диконов \nRikudouSage \npopanz \nCarmen F. B \n" +
                       "Åke Engelbrektson \nNathan Follens \nSzabó G. \n涛 匡 \nАлексей Дедун"
             }
 

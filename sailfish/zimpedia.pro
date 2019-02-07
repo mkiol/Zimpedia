@@ -74,6 +74,7 @@ TRANSLATIONS += translations/Zimpedia_en.ts \
                 translations/Zimpedia_de.ts \
                 translations/Zimpedia_fr.ts \
                 translations/Zimpedia_nl.ts \
+                translations/Zimpedia_hu.ts \
                 translations/Zimpedia_nl_BE.ts \
                 translations/Zimpedia_zh_TW.ts \
                 translations/Zimpedia_zh_CN.ts \
