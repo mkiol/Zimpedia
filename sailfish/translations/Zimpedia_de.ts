@@ -276,8 +276,9 @@
         <translation>Such Modus</translation>
     </message>
     <message>
-        <source>By default when you enter a phase, search only by article title is performed. A different mode is a search within full article text. The full-text search mode works only when ZIM file contains appropriate index.</source>
-        <translation type="obsolete">Standardmäßig werden nur die Artikeltitel durchsucht. Als Alternative kann auch die Volltextsuche aktiviert werden. Die Volltextsuche funktioniert nur, wenn die ZIM Datei einen Index enthält.</translation>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by title. Alternatively, you can also search through the full article text. Full-text search only works if the ZIM file contains the appropriate index.</source>
+        <translation>Standardmäßig werden nur die Artikeltitel durchsucht. Als Alternative kann auch die Volltextsuche aktiviert werden. Die Volltextsuche funktioniert nur, wenn die ZIM Datei einen Index enthält.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
@@ -298,11 +299,6 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Standard Betrachter</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
-        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
-        <translation>Standardmäßig werden nur die Artikeltitel durchsucht. Als Alternative kann auch die Volltextsuche aktiviert werden. Die Volltextsuche funktioniert nur, wenn die ZIM Datei einen Index enthält.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>
@@ -450,7 +446,7 @@
 <context>
     <name>ZimServer</name>
     <message>
-        <location filename="../core/zimserver.cpp" line="525"/>
+        <location filename="../core/zimserver.cpp" line="527"/>
         <source>Main page</source>
         <translation>Hauptseite</translation>
     </message>

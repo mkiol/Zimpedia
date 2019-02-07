@@ -276,6 +276,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/SettingsPage.qml" line="45"/>
+        <source>By default, articles are searched only by title. Alternatively, you can also search through the full article text. Full-text search only works if the ZIM file contains the appropriate index.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/SettingsPage.qml" line="50"/>
         <source>By title</source>
         <translation type="unfinished"></translation>
@@ -294,11 +299,6 @@
         <location filename="../qml/SettingsPage.qml" line="62"/>
         <source>Default viewer</source>
         <translation>Výchozí prohlížeč</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
-        <source>By default, articles are searched only by titles. Another mode is to search through the content of articles as well. Full-text search works only if the ZIM file contains the appropriate index.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="67"/>
@@ -446,7 +446,7 @@
 <context>
     <name>ZimServer</name>
     <message>
-        <location filename="../core/zimserver.cpp" line="525"/>
+        <location filename="../core/zimserver.cpp" line="527"/>
         <source>Main page</source>
         <translation type="unfinished"></translation>
     </message>
