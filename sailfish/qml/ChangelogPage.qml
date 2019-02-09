@@ -31,6 +31,20 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.4")
+            }
+
+            LogItem {
+                title: "Search improvements"
+                description: "A search by title is performed regardless whether title starts with upper or lower case letter."
+            }
+
+            LogItem {
+                title: "Hungarian and Dutch translations"
+                description: "Translations provided by Nathan Follens and Szabó G."
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.2.3")
             }
 
