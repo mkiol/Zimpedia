@@ -79,6 +79,7 @@ private slots:
     void requestHandler(QHttpRequest *req, QHttpResponse *resp);
 
 private:
+    static const int maxSearch = 20; // max size of search result
     static ZimServer* m_instance;
 
     explicit ZimServer(QObject *parent = nullptr);

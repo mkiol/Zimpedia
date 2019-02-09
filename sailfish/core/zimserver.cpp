@@ -554,10 +554,10 @@ QList<SearchResult> ZimServer::search(const QString &value)
                 if (ftindex && sm == Settings::FullTextSearch) {
                     // Trying full text search
                     std::string st(t.toUtf8().constData());
-                    auto search = zimfile->search(st, 0, 10);
+                    auto search = zimfile->search(st, 0, maxSearch);
                     auto it = search->begin();
 
-                    for(int i = 0; it != search->end() && i < 10; ++it, ++i) {
+                    for(int i = 0; it != search->end() && i < maxSearch; ++it, ++i) {
                         result << SearchResult {
                                     ZimServer::stringStdToQ(it->getTitle()),
                                     getLocalUrl(ZimServer::stringStdToQ(it->getLongUrl()))
@@ -573,8 +573,8 @@ QList<SearchResult> ZimServer::search(const QString &value)
                     t[0] = t[0].toUpper();
                     std::string stu(t.toUtf8().constData());
                     auto itu = zimfile->findByTitle('A', stu);
-                    for (int i = 0; itu != zimfile->end() && i < 10; ++itu, ++i) {
-                        auto url = ZimServer::stringStdToQ(itu->getLongUrl());
+                    for (int i = 0; itu != zimfile->end() && i < maxSearch; ++itu, ++i) {
+                        auto url = getLocalUrl(ZimServer::stringStdToQ(itu->getLongUrl()));
                         result << SearchResult {
                                     ZimServer::stringStdToQ(itu->getTitle()),
                                     url
@@ -586,8 +586,8 @@ QList<SearchResult> ZimServer::search(const QString &value)
                     t[0] = t[0].toLower();
                     std::string stl(t.toUtf8().constData());
                     auto itl = zimfile->findByTitle('A', stl);
-                    for (int i = 0; itl != zimfile->end() && i < 10; ++itl, ++i) {
-                        auto url = ZimServer::stringStdToQ(itl->getLongUrl());
+                    for (int i = 0; itl != zimfile->end() && i < maxSearch; ++itl, ++i) {
+                        auto url = getLocalUrl(ZimServer::stringStdToQ(itl->getLongUrl()));
                         if (!urls.contains(url)) {
                             result << SearchResult {
                                         ZimServer::stringStdToQ(itl->getTitle()),
@@ -601,8 +601,8 @@ QList<SearchResult> ZimServer::search(const QString &value)
                         return a.title.compare(b.title, Qt::CaseInsensitive) < 0;
                     });
 
-                    if (result.size() > 10) {
-                        result = result.mid(0,10);
+                    if (result.size() > maxSearch) {
+                        result = result.mid(0, maxSearch);
                     }
                 }
             } catch (zim::ZimFileFormatError &e) {

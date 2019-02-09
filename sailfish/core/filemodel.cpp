@@ -45,7 +45,7 @@ FileModel::FileModel(QObject *parent) :
 void FileModel::findFiles(const QString &dirName)
 {
     QDir dir(dirName);
-    qDebug() << "Scanning dir:" << dirName;
+    //qDebug() << "Scanning dir:" << dirName;
 
     if (dir.exists(dirName)) {
         // Not following symlinks to avoid duplicates!
