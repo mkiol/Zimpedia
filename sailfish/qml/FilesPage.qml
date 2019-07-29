@@ -69,7 +69,7 @@ Page {
                 zimServer.loadZimFile();
             }
 
-            Icon {
+            FileIcon {
                 id: icon
                 anchors {
                     left: parent.left

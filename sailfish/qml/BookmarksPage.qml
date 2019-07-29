@@ -66,7 +66,7 @@ Page {
                 }
             }
 
-            Icon {
+            FileIcon {
                 id: icon
                 anchors {
                     left: parent.left

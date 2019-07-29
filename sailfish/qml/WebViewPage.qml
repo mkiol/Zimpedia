@@ -59,9 +59,6 @@ Page {
     }
 
     function navigateBack() {
-        /*for (var i=0; i < history.length; i++) {
-            console.log("#" + i + " - " + history[i])
-        }*/
         if (history.length > 1) {
             navigate(history[history.length-2])
             history.pop()

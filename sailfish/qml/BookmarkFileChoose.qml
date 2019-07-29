@@ -41,7 +41,7 @@ Page {
 
             contentHeight: Theme.itemSizeMedium
 
-            Icon {
+            FileIcon {
                 id: icon
                 anchors {
                     left: parent.left

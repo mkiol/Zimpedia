@@ -45,7 +45,7 @@ Page {
                 title: qsTr("Details")
             }
 
-            Icon {
+            FileIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
                 showPlaceholder: true
                 width: Theme.iconSizeLarge
