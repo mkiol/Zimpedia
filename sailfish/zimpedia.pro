@@ -11,7 +11,7 @@ DEFINES += SAILFISH
 
 PROJECTDIR = $$PWD
 
-INCLUDEPATH += /usr/include/c++/7
+INCLUDEPATH += /usr/include/c++/9
 
 CONFIG += sailfish
 DEFINES += SAILFISH
@@ -47,14 +47,14 @@ DISTFILES += \
     qml/ProgressPanel.qml \
     qml/IconSlider.qml \
     qml/Notification.qml \
-    qml/Icon.qml \
     qml/IconPlaceholder.qml \
     qml/ZimInfoPage.qml \
     qml/tools.js \
     qml/AttValue.qml \
     qml/BookmarksPage.qml \
     qml/BookmarkEditPage.qml \
-    qml/BookmarkFileChoose.qml
+    qml/BookmarkFileChoose.qml \
+    qml/FileIcon.qml
 
 OTHER_FILES += \
     translations/*.ts \

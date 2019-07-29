@@ -10,7 +10,7 @@
 
 namespace Zimpedia {
 static const char* APP_NAME = "Zimpedia";
-static const char* APP_VERSION = "2.2.4";
+static const char* APP_VERSION = "2.2.5";
 static const char* AUTHOR = "Michal Kosciesza";
 static const char* COPYRIGHT_YEAR = "2018-2019";
 static const char* SUPPORT_EMAIL = "zimpedia@mkiol.net";
