@@ -36,7 +36,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="98"/>
         <source>Libraries</source>
-        <translation>Librairies</translation>
+        <translation>Bibliothèques</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="47"/>
