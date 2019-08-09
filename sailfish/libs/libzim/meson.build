@@ -27,8 +27,11 @@ conf.set('ENABLE_ZLIB', zlib_dep.found())
 
 lzma_dep = dependency('liblzma')
 
+#xapian_dep = dependency('xapian-core',
+#                        required:false,
+#                        static:(get_option('default_library')=='static'))
 xapian_dep = dependency('xapian-core',
-                        required:false,
+                        required:true,
                         static:(get_option('default_library')=='static'))
 conf.set('ENABLE_XAPIAN', xapian_dep.found())
 

@@ -28,8 +28,6 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(liblzma)
-BuildRequires:  pkgconfig(libz)
-BuildRequires:  pkgconfig(libbz2)
 BuildRequires:  xz
 BuildRequires:  desktop-file-utils
 
