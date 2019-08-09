@@ -31,12 +31,12 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("Version %1").arg("2.2.5")
+                text: qsTr("Version %1").arg("2.2.6")
             }
 
             LogItem {
                 title: "Bug fixes"
-                description: "Bugs related to SFOS 3.1.0 have been fixed."
+                description: "Bugs discovered on Sailfish OS 3.1.0 have been fixed."
             }
 
             SectionHeader {
