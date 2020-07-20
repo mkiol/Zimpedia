@@ -8,6 +8,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jul 11 2020 Michal Kosciesza <michal@mkiol.net> 2.2.7-2
+- Libzim updated to version 6.1.8
+- Libzstd updated to version 1.4.5
+- Xapian updated to version 1.4.16
+
 * Fri Aug 09 2019 Michal Kosciesza <michal@mkiol.net> 2.2.5-1
 - French translation update
 

@@ -11,9 +11,7 @@ SOURCES += \
     $$CORE_DIR/filemodel.cpp \
     $$CORE_DIR/utils.cpp \
     $$CORE_DIR/bookmarkmodel.cpp \
-#    $$CORE_DIR/filefinder.cpp \
     $$CORE_DIR/zimmetadatareader.cpp \
-#    $$CORE_DIR/bookmarks.cpp \
     $$CORE_DIR/itemmodel.cpp
 
 HEADERS += \
@@ -24,10 +22,7 @@ HEADERS += \
     $$CORE_DIR/filemodel.h \
     $$CORE_DIR/utils.h \
     $$CORE_DIR/bookmarkmodel.h \
-#    $$CORE_DIR/filefinder.h \
-#    $$CORE_DIR/zimmetadata.h \
     $$CORE_DIR/zimmetadatareader.h \
-#    $$CORE_DIR/bookmarks.h \
     $$CORE_DIR/info.h \
     $$CORE_DIR/itemmodel.h
 

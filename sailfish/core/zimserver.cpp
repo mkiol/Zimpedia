@@ -20,6 +20,7 @@
 #include <cctype>
 #include <algorithm>
 
+#include <zim/file.h>
 #include <zim/fileiterator.h>
 #include <zim/fileheader.h>
 #include <zim/search.h>

@@ -1,7 +1,5 @@
 /*
-  Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
-
-  This file is part of Zimpedia application.
+  Copyright (C) 2017-2020 Michal Kosciesza <michal@mkiol.net>
 
   This Source Code Form is subject to the terms of
   the Mozilla Public License, v.2.0. If a copy of
@@ -28,6 +26,17 @@ Page {
 
             PageHeader {
                 title: qsTr("Changelog")
+            }
+
+            SectionHeader {
+                text: qsTr("Version %1").arg("2.2.7")
+            }
+
+            LogItem {
+                title: "LibZIM update"
+                description: "LibZIM and other connected libraries have been " +
+                             "updated to the most recent versions. " +
+                             "Thanks to this update, very large ZIM files are now supported."
             }
 
             SectionHeader {

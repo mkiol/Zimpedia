@@ -26,10 +26,8 @@
 #include <iosfwd>
 #include <limits>
 
-#ifdef _WIN32
-#define NOMINMAX 1
-#include <windows.h>
-#undef NOMINMAX
+// max may be defined as a macro by window includes
+#ifdef max
 #undef max
 #endif
 
@@ -73,6 +71,7 @@ namespace zim
           checksumPos(std::numeric_limits<offset_type>::max())
       {}
 
+      void write(int out_fd) const;
       void read(std::shared_ptr<const Buffer> buffer);
 
       // Do some sanity check, raise a ZimFileFormateError is
@@ -118,8 +117,6 @@ namespace zim
       offset_type getChecksumPos() const           { return hasChecksum() ? checksumPos : 0; }
       void        setChecksumPos(offset_type p)    { checksumPos = p; }
   };
-
-  std::ostream& operator<< (std::ostream& out, const Fileheader& fh);
 
 }
 

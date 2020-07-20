@@ -22,7 +22,6 @@
 
 #include <iterator>
 #include "article.h"
-#include "file.h"
 
 namespace zim
 {
@@ -31,7 +30,8 @@ namespace zim
     public:
       enum Mode {
         UrlIterator,
-        ArticleIterator
+        ArticleIterator,
+        ClusterIterator
       };
 
     private:
@@ -43,7 +43,7 @@ namespace zim
       bool is_end() const  { return file == 0 || idx >= file->getCountArticles(); }
 
     public:
-      explicit const_iterator(const File* file_ = 0, article_index_type idx_ = 0, Mode mode_ = UrlIterator)
+      explicit const_iterator(const File* file_, article_index_type idx_, Mode mode_)
         : file(file_),
           idx(idx_),
           mode(mode_)
@@ -89,8 +89,20 @@ namespace zim
       const Article& operator*() const
       {
         if (!article.good())
-          article = mode == UrlIterator ? file->getArticle(idx)
-                                        : file->getArticleByTitle(idx);
+        {
+          switch(mode)
+          {
+            case UrlIterator:
+             article = file->getArticle(idx);
+             break;
+            case ArticleIterator:
+              article = file->getArticleByTitle(idx);
+              break;
+            case ClusterIterator:
+              article = file->getArticleByClusterOrder(idx);
+              break;
+          }
+        }
         return article;
       }
 
@@ -99,9 +111,7 @@ namespace zim
         operator*();
         return &article;
       }
-
   };
-
 }
 
 #endif // ZIM_FILEITERATOR_H

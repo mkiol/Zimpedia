@@ -1,6 +1,6 @@
 TARGET = harbour-zimpedia
 
-CONFIG += c++11 sailfishapp dbus json libzim
+CONFIG += c++11 sailfishapp dbus json
 
 PKGCONFIG += mlite5
 
@@ -16,14 +16,8 @@ INCLUDEPATH += /usr/include/c++/9
 CONFIG += sailfish
 DEFINES += SAILFISH
 
-libzim {
-    DEFINES += LIBZIM
-    include($$PROJECTDIR/libs/libzim/libzim.pri)
-}
-zimlib {
-    DEFINES += ZIMLIB
-    include($$PROJECTDIR/libs/zimlib/zimlib.pri)
-}
+DEFINES += LIBZIM
+include($$PROJECTDIR/libs/libzim/libzim.pri)
 
 include($$PROJECTDIR/libs/qhttpserver/qhttpserver.pri)
 include(core/zimpedia_core.pri)

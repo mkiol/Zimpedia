@@ -22,6 +22,16 @@
 
 #include <cstdint>
 
+#ifdef __GNUC__
+#define DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#define DEPRECATED __declspec(deprecated)
+#else
+#praga message("WARNING: You need to implement DEPRECATED for this compiler")
+#define DEPRECATED
+#endif
+
+
 namespace zim
 {
   // An index of an article (in a zim file)
@@ -35,7 +45,7 @@ namespace zim
 
   // The size of something (article, zim, cluster, blob, ...)
   typedef uint64_t size_type;
-  
+
   // An offset.
   typedef uint64_t offset_type;
 
@@ -45,7 +55,8 @@ namespace zim
     zimcompNone,
     zimcompZip,
     zimcompBzip2, // Not supported anymore in the libzim
-    zimcompLzma
+    zimcompLzma,
+    zimcompZstd
   };
 
   static const char MimeHtmlTemplate[] = "text/x-zim-htmltemplate";

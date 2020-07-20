@@ -100,14 +100,7 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                textFormat: Text.RichText
-                text: "QHTTPServer - Copyright &copy; 2011-2014 Nikhil Marathe"
-            }
-
-            PaddedLabel {
-                horizontalAlignment: Text.AlignLeft
-                textFormat: Text.RichText
-                text: "LibZIM - Copyright &copy; 2003-2010 Tommi Maekitalo, openZIM project team"
+                text: "QHTTPServer \nLibZIM \nzstd \nXapian"
             }
 
             Spacer {}

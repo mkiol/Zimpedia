@@ -26,6 +26,10 @@
 #include <limits>
 #include <iosfwd>
 
+#ifdef max
+#undef max
+#endif
+
 namespace zim
 {
   class Cluster;
@@ -76,6 +80,7 @@ namespace zim
                && getTitle() < a.getTitle()); }
 
       std::shared_ptr<const Cluster> getCluster() const;
+      cluster_index_type getClusterNumber() const;
 
       Blob getData(offset_type offset=0) const;
       Blob getData(offset_type offset, size_type size) const;
