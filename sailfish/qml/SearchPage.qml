@@ -51,7 +51,7 @@ Page {
             contentHeight: Theme.itemSizeMedium
 
             Label {
-                wrapMode: Text.AlignLeft
+                horizontalAlignment: Text.AlignLeft
                 anchors.left: parent.left; anchors.right: parent.right;
                 anchors.leftMargin: Theme.paddingLarge; anchors.rightMargin: Theme.paddingLarge
                 anchors.verticalCenter: parent.verticalCenter
