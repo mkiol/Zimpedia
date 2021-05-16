@@ -29,11 +29,26 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("2.2.8")
+            }
+
+            LogItem {
+                title: "LibZIM update to version 6.3.0"
+                description: "LibZIM and other connected libraries have been " +
+                             "updated to the most recent versions."
+            }
+
+            LogItem {
+                title: "Support for ARM64"
+                description: "ARM64 build enables Zimpedia on Xperia 10 II and other ARM64 devices."
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("2.2.7")
             }
 
             LogItem {
-                title: "LibZIM update"
+                title: "LibZIM update to version 6.1.8"
                 description: "LibZIM and other connected libraries have been " +
                              "updated to the most recent versions. " +
                              "Thanks to this update, very large ZIM files are now supported."

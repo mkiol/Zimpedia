@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun May 16 2021 Michal Kosciesza <michal@mkiol.net> 2.2.8-1
+- Libzim updated to version 6.3.0
+- ARM64 support
+
 * Sun Jul 11 2020 Michal Kosciesza <michal@mkiol.net> 2.2.7-2
 - Libzim updated to version 6.1.8
 - Libzstd updated to version 1.4.5
