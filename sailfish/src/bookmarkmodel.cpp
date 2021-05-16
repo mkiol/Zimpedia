@@ -239,9 +239,7 @@ const QString BookmarkModel::changeUuid(const QString &url, const QString &newUu
 {
     auto s = Settings::instance();
     return newUuid.isEmpty() ? url : QString("http://localhost:%1/%2/%3")
-                                                .arg(s->getPort())
-                                                .arg("uuid:" + newUuid)
-                                                .arg(articleUrl(url));
+                                     .arg(s->getPort()).arg("uuid:" + newUuid, articleUrl(url));
 }
 
 bool BookmarkModel::validateUrl(const QString &url)

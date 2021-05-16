@@ -162,8 +162,8 @@ void SelectableItemModel::setAllSelected(bool value)
 
     int c = m_selectedCount;
 
-    for (auto li : m_list) {
-        auto item = dynamic_cast<SelectableItem*>(li);
+    foreach (auto li, m_list) {
+        auto item = qobject_cast<SelectableItem*>(li);
 
         bool cvalue = item->selected();
 

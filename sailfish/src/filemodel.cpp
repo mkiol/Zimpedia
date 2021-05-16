@@ -95,7 +95,7 @@ bool FileModel::scanZimFile(ZimMetaData &metaData)
         return false;
     }
 
-    auto &fh = zimfile->getFileheader();
+    const auto &fh = zimfile->getFileheader();
 #ifdef LIBZIM
     qDebug() << "ZIM major version:" << fh.getMajorVersion();
     qDebug() << "ZIM minor version:" << fh.getMinorVersion();
@@ -241,8 +241,8 @@ QList<ListItem*> FileModel::makeItems()
 {
     if (files.isEmpty()) {
 #ifdef SAILFISH
-        findFiles(QStandardPaths::standardLocations(
-                      QStandardPaths::HomeLocation).first());
+        auto paths = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+        findFiles(paths.first());
         if (QFileInfo::exists("/media/sdcard"))
             findFiles("/media/sdcard");
         else

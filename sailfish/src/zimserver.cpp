@@ -394,7 +394,7 @@ void ZimServer::getArticleAsync(const QString &zimUrl)
 {
     //qDebug() << "getArticleAsync, zimUrl:" << zimUrl;
     QStringList parts = zimUrl.split("/");
-    if (parts.length()<2) {
+    if (parts.length() < 2) {
         qWarning() << "Bad url:" << zimUrl;
         return;
     }
@@ -485,8 +485,7 @@ QString ZimServer::getLocalUrl(const QString &zimUrl)
 
     return QString("http://localhost:%1/uuid:%2/%3")
             .arg(s->getPort())
-            .arg(getUuid())
-            .arg(zimUrl);
+            .arg(getUuid(), zimUrl);
 }
 
 std::string ZimServer::stringQtoStd(const QString &s)
