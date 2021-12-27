@@ -14,8 +14,9 @@ Zimpedia is a Sailfish OS application.
 Binary packages for Jolla phone and Jolla tablet can be downloaded
 from [OpenRepos](https://openrepos.net/content/mkiol/zimpedia) and Jolla Store.
 
-Old package (not supported) for BlackBerry 10 devices can be downloaded
-from [BlackBerry World](https://appworld.blackberry.com/webstore/content/59988411).
+Old package (not supported any more) for BlackBerry 10 devices can be downloaded
+from [BlackBerry World](https://appworld.blackberry.com/webstore/content/59988411)
+or [BAR file directly from GitHub](https://github.com/mkiol/Zimpedia/raw/master/bb10/bar/Zimpedia-2_0_0_0.bar).
 
 ## ZIM repositories downloads
 * Wikipedia dumps can be downloaded from
