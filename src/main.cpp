@@ -24,6 +24,7 @@
 #include "filemodel.h"
 #include "iconprovider.h"
 #include "info.h"
+#include "log.h"
 #include "settings.h"
 #include "utils.h"
 #include "zimmetadatareader.h"
@@ -39,8 +40,8 @@ void registerTypes() {
     qRegisterMetaType<ZimMetaData>("ZimMetaData");
 }
 
-void installTranslator(QGuiApplication* app) {
-    auto translator = new QTranslator{};
+void installTranslator() {
+    auto* translator = new QTranslator{qApp};
     auto transDir =
         SailfishApp::pathTo(QStringLiteral("translations")).toLocalFile();
     if (!translator->load(QLocale{}, QStringLiteral("Zimpedia"),
@@ -50,26 +51,27 @@ void installTranslator(QGuiApplication* app) {
                  << transDir;
         if (!translator->load(QStringLiteral("Zimpedia_en"), transDir)) {
             qDebug() << "Cannot load default translation";
-            delete translator;
             return;
         }
     }
 
-    app->installTranslator(translator);
+    QGuiApplication::installTranslator(translator);
 }
 
 Q_DECL_EXPORT int main(int argc, char** argv) {
-    auto app = SailfishApp::application(argc, argv);
-    auto view = SailfishApp::createView();
-    auto context = view->rootContext();
-    auto engine = view->engine();
+    qInstallMessageHandler(qtLog);
 
-    app->setApplicationName(Zimpedia::APP_ID);
-    app->setOrganizationName(Zimpedia::ORG);
-    app->setApplicationDisplayName(Zimpedia::APP_NAME);
-    app->setApplicationVersion(Zimpedia::APP_VERSION);
+    SailfishApp::application(argc, argv);
+
+    QGuiApplication::setApplicationName(Zimpedia::APP_ID);
+    QGuiApplication::setOrganizationName(Zimpedia::ORG);
+    QGuiApplication::setApplicationDisplayName(Zimpedia::APP_NAME);
+    QGuiApplication::setApplicationVersion(Zimpedia::APP_VERSION);
 
     registerTypes();
+
+    auto* view = SailfishApp::createView();
+    auto* context = view->rootContext();
 
     context->setContextProperty(QStringLiteral("APP_NAME"), Zimpedia::APP_NAME);
     context->setContextProperty(QStringLiteral("APP_ID"), Zimpedia::APP_ID);
@@ -85,16 +87,17 @@ Q_DECL_EXPORT int main(int argc, char** argv) {
     context->setContextProperty(QStringLiteral("LICENSE_URL"),
                                 Zimpedia::LICENSE_URL);
 
-    installTranslator(app);
+    installTranslator();
 
-    auto settings = Settings::instance();
-    auto fileModel = FileModel::instance();
-    auto bookmarkModel = BookmarkModel::instance();
-    auto articleModel = ArticleModel::instance();
-    auto zimServer = ZimServer::instance();
+    auto* settings = Settings::instance();
+    auto* fileModel = FileModel::instance();
+    auto* bookmarkModel = BookmarkModel::instance();
+    auto* articleModel = ArticleModel::instance();
+    auto* zimServer = ZimServer::instance();
     Utils utils;
 
-    engine->addImageProvider(QStringLiteral("icons"), new IconProvider{});
+    view->engine()->addImageProvider(QStringLiteral("icons"),
+                                     new IconProvider{});
 
     context->setContextProperty(QStringLiteral("settings"), settings);
     context->setContextProperty(QStringLiteral("zimServer"), zimServer);
@@ -105,10 +108,8 @@ Q_DECL_EXPORT int main(int argc, char** argv) {
 
     fileModel->updateModel();
 
-    QObject::connect(engine, SIGNAL(quit()), QCoreApplication::instance(),
-                     SLOT(quit()));
-
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/main.qml")));
     view->show();
-    return app->exec();
+
+    return QGuiApplication::exec();
 }

@@ -53,7 +53,8 @@ SOURCES += \
     $${SRC_DIR}/bookmarkmodel.cpp \
     $${SRC_DIR}/zimmetadatareader.cpp \
     $${SRC_DIR}/itemmodel.cpp \
-    $${SRC_DIR}/iconprovider.cpp
+    $${SRC_DIR}/iconprovider.cpp \
+    $${SRC_DIR}/log.cpp
 
 HEADERS += \
     $${SRC_DIR}/zimserver.h \
@@ -66,7 +67,8 @@ HEADERS += \
     $${SRC_DIR}/zimmetadatareader.h \
     $${SRC_DIR}/info.h \
     $${SRC_DIR}/itemmodel.h \
-    $${SRC_DIR}/iconprovider.h
+    $${SRC_DIR}/iconprovider.h \
+    $${SRC_DIR}/log.h
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
