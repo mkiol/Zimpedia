@@ -1,4 +1,4 @@
-QHTTPSERVER_BASE = $${LIB_DIR}/qhttpserver
+QHTTPSERVER_BASE = $$PWD
 INCLUDEPATH += $${QHTTPSERVER_BASE}/http-parser $${QHTTPSERVER_BASE}/src
 
 PRIVATE_HEADERS += $${QHTTPSERVER_BASE}/http-parser/http_parser.h \

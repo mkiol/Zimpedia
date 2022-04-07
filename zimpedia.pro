@@ -2,6 +2,7 @@ TARGET = harbour-zimpedia
 
 CONFIG += c++1z sailfishapp dbus json
 PKGCONFIG += mlite5
+DEFINES += QT_NO_URL_CAST_FROM_STRING
 
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3
@@ -68,7 +69,9 @@ HEADERS += \
     $${SRC_DIR}/info.h \
     $${SRC_DIR}/itemmodel.h \
     $${SRC_DIR}/iconprovider.h \
-    $${SRC_DIR}/log.h
+    $${SRC_DIR}/log.h \
+    $${ZIM_ROOT}/include/zim/*.h
+
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 

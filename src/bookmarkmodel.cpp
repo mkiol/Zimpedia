@@ -5,102 +5,100 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <QStandardPaths>
-#include <QJsonObject>
+#include "bookmarkmodel.h"
+
+#include <QByteArray>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QJsonValue>
+#include <QJsonObject>
 #include <QJsonParseError>
-#include <QTextStream>
-#include <QFile>
-#include <QDir>
-#include <QDebug>
+#include <QJsonValue>
 #include <QMap>
-#include <QByteArray>
+#include <QStandardPaths>
+#include <QTextStream>
 #include <algorithm>
 
-#include "bookmarkmodel.h"
 #include "filemodel.h"
 #include "settings.h"
+#include "zimserver.h"
 
-BookmarkModel* BookmarkModel::m_instance = nullptr;
+BookmarkModel *BookmarkModel::m_instance = nullptr;
 const QString BookmarkModel::bookmarkFilename = "bookmarks.json";
 
-BookmarkModel* BookmarkModel::instance(QObject *parent)
-{
+BookmarkModel *BookmarkModel::instance(QObject *parent) {
     if (BookmarkModel::m_instance == nullptr) {
-        BookmarkModel::m_instance = new BookmarkModel(parent);
+        BookmarkModel::m_instance = new BookmarkModel{parent};
     }
 
     return BookmarkModel::m_instance;
 }
 
-BookmarkModel::BookmarkModel(QObject *parent) :
-    SelectableItemModel(new BookmarkItem, parent)
-{
+BookmarkModel::BookmarkModel(QObject *parent)
+    : SelectableItemModel{new BookmarkItem, parent} {
     auto fm = FileModel::instance();
-    connect(fm, &FileModel::busyChanged, []{
-        BookmarkModel::instance()->updateModel();
-    });
+    connect(fm, &FileModel::busyChanged, this,
+            [] { BookmarkModel::instance()->updateModel(); });
 }
 
-QList<ListItem*> BookmarkModel::makeItems()
-{
-    QList<ListItem*> items;
+QList<ListItem *> BookmarkModel::makeItems() {
+    QList<ListItem *> items;
 
     auto fm = FileModel::instance();
 
     if (!fm->isBusy()) {
         auto jsonlist = readBookmarks();
-        for (const auto& i : jsonlist) {
+        for (const auto &i : jsonlist) {
             auto obj = i.toObject();
 
             auto url = obj["url"].toString();
             auto parts = url.split("/");
             if (parts.length() < 6) {
-                qWarning() << "Url is invalid!";
+                qWarning() << "url is invalid";
                 continue;
             }
 
             auto zimuuid = parts.at(3);
             if (zimuuid.startsWith("uuid:")) {
-                zimuuid = zimuuid.right(zimuuid.length()-5);
+                zimuuid = zimuuid.right(zimuuid.length() - 5);
             } else {
-                qWarning() << "Url UUID is invalid or missing!";
+                qWarning() << "url uuid is invalid or missing";
                 continue;
             }
 
             auto md = fm->files.value(zimuuid);
 
-            if (md.isEmpty()) {
-                items << new BookmarkItem(
-                              url, // id
-                              obj["title"].toString(), // title
-                              url, // url
-                              obj.contains("favicon") ? obj["favicon"].toString() : QString(), // icon
-                              QString(), // zimtitle
-                              QString(), // lang
-                              QString(), // zimuuid
-                              false
-                          );
+            if (md.empty()) {
+                items << new BookmarkItem{url,                      // id
+                                          obj["title"].toString(),  // title
+                                          url,                      // url
+                                          obj.contains("favicon")
+                                              ? obj["favicon"].toString()
+                                              : QString{},  // icon
+                                          QString(),        // zimtitle
+                                          QString(),        // lang
+                                          QString(),        // zimuuid
+                                          false};
             } else {
-                items << new BookmarkItem(
-                              url, // id
-                              obj["title"].toString(), // title
-                              url, // url
-                              obj.contains("favicon") ? obj["favicon"].toString() : QString(), // icon
-                              md.title, // zimtitle
-                              md.language, // lang
-                              zimuuid, // zimuuid
-                              true
-                          );
+                items << new BookmarkItem{url,                      // id
+                                          obj["title"].toString(),  // title
+                                          url,                      // url
+                                          obj.contains("favicon")
+                                              ? obj["favicon"].toString()
+                                              : QString{},  // icon
+                                          md.title,         // zimtitle
+                                          md.language,      // lang
+                                          zimuuid,          // zimuuid
+                                          true};
             }
         }
 
         // Sorting
         std::sort(items.begin(), items.end(), [](ListItem *a, ListItem *b) {
-            auto aa = dynamic_cast<BookmarkItem*>(a);
-            auto bb = dynamic_cast<BookmarkItem*>(b);
+            auto aa = qobject_cast<BookmarkItem *>(a);
+            auto bb = qobject_cast<BookmarkItem *>(b);
             return aa->title().compare(bb->title(), Qt::CaseInsensitive) < 0;
         });
     }
@@ -108,40 +106,36 @@ QList<ListItem*> BookmarkModel::makeItems()
     return items;
 }
 
-QJsonArray BookmarkModel::readBookmarks()
-{
+QJsonArray BookmarkModel::readBookmarks() {
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
     QFile file(dir.absoluteFilePath(bookmarkFilename));
 
-    if(!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "Cannot open bookmarks file";
-        return QJsonArray();
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "cannot open bookmarks file";
+        return {};
     }
 
     QJsonParseError parseError;
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll(), &parseError);
     if (parseError.error != QJsonParseError::NoError) {
-        qWarning() << "Cannot parse bookmarks file:" << parseError.errorString();
-        file.close();
-        return QJsonArray();
+        qWarning() << "Cannot parse bookmarks file:"
+                   << parseError.errorString();
+        return {};
     }
 
     if (!doc.isArray()) {
         qWarning() << "Bookmarks file is not JSON array";
-        file.close();
-        return QJsonArray();
+        return {};
     }
 
-    file.close();
     return doc.array();
 }
 
-bool BookmarkModel::writeBookmarks(const QJsonArray &json)
-{
+bool BookmarkModel::writeBookmarks(const QJsonArray &json) {
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
     QFile file(dir.absoluteFilePath(bookmarkFilename));
 
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         qWarning() << "Cannot open bookmarks file";
         return false;
     }
@@ -156,16 +150,14 @@ bool BookmarkModel::writeBookmarks(const QJsonArray &json)
     return true;
 }
 
-void BookmarkModel::addBookmark(const QString &title,
-                                const QString &url,
-                                const QString &favicon)
-{
+void BookmarkModel::addBookmark(const QString &title, const QString &url,
+                                const QString &favicon) {
     auto array = readBookmarks();
 
-    for (const auto& b : array) {
+    for (const auto &b : array) {
         auto obj = b.toObject();
         if (obj.contains("url") && obj.value("url").toString() == url) {
-            qWarning() << "Bookmark url already exists!";
+            qWarning() << "bookmark url already exists";
             emit bookmarkExists();
             return;
         }
@@ -177,16 +169,12 @@ void BookmarkModel::addBookmark(const QString &title,
     obj.insert("favicon", favicon);
     array.append(obj);
 
-    if (writeBookmarks(array))
-        emit bookmarkAdded();
+    if (writeBookmarks(array)) emit bookmarkAdded();
     updateModel();
 }
 
-void BookmarkModel::updateBookmark(const QString &oldUrl,
-                                   const QString &title,
-                                   const QString &url,
-                                   const QString &favicon)
-{
+void BookmarkModel::updateBookmark(const QString &oldUrl, const QString &title,
+                                   const QString &url, const QString &favicon) {
     auto array = readBookmarks();
 
     auto it = array.begin();
@@ -201,19 +189,17 @@ void BookmarkModel::updateBookmark(const QString &oldUrl,
             nobj.insert("favicon", favicon);
             array.insert(it, nobj);
 
-            if (writeBookmarks(array))
-                emit bookmarkUpdated();
+            if (writeBookmarks(array)) emit bookmarkUpdated();
             updateModel();
             return;
         }
         ++it;
     }
 
-    qWarning() << "Bookmark url doesn't exist";
+    qWarning() << "bookmark url doesn't exist";
 }
 
-void BookmarkModel::deleteBookmark(const QString &url)
-{
+void BookmarkModel::deleteBookmark(const QString &url) {
     auto array = readBookmarks();
 
     auto it = array.begin();
@@ -222,8 +208,7 @@ void BookmarkModel::deleteBookmark(const QString &url)
         auto obj = (*it).toObject();
         if (obj.contains("url") && obj.value("url").toString() == url) {
             array.erase(it);
-            if (writeBookmarks(array))
-                emit bookmarkDeleted();
+            if (writeBookmarks(array)) emit bookmarkDeleted();
             updateModel();
             return;
         }
@@ -231,18 +216,18 @@ void BookmarkModel::deleteBookmark(const QString &url)
     }
 }
 
-const QString BookmarkModel::changeUuid(const QString &url, const QString &newUuid)
-{
-    auto s = Settings::instance();
-    return newUuid.isEmpty() ? url : QString("http://localhost:%1/%2/%3")
-                                     .arg(s->getPort()).arg("uuid:" + newUuid, articleUrl(url));
+QString BookmarkModel::changeUuid(const QString &url,
+                                  const QString &newUuid) const {
+    return newUuid.isEmpty() ? url
+                             : QString("http://localhost:%1/%2/%3")
+                                   .arg(ZimServer::port)
+                                   .arg("uuid:" + newUuid, articleUrl(url));
 }
 
-bool BookmarkModel::validateUrl(const QString &url)
-{
+bool BookmarkModel::validateUrl(const QString &url) {
     auto parts = url.split("/");
     if (parts.length() < 6) {
-        qWarning() << "Url is invalid!";
+        qWarning() << "url is invalid";
         return false;
     }
 
@@ -254,43 +239,32 @@ bool BookmarkModel::validateUrl(const QString &url)
     return false;
 }
 
-const QString BookmarkModel::articleUrl(const QString &url)
-{
-    QString newUrl;
-
+QString BookmarkModel::articleUrl(QString url) {
     auto parts = url.split("/");
     if (parts.length() < 2) {
-        qWarning() << "Url is invalid!";
+        qWarning() << "url is invalid";
     } else {
-        newUrl = QStringList(parts.mid(parts.length()-2)).join("/");
+        url = QStringList(parts.mid(parts.length() - 2)).join("/");
     }
 
-    return newUrl;
+    return url;
 }
 
-BookmarkItem::BookmarkItem(
-                   const QString &id,
-                   const QString &title,
-                   const QString &url,
-                   const QString &favicon,
-                   const QString &zimtitle,
-                   const QString &zimlang,
-                   const QString &zimuuid,
-                   bool valid,
-                   QObject *parent) :
-    SelectableItem(parent),
-    m_id(id),
-    m_title(title),
-    m_url(url),
-    m_icon(favicon),
-    m_zimtitle(zimtitle),
-    m_zimlang(zimlang),
-    m_zimuuid(zimuuid),
-    m_valid(valid)
-{}
+BookmarkItem::BookmarkItem(const QString &id, const QString &title,
+                           const QString &url, const QString &favicon,
+                           const QString &zimtitle, const QString &zimlang,
+                           const QString &zimuuid, bool valid, QObject *parent)
+    : SelectableItem(parent),
+      m_id(id),
+      m_title(title),
+      m_url(url),
+      m_icon(favicon),
+      m_zimtitle(zimtitle),
+      m_zimlang(zimlang),
+      m_zimuuid(zimuuid),
+      m_valid(valid) {}
 
-QHash<int, QByteArray> BookmarkItem::roleNames() const
-{
+QHash<int, QByteArray> BookmarkItem::roleNames() const {
     QHash<int, QByteArray> names;
     names[IdRole] = "id";
     names[TitleRole] = "title";
@@ -303,26 +277,25 @@ QHash<int, QByteArray> BookmarkItem::roleNames() const
     return names;
 }
 
-QVariant BookmarkItem::data(int role) const
-{
-    switch(role) {
-    case IdRole:
-        return id();
-    case TitleRole:
-        return title();
-    case UrlRole:
-        return url();
-    case IconRole:
-        return icon();
-    case ValidRole:
-        return valid();
-    case ZimTitleRole:
-        return zimtitle();
-    case ZimLangRole:
-        return zimlang();
-    case ZimUuidRole:
-        return zimuuid();
-    default:
-        return QVariant();
+QVariant BookmarkItem::data(int role) const {
+    switch (role) {
+        case IdRole:
+            return id();
+        case TitleRole:
+            return title();
+        case UrlRole:
+            return url();
+        case IconRole:
+            return icon();
+        case ValidRole:
+            return valid();
+        case ZimTitleRole:
+            return zimtitle();
+        case ZimLangRole:
+            return zimlang();
+        case ZimUuidRole:
+            return zimuuid();
+        default:
+            return QVariant();
     }
 }

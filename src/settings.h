@@ -15,7 +15,6 @@
 class Settings : public QSettings {
     Q_OBJECT
 
-    Q_PROPERTY(int port READ getPort WRITE setPort NOTIFY portChanged)
     Q_PROPERTY(
         int fontSize READ getFontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
@@ -35,8 +34,6 @@ class Settings : public QSettings {
 
     static Settings* instance();
 
-    void setPort(int value);
-    int getPort() const;
     void setFontSize(int value);
     int getFontSize() const;
     void setZimFile(const QString& value);

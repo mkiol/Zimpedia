@@ -22,6 +22,11 @@ Page {
 
     Component.onCompleted: articleModel.updateModel()
 
+    Connections {
+        target: settings
+        onSearchModeChanged: articleModel.refresh()
+    }
+
     SilicaListView {
         id: listView
 
@@ -62,15 +67,17 @@ Page {
 
             menu: ContextMenu {
                 MenuItem {
-                    text: settings.browser === 1 ? qsTr("Open in built-in viewer") : qsTr("Open in browser")
+                    text: qsTr("Open in viewer")
                     onClicked: {
                         listView.focus = true
-
-                        if (settings.browser === 1) {
-                            pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
-                        } else {
-                            app.openUrlEntryInBrowser(model.url)
-                        }
+                        pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
+                    }
+                }
+                MenuItem {
+                    text: qsTr("Open in external app")
+                    onClicked: {
+                        listView.focus = true
+                        Qt.openUrlExternally(model.url)
                     }
                 }
                 MenuItem {
@@ -86,7 +93,7 @@ Page {
                 listView.focus = true
 
                 if (settings.browser === 1) {
-                    app.openUrlEntryInBrowser(model.url)
+                     Qt.openUrlExternally(model.url)
                 } else {
                     pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": model.url});
                 }

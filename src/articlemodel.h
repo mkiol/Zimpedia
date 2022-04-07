@@ -8,57 +8,51 @@
 #ifndef ARTICLEMODEL_H
 #define ARTICLEMODEL_H
 
-#include <QDebug>
-#include <QString>
-#include <QList>
 #include <QByteArray>
-#include <QVariant>
+#include <QDebug>
 #include <QHash>
+#include <QList>
+#include <QString>
+#include <QUrl>
+#include <QVariant>
 
 #include "itemmodel.h"
 
-class ArticleItem : public SelectableItem
-{
+class ArticleItem : public SelectableItem {
     Q_OBJECT
 
-public:
-    enum Roles {
-        TitleRole = Qt::DisplayRole,
-        IdRole = Qt::UserRole,
-        UrlRole
-    };
+   public:
+    enum Roles { TitleRole = Qt::DisplayRole, IdRole = Qt::UserRole, UrlRole };
 
-public:
-    ArticleItem(QObject *parent = nullptr): SelectableItem(parent) {}
-    explicit ArticleItem(const QString &id,
-                      const QString &title,
-                      const QString &url,
-                      QObject *parent = nullptr);
-    QVariant data(int role) const;
-    QHash<int, QByteArray> roleNames() const;
-    inline QString id() const { return m_id; }
+   public:
+    ArticleItem(QObject *parent = nullptr) : SelectableItem{parent} {}
+    explicit ArticleItem(const QString &id, const QString &title,
+                         const QUrl &url, QObject *parent = nullptr);
+    QVariant data(int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
+    inline QString id() const override { return m_id; }
     inline QString title() const { return m_title; }
-    inline QString url() const { return m_url; }
+    inline QUrl url() const { return m_url; }
 
-private:
+   private:
     QString m_id;
     QString m_title;
-    QString m_url;
+    QUrl m_url;
 };
 
-class ArticleModel : public SelectableItemModel
-{
+class ArticleModel : public SelectableItemModel {
     Q_OBJECT
 
-public:
-    static ArticleModel* instance(QObject *parent = nullptr);
+   public:
+    static ArticleModel *instance(QObject *parent = nullptr);
+    Q_INVOKABLE void refresh() { updateModel(); }
 
-private:
-    static ArticleModel* m_instance;
+   private:
+    static ArticleModel *m_instance;
 
     explicit ArticleModel(QObject *parent = nullptr);
 
-    QList<ListItem*> makeItems();
+    QList<ListItem *> makeItems() override;
 };
 
-#endif // ARTICLEMODEL_H
+#endif  // ARTICLEMODEL_H

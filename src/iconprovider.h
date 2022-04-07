@@ -8,20 +8,20 @@
 #ifndef ICONPROVIDER_H
 #define ICONPROVIDER_H
 
-#include <QSize>
 #include <QPixmap>
 #include <QQuickImageProvider>
+#include <QSize>
 #include <QString>
 
-class IconProvider : public QQuickImageProvider
-{
-public:
+class IconProvider : public QQuickImageProvider {
+   public:
     IconProvider();
-    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize);
+    QPixmap requestPixmap(const QString &id, QSize *size,
+                          const QSize &requestedSize);
 
-private:
+   private:
     QString themeDir;
     QString cacheDir;
 };
 
-#endif // ICONPROVIDER_H
+#endif  // ICONPROVIDER_H

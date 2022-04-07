@@ -39,23 +39,23 @@ class ZimMetaDataReader : public QObject {
     void pathChanged();
 
    public slots:
-    QString getPath();
+    QString getPath() const;
     void setPath(const QString &path);
-    QString getName();
-    QString getTitle();
-    QString getCreator();
-    QString getDate();
-    QString getDescription();
-    QString getLanguage();
-    QString getFilename();
-    QString getPublisher();
-    // QString getSource();
-    QString getTags();
-    bool getFtindex();
-    // QString getChecksum();
-    // QString getVersion();
-    qint64 getSize();
-    int getArticleCount();
+    QString getName() const;
+    QString getTitle() const;
+    QString getCreator() const;
+    QString getDate() const;
+    QString getDescription() const;
+    QString getLanguage() const;
+    QString getFilename() const;
+    QString getPublisher() const;
+    // QString getSource() const;
+    QString getTags() const;
+    bool getFtindex() const;
+    // QString getChecksum() const;
+    // QString getVersion() const;
+    qint64 getSize() const;
+    int getArticleCount() const;
 
    private:
     ZimMetaData m_data;

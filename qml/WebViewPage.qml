@@ -20,7 +20,7 @@ Page {
     id: root
     objectName: "webview"
 
-    property string url
+    property url url
 
     property variant _settings: settings
     property bool nightMode: false
@@ -31,7 +31,7 @@ Page {
     property string title: ""
 
     function isLocal(url) {
-        return url.lastIndexOf(zimServer.serverUrl()) === 0
+        return url.toString().lastIndexOf(zimServer.serverUrl()) === 0
     }
 
     function init() {
@@ -40,18 +40,13 @@ Page {
         navigate(url)
     }
 
-    function openUrlEntryInBrowser(url) {
-        notification.show(qsTr("Launching an external browser..."))
-        Qt.openUrlExternally(url)
-    }
-
     function navigate(url) {
         local = isLocal(url)
-        console.log("Opening " + (local ? "local" : "non-local") + " url: " + url)
+        console.log("Opening " + (local ? "local" : "non-local") + " url: " + url.toString())
         if (local) {
-            title = zimServer.getTitleFromUrl(url)
+            title = zimServer.titleFromUrl(url)
             // WORKAROUND for https://github.com/mkiol/kaktus/issues/14
-            zimServer.getArticleAsync(url)
+            zimServer.articleAsync(url)
         } else {
             title = ""
             view.url = url
@@ -110,23 +105,6 @@ Page {
     showNavigationIndicator: false
 
     Component.onCompleted: init()
-
-    // Workaround for 'High Power Consumption' webkit bug
-    /*Connections {
-        target: Qt.application
-        onActiveChanged: {
-            if(!Qt.application.active) {
-                if (settings.powerSaveMode && root.status === PageStatus.Active) {
-                    pageStack.pop()
-                    return
-                }
-                if (root.status !== PageStatus.Active) {
-                    pageStack.pop(pageStack.previousPage(root), PageStackAction.Immediate)
-                    return
-                }
-            }
-        }
-    }*/
 
     SilicaWebView {
         id: view
@@ -256,7 +234,7 @@ Page {
             theme: parent.theme
             icon: "image://icons/icon-m-browser"
             onClicked: {
-                notification.show(qsTr("Launching an external browser..."))
+                notification.show(qsTr("Opening in external app..."))
                 var url = encodeURI(root.history[root.history.length-1])
                 console.log("Opening: " + url)
                 Qt.openUrlExternally(url)

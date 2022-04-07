@@ -7,7 +7,7 @@ Name:       harbour-zimpedia
 
 # >> macros
 %define __provides_exclude_from ^%{_datadir}/.*$
-%define __requires_exclude ^libxapian.*|libzim.*|libzstd.*|libicui18n.*|libicuuc.*|libicudata.*|liblzma.*|libuuid.*$
+%define __requires_exclude ^libxapian.*|libzim.*|libzstd.*|libicui18n.*|libicuuc.*|libicudata.*|libuuid.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -16,7 +16,7 @@ Name:       harbour-zimpedia
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Zimpedia
 Version:    2.2.8
-Release:    1
+Release:    2
 Group:      Qt/Qt
 License:    LICENSE
 URL:        https://github.com/mkiol/Zimpedia

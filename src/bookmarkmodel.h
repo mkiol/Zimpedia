@@ -8,13 +8,13 @@
 #ifndef BOOKMARKMODEL_H
 #define BOOKMARKMODEL_H
 
-#include <QDebug>
-#include <QString>
-#include <QList>
 #include <QByteArray>
-#include <QVariant>
+#include <QDebug>
 #include <QHash>
 #include <QJsonArray>
+#include <QList>
+#include <QString>
+#include <QVariant>
 
 #include "itemmodel.h"
 
@@ -28,11 +28,10 @@ struct Bookmark {
     bool valid;
 };
 
-class BookmarkItem : public SelectableItem
-{
+class BookmarkItem : public SelectableItem {
     Q_OBJECT
 
-public:
+   public:
     enum Roles {
         TitleRole = Qt::DisplayRole,
         IdRole = Qt::UserRole,
@@ -44,21 +43,16 @@ public:
         ZimUuidRole
     };
 
-public:
-    BookmarkItem(QObject *parent = nullptr): SelectableItem(parent) {}
-    explicit BookmarkItem(
-                      const QString &id,
-                      const QString &title,
-                      const QString &url,
-                      const QString &favicon,
-                      const QString &zimtitle,
-                      const QString &zimlang,
-                      const QString &zimuuid,
-                      bool valid,
-                      QObject *parent = 0);
-    QVariant data(int role) const;
-    QHash<int, QByteArray> roleNames() const;
-    inline QString id() const { return m_id; }
+   public:
+    BookmarkItem(QObject *parent = nullptr) : SelectableItem(parent) {}
+    explicit BookmarkItem(const QString &id, const QString &title,
+                          const QString &url, const QString &favicon,
+                          const QString &zimtitle, const QString &zimlang,
+                          const QString &zimuuid, bool valid,
+                          QObject *parent = 0);
+    QVariant data(int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
+    inline QString id() const override { return m_id; }
     inline QString title() const { return m_title; }
     inline QString url() const { return m_url; }
     inline QString icon() const { return m_icon; }
@@ -67,7 +61,7 @@ public:
     inline QString zimuuid() const { return m_zimuuid; }
     inline bool valid() const { return m_valid; }
 
-private:
+   private:
     QString m_id;
     QString m_title;
     QString m_url;
@@ -78,40 +72,36 @@ private:
     bool m_valid;
 };
 
-class BookmarkModel : public SelectableItemModel
-{
+class BookmarkModel : public SelectableItemModel {
     Q_OBJECT
 
-public:
-    static BookmarkModel* instance(QObject *parent = nullptr);
+   public:
+    static BookmarkModel *instance(QObject *parent = nullptr);
 
-    Q_INVOKABLE void addBookmark(const QString &title,
-                                 const QString &url,
+    Q_INVOKABLE void addBookmark(const QString &title, const QString &url,
                                  const QString &favicon);
-    Q_INVOKABLE void updateBookmark(const QString &oldUrl,
-                                    const QString &title,
-                                    const QString &url,
-                                    const QString &favicon);
+    Q_INVOKABLE void updateBookmark(const QString &oldUrl, const QString &title,
+                                    const QString &url, const QString &favicon);
     Q_INVOKABLE void deleteBookmark(const QString &url);
-    Q_INVOKABLE const QString changeUuid(const QString &url,
-                                         const QString &newUuid);
+    Q_INVOKABLE QString changeUuid(const QString &url,
+                                   const QString &newUuid) const;
     Q_INVOKABLE bool validateUrl(const QString &url);
 
-signals:
+   signals:
     void bookmarkAdded();
     void bookmarkDeleted();
     void bookmarkUpdated();
     void bookmarkExists();
 
-private:
-    static BookmarkModel* m_instance;
+   private:
+    static BookmarkModel *m_instance;
     static const QString bookmarkFilename;
 
     explicit BookmarkModel(QObject *parent = nullptr);
-    const QString articleUrl(const QString &url);
-    QList<ListItem*> makeItems();
+    static QString articleUrl(QString url);
+    QList<ListItem *> makeItems() override;
     QJsonArray readBookmarks();
     bool writeBookmarks(const QJsonArray &json);
 };
 
-#endif // BOOKMARKMODEL_H
+#endif  // BOOKMARKMODEL_H

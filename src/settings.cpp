@@ -46,15 +46,6 @@ Settings* Settings::instance() {
     return Settings::m_instance;
 }
 
-void Settings::setPort(int value) {
-    if (getPort() != value) {
-        setValue("port", value);
-        emit portChanged();
-    }
-}
-
-int Settings::getPort() const { return value("port", 9091).toInt(); }
-
 void Settings::setFontSize(int value) {
     if (getFontSize() != value) {
         setValue("fontsize", value);

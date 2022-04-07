@@ -17,11 +17,9 @@
 
 Utils::Utils(QObject *parent) : QObject(parent) { createCacheDir(); }
 
-const QString Utils::homeDir() {
-    const QStringList homeLocationList =
-        QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-    const QString homeLocation = homeLocationList.first();
-    return homeLocation;
+QString Utils::homeDir() const {
+    return QStandardPaths::standardLocations(QStandardPaths::HomeLocation)
+        .first();
 }
 
 bool Utils::createCacheDir() {
@@ -30,7 +28,7 @@ bool Utils::createCacheDir() {
 
     if (!QFile::exists(cacheDir)) {
         if (!QDir::root().mkpath(cacheDir)) {
-            qWarning() << "Unable to create cache dir!";
+            qWarning() << "unable to create cache dir";
             return false;
         }
     }
@@ -38,7 +36,6 @@ bool Utils::createCacheDir() {
     return true;
 }
 
-void Utils::copyToClipboard(const QString &text) {
-    QClipboard *clipboard = QGuiApplication::clipboard();
-    clipboard->setText(text);
+void Utils::copyToClipboard(const QString &text) const {
+    QGuiApplication::clipboard()->setText(text);
 }

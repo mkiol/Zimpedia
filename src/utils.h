@@ -17,9 +17,9 @@ class Utils : public QObject {
    public:
     explicit Utils(QObject *parent = nullptr);
 
-    Q_INVOKABLE const QString homeDir();
-    Q_INVOKABLE void copyToClipboard(const QString &text);
-    bool createCacheDir();
+    Q_INVOKABLE QString homeDir() const;
+    Q_INVOKABLE void copyToClipboard(const QString &text) const;
+    static bool createCacheDir();
 };
 
 #endif  // UTILS_H

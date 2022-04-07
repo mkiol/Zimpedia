@@ -5,22 +5,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include "filemodel.h"
+
+#include <zim/archive.h>
+#include <zim/blob.h>
+#include <zim/error.h>
+#include <zim/item.h>
+
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QFileInfoList>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
-#include <zim/file.h>
-
 #include <string>
 
-#include "filemodel.h"
 #include "zimserver.h"
 
 FileModel *FileModel::m_instance = nullptr;
@@ -36,190 +36,208 @@ FileModel *FileModel::instance(QObject *parent) {
 FileModel::FileModel(QObject *parent) : ItemModel(new FileItem, parent) {}
 
 void FileModel::findFiles(const QString &dirName) {
-    QDir dir(dirName);
-    // qDebug() << "Scanning dir:" << dirName;
+    QDir dir{dirName};
 
-    if (dir.exists(dirName)) {
-        // Not following symlinks to avoid duplicates!
-        QFileInfoList infoList = dir.entryInfoList(
-            QStringList("*.zim"),
-            QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files |
-                QDir::NoSymLinks | QDir::Readable,
-            QDir::DirsFirst);
+    if (!dir.exists(dirName)) {
+        qWarning() << "directory does not exist:" << dirName;
+        return;
+    }
 
-        for (const auto &info : infoList) {
-            if (info.isDir()) {
-                findFiles(info.absoluteFilePath());
-            } else {
-                // qDebug() << info.absoluteFilePath();
-                ZimMetaData metaData;
-                metaData.path = info.absoluteFilePath();
-                metaData.filename = info.fileName();
-                metaData.size = info.size();
-                metaData.fields = ZimMetaData::Title | ZimMetaData::Language |
-                                  ZimMetaData::Favicon | ZimMetaData::Checksum;
-                if (scanZimFile(metaData)) {
-                    files.insert(metaData.checksum, metaData);
-                }
+    // Not following symlinks to avoid duplicates
+    auto infoList =
+        dir.entryInfoList({"*.zim"},
+                          QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files |
+                              QDir::NoSymLinks | QDir::Readable,
+                          QDir::DirsFirst);
+
+    for (const auto &info : infoList) {
+        if (info.isDir()) {
+            findFiles(info.absoluteFilePath());
+        } else {
+            ZimMetaData meta;
+            meta.path = info.absoluteFilePath();
+            meta.filename = info.fileName();
+            meta.size = info.size();
+            meta.fields = ZimMetaData::Title | ZimMetaData::Language |
+                          ZimMetaData::Favicon | ZimMetaData::Checksum;
+            if (scanZimFile(&meta)) {
+                files.insert(meta.checksum, meta);
             }
         }
     }
 }
 
-bool FileModel::scanZimFile(ZimMetaData &metaData) {
-    zim::File *zimfile = nullptr;
+static QString extractFavIcon(zim::Archive archive, const QString &checksum) {
+    QString favUrl;
+
+    if (!archive.hasIllustration()) {
+        return favUrl;
+    }
+
+    //    qDebug() << "illustration sizes:";
+    //    for (auto s : archive.getIllustrationSizes()) {
+    //        qDebug() << "size:" << s;
+    //    }
+
+    auto sizes = archive.getIllustrationSizes();
+    if (sizes.empty()) {
+        return favUrl;
+    }
 
     try {
-        qDebug() << "Scanning file:" << metaData.path;
-        zimfile = new zim::File(metaData.path.toStdString());
-    } catch (const std::exception &e) {
-        qWarning() << "Unable to open file" << metaData.path << "!";
-        qWarning() << "Details:" << e.what();
-        return false;
-    }
+        auto item = archive.getIllustrationItem(*sizes.rbegin());
+        qDebug() << "favicon mime:"
+                 << QString::fromStdString(item.getMimetype());
+        if (item.getMimetype() != "image/png") {
+            return favUrl;
+        }
 
-    const auto &fh = zimfile->getFileheader();
-    qDebug() << "ZIM major version:" << fh.getMajorVersion();
-    qDebug() << "ZIM minor version:" << fh.getMinorVersion();
-    qDebug() << "multipart:" << zimfile->is_multiPart();
+        auto blob = item.getData();
+        if (blob.size() == 0) {
+            return favUrl;
+        }
 
-    metaData.filename = QFileInfo(metaData.path).fileName();
-    metaData.checksum = QString::fromStdString(zimfile->getChecksum());
-    if (metaData.checksum == "") {
-        qWarning() << "Metadata Checksum is missing!";
-        metaData.checksum = metaData.filename.toLocal8Bit().toHex();
-        qDebug() << "Hex checksum:" << metaData.checksum;
-    }
-
-    if (metaData.fields & ZimMetaData::Time)
-        metaData.time = QDateTime::fromTime_t(zimfile->getMTime())
-                            .toLocalTime()
-                            .toString("d MMMM yyyy");
-    if (metaData.fields & ZimMetaData::Size)
-        metaData.size = QFileInfo(metaData.path).size();
-    if (metaData.fields & ZimMetaData::ArticleCount)
-        metaData.article_count = zimfile->getCountArticles();
-
-    QByteArray data;
-    QString mimeType;
-
-    if (metaData.fields & ZimMetaData::Name) {
-        if (ZimServer::getArticle(zimfile, "M/Name", data, mimeType)) {
-            metaData.name = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "name:" << metaData.name;
-        } else {
-            qWarning() << "Metadata Name is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Title) {
-        if (ZimServer::getArticle(zimfile, "M/Title", data, mimeType)) {
-            metaData.title = QString::fromUtf8(data).left(max_size);
-            // qDebug() << "title:" << metaData.title;
-        } else {
-            qWarning() << "Metadata Title is missing";
-            metaData.title = metaData.filename;
-        }
-    }
-    if (metaData.fields & ZimMetaData::Creator) {
-        if (ZimServer::getArticle(zimfile, "M/Creator", data, mimeType)) {
-            metaData.creator = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "creator:" << metaData.creator;
-        } else {
-            qWarning() << "Metadata Creator is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Date) {
-        if (ZimServer::getArticle(zimfile, "M/Date", data, mimeType)) {
-            metaData.date = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "date:" << metaData.date;
-        } else {
-            qWarning() << "Metadata Date is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Description) {
-        if (ZimServer::getArticle(zimfile, "M/Description", data, mimeType)) {
-            metaData.description = QString::fromUtf8(data).left(4 * max_size);
-            ;
-            // qDebug() << "description:" << metaData.description;
-        } else {
-            qWarning() << "Metadata Description is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Language) {
-        if (ZimServer::getArticle(zimfile, "M/Language", data, mimeType)) {
-            metaData.language = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "lang:" << metaData.language;
-        } else {
-            qWarning() << "Metadata Language is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Publisher) {
-        if (ZimServer::getArticle(zimfile, "M/Publisher", data, mimeType)) {
-            metaData.publisher = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "publisher:" << metaData.publisher;
-        } else {
-            qWarning() << "Metadata Publisher is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Source) {
-        if (ZimServer::getArticle(zimfile, "M/Source", data, mimeType)) {
-            metaData.source = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "source:" << metaData.source;
-        } else {
-            qWarning() << "Metadata Source is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Tags) {
-        if (ZimServer::getArticle(zimfile, "M/Tags", data, mimeType)) {
-            metaData.tags = QString::fromUtf8(data).left(max_size);
-            ;
-            // qDebug() << "tags:" << metaData.tags;
-        } else {
-            qWarning() << "Metadata Tags is missing";
-        }
-    }
-    if (metaData.fields & ZimMetaData::Favicon) {
-        if (ZimServer::getArticle(zimfile, "-/favicon", data, mimeType)) {
-            if (mimeType == "image/png") {
-                QString filename = "zim-favicon-" + metaData.checksum;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-                const QString cacheDir = QStandardPaths::writableLocation(
-                    QStandardPaths::CacheLocation);
-#else
-                const QString cacheDir = QDesktopServices::storageLocation(
-                    QDesktopServices::CacheLocation);
-#endif
-                QFile file(cacheDir + "/" + filename + ".png");
-                if (!file.exists()) {
-                    if (file.open(QFile::WriteOnly)) {
-                        file.write(data);
-                        file.close();
-                        metaData.favicon = "image://icons/" + filename;
-                    } else {
-                        qWarning() << "Unable to open file" << file.fileName()
-                                   << " to write!";
-                    }
-                } else {
-                    metaData.favicon = "image://icons/" + filename;
-                }
+        QString filename = "zim-favicon-" + checksum;
+        auto cacheDir =
+            QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        QFile file{cacheDir + "/" + filename + ".png"};
+        if (!file.exists()) {
+            if (file.open(QFile::WriteOnly)) {
+                file.write(
+                    QByteArray{blob.data(), static_cast<int>(blob.size())});
             } else {
-                qWarning() << "Favicon mimeType is not image/png. It is:"
-                           << mimeType;
+                qWarning() << "unable to open file:" << file.fileName();
+                return favUrl;
             }
-        } else {
-            qWarning() << "Favicon is missing";
         }
+        favUrl = "image://icons/" + filename;
+    } catch (const zim::EntryNotFound &) {
     }
 
-    if (zimfile) delete zimfile;
+    return favUrl;
+}
 
-    return true;
+bool FileModel::scanZimFile(ZimMetaData *meta) {
+    qDebug() << "scanning file:" << meta->path;
+
+    try {
+        zim::Archive archive{meta->path.toStdString()};
+
+        // qDebug() << "ZIM major version:" << fh.getMajorVersion();
+        // qDebug() << "ZIM minor version:" << fh.getMinorVersion();
+        qDebug() << "multipart:" << archive.isMultiPart();
+
+        //        qDebug() << "zim file meta keys:";
+        //        for (const auto &key : archive.getMetadataKeys()) {
+        //            qDebug() << QString::fromStdString(key);
+        //        }
+
+        meta->filename = QFileInfo{meta->path}.fileName();
+        meta->checksum = QString::fromStdString(archive.getChecksum());
+        if (meta->checksum.isEmpty()) {
+            qDebug() << "meta checksum is empty";
+            meta->checksum = meta->filename.toLocal8Bit().toHex();
+        }
+        if (meta->fields & ZimMetaData::Time) {
+            meta->time = QFileInfo{meta->path}.created().toLocalTime().toString(
+                "d MMMM yyyy");
+        }
+        if (meta->fields & ZimMetaData::Size)
+            meta->size = QFileInfo{meta->path}.size();
+        if (meta->fields & ZimMetaData::ArticleCount)
+            meta->article_count = archive.getArticleCount();
+        if (meta->fields & ZimMetaData::Tags) {
+            try {
+                meta->tags = QString::fromStdString(archive.getMetadata("Tags"))
+                                 .toLower();
+                qDebug() << "tags:" << meta->tags;
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Tags";
+            }
+        }
+        if (meta->fields & ZimMetaData::Name) {
+            try {
+                meta->name = QString::fromStdString(archive.getMetadata("Name"))
+                                 .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Name";
+            }
+        }
+        if (meta->fields & ZimMetaData::Title) {
+            try {
+                meta->title =
+                    QString::fromStdString(archive.getMetadata("Title"))
+                        .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Title";
+            }
+        }
+        if (meta->fields & ZimMetaData::Creator) {
+            try {
+                meta->creator =
+                    QString::fromStdString(archive.getMetadata("Creator"))
+                        .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Creator";
+            }
+        }
+        if (meta->fields & ZimMetaData::Description) {
+            try {
+                meta->description =
+                    QString::fromStdString(archive.getMetadata("Description"))
+                        .left(5 * max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Description";
+            }
+        }
+        if (meta->fields & ZimMetaData::Language) {
+            try {
+                meta->language =
+                    QString::fromStdString(archive.getMetadata("Language"))
+                        .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Language";
+            }
+        }
+        if (meta->fields & ZimMetaData::Publisher) {
+            try {
+                meta->publisher =
+                    QString::fromStdString(archive.getMetadata("Publisher"))
+                        .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Publisher";
+            }
+        }
+        if (meta->fields & ZimMetaData::Source) {
+            try {
+                meta->source =
+                    QString::fromStdString(archive.getMetadata("Source"))
+                        .left(max_size);
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Source";
+            }
+        }
+        if (meta->fields & ZimMetaData::Date) {
+            try {
+                meta->date =
+                    QString::fromStdString(archive.getMetadata("Date"));
+                qDebug() << "date:" << meta->date;
+            } catch (const zim::EntryNotFound &e) {
+                qWarning() << "archive does not have Date";
+            }
+        }
+        if (meta->fields & ZimMetaData::Favicon) {
+            meta->favicon = extractFavIcon(archive, meta->checksum);
+            if (meta->favicon.isEmpty()) {
+                qWarning() << "archive does not have Favicon";
+            }
+        }
+        return true;
+    } catch (const std::exception &e) {
+        qWarning() << "unable to open file:" << meta->path << e.what();
+    }
+
+    return false;
 }
 
 void FileModel::refresh() {
@@ -242,11 +260,11 @@ QList<ListItem *> FileModel::makeItems() {
 
     for (auto it = files.begin(); it != files.end(); ++it) {
         const auto &metaData = it.value();
-        items << new FileItem(metaData.path, metaData.name, metaData.path,
-                              metaData.time, metaData.checksum, metaData.size,
-                              metaData.title, metaData.creator, metaData.date,
-                              metaData.description, metaData.language,
-                              metaData.favicon);
+        items << new FileItem{
+            metaData.path,        metaData.name,     metaData.path,
+            metaData.time,        metaData.checksum, metaData.size,
+            metaData.title,       metaData.creator,  metaData.date,
+            metaData.description, metaData.language, metaData.favicon};
     }
 
     return items;
@@ -316,6 +334,6 @@ QVariant FileItem::data(int role) const {
         case LanguageRole:
             return language();
         default:
-            return QVariant();
+            return {};
     }
 }

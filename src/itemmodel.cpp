@@ -5,31 +5,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <QDebug>
-
 #include "itemmodel.h"
 
-ItemWorker::ItemWorker(ItemModel *model, const QString &data) :
-    QThread(model),
-    model(model),
-    data(data)
-{
-}
+#include <QDebug>
 
-void ItemWorker::run()
-{
-    items = model->makeItems();
-}
+ItemWorker::ItemWorker(ItemModel *model, const QString &data)
+    : QThread(model), model(model), data(data) {}
 
-ItemModel::ItemModel(ListItem *prototype, QObject *parent) :
-    ListModel(prototype, parent)
-{
-}
+void ItemWorker::run() { items = model->makeItems(); }
 
-void ItemModel::updateModel(const QString &data)
-{
+ItemModel::ItemModel(ListItem *prototype, QObject *parent)
+    : ListModel(prototype, parent) {}
+
+void ItemModel::updateModel(const QString &data) {
     if (m_worker && m_worker->isRunning()) {
-        //qWarning() << "Previous worker is running";
+        // qWarning() << "Previous worker is running";
         return;
     }
 
@@ -39,31 +29,26 @@ void ItemModel::updateModel(const QString &data)
     m_worker->start(QThread::IdlePriority);
 }
 
-void ItemModel::clear()
-{
-    if (m_list.length() == 0)
-        return;
+void ItemModel::clear() {
+    if (m_list.length() == 0) return;
 
-    removeRows(0,rowCount());
+    removeRows(0, rowCount());
     emit countChanged();
 }
 
-void ItemModel::workerDone()
-{
-    auto worker = dynamic_cast<ItemWorker*>(sender());
+void ItemModel::workerDone() {
+    auto worker = qobject_cast<ItemWorker *>(sender());
     if (worker) {
         int old_l = m_list.length();
 
-        if (m_list.length() != 0)
-            removeRows(0,rowCount());
+        if (m_list.length() != 0) removeRows(0, rowCount());
 
         if (!worker->items.isEmpty())
             appendRows(worker->items);
         else
             qWarning() << "No items";
 
-        if (old_l != m_list.length())
-            emit countChanged();
+        if (old_l != m_list.length()) emit countChanged();
 
         m_worker.reset(nullptr);
     }
@@ -71,52 +56,38 @@ void ItemModel::workerDone()
     setBusy(false);
 }
 
-int  ItemModel::getCount()
-{
-    return m_list.length();
-}
+int ItemModel::getCount() const { return m_list.length(); }
 
-bool ItemModel::isBusy()
-{
-    return m_busy;
-}
+bool ItemModel::isBusy() const { return m_busy; }
 
-void ItemModel::setBusy(bool busy)
-{
+void ItemModel::setBusy(bool busy) {
     if (busy != m_busy) {
         m_busy = busy;
         emit busyChanged();
     }
 }
 
-void SelectableItem::setSelected(bool value)
-{
+void SelectableItem::setSelected(bool value) {
     if (m_selected != value) {
         m_selected = value;
         emit dataChanged();
     }
 }
 
-SelectableItemModel::SelectableItemModel(SelectableItem *prototype, QObject *parent) :
-    ItemModel(prototype, parent)
-{
-}
+SelectableItemModel::SelectableItemModel(SelectableItem *prototype,
+                                         QObject *parent)
+    : ItemModel(prototype, parent) {}
 
-int SelectableItemModel::selectedCount()
-{
-    return m_selectedCount;
-}
+int SelectableItemModel::selectedCount() { return m_selectedCount; }
 
-void SelectableItemModel::clear()
-{
+void SelectableItemModel::clear() {
     ItemModel::clear();
 
     m_selectedCount = 0;
     emit selectedCountChanged();
 }
 
-void SelectableItemModel::setFilter(const QString &filter)
-{
+void SelectableItemModel::setFilter(const QString &filter) {
     if (m_filter != filter) {
         m_filter = filter;
         emit filterChanged();
@@ -125,13 +96,9 @@ void SelectableItemModel::setFilter(const QString &filter)
     }
 }
 
-QString SelectableItemModel::getFilter()
-{
-    return m_filter;
-}
+QString SelectableItemModel::getFilter() const { return m_filter; }
 
-void SelectableItemModel::setSelected(int index, bool value)
-{
+void SelectableItemModel::setSelected(int index, bool value) {
     int l = m_list.length();
 
     if (index >= l) {
@@ -139,7 +106,7 @@ void SelectableItemModel::setSelected(int index, bool value)
         return;
     }
 
-    auto item = dynamic_cast<SelectableItem*>(m_list.at(index));
+    auto item = dynamic_cast<SelectableItem *>(m_list.at(index));
 
     bool cvalue = item->selected();
 
@@ -155,15 +122,13 @@ void SelectableItemModel::setSelected(int index, bool value)
     }
 }
 
-void SelectableItemModel::setAllSelected(bool value)
-{
-    if (m_list.isEmpty())
-        return;
+void SelectableItemModel::setAllSelected(bool value) {
+    if (m_list.isEmpty()) return;
 
     int c = m_selectedCount;
 
     foreach (auto li, m_list) {
-        auto item = qobject_cast<SelectableItem*>(li);
+        auto item = qobject_cast<SelectableItem *>(li);
 
         bool cvalue = item->selected();
 
@@ -177,27 +142,21 @@ void SelectableItemModel::setAllSelected(bool value)
         }
     }
 
-    if (c != m_selectedCount)
-         emit selectedCountChanged();
+    if (c != m_selectedCount) emit selectedCountChanged();
 }
 
-QVariantList SelectableItemModel::selectedItems()
-{
-    return QVariantList();
-}
+QVariantList SelectableItemModel::selectedItems() { return QVariantList(); }
 
-void SelectableItemModel::workerDone()
-{
+void SelectableItemModel::workerDone() {
     if (m_worker && m_worker->data != m_filter) {
-        //qDebug() << "Filter has changed, so updating model";
+        // qDebug() << "Filter has changed, so updating model";
         updateModel(m_filter);
     } else {
         ItemModel::workerDone();
     }
 }
 
-void SelectableItemModel::updateModel(const QString &data)
-{
+void SelectableItemModel::updateModel(const QString &data) {
     Q_UNUSED(data)
     setAllSelected(false);
     ItemModel::updateModel(m_filter);

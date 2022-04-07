@@ -20,10 +20,7 @@ ApplicationWindow {
     _defaultPageOrientations: Orientation.All
 
     function reload(url, title) {
-        if (!zimServer.listening) {
-            Qt.quit();
-            return;
-        }
+        console.log("reload:", url, title, zimServer.loaded)
         if (zimServer.loaded) {
             if (url !== "" && title !== "") {
                 pageStack.replaceAbove(null,Qt.resolvedUrl("SearchPage.qml"), {}, PageStackAction.Immediate)
@@ -40,11 +37,6 @@ ApplicationWindow {
         }
     }
 
-    function openUrlEntryInBrowser(url) {
-        notification.show(qsTr("Launching an external browser..."))
-        Qt.openUrlExternally(encodeURI(url))
-    }
-
     Connections {
         target: zimServer
         onLoadedChanged: reload("", "")
@@ -53,13 +45,13 @@ ApplicationWindow {
 
     Connections {
         target: bookmarkModel
-        onBookmarkAdded: notification.show(qsTr("Bookmark has been added"))
+        onBookmarkAdded: notification.show(qsTr("Bookmark added"))
         onBookmarkExists: notification.show(qsTr("Bookmark already exists"))
-        //onBookmarkDeleted: notification.show(qsTr("Bookmark has been deleted"))
-        onBookmarkUpdated: notification.show(qsTr("Bookmark has been updated"))
+        onBookmarkUpdated: notification.show(qsTr("Bookmark updated"))
     }
 
     Component.onCompleted: {
+        console.log("=== QML component completed ===")
         zimServer.loadZimFile();
     }
 
