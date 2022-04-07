@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) 2021 Mannesh P M <manu.pm55@gmaile.com>
+ * Copyright (C) 2018 Matthieu Gautier <mgautier@kymeria.fr>
  * Copyright (C) 2009 Tommi Maekitalo
  *
  * This program is free software; you can redistribute it and/or
@@ -46,6 +48,8 @@ namespace zim
     bool operator!= (const Uuid& other) const
       { return !(*this == other); }
     unsigned size() const  { return 16; }
+
+    explicit operator std::string() const;
 
     char data[16];
   };

@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) 2017-2021 Matthieu Gautier <mgautier@kymeria.fr>
+ * Copyright (C) 2020 Veloman Yunkan
  * Copyright (C) 2009 Tommi Maekitalo
  *
  * This program is free software; you can redistribute it and/or
@@ -22,7 +24,7 @@
 
 #include <memory>
 #include <zim/zim.h>
-#include <zim/writer/article.h>
+#include <zim/writer/item.h>
 
 namespace zim
 {
@@ -30,39 +32,190 @@ namespace zim
   namespace writer
   {
     class CreatorData;
+
+    /**
+     * The `Creator` is responsible to create a zim file.
+     *
+     * Once the `Creator` is instantiated, it can be configured with the
+     * `config*` methods.
+     * Then the creation process must be started with `startZimCreation`.
+     * Elements of the zim file can be added using the `add*` methods.
+     * The final steps is to call `finishZimCreation`.
+     *
+     * During the creation of the zim file (and before the call to `finishZimCreation`),
+     * some values must be set using the `set*` methods.
+     */
     class Creator
     {
       public:
-        Creator(bool verbose = false, CompressionType c = zimcompLzma);
+
+        /**
+         * Creator constructor.
+         *
+         * @param verbose If the creator print verbose information.
+         * @param comptype The compression algorithm to use.
+         */
+        Creator();
         virtual ~Creator();
 
-        zim::size_type getMinChunkSize() const { return minChunkSize; }
-        void setMinChunkSize(zim::size_type s) { minChunkSize = s; }
-        void setIndexing(bool indexing, std::string language)
-        { withIndex = indexing; indexingLanguage = language; }
-        DEPRECATED void setCompressionThreads(unsigned ct) { nbWorkerThreads = ct; }
-        void setNbWorkerThreads(unsigned ct) { nbWorkerThreads = ct; }
+        /**
+         * Configure the verbosity of the creator
+         *
+         * @param verbose if the creator print verbose information.
+         * @return a reference to itself.
+         */
+        Creator& configVerbose(bool verbose);
 
+        /**
+         * Configure the compression algorithm to use.
+         *
+         * @param comptype the compression algorithm to use.
+         * @return a reference to itself.
+         */
+        Creator& configCompression(Compression compression);
 
-        virtual void startZimCreation(const std::string& fname);
-        virtual void addArticle(std::shared_ptr<Article> article);
-        virtual void finishZimCreation();
+        /**
+         * Set the size of the created clusters.
+         *
+         * The creator will try to create cluster with (uncompressed) size
+         * as close as possible to targetSize without exceeding that limit.
+         * If not possible, the only such case being an item larger than targetSize,
+         * a separated cluster will be allocated for that oversized item.
+         *
+         * Be carefull with this value.
+         * Bigger value means more content put together, so a better compression ratio.
+         * But it means also that more decompression has to be made when reading a blob.
+         * If you don't know which value to put, don't use this method and let libzim
+         * use the default value.
+         *
+         * @param targetSize The target size of a cluster (in byte).
+         * @return a reference to itself.
+         */
+        Creator& configClusterSize(zim::size_type targetSize);
 
-        virtual Url getMainUrl() const { return Url(); }
-        virtual Url getLayoutUrl() const { return Url(); }
-        virtual zim::Uuid getUuid() const { return Uuid::generate(); }
+        /**
+         * Configure the fulltext indexing feature.
+         *
+         * @param indexing True if we must fulltext index the content.
+         * @param language Language to use for the indexation.
+         * @return a reference to itself.
+         */
+        Creator& configIndexing(bool indexing, const std::string& language);
+
+        /**
+         * Set the number of thread to use for the internal worker.
+         *
+         * @param nbWorkers The number of workers to use.
+         * @return a reference to itself.
+         */
+        Creator& configNbWorkers(unsigned nbWorkers);
+
+        /**
+         * Start the zim creation.
+         *
+         * The creator must have been configured before calling this method.
+         *
+         * @param filepath the path of the zim file to create.
+         */
+        void startZimCreation(const std::string& filepath);
+
+        /**
+         * Add a item to the archive.
+         *
+         * @param item The item to add.
+         */
+        void addItem(std::shared_ptr<Item> item);
+
+        /**
+         * Add a metadata to the archive.
+         *
+         * @param name the name of the metadata
+         * @param content the content of the metadata
+         * @param mimetype the mimetype of the metadata.
+         *                 Only used to detect if the metadata must be compressed or not.
+         */
+        void addMetadata(const std::string& name, const std::string& content, const std::string& mimetype = "text/plain;charset=utf-8");
+
+        /**
+         * Add a metadata to the archive using a contentProvider instead of plain string.
+         *
+         * @param name the name of the metadata.
+         * @param provider the provider of the content of the metadata.
+         * @param mimetype the mimetype of the metadata.
+         *                 Only used to detect if the metadata must be compressed.
+         */
+        void addMetadata(const std::string& name, std::unique_ptr<ContentProvider> provider, const std::string& mimetype);
+
+        /**
+         * Add illustration to the archive.
+         *
+         * @param size the size (width and height) of the illustration.
+         * @param content the content of the illustration (must be a png content)
+         */
+        void addIllustration(unsigned int size, const std::string& content);
+
+        /**
+         * Add illustration to the archive.
+         *
+         * @param size the size (width and height) of the illustration.
+         * @param provider the provider of the content of the illustration (must be a png content)
+         */
+        void addIllustration(unsigned int size, std::unique_ptr<ContentProvider> provider);
+
+        /**
+         * Add a redirection to the archive.
+         *
+         * Hints (especially FRONT_ARTICLE) can be used to put the redirection
+         * in the front articles list.
+         * By default, redirections are not front article.
+         *
+         * @param path the path of the redirection.
+         * @param title the title of the redirection.
+         * @param targetpath the path of the target of the redirection.
+         * @param hints hints associated to the redirection.
+         */
+        void addRedirection(
+            const std::string& path,
+            const std::string& title,
+            const std::string& targetpath,
+            const Hints& hints = Hints());
+
+        /**
+         * Finalize the zim creation.
+         */
+        void finishZimCreation();
+
+        /**
+         * Set the path of the main page.
+         *
+         * @param mainPath The path of the main page.
+         */
+        void setMainPath(const std::string& mainPath) { m_mainPath = mainPath; }
+
+        /**
+         * Set the uuid of the the archive.
+         *
+         * @param uuid The uuid of the archive.
+         */
+        void setUuid(const zim::Uuid& uuid) { m_uuid = uuid; }
 
       private:
         std::unique_ptr<CreatorData> data;
-        bool verbose;
-        const CompressionType compression;
-        bool withIndex = false;
-        size_t minChunkSize = 1024-64;
-        std::string indexingLanguage;
-        unsigned nbWorkerThreads = 4;
+
+        // configuration
+        bool m_verbose = false;
+        Compression m_compression = Compression::Zstd;
+        bool m_withIndex = false;
+        size_t m_clusterSize;
+        std::string m_indexingLanguage;
+        unsigned m_nbWorkers = 4;
+
+        // zim data
+        std::string m_mainPath;
+        Uuid m_uuid = Uuid::generate();
 
         void fillHeader(Fileheader* header) const;
-        void write() const;
+        void writeLastParts() const;
     };
   }
 

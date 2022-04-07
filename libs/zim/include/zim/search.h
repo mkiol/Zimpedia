@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) 2017-2021 Matthieu Gautier <mgautier@kymeria.fr>
+ * Copyright (C) 2021 Maneesh P M <manu.pm55@gmail.com>
  * Copyright (C) 2007 Tommi Maekitalo
  *
  * This program is free software; you can redistribute it and/or
@@ -21,60 +23,200 @@
 #define ZIM_SEARCH_H
 
 #include "search_iterator.h"
+#include "archive.h"
 #include <vector>
 #include <string>
 #include <map>
 
+namespace Xapian {
+  class Enquire;
+  class MSet;
+};
+
 namespace zim
 {
 
-class File;
+class Archive;
+class InternalDataBase;
+class Query;
+class Search;
+class SearchResultSet;
+
+/**
+ * A Searcher is a object fulltext searching a set of Archives
+ *
+ * A Searcher is mainly used to create new `Search`
+ * Internaly, this is mainly a wrapper around a Xapian database.
+ *
+ * You should consider that all search operations are NOT threadsafe.
+ * It is up to you to protect your calls to avoid race competition.
+ * However, Searcher (and subsequent classes) do not maintain a global/share state.
+ * You can create several Searchers and use them in different threads.
+ */
+class Searcher
+{
+  public:
+    /** Searcher constructor.
+     *
+     * Construct a searcher on top of several archives (multi search).
+     *
+     * @param archives A list(vector) of archives to search on.
+     */
+    explicit Searcher(const std::vector<Archive>& archives);
+
+    /** Searcher constructor.
+     *
+     * Construct a searcher on top of on archive.
+     *
+     * @param archive A archive to search on.
+     */
+    explicit Searcher(const Archive& archive);
+    Searcher(const Searcher& other);
+    Searcher& operator=(const Searcher& other);
+    Searcher(Searcher&& other);
+    Searcher& operator=(Searcher&& other);
+    ~Searcher();
+
+    /** Add a archive to the searcher.
+     *
+     * Adding a archive to a searcher do not invalidate already created search.
+     */
+    Searcher& addArchive(const Archive& archive);
+
+    /** Create a search for a specific query.
+     *
+     * The search is made on all archives added to the Searcher.
+     *
+     * @param query The Query to search.
+     *
+     * @throws std::runtime_error if the searcher does not have a valid
+     *         FT database.
+     */
+    Search search(const Query& query);
+
+    /** Set the verbosity of search operations.
+     *
+     * @param verbose The verbose mode to set
+     */
+    void setVerbose(bool verbose);
+
+  private: // methods
+    void initDatabase();
+
+  private: // data
+    std::shared_ptr<InternalDataBase> mp_internalDb;
+    std::vector<Archive> m_archives;
+    bool m_verbose;
+};
+
+/**
+ * A Query represent a query.
+ *
+ * It describe what have to be searched and how.
+ * A Query is "database" independent.
+ */
+class Query
+{
+  public:
+    /** Query constructor.
+     *
+     * Create a empty query.
+     */
+    Query(const std::string& query = "");
+
+    /** Set the textual query of the Query.
+     *
+     * @param query The string to search for.
+     */
+    Query& setQuery(const std::string& query);
+
+    /** Set the geographical query of the Query.
+     *
+     * Some article may be geo positioned.
+     * You can search for articles in a certain distance of a point.
+     *
+     * @param latitude The latitute of the point.
+     * @param longitude The longitude of the point.
+     * @param distance The maximal distance from the point.
+     */
+    Query& setGeorange(float latitude, float longitude, float distance);
+
+    std::string m_query { "" };
+
+    bool m_geoquery { false };
+    float m_latitude { 0 };
+    float m_longitude { 0 };
+    float m_distance { 0 } ;
+};
+
+
+/**
+ * A Search represent a particular search, based on a `Searcher`.
+ *
+ * This is somehow the reunification of a `Searcher` (what to search on)
+ * and a `Query` (what to search for).
+ */
 class Search
 {
-    friend class search_iterator;
-    friend struct search_iterator::InternalData;
     public:
-        typedef search_iterator iterator;
-
-        explicit Search(const std::vector<const File*> zimfiles);
-        explicit Search(const File* zimfile);
-        Search(const Search& it);
-        Search& operator=(const Search& it);
-        Search(Search&& it);
-        Search& operator=(Search&& it);
+        Search(Search&& s);
+        Search& operator=(Search&& s);
         ~Search();
 
-        void set_verbose(bool verbose);
+        /** Get a set of results for this search.
+         *
+         * @param start The begining of the range to get
+         *              (offset of the first result).
+         * @param maxResults The maximum number of results to return
+         *                   (offset of last result from the start of range).
+         */
+        const SearchResultSet getResults(int start, int maxResults) const;
 
-        Search& add_zimfile(const File* zimfile);
-        Search& set_query(const std::string& query);
-        Search& set_georange(float latitude, float longitude, float distance);
-        Search& set_range(int start, int end);
-        Search& set_suggestion_mode(bool suggestion_mode);
+        /** Get the number of estimated results for this search.
+         *
+         * As the name suggest, it is a estimation of the number of results.
+         */
+        int getEstimatedMatches() const;
 
-        search_iterator begin() const;
-        search_iterator end() const;
-        int get_matches_estimated() const;
+    private: // methods
+        Search(std::shared_ptr<InternalDataBase> p_internalDb, const Query& query);
+        Xapian::Enquire& getEnquire() const;
 
-    private:
-         struct InternalData;
-         std::unique_ptr<InternalData> internal;
-         std::vector<const File*> zimfiles;
+    private: // data
+         std::shared_ptr<InternalDataBase> mp_internalDb;
+         mutable std::unique_ptr<Xapian::Enquire> mp_enquire;
+         Query m_query;
 
-         mutable std::map<std::string, int> valuesmap;
-         mutable std::string prefixes;
-         std::string query;
-         float latitude;
-         float longitude;
-         float distance;
-         int range_start;
-         int range_end;
-         bool suggestion_mode;
-         bool geo_query;
-         mutable bool search_started;
-         mutable bool has_database;
-         mutable bool verbose;
-         mutable int estimated_matches_number;
+  friend class Searcher;
+};
+
+/**
+ * The `SearchResult` represent a range of results corresponding to a `Search`.
+ *
+ * It mainly allows to get a iterator.
+ */
+class SearchResultSet
+{
+  public:
+    typedef SearchIterator iterator;
+
+    /** The begin iterator on the result range. */
+    iterator begin() const;
+
+    /** The end iterator on the result range. */
+    iterator end() const;
+
+    /** The size of the SearchResult (end()-begin()) */
+    int size() const;
+
+  private:
+    SearchResultSet(std::shared_ptr<InternalDataBase> p_internalDb, Xapian::MSet&& mset);
+    SearchResultSet(std::shared_ptr<InternalDataBase> p_internalDb);
+
+  private: // data
+    std::shared_ptr<InternalDataBase> mp_internalDb;
+    std::shared_ptr<Xapian::MSet> mp_mset;
+  friend class Search;
 };
 
 } //namespace zim

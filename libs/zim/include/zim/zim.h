@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) 2020-2021 Veloman Yunkan
+ * Copyright (C) 2018-2020 Matthieu Gautier <mgautier@kymeria.fr>
  * Copyright (C) 2006 Tommi Maekitalo
  *
  * This program is free software; you can redistribute it and/or
@@ -32,10 +34,12 @@
 #endif
 
 
+#include <zim/zim_config.h>
+
 namespace zim
 {
-  // An index of an article (in a zim file)
-  typedef uint32_t article_index_type;
+  // An index of an entry (in a zim file)
+  typedef uint32_t entry_index_type;
 
   // An index of an cluster (in a zim file)
   typedef uint32_t cluster_index_type;
@@ -43,20 +47,17 @@ namespace zim
   // An index of a blog (in a cluster)
   typedef uint32_t blob_index_type;
 
-  // The size of something (article, zim, cluster, blob, ...)
+  // The size of something (entry, zim, cluster, blob, ...)
   typedef uint64_t size_type;
 
   // An offset.
   typedef uint64_t offset_type;
 
-  enum CompressionType
+  enum class Compression
   {
-    zimcompDefault,
-    zimcompNone,
-    zimcompZip, // Not supported anymore in the libzim
-    zimcompBzip2, // Not supported anymore in the libzim
-    zimcompLzma,
-    zimcompZstd
+    None = 1,
+    Lzma = 4,
+    Zstd = 5
   };
 
   static const char MimeHtmlTemplate[] = "text/x-zim-htmltemplate";
@@ -65,8 +66,11 @@ namespace zim
   {
     CHECKSUM,
     DIRENT_PTRS, // Checks that offsets in UrlPtrList are valid
+    DIRENT_ORDER, // Checks that dirents are properly sorted
     TITLE_INDEX, // Checks that entries in the title index are valid
+                 // and properly sorted
     CLUSTER_PTRS, // Checks that offsets in ClusterPtrList are valid
+    DIRENT_MIMETYPES, // Checks that mime-type values in dirents are valid
 
     // This must be the last one and denotes the count of all checks
     COUNT
