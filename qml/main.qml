@@ -15,32 +15,38 @@ import Sailfish.Silica 1.0
 ApplicationWindow {
     id: app
 
+    initialPage: Qt.resolvedUrl("SearchPage.qml")
     cover: Qt.resolvedUrl("CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
 
+    function setSearchPage() {
+        pageStack.replaceAbove(null, Qt.resolvedUrl("SearchPage.qml"), {}, PageStackAction.Immediate);
+    }
+
     function reload(url, title) {
-        console.log("reload:", url, title, zimServer.loaded)
-        if (zimServer.loaded) {
-            if (url !== "" && title !== "") {
-                pageStack.replaceAbove(null,Qt.resolvedUrl("SearchPage.qml"), {}, PageStackAction.Immediate)
-                if (settings.browser === 0) {
-                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": url});
-                } else {
-                    openUrlEntryInBrowser(url)
-                }
+        if (zimServer.loaded && url !== "" && title !== "") {
+            setSearchPage();
+            if (settings.browser === 0) {
+                pageStack.push(Qt.resolvedUrl("WebViewPage.qml"), {"url": url});
             } else {
-                pageStack.replaceAbove(null,Qt.resolvedUrl("SearchPage.qml"))
+                openUrlEntryInBrowser(url)
             }
-        } else {
-            pageStack.replaceAbove(null,Qt.resolvedUrl("FilesPage.qml"))
         }
     }
 
+
     Connections {
         target: zimServer
-        onLoadedChanged: reload("", "")
         onUrlReady: reload(url, title)
+    }
+
+    Connections {
+        target: fileModel
+        onNoFilesFound: {
+            setSearchPage();
+            pageStack.push(Qt.resolvedUrl("FilesPage.qml"), {}, PageStackAction.Immediate);
+        }
     }
 
     Connections {
@@ -52,11 +58,11 @@ ApplicationWindow {
 
     Component.onCompleted: {
         console.log("=== QML component completed ===")
-        zimServer.loadZimFile();
+        fileModel.updateModel();
+        zimServer.loadZim();
     }
 
     Notification {
         id: notification
     }
 }
-

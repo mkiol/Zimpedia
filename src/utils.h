@@ -8,6 +8,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <QColor>
 #include <QObject>
 #include <QString>
 
@@ -16,10 +17,11 @@ class Utils : public QObject {
 
    public:
     explicit Utils(QObject *parent = nullptr);
-
+    static bool createCacheDir();
     Q_INVOKABLE QString homeDir() const;
     Q_INVOKABLE void copyToClipboard(const QString &text) const;
-    static bool createCacheDir();
+    Q_INVOKABLE QColor colorFromUuid(const QString &uuid) const;
+    Q_INVOKABLE QString humanSize(qint64 bytes) const;
 };
 
 #endif  // UTILS_H

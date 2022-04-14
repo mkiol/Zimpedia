@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QVariant>
+#include <algorithm>
 
 #include "info.h"
 
@@ -47,57 +48,74 @@ Settings* Settings::instance() {
 }
 
 void Settings::setFontSize(int value) {
-    if (getFontSize() != value) {
+    if (fontSize() != value) {
         setValue("fontsize", value);
         emit fontSizeChanged();
     }
 }
 
-int Settings::getFontSize() const { return value("fontsize", 1).toInt(); }
+int Settings::fontSize() const { return value("fontsize", 1).toInt(); }
 
-float Settings::getZoom() const {
-    float size = value("zoom", 1.0).toFloat();
-    return size <= 0.5 ? 0.5 : size >= 2.0 ? 2.0 : size;
+float Settings::zoom() const {
+    return std::min(std::max(minZoom, value("zoom", 1.0).toFloat()), maxZoom);
 }
 
 void Settings::setZoom(float value) {
-    // Min value is 0.5 & max value is 2.0
-    if (value <= 0.5)
-        value = 0.5;
-    else if (value >= 2.0)
-        value = 2.0;
-
-    if (getZoom() != value) {
+    value = std::min(std::max(minZoom, value), maxZoom);
+    if (zoom() != value) {
         setValue("zoom", value);
         emit zoomChanged();
     }
 }
 
-void Settings::setZimFile(const QString& value) {
-    if (getZimFile() != value) {
-        setValue("zimfile", value);
-        emit zimFileChanged();
+void Settings::setZimFiles(QStringList files) {
+    std::sort(files.begin(), files.end());
+    if (zimFiles() != files) {
+        setValue("zimfiles", files);
+        emit zimFilesChanged();
     }
 }
 
-QString Settings::getZimFile() const { return value("zimfile", "").toString(); }
+void Settings::addZimFile(const QString& value) {
+    auto files = zimFiles();
+    if (files.contains(value)) return;
+    files.push_back(value);
+    setZimFiles(files);
+}
+
+void Settings::removeZimFile(const QString& value) {
+    auto files = zimFiles();
+    if (!files.contains(value)) return;
+    files.removeAll(value);
+    setZimFiles(files);
+}
+
+QStringList Settings::zimFiles() const {
+    return value("zimfiles", {}).toStringList();
+}
 
 void Settings::setBrowser(int value) {
-    if (getBrowser() != value) {
+    if (browser() != value) {
         setValue("browser", value);
         emit browserChanged();
     }
 }
 
-int Settings::getBrowser() const { return value("browser", 0).toInt(); }
+int Settings::browser() const { return value("browser", 0).toInt(); }
 
 void Settings::setSearchMode(Settings::SearchMode value) {
-    if (getSearchMode() != value) {
+    if (searchMode() != value) {
         setValue("searchmode", static_cast<int>(value));
         emit searchModeChanged();
     }
 }
 
-Settings::SearchMode Settings::getSearchMode() const {
+Settings::SearchMode Settings::searchMode() const {
     return static_cast<Settings::SearchMode>(value("searchmode", 0).toInt());
+}
+
+QUrl Settings::appIcon() const {
+    return QUrl::fromLocalFile(
+        QString(QStringLiteral("/usr/share/icons/hicolor/172x172/apps/%1.png"))
+            .arg(Zimpedia::APP_BINARY_ID));
 }

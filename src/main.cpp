@@ -51,6 +51,7 @@ void installTranslator() {
                  << transDir;
         if (!translator->load(QStringLiteral("Zimpedia_en"), transDir)) {
             qDebug() << "Cannot load default translation";
+            delete translator;
             return;
         }
     }
@@ -105,8 +106,6 @@ Q_DECL_EXPORT int main(int argc, char** argv) {
     context->setContextProperty(QStringLiteral("articleModel"), articleModel);
     context->setContextProperty(QStringLiteral("utils"), &utils);
     context->setContextProperty(QStringLiteral("bookmarkModel"), bookmarkModel);
-
-    fileModel->updateModel();
 
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/main.qml")));
     view->show();

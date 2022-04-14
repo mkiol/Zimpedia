@@ -11,19 +11,20 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
+#include <QUrl>
 
 class Settings : public QSettings {
     Q_OBJECT
 
     Q_PROPERTY(
-        int fontSize READ getFontSize WRITE setFontSize NOTIFY fontSizeChanged)
-    Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
-    Q_PROPERTY(
-        QString zimFile READ getZimFile WRITE setZimFile NOTIFY zimFileChanged)
-    Q_PROPERTY(
-        int browser READ getBrowser WRITE setBrowser NOTIFY browserChanged)
-    Q_PROPERTY(SearchMode searchMode READ getSearchMode WRITE setSearchMode
-                   NOTIFY searchModeChanged)
+        int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
+    Q_PROPERTY(float zoom READ zoom WRITE setZoom NOTIFY zoomChanged)
+    Q_PROPERTY(QStringList zimFiles READ zimFiles WRITE setZimFiles NOTIFY
+                   zimFilesChanged)
+    Q_PROPERTY(int browser READ browser WRITE setBrowser NOTIFY browserChanged)
+    Q_PROPERTY(SearchMode searchMode READ searchMode WRITE setSearchMode NOTIFY
+                   searchModeChanged)
 
    public:
     enum SearchMode {
@@ -35,20 +36,23 @@ class Settings : public QSettings {
     static Settings* instance();
 
     void setFontSize(int value);
-    int getFontSize() const;
-    void setZimFile(const QString& value);
+    int fontSize() const;
+    void setZimFiles(QStringList value);
+    void addZimFile(const QString& value);
+    void removeZimFile(const QString& value);
     void setZoom(float value);
-    float getZoom() const;
+    float zoom() const;
     void setBrowser(int value);
-    int getBrowser() const;
+    int browser() const;
     void setSearchMode(SearchMode value);
-    SearchMode getSearchMode() const;
-    QString getZimFile() const;
+    SearchMode searchMode() const;
+    QStringList zimFiles() const;  // uuids
+    Q_INVOKABLE QUrl appIcon() const;
 
    signals:
     void portChanged();
     void fontSizeChanged();
-    void zimFileChanged();
+    void zimFilesChanged();
     void browserChanged();
     void zoomChanged();
     void searchModeChanged();
@@ -56,6 +60,8 @@ class Settings : public QSettings {
    private:
     inline static const QString settingsFilename =
         QStringLiteral("settings.conf");
+    static constexpr const float maxZoom = 2.0;
+    static constexpr const float minZoom = 0.5;
     static Settings* m_instance;
     Settings();
     static QString settingsFilepath();

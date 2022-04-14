@@ -1,13 +1,9 @@
-/*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
-
-  This file is part of Zimpedia application.
-
-  This Source Code Form is subject to the terms of
-  the Mozilla Public License, v.2.0. If a copy of
-  the MPL was not distributed with this file, You can
-  obtain one at http://mozilla.org/MPL/2.0/.
-*/
+/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
@@ -15,6 +11,7 @@ import Sailfish.Silica 1.0
 Page {
     id: root
     objectName: "about"
+    allowedOrientations: Orientation.All
 
     SilicaFlickable {
         anchors.fill: parent
@@ -28,12 +25,14 @@ Page {
             spacing: Theme.paddingLarge
 
             PageHeader {
-                title: qsTr("About")
+                title: qsTr("About %1").arg(APP_NAME)
             }
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "image://icons/icon-i-zimpedia"
+                height: Theme.itemSizeHuge
+                width: Theme.itemSizeHuge
+                source: settings.appIcon()
             }
 
             InfoLabel {
@@ -47,20 +46,16 @@ Page {
                 text: qsTr("Version %1").arg(APP_VERSION);
             }
 
-            /*PaddedLabel {
-                text: qsTr("Offline reader for Wikipedia and other Wiki projects");
-            }*/
-
-            Button {
-                text: qsTr("Changelog")
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
-            }
-
             Button {
                 text: qsTr("Project website")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: Qt.openUrlExternally(PAGE)
+            }
+
+            Button {
+                text: qsTr("Changes")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
             }
 
             SectionHeader {
@@ -77,21 +72,20 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                text: qsTr("Translations are provided by:")
+                textFormat: Text.StyledText
+                text: qsTr("%1 is developed as an open source project under %2.")
+                .arg(APP_NAME)
+                .arg("<a href=\"" + LICENSE_URL + "\">" + LICENSE + "</a>")
+            }
+
+            SectionHeader {
+                text: qsTr("Translators")
             }
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 text: "lutinotmalin \nJeff Huang \nВячеслав Диконов \nRikudouSage \npopanz \nCarmen F. B \n" +
                       "Åke Engelbrektson \nNathan Follens \nSzabó G. \n涛 匡 \nАлексей Дедун"
-            }
-
-            PaddedLabel {
-                horizontalAlignment: Text.AlignLeft
-                textFormat: Text.StyledText
-                text: qsTr("%1 is developed as an open source project under %2.")
-                .arg(APP_NAME)
-                .arg("<a href=\"" + LICENSE_URL + "\">" + LICENSE + "</a>")
             }
 
             SectionHeader {

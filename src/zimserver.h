@@ -16,6 +16,7 @@
 #include <QList>
 #include <QObject>
 #include <QThread>
+#include <memory>
 #include <optional>
 #include <string>
 
@@ -24,6 +25,8 @@
 struct SearchResult {
     QString title;
     QUrl url;
+    QString uuid;
+    int score = 0;
 };
 
 struct ArticleResult {
@@ -35,13 +38,8 @@ class ZimServer : public QThread {
     Q_OBJECT
 
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
-    Q_PROPERTY(bool hasMainPage READ hasMainPage NOTIFY archiveChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
-    Q_PROPERTY(QString title READ title NOTIFY archiveChanged)
-    Q_PROPERTY(QString language READ language NOTIFY archiveChanged)
-    Q_PROPERTY(QString uuid READ uuid NOTIFY archiveChanged)
-    Q_PROPERTY(QString favicon READ favicon NOTIFY archiveChanged)
-
+    Q_PROPERTY(int filesCount READ filesCount NOTIFY loadedChanged)
    public:
     static const int port = 9091;
     static ZimServer *instance(QObject *parent = nullptr);
@@ -56,63 +54,72 @@ class ZimServer : public QThread {
 
     static std::optional<ArticleResult> article(const zim::Archive &archive,
                                                 const QString &path);
+    [[nodiscard]] static std::pair<QString, QString> parseUrl(const QUrl &url);
 
-    Q_INVOKABLE bool loadZimFile();
-    Q_INVOKABLE QUrl serverUrl() const;
-    Q_INVOKABLE void articleAsync(const QString &url);
-    Q_INVOKABLE void openUrl(const QString &url, const QString &title);
-    Q_INVOKABLE QString titleFromUrl(const QUrl &url);
+    Q_INVOKABLE bool loadZim();
+    Q_INVOKABLE QUrl serverUrl(const QString &uuid = {}) const;
+    Q_INVOKABLE void articleAsync(const QUrl &url);
+    Q_INVOKABLE void openUrl(const QUrl &url, const QString &title);
+    Q_INVOKABLE QString titleFromUrl(const QUrl &url) const;
     QList<SearchResult> search(QString phrase) const;
 
    signals:
     void error();
     void loadedChanged();
-    void archiveChanged();
     void searchReady();
-    void articleReady(QString article);
-    void urlReady(QString url, QString title);
+    void articleReady(const QString &article);
+    void urlReady(const QUrl &url, const QString &title);
     void busyChanged();
 
    private slots:
     void requestHandler(QHttpRequest *req, QHttpResponse *resp);
 
    private:
+    enum class WorkType { none, article, loadZim };
     static const int maxSearch = 20;  // max size of search result
     static ZimServer *m_instance;
 
-    explicit ZimServer(QObject *parent = nullptr);
-
     QHttpServer m_server;
-    std::optional<zim::Archive> m_archive;
-
-    bool isListening;
-    bool ftindex;
-    ZimMetaData m_meta;
-    QString urlToAsyncGet;
+    QHash<QString, std::shared_ptr<zim::Archive>> m_archive;  // uuid => archive
+    QHash<QString, ZimMetaData> m_meta;                       // uuid => meta
+    std::pair<QString, QString> m_articleToAsyncGet;  // article path, uuid
+    QString m_lastUuid;
+    bool m_loaded = false;
     bool m_busy = false;
-    bool m_hasMainPage = false;
+    bool m_delayedLoadZim = false;
+    QStringList m_uuidsToLoad;
+    WorkType m_workType = WorkType::none;
 
-    inline bool busy() const { return m_busy; }
-    inline bool loaded() const { return m_archive.has_value(); }
-    inline bool hasMainPage() const { return m_hasMainPage; }
-    inline QString title() const { return m_meta.title; }
-    inline QString language() const { return m_meta.language; }
-    inline QString uuid() const { return m_meta.checksum; }
-    inline QString favicon() const { return m_meta.favicon; }
+    explicit ZimServer(QObject *parent = nullptr);
+    inline auto busy() const { return m_busy; }
+    inline auto loaded() const { return m_loaded; }
+    inline auto filesCount() const { return m_archive.size(); }
     void run() override;
-    QUrl localUrl(const QString &path) const;
+    static QUrl localUrl(const QString &path, const QString &uuid);
     static std::optional<QByteArray> resContent(const QString &filename);
     static QString contentType(const QString &file);
-    void filter(QString *data);
-    std::optional<ArticleResult> article(const QString &path);
-    bool loadZimPath(const QString &path);
-    bool loadZimFileByUuid(const QString &uuid);
+    void filter(const QString &uuid, QString *data);
+    std::optional<ArticleResult> article(const QString &path,
+                                         const QString &uuid);
+    bool loadZimUuids(QStringList &&uuids);
+    bool loadZimUuid(const QString &uuids);
+    bool loadZimUuidEmit(const QString &uuid);
     [[nodiscard]] static QString fixPath(QString path);
     void setBusy(bool busy);
+    void setLoaded(bool loaded);
     void searchFullText(const QString &phrase, int maxSize,
                         QList<SearchResult> *result) const;
+    static void searchTitle(const zim::Archive &archive, const QString &uuid,
+                            const QString &phrase, int maxSize,
+                            QList<SearchResult> *result);
     void searchTitle(const QString &phrase, int maxSize,
                      QList<SearchResult> *result) const;
+    inline auto uuidLoaded(const QString &uuid) const {
+        return m_archive.contains(uuid);
+    }
+    void handleFilemodelChanged();
+    void articleAsyncWork();
+    void loadZimAsyncWork();
 };
 
 #endif  // ZIMSERVER_H

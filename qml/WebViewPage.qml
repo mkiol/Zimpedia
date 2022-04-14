@@ -1,13 +1,10 @@
-/*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
-  This file is part of Zimpedia application.
-
-  This Source Code Form is subject to the terms of
-  the Mozilla Public License, v.2.0. If a copy of
-  the MPL was not distributed with this file, You can
-  obtain one at http://mozilla.org/MPL/2.0/.
-*/
 
 // Some ideas heavily inspired and partially borrowed from
 // harbour-webpirate project (https://github.com/Dax89/harbour-webpirate)
@@ -127,7 +124,6 @@ Page {
             Qt.resolvedUrl("js/init.js")]
 
         experimental.onMessageReceived: {
-            //console.log("onMessageReceived data:", message.data)
             root.messageReceivedHandler(JSON.parse(message.data))
         }
 
@@ -234,7 +230,6 @@ Page {
             theme: parent.theme
             icon: "image://icons/icon-m-browser"
             onClicked: {
-                notification.show(qsTr("Opening in external app..."))
                 var url = encodeURI(root.history[root.history.length-1])
                 console.log("Opening: " + url)
                 Qt.openUrlExternally(url)

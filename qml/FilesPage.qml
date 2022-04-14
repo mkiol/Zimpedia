@@ -1,163 +1,100 @@
-/*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
-
-  This file is part of Zimpedia application.
-
-  This Source Code Form is subject to the terms of
-  the Mozilla Public License, v.2.0. If a copy of
-  the MPL was not distributed with this file, You can
-  obtain one at http://mozilla.org/MPL/2.0/.
-*/
+/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Page {
+Dialog {
     id: root
     objectName: "files"
 
-    property real preferredItemHeight: root && root.isLandscape ?
-                                           Theme.itemSizeSmall :
-                                           Theme.itemSizeLarge
-
-    Component.onCompleted: fileModel.updateModel()
+    allowedOrientations: Orientation.All
+    canAccept: fileModel.selectedCount > 0
+    onAccepted: {
+        settings.zimFiles = fileModel.selectedItems();
+        zimServer.loadZim();
+    }
 
     SilicaListView {
         id: listView
 
         anchors.fill: parent
-
         currentIndex: -1
-
         model: fileModel
 
-        header: PageHeader {
-            title: qsTr("ZIM files")
-        }
-
-        delegate: ListItem {
-            id: listItem
-
-            property bool active: settings.zimFile === model.id
-
-            visible: !fileModel.busy
-
-            contentHeight: Theme.itemSizeMedium
-
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Open file")
-                    onClicked: {
-                        settings.zimFile = model.id;
-                        zimServer.loadZimFile();
-                    }
-                }
-
-                MenuItem {
-                    text: qsTr("Show details")
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"),
-                                       {"path": model.dir,
-                                       "icon": model.favicon,
-                                       "title": model.title});
-                    }
-                }
+        header: SearchDialogHeader {
+            implicitWidth: root.width
+            dialog: root
+            search: false
+            view: listView
+            onActiveFocusChanged: {
+                listView.currentIndex = -1
             }
-
-            onClicked: {
-                settings.zimFile = model.id;
-                zimServer.loadZimFile();
-            }
-
-            FileIcon {
-                id: icon
-                anchors {
-                    left: parent.left
-                    leftMargin: Theme.horizontalPageMargin
-                    verticalCenter: parent.verticalCenter
-                }
-                showPlaceholder: true
-                source: model.favicon
-                text: model.title
-                height: Theme.iconSizeMedium
-                width: Theme.iconSizeMedium
-            }
-
-            Column {
-                anchors {
-                    left: icon.right
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                    leftMargin: Theme.paddingLarge
-                    rightMargin: Theme.paddingLarge
-                }
-                spacing: Theme.paddingSmall
-
-                Label {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    truncationMode: TruncationMode.Fade
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: listItem.active || listItem.down ? Theme.highlightColor : Theme.primaryColor
-                    text: model.title + (model.language === "" ? "" : " (" + model.language + ")")
-                }
-
-                Label {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    truncationMode: TruncationMode.Fade
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    color: listItem.active || listItem.down ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                    text: model.dir
-                }
-            }
-        }
-
-        Bubble {
-            enabled: listView.count == 0 && !fileModel.busy && !menu.active
-            text: qsTr("The ZIM is an open file format that stores wiki content for offline usage. "+
-                       "The collection of nice wikis can be downloaded from "+
-                       "<a href='http://www.kiwix.org/wiki/Content_in_all_languages'>this page</a>. "+
-                       "If you already have some ZIM files, put them to any folder you like under your home directory or SD card.")
         }
 
         PullDownMenu {
             id: menu
+            busy: fileModel.busy
 
             MenuItem {
-                text: qsTr("About")
-                visible: !zimServer.loaded
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-            }
-
-            MenuItem {
-                text: qsTr("Settings")
-                visible: !zimServer.loaded
-                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-            }
-
-            MenuItem {
-                text: qsTr("Bookmarks")
-                visible: !zimServer.loaded
-                enabled: !bookmarkModel.busy
-                onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
-            }
-
-            MenuItem {
+                enabled: !fileModel.busy
                 text: qsTr("Refresh")
                 onClicked: fileModel.refresh()
             }
         }
 
-        ViewPlaceholder {
-            enabled: listView.count == 0 && !fileModel.busy
-            text: qsTr("No files were found")
+        delegate: DoubleListItem {
+            id: listItem
+
+            property color primaryColor: highlighted ? Theme.highlightColor : Theme.primaryColor
+            property bool active: settings.zimFile === model.id
+
+            highlighted: down || model.selected
+            title: model.title
+            //subtitle: model.dir
+            uuid: model.uuid
+            visible: !fileModel.busy && listView.count > 0
+            icon: model.icon
+
+            onClicked: {
+                var selected = model.selected
+                fileModel.setSelected(model.index, !selected);
+            }
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Show details")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"), {"uuid": model.uuid});
+                    }
+                }
+            }
         }
 
+        ViewPlaceholder {
+            id: placeholder
+            enabled: listView.count == 0 && !fileModel.busy
+            verticalOffset: Theme.paddingLarge
+            text: qsTr("It looks like you don't have any ZIM archives")
+            hintText: qsTr("The ZIM is an open file format that stores content coming from the Web for offline use. " +
+                           "The collection of various archives can be found on " +
+                           "%1 website. " +
+                           "If you have already downloaded ZIM files, put them to any folder you like under Download directory or SD card.")
+            .arg("<b>library.kiwix.org</b>")
+        }
+
+        Button {
+            visible: placeholder.enabled
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.iconSizeMedium
+            text: qsTr("Open %1").arg("library.kiwix.org")
+            onClicked: Qt.openUrlExternally("http://library.kiwix.org")
+        }
     }
 
     BusyIndicator {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2017-2022 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,11 +17,16 @@ class IconProvider : public QQuickImageProvider {
    public:
     IconProvider();
     QPixmap requestPixmap(const QString &id, QSize *size,
-                          const QSize &requestedSize);
+                          const QSize &requestedSize) override;
 
    private:
     QString themeDir;
     QString cacheDir;
+
+    QPixmap makeZimPixmap(const QString &name, QSize *size,
+                          const QSize &requestedSize) const;
+    QPixmap makeThemePixmap(const QString &name, const QString &color,
+                            QSize *size, const QSize &requestedSize) const;
 };
 
 #endif  // ICONPROVIDER_H
