@@ -15,8 +15,8 @@ Name:       harbour-zimpedia
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Zimpedia
-Version:    2.2.8
-Release:    2
+Version:    3.0.0
+Release:    1
 Group:      Qt/Qt
 License:    LICENSE
 URL:        https://github.com/mkiol/Zimpedia
@@ -32,7 +32,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  desktop-file-utils
 
 %description
-Offline reader for Wikipedia and other Wiki projects
+Offline reader for Wikipedia
 
 
 %prep
