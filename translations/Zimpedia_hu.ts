@@ -4,86 +4,113 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/AboutPage.qml" line="31"/>
         <source>About</source>
-        <translation>Névjegy</translation>
+        <translation type="vanished">Névjegy</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="55"/>
         <source>Changelog</source>
-        <translation>Változási napló</translation>
+        <translation type="vanished">Változási napló</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="61"/>
+        <location filename="../qml/AboutPage.qml" line="28"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="50"/>
         <source>Project website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="67"/>
+        <location filename="../qml/AboutPage.qml" line="56"/>
+        <source>Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="62"/>
         <source>Authors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="80"/>
-        <source>Translations are provided by:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="76"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="98"/>
+        <location filename="../qml/AboutPage.qml" line="82"/>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="92"/>
         <source>Libraries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="47"/>
+        <location filename="../qml/AboutPage.qml" line="46"/>
         <source>Version %1</source>
         <translation>%1 verzió</translation>
     </message>
 </context>
 <context>
+    <name>ArticleSearchHeader</name>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="33"/>
+        <source>Search</source>
+        <translation type="unfinished">Keresés</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <source>Close archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <source>Open main page</source>
+        <translation type="unfinished">A főoldal megnyitása</translation>
+    </message>
+</context>
+<context>
     <name>BookmarkEditPage</name>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="44"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="39"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
-        <location filename="../qml/BookmarkEditPage.qml" line="54"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="48"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="49"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="80"/>
-        <source>Change</source>
-        <translation>Változtatás</translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="118"/>
-        <source>ZIM file is missing</source>
-        <translation>A ZIM fájl hiányzik</translation>
-    </message>
-    <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="180"/>
-        <source>Something went wrong and bookmark cannot be updated</source>
+        <location filename="../qml/BookmarkEditPage.qml" line="53"/>
+        <source>Archive is missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="153"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="88"/>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="vanished">Változtatás</translation>
+    </message>
+    <message>
+        <source>ZIM file is missing</source>
+        <translation type="vanished">A ZIM fájl hiányzik</translation>
+    </message>
+    <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="155"/>
         <source>URL was copied to the clipboard</source>
-        <translation>Az URL a vágólapra másolva</translation>
+        <translation type="vanished">Az URL a vágólapra másolva</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkEditPage.qml" line="127"/>
+        <location filename="../qml/BookmarkEditPage.qml" line="61"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
@@ -91,50 +118,50 @@
 <context>
     <name>BookmarkFileChoose</name>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="32"/>
         <source>Choose ZIM file</source>
-        <translation>ZIM fájl kiválasztása</translation>
+        <translation type="vanished">ZIM fájl kiválasztása</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="103"/>
         <source>No files were found</source>
-        <translation>Nem találhatók fájlok</translation>
+        <translation type="vanished">Nem találhatók fájlok</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarkFileChoose.qml" line="108"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation type="vanished">Frissítés</translation>
     </message>
 </context>
 <context>
     <name>BookmarksPage</name>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="35"/>
+        <location filename="../qml/BookmarksPage.qml" line="28"/>
         <source>Bookmarks</source>
         <translation>Könyvjelzők</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="47"/>
+        <location filename="../qml/BookmarksPage.qml" line="34"/>
+        <source>Archive is missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/BookmarksPage.qml" line="41"/>
         <source>Edit</source>
         <translation>Szerkesztés</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="62"/>
+        <location filename="../qml/BookmarksPage.qml" line="55"/>
         <source>Delete</source>
         <translation>Törlés</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="113"/>
         <source>ZIM file is missing</source>
-        <translation>A ZIM fájl hiányzik</translation>
+        <translation type="vanished">A ZIM fájl hiányzik</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="122"/>
         <source>Bookmark&apos;s ZIM file is missing</source>
-        <translation>A könyvjelző ZIM fájlja hiányzik</translation>
+        <translation type="vanished">A könyvjelző ZIM fájlja hiányzik</translation>
     </message>
     <message>
-        <location filename="../qml/BookmarksPage.qml" line="128"/>
+        <location filename="../qml/BookmarksPage.qml" line="73"/>
         <source>No bookmarks</source>
         <translation>Nincsenek könyvjelzők</translation>
     </message>
@@ -142,21 +169,16 @@
 <context>
     <name>ChangelogPage</name>
     <message>
-        <location filename="../qml/ChangelogPage.qml" line="28"/>
         <source>Changelog</source>
-        <translation>Változási napló</translation>
+        <translation type="vanished">Változási napló</translation>
     </message>
     <message>
-        <location filename="../qml/ChangelogPage.qml" line="32"/>
-        <location filename="../qml/ChangelogPage.qml" line="47"/>
-        <location filename="../qml/ChangelogPage.qml" line="58"/>
-        <location filename="../qml/ChangelogPage.qml" line="67"/>
-        <location filename="../qml/ChangelogPage.qml" line="81"/>
-        <location filename="../qml/ChangelogPage.qml" line="90"/>
-        <location filename="../qml/ChangelogPage.qml" line="105"/>
-        <location filename="../qml/ChangelogPage.qml" line="115"/>
-        <location filename="../qml/ChangelogPage.qml" line="133"/>
-        <location filename="../qml/ChangelogPage.qml" line="142"/>
+        <location filename="../qml/ChangelogPage.qml" line="26"/>
+        <source>Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ChangelogPage.qml" line="30"/>
         <source>Version %1</source>
         <translation>%1 verzió</translation>
     </message>
@@ -164,158 +186,210 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="57"/>
+        <location filename="../qml/FilesPage.qml" line="62"/>
         <source>Show details</source>
         <translation>Részletek megjelenítése</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="158"/>
         <source>No files were found</source>
-        <translation>Nem találhatók fájlok</translation>
+        <translation type="vanished">Nem találhatók fájlok</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="122"/>
         <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation>A ZIM egy nyílt fájlformátum, amely wiki tartalmat tárol és offline használatra alkalmas. A wiki tartalmak gyűjteményei  &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;erről az oldalról&lt;/a&gt; tölthetők le. Ha már van néhány ZIM fájlod, helyezd őket a home mappa vagy az SD kártya bármely almappájába.</translation>
+        <translation type="vanished">A ZIM egy nyílt fájlformátum, amely wiki tartalmat tárol és offline használatra alkalmas. A wiki tartalmak gyűjteményei  &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;erről az oldalról&lt;/a&gt; tölthetők le. Ha már van néhány ZIM fájlod, helyezd őket a home mappa vagy az SD kártya bármely almappájába.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="35"/>
-        <source>ZIM files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="49"/>
-        <source>Open file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="132"/>
         <source>About</source>
-        <translation>Névjegy</translation>
+        <translation type="vanished">Névjegy</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="138"/>
         <source>Settings</source>
-        <translation>Beállítások</translation>
+        <translation type="vanished">Beállítások</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="144"/>
         <source>Bookmarks</source>
-        <translation>Könyvjelzők</translation>
+        <translation type="vanished">Könyvjelzők</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="151"/>
+        <location filename="../qml/FilesPage.qml" line="45"/>
         <source>Refresh</source>
         <translation>Frissítés</translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="74"/>
+        <source>It looks like you don&apos;t have any ZIM archives</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="75"/>
+        <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FilesPage.qml" line="87"/>
+        <source>Open %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SearchDialogHeader</name>
+    <message numerus="yes">
+        <location filename="../qml/SearchDialogHeader.qml" line="36"/>
+        <source>%n selected</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in built-in viewer</source>
-        <translation>Megnyitás a beépített megjelenítőben</translation>
+        <translation type="vanished">Megnyitás a beépített megjelenítőben</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="65"/>
         <source>Open in browser</source>
-        <translation>Megnyitás böngészőben</translation>
+        <translation type="vanished">Megnyitás böngészőben</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="77"/>
+        <location filename="../qml/SearchPage.qml" line="56"/>
         <source>Add to bookmarks</source>
         <translation>Hozzáadás a könyvjelzőkhöz</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="165"/>
-        <source>No articles</source>
+        <location filename="../qml/SearchPage.qml" line="77"/>
+        <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="166"/>
+        <location filename="../qml/SearchPage.qml" line="87"/>
+        <source>Select archives</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="105"/>
         <source>Find article, by typing in the search field</source>
         <translation>Cikk megtalálása a keresőmezőbe gépeléssel</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="98"/>
-        <source>About</source>
-        <translation>Névjegy</translation>
+        <location filename="../qml/SearchPage.qml" line="107"/>
+        <source>You have not selected any archives to search</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="103"/>
+        <location filename="../qml/SearchPage.qml" line="109"/>
+        <source>Open pulley menu and select one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="117"/>
+        <source>Looking for archives...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="118"/>
+        <source>Opening archives...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="vanished">Névjegy</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="45"/>
+        <source>Open in viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="45"/>
+        <source>Open in an external app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="82"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="108"/>
-        <source>Change ZIM file</source>
-        <translation>ZIM fájl cseréje</translation>
+        <location filename="../qml/SearchPage.qml" line="104"/>
+        <source>No results</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="113"/>
+        <source>Change ZIM file</source>
+        <translation type="vanished">ZIM fájl cseréje</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="92"/>
         <source>Bookmarks</source>
         <translation>Könyvjelzők</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="119"/>
         <source>Open main page</source>
-        <translation>A főoldal megnyitása</translation>
+        <translation type="vanished">A főoldal megnyitása</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="37"/>
         <source>Search</source>
-        <translation>Keresés</translation>
+        <translation type="vanished">Keresés</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="40"/>
+        <location filename="../qml/SettingsPage.qml" line="28"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="44"/>
+        <location filename="../qml/SettingsPage.qml" line="32"/>
         <source>Search mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="45"/>
-        <source>By default, articles are searched only by title. Alternatively, you can also search through the full article text. Full-text search only works if the ZIM file contains the appropriate index.</source>
+        <location filename="../qml/SettingsPage.qml" line="33"/>
+        <source>You can search for articles by title only (option &apos;By title&apos;) or, alternatively, search through the full text of all articles in the archives (option &apos;Full-text&apos;). Full-text search only works when ZIM file contains the appropriate index.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="50"/>
+        <location filename="../qml/SettingsPage.qml" line="39"/>
         <source>By title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="51"/>
+        <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>Full-text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="66"/>
+        <location filename="../qml/SettingsPage.qml" line="72"/>
         <source>Web view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="62"/>
+        <location filename="../qml/SettingsPage.qml" line="73"/>
+        <source>External app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="80"/>
+        <source>Articles can be opened in the built-in web viewer or in an external app (e.g. Web Browser).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SettingsPage.qml" line="68"/>
         <source>Default viewer</source>
         <translation>Alapértelmezett megjelenítő</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Browser</source>
-        <translation>Böngésző</translation>
+        <translation type="vanished">Böngésző</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
-        <translation>A Wiki oldalak megnyithatók a beépített-, vagy egy külső böngészőben</translation>
+        <translation type="vanished">A Wiki oldalak megnyithatók a beépített-, vagy egy külső böngészőben</translation>
     </message>
     <message>
-        <location filename="../qml/SettingsPage.qml" line="80"/>
+        <location filename="../qml/SettingsPage.qml" line="85"/>
         <source>Viewer font size level</source>
         <translation>Megjelenítő betűmérete</translation>
     </message>
@@ -323,53 +397,51 @@
 <context>
     <name>WebViewPage</name>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="44"/>
-        <location filename="../qml/WebViewPage.qml" line="259"/>
         <source>Launching an external browser...</source>
-        <translation>Egy külső böngésző megnyitása...</translation>
+        <translation type="vanished">Egy külső böngésző megnyitása...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="159"/>
+        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
         <translation>Oldal tartalmának töltése...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="167"/>
+        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
         <translation>Nem sikerült betölteni az oldal tartalmát</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="223"/>
+        <location filename="../qml/WebViewPage.qml" line="193"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="230"/>
+        <location filename="../qml/WebViewPage.qml" line="200"/>
         <source>Toggle Night View</source>
         <translation>Éjszakai nézet bekapcsolása</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="242"/>
+        <location filename="../qml/WebViewPage.qml" line="212"/>
         <source>Add to bookmarks</source>
         <translation>Hozzáadás a könyvjelzőkhöz</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="255"/>
+        <location filename="../qml/WebViewPage.qml" line="225"/>
         <source>Browser</source>
         <translation>Böngésző</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="266"/>
+        <location filename="../qml/WebViewPage.qml" line="235"/>
         <source>Decrease font</source>
         <translation>Kisebb betűméret</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="275"/>
+        <location filename="../qml/WebViewPage.qml" line="244"/>
         <source>Increase font</source>
         <translation>Nagyobb betűméret</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="284"/>
+        <location filename="../qml/WebViewPage.qml" line="253"/>
         <source>Hide toolbar</source>
         <translation>Eszköztár elrejtése</translation>
     </message>
@@ -377,72 +449,86 @@
 <context>
     <name>ZimInfoPage</name>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="45"/>
+        <location filename="../qml/ZimInfoPage.qml" line="37"/>
         <source>Details</source>
         <translation>Részletek</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="62"/>
+        <location filename="../qml/ZimInfoPage.qml" line="54"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="67"/>
+        <location filename="../qml/ZimInfoPage.qml" line="59"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="72"/>
+        <location filename="../qml/ZimInfoPage.qml" line="64"/>
         <source>Date</source>
         <translation>Dátum</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="77"/>
+        <location filename="../qml/ZimInfoPage.qml" line="69"/>
         <source>Creator</source>
         <translation>Létrehozó</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="82"/>
+        <location filename="../qml/ZimInfoPage.qml" line="74"/>
         <source>Publisher</source>
         <translation>Kiadó</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="87"/>
+        <location filename="../qml/ZimInfoPage.qml" line="79"/>
         <source>Description</source>
         <translation>Leírás</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="92"/>
+        <location filename="../qml/ZimInfoPage.qml" line="84"/>
         <source>Language</source>
         <translation>Nyelv</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="102"/>
+        <location filename="../qml/ZimInfoPage.qml" line="94"/>
         <source>Full-text index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <location filename="../qml/ZimInfoPage.qml" line="95"/>
+        <location filename="../qml/ZimInfoPage.qml" line="100"/>
+        <location filename="../qml/ZimInfoPage.qml" line="105"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="103"/>
+        <location filename="../qml/ZimInfoPage.qml" line="95"/>
+        <location filename="../qml/ZimInfoPage.qml" line="100"/>
+        <location filename="../qml/ZimInfoPage.qml" line="105"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="97"/>
+        <location filename="../qml/ZimInfoPage.qml" line="99"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="104"/>
+        <source>Videos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/ZimInfoPage.qml" line="89"/>
         <source>Article count</source>
         <translation>Cikk száma</translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="112"/>
+        <location filename="../qml/ZimInfoPage.qml" line="114"/>
         <source>Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ZimInfoPage.qml" line="107"/>
+        <location filename="../qml/ZimInfoPage.qml" line="109"/>
         <source>Size</source>
         <translation>Méret</translation>
     </message>
@@ -450,7 +536,7 @@
 <context>
     <name>ZimServer</name>
     <message>
-        <location filename="../src/zimserver.cpp" line="471"/>
+        <location filename="../src/zimserver.cpp" line="456"/>
         <source>Main page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -458,24 +544,26 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="44"/>
         <source>Launching an external browser...</source>
-        <translation>Egy külső böngésző megnyitása...</translation>
+        <translation type="vanished">Egy külső böngésző megnyitása...</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="56"/>
         <source>Bookmark has been added</source>
-        <translation>Könyvjelző hozzáadva</translation>
+        <translation type="vanished">Könyvjelző hozzáadva</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="57"/>
+        <location filename="../qml/main.qml" line="54"/>
+        <source>Bookmark added</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/main.qml" line="55"/>
         <source>Bookmark already exists</source>
         <translation>A könyvjelző  már létezik</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="59"/>
         <source>Bookmark has been updated</source>
-        <translation>Könyvjelző frissítve</translation>
+        <translation type="vanished">Könyvjelző frissítve</translation>
     </message>
 </context>
 </TS>
