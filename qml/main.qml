@@ -53,7 +53,6 @@ ApplicationWindow {
         target: bookmarkModel
         onBookmarkAdded: notification.show(qsTr("Bookmark added"))
         onBookmarkExists: notification.show(qsTr("Bookmark already exists"))
-        onBookmarkUpdated: notification.show(qsTr("Bookmark updated"))
     }
 
     Component.onCompleted: {
@@ -62,7 +61,7 @@ ApplicationWindow {
         zimServer.loadZim();
     }
 
-    Notification {
+    Toast {
         id: notification
     }
 }
