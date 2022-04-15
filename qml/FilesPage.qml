@@ -48,23 +48,15 @@ Dialog {
         }
 
         delegate: DoubleListItem {
-            id: listItem
-
-            property color primaryColor: highlighted ? Theme.highlightColor : Theme.primaryColor
-            property bool active: settings.zimFile === model.id
-
             highlighted: down || model.selected
             title: model.title
-            //subtitle: model.dir
             uuid: model.uuid
             visible: !fileModel.busy && listView.count > 0
             icon: model.icon
-
             onClicked: {
                 var selected = model.selected
                 fileModel.setSelected(model.index, !selected);
             }
-
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Show details")

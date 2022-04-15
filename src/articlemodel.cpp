@@ -20,7 +20,7 @@ ArticleModel *ArticleModel::instance(QObject *parent) {
 }
 
 ArticleModel::ArticleModel(QObject *parent)
-    : SelectableItemModel{new ArticleItem, parent} {}
+    : SelectableItemModel{new ArticleItem, true, parent} {}
 
 QList<ListItem *> ArticleModel::makeItems() {
     QList<ListItem *> items;

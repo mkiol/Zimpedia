@@ -16,6 +16,7 @@
 #include <QList>
 #include <QObject>
 #include <QThread>
+#include <QVariantList>
 #include <memory>
 #include <optional>
 #include <string>
@@ -40,6 +41,7 @@ class ZimServer : public QThread {
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
     Q_PROPERTY(int filesCount READ filesCount NOTIFY loadedChanged)
+    Q_PROPERTY(QVariantList files READ files NOTIFY filesChanged)
    public:
     static const int port = 9091;
     static ZimServer *instance(QObject *parent = nullptr);
@@ -57,7 +59,11 @@ class ZimServer : public QThread {
     [[nodiscard]] static std::pair<QString, QString> parseUrl(const QUrl &url);
 
     Q_INVOKABLE bool loadZim();
-    Q_INVOKABLE QUrl serverUrl(const QString &uuid = {}) const;
+    Q_INVOKABLE inline void unLoadZim(const QString &uuid) {
+        unLoadZimUuidEmit(uuid);
+    }
+    Q_INVOKABLE bool isServerUrl(const QUrl &url) const;
+    Q_INVOKABLE QUrl urlToMainPage(const QString &uuid) const;
     Q_INVOKABLE void articleAsync(const QUrl &url);
     Q_INVOKABLE void openUrl(const QUrl &url, const QString &title);
     Q_INVOKABLE QString titleFromUrl(const QUrl &url) const;
@@ -66,6 +72,7 @@ class ZimServer : public QThread {
    signals:
     void error();
     void loadedChanged();
+    void filesChanged();
     void searchReady();
     void articleReady(const QString &article);
     void urlReady(const QUrl &url, const QString &title);
@@ -103,7 +110,9 @@ class ZimServer : public QThread {
                                          const QString &uuid);
     bool loadZimUuids(QStringList &&uuids);
     bool loadZimUuid(const QString &uuids);
+    bool unLoadZimUuid(const QString &uuid);
     bool loadZimUuidEmit(const QString &uuid);
+    bool unLoadZimUuidEmit(const QString &uuid);
     [[nodiscard]] static QString fixPath(QString path);
     void setBusy(bool busy);
     void setLoaded(bool loaded);
@@ -120,6 +129,7 @@ class ZimServer : public QThread {
     void handleFilemodelChanged();
     void articleAsyncWork();
     void loadZimAsyncWork();
+    QVariantList files() const;
 };
 
 #endif  // ZIMSERVER_H

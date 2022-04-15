@@ -24,6 +24,7 @@ class ItemWorker : public QThread {
     friend class SelectableItemModel;
 
    public:
+    static const auto startDelay = 200ul;  // ms
     explicit ItemWorker(ItemModel *model, const QString &data = {});
     ~ItemWorker() override;
 
@@ -53,6 +54,7 @@ class ItemModel : public ListModel {
 
    protected:
     std::unique_ptr<ItemWorker> m_worker;
+    bool m_delayedStart = false;
     virtual void workerDone();
     virtual QList<ListItem *> makeItems() = 0;
     virtual void postMakeItems(const QList<ListItem *> &items);
@@ -88,6 +90,7 @@ class SelectableItemModel : public ItemModel {
 
    public:
     explicit SelectableItemModel(SelectableItem *prototype,
+                                 bool delayedStart = false,
                                  QObject *parent = nullptr);
     void setFilter(const QString &filter);
     void setFilterNoUpdate(const QString &filter);

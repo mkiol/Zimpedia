@@ -1,13 +1,9 @@
-/*
-  Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
-
-  This file is part of Zimpedia application.
-
-  This Source Code Form is subject to the terms of
-  the Mozilla Public License, v.2.0. If a copy of
-  the MPL was not distributed with this file, You can
-  obtain one at http://mozilla.org/MPL/2.0/.
-*/
+/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
@@ -30,56 +26,9 @@ Page {
         currentIndex: -1
         model: articleModel
 
-        header: SearchField {
-            id: search
-            Connections {
-                target: zimServer
-                onLoadedChanged: {
-                    if (!zimServer.loaded) {
-                        articleModel.filter = ""
-                        search.text = ""
-                    }
-                }
-            }
-
-            active: zimServer.loaded && !fileModel.busy && !zimServer.busy
-            onActiveChanged: if (active) text = articleModel.filter
-            width: parent.width
-            placeholderText: qsTr("Search")
-            onTextChanged: articleModel.filter = text.trim()
-            EnterKey.iconSource: "image://theme/icon-m-enter-close"
-            EnterKey.onClicked: {
-                Qt.inputMethod.hide();
-                listView.focus = true
-            }
-
-            Item {
-                parent: search
-                anchors.fill: parent
-                IconButton {
-                    anchors {
-                        right: parent.right
-                        rightMargin: Theme.horizontalPageMargin
-                    }
-                    width: icon.width
-                    height: parent.height
-                    icon.source: search.text.length == 0 ?
-                                     settings.searchMode === Settings.FullTextSearch ?
-                                         "image://theme/icon-m-file-document" :
-                                         "image://theme/icon-m-file-other" : ""
-                    enabled: search.enabled
-                    opacity: icon.status === Image.Ready ? 1 : 0
-                    Behavior on opacity {
-                        FadeAnimation {}
-                    }
-                    onClicked: {
-                        if (settings.searchMode === Settings.FullTextSearch) {
-                            settings.searchMode = Settings.TitleSearch
-                        } else {
-                            settings.searchMode = Settings.FullTextSearch
-                        }
-                    }
-                }
+        header: ArticleSearchHeader {
+            onFilesHeightChanged: {
+                placeholder.verticalOffset = 0.8 * filesHeight
             }
         }
 
@@ -125,7 +74,7 @@ Page {
         PullDownMenu {
             busy: articleModel.busy || zimServer.busy || fileModel.busy
             MenuItem {
-                text: qsTr("About")
+                text: qsTr("About %1").arg(APP_NAME)
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
             }
 
@@ -144,33 +93,20 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("BookmarksPage.qml"))
                 enabled: !bookmarkModel.busy
             }
-
-//            MenuItem {
-//                text: qsTr("Open main page")
-//                visible: zimServer.hasMainPage
-//                onClicked: {
-//                    listView.focus = true
-//                    var url = zimServer.serverUrl() + "A/mainpage";
-//                    if (settings.browser === 1) {
-//                        app.openUrlEntryInBrowser(url)
-//                    } else {
-//                        pageStack.push(Qt.resolvedUrl("WebViewPage.qml"),{"url": url});
-//                    }
-//                }
-//            }
         }
 
         ViewPlaceholder {
+            id: placeholder
             enabled: listView.count === 0 && !articleModel.busy && !zimServer.busy && !fileModel.busy
             text: {
                 if (zimServer.loaded) {
-                    return articleModel.filter.length > 0 ?
+                    return articleModel.filter.length !== 0 ?
                                 qsTr("No results") :
                                 qsTr("Find article, by typing in the search field")
                 }
                 return qsTr("You have not selected any archives to search")
             }
-            hintText: qsTr("Open pulley menu and select one")
+            hintText: !zimServer.loaded ? qsTr("Open pulley menu and select at least one") : ""
         }
     }
 

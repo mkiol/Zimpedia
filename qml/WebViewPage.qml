@@ -27,10 +27,6 @@ Page {
     property bool local: false
     property string title: ""
 
-    function isLocal(url) {
-        return url.toString().lastIndexOf(zimServer.serverUrl()) === 0
-    }
-
     function init() {
         history = []
         history.push(url)
@@ -38,7 +34,7 @@ Page {
     }
 
     function navigate(url) {
-        local = isLocal(url)
+        local = zimServer.isServerUrl(url)
         console.log("Opening " + (local ? "local" : "non-local") + " url: " + url.toString())
         if (local) {
             title = zimServer.titleFromUrl(url)
@@ -166,7 +162,7 @@ Page {
                 var url = request.url.toString()
                 if (url !== root.history[root.history.length-1])
                     root.history.push(url)
-                var local = root.isLocal(request.url.toString());
+                var local = zimServer.isServerUrl(request.url.toString());
                 //console.log(" local:", local);
                 if (local) {
                     request.action = WebView.IgnoreRequest

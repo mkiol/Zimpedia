@@ -37,7 +37,7 @@ BookmarkModel *BookmarkModel::instance(QObject *parent) {
 }
 
 BookmarkModel::BookmarkModel(QObject *parent)
-    : SelectableItemModel{new BookmarkItem, parent} {
+    : SelectableItemModel{new BookmarkItem, false, parent} {
     connect(FileModel::instance(), &FileModel::busyChanged, this,
             [] { BookmarkModel::instance()->updateModel(); });
 }

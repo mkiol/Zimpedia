@@ -35,7 +35,7 @@ FileModel *FileModel::instance(QObject *parent) {
 }
 
 FileModel::FileModel(QObject *parent)
-    : SelectableItemModel(new FileItem, parent) {}
+    : SelectableItemModel{new FileItem, false, parent} {}
 
 QVariantList FileModel::selectedItems() {
     QVariantList list;

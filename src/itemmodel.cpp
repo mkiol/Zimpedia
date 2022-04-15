@@ -18,6 +18,7 @@ ItemWorker::~ItemWorker() {
 }
 
 void ItemWorker::run() {
+    if (model->m_delayedStart) QThread::msleep(startDelay);
     if (!isInterruptionRequested()) items = model->makeItems();
     if (!isInterruptionRequested()) model->postMakeItems(items);
 }
@@ -73,8 +74,10 @@ void SelectableItem::setSelected(bool value) {
 }
 
 SelectableItemModel::SelectableItemModel(SelectableItem *prototype,
-                                         QObject *parent)
-    : ItemModel(prototype, parent) {}
+                                         bool delayedStart, QObject *parent)
+    : ItemModel{prototype, parent} {
+    m_delayedStart = delayedStart;
+}
 
 void SelectableItemModel::clear() {
     ItemModel::clear();

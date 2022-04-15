@@ -52,6 +52,9 @@ ZimServer::ZimServer(QObject *parent) : QThread{parent}, m_server{parent} {
     connect(
         this, &ZimServer::loadedChanged, this,
         [] { FileModel::instance()->updateModel(); }, Qt::QueuedConnection);
+    connect(
+        this, &ZimServer::filesChanged, this,
+        [] { FileModel::instance()->updateModel(); }, Qt::QueuedConnection);
 
     if (!m_server.listen(port)) {
         qWarning() << "unable to start HTTP server on port" << port;
@@ -100,6 +103,17 @@ bool ZimServer::loadZimUuidEmit(const QString &uuid) {
     auto ok = loadZimUuid(uuid);
     if (ok) Settings::instance()->addZimFile(uuid);
     setLoaded(ok);
+    emit filesChanged();
+    setBusy(false);
+    return ok;
+}
+
+bool ZimServer::unLoadZimUuidEmit(const QString &uuid) {
+    setBusy(true);
+    auto ok = unLoadZimUuid(uuid);
+    if (ok) Settings::instance()->removeZimFile(uuid);
+    setLoaded(!m_archive.empty());
+    emit filesChanged();
     setBusy(false);
     return ok;
 }
@@ -107,6 +121,7 @@ bool ZimServer::loadZimUuidEmit(const QString &uuid) {
 void ZimServer::loadZimAsyncWork() {
     setBusy(true);
     setLoaded(loadZimUuids(std::move(m_uuidsToLoad)));
+    emit filesChanged();
     setBusy(false);
 }
 
@@ -117,6 +132,7 @@ bool ZimServer::loadZim() {
         qDebug() << "uuid list is empty";
         m_archive.clear();
         m_meta.clear();
+        emit filesChanged();
         setLoaded(false);
         setBusy(false);
         return false;
@@ -157,6 +173,18 @@ void ZimServer::setLoaded(bool loaded) {
         m_loaded = loaded;
         emit loadedChanged();
     }
+}
+
+bool ZimServer::unLoadZimUuid(const QString &uuid) {
+    if (!m_archive.contains(uuid)) return false;
+
+    qDebug() << "unload zim uuid:" << uuid;
+
+    m_archive.remove(uuid);
+    m_meta.remove(uuid);
+
+    qDebug() << "zim successfully unloaded:" << uuid;
+    return true;
 }
 
 bool ZimServer::loadZimUuid(const QString &uuid) {
@@ -555,10 +583,14 @@ QList<SearchResult> ZimServer::search(QString phrase) const {
     return result;
 }
 
-QUrl ZimServer::serverUrl(const QString &uuid) const {
+bool ZimServer::isServerUrl(const QUrl &url) const {
+    return url.host() == "localhost" && url.port() == port;
+}
+
+QUrl ZimServer::urlToMainPage(const QString &uuid) const {
     QUrl url{"http://localhost"};
     url.setPort(port);
-    if (!uuid.isEmpty()) url.setPath(QString{"/uuid:%2/"}.arg(uuid));
+    if (!uuid.isEmpty()) url.setPath(QString{"/uuid:%2/A/mainpage"}.arg(uuid));
     return url;
 }
 
@@ -638,4 +670,18 @@ void ZimServer::filter(const QString &uuid, QString *data) {
             ++pos;
         }
     }
+}
+
+QVariantList ZimServer::files() const {
+    QVariantList fl;
+    for (auto it = m_meta.cbegin(); it != m_meta.cend(); ++it) {
+        const auto &meta = it.value();
+        fl.push_back(
+            QVariantList{meta.uuid, meta.title, meta.icon, meta.mainPage});
+    }
+    std::sort(fl.begin(), fl.end(), [](const QVariant &f1, const QVariant &f2) {
+        return f1.toList().at(1).toString().compare(
+                   f2.toList().at(1).toString(), Qt::CaseInsensitive) < 0;
+    });
+    return fl;
 }
