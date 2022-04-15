@@ -106,7 +106,7 @@ Page {
                 }
                 return qsTr("You have not selected any archives to search")
             }
-            hintText: !zimServer.loaded ? qsTr("Open pulley menu and select at least one") : ""
+            hintText: !zimServer.loaded ? qsTr("Open pulley menu and select one") : ""
         }
     }
 

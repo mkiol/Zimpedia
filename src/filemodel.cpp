@@ -289,9 +289,12 @@ void FileModel::refresh() {
 
 QList<ListItem *> FileModel::makeItems() {
     if (m_files.isEmpty()) {
-        auto paths =
-            QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-        findFiles(paths.first());
+        findFiles(
+            QStandardPaths::standardLocations(QStandardPaths::DownloadLocation)
+                .at(0));
+        findFiles(
+            QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)
+                .at(0));
         if (QFileInfo::exists(QStringLiteral("/media/sdcard"))) {
             findFiles(QStringLiteral("/media/sdcard"), -1);
         } else {

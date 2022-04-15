@@ -25,7 +25,6 @@ class Settings : public QSettings {
     Q_PROPERTY(int browser READ browser WRITE setBrowser NOTIFY browserChanged)
     Q_PROPERTY(SearchMode searchMode READ searchMode WRITE setSearchMode NOTIFY
                    searchModeChanged)
-
    public:
     enum SearchMode {
         TitleSearch = 0,

@@ -5,3 +5,8 @@ Icon=harbour-zimpedia
 Exec=harbour-zimpedia
 Name=Zimpedia
 
+[X-Sailjail]
+Permissions=Internet;RemovableMedia;Documents;Downloads
+OrganizationName=org.mkiol
+ApplicationName=zimpedia
+ExecDBus=harbour-zimpedia

@@ -75,7 +75,7 @@ Dialog {
             hintText: qsTr("The ZIM is an open file format that stores content coming from the Web for offline use. " +
                            "The collection of various archives can be found on " +
                            "%1 website. " +
-                           "If you have already downloaded ZIM files, put them to any folder you like under Download directory or SD card.")
+                           "If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.")
             .arg("<b>library.kiwix.org</b>")
         }
 
