@@ -28,7 +28,7 @@ ItemModel::ItemModel(ListItem *prototype, QObject *parent)
 
 void ItemModel::updateModel(const QString &data) {
     if (m_worker && m_worker->isRunning()) {
-        m_worker->requestInterruption();
+        if (m_delayedStart) m_worker->requestInterruption();
         return;
     }
 
