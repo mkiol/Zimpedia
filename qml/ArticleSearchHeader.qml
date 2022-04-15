@@ -85,7 +85,7 @@ Column {
                 menu: ContextMenu {
                     MenuItem {
                         enabled: modelData[3]
-                        text: qsTr("Open main article")
+                        text: qsTr("Open main page")
                         onClicked: {
                             root.parent.focus = true
                             if (settings.browser === 1) {
@@ -96,7 +96,7 @@ Column {
                         }
                     }
                     MenuItem {
-                        text: qsTr("Unselect archive")
+                        text: qsTr("Close archive")
                         onClicked: zimServer.unLoadZim(modelData[0])
                     }
                 }

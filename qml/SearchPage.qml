@@ -110,10 +110,12 @@ Page {
         }
     }
 
-    BusyIndicator {
+    LabelIndicator {
         anchors.centerIn: parent
         running: articleModel.busy || zimServer.busy || fileModel.busy
         size: BusyIndicatorSize.Large
+        text: fileModel.busy ? qsTr("Looking for archives...") :
+                               zimServer.busy ? qsTr("Opening archives...") : ""
     }
 
     VerticalScrollDecorator {

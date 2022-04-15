@@ -11,15 +11,11 @@ import Sailfish.Silica 1.0
 FocusScope {
     id: root
 
-    property alias searchPlaceholderText: searchField.placeholderText
-    property alias sectionHeaderText: sectionHeader.text
-    property var recentSearches: []
     property int noSearchCount: 10
     property bool search: true
     property bool canCancel: true
     property var dialog
     property var view
-    signal removeSearchHistoryClicked(string value)
 
     height: column.height
 
@@ -62,51 +58,6 @@ FocusScope {
                 target: root.view.model
                 onFilterChanged: searchField.text = root.view.model.filter
             }
-        }
-
-        SectionHeader {
-            visible: root.search && root.recentSearches.length > 0
-            text: qsTr("Recent searches")
-        }
-
-        Repeater {
-            model: recentSearches
-            Behavior on width { FadeAnimation {} }
-            delegate: Component {
-                ListItem {
-                    menu: contextMenu
-                    contentHeight: Theme.itemSizeExtraSmall
-                    Label {
-                        font.pixelSize: Theme.fontSizeSmall
-                        truncationMode: TruncationMode.Fade
-                        text: modelData
-                        anchors {
-                            left: parent.left; right: parent.right
-                            leftMargin: Theme.horizontalPageMargin
-                            rightMargin: Theme.horizontalPageMargin
-                            verticalCenter: parent.verticalCenter
-                        }
-                        color: root.highlighted ? Theme.highlightColor : Theme.primaryColor
-                    }
-                    onClicked: root.view.model.filter = modelData
-                    Component {
-                        id: contextMenu
-                        ContextMenu {
-                            MenuItem {
-                                text: qsTr("Remove")
-                                onClicked: root.removeSearchHistoryClicked(modelData)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        SectionHeader {
-            id: sectionHeader
-            opacity: (text.length > 0) ? 1.0 : 0.0
-            visible: opacity > 0.0
-            Behavior on opacity { FadeAnimation {} }
         }
     }
 }

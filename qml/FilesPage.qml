@@ -70,7 +70,7 @@ Dialog {
         ViewPlaceholder {
             id: placeholder
             enabled: listView.count == 0 && !fileModel.busy
-            verticalOffset: Theme.paddingLarge
+            verticalOffset: root.isPortrait ? Theme.itemSizeLarge : Theme.itemSizeSmall
             text: qsTr("It looks like you don't have any ZIM archives")
             hintText: qsTr("The ZIM is an open file format that stores content coming from the Web for offline use. " +
                            "The collection of various archives can be found on " +
