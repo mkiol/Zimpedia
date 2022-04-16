@@ -41,10 +41,12 @@ void Utils::copyToClipboard(const QString &text) const {
 }
 
 QColor Utils::colorFromUuid(const QString &uuid) const {
-    auto len = uuid.size() / 3;
-    auto r = static_cast<int>(100 + (qHash(uuid.mid(0, len)) % 155));
-    auto g = static_cast<int>(100 + (qHash(uuid.mid(len, len)) % 155));
-    auto b = static_cast<int>(100 + (qHash(uuid.mid(2 * len, len)) % 155));
+    int len = uuid.size() / 3;
+    auto h = qHash(uuid);
+    auto r = static_cast<int>(100u + ((h + qHash(uuid.mid(0, len))) % 155u));
+    auto g = static_cast<int>(100u + ((h + qHash(uuid.mid(len, len))) % 155u));
+    auto b =
+        static_cast<int>(100u + ((h + qHash(uuid.mid(2 * len, len))) % 155u));
     return {r, g, b};
 }
 

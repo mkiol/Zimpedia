@@ -17,17 +17,17 @@
         <translation>O Zimpedii</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="50"/>
+        <location filename="../qml/AboutPage.qml" line="53"/>
         <source>Project website</source>
         <translation>Strona projektu</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
+        <location filename="../qml/AboutPage.qml" line="57"/>
         <source>Changes</source>
         <translation>Zmiany</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="62"/>
+        <location filename="../qml/AboutPage.qml" line="63"/>
         <source>Authors</source>
         <translation>Autorzy</translation>
     </message>
@@ -36,17 +36,17 @@
         <translation type="vanished">Tłumaczenia przygotowali:</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="76"/>
+        <location filename="../qml/AboutPage.qml" line="77"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation>%1 jest tworzona jako oprogramowanie Open Source zgodnie z licencją %2.</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="82"/>
+        <location filename="../qml/AboutPage.qml" line="83"/>
         <source>Translators</source>
         <translation>Tłumacze</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="93"/>
         <source>Libraries</source>
         <translation>Wykorzystane biblioteki</translation>
     </message>
@@ -65,6 +65,11 @@
     </message>
     <message>
         <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <source>Show details</source>
+        <translation>Pokaż szczegóły</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
         <source>Close archive</source>
         <translation>Zamknij archiwum</translation>
     </message>
@@ -203,7 +208,7 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>Pokaż szczegóły</translation>
     </message>
@@ -236,22 +241,23 @@
         <translation type="vanished">Zakładki</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
         <translation>Wygląda na to, że nie masz żadnego archiwum ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
         <translation>Archiwum ZIM jest otwartym formatem przechowywania treści pochodzących z Internetu. Zbiór różnych ciekawych archiwów można znaleźć na stronie %1. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze w &apos;Downloads&apos;, &apos;Documents&apos; lub na karcie SD.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
         <translation>Otwórz %1</translation>
     </message>

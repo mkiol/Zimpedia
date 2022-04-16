@@ -41,6 +41,10 @@ Dialog {
             busy: fileModel.busy
 
             MenuItem {
+                text: qsTr("Open %1").arg("library.kiwix.org")
+                onClicked: Qt.openUrlExternally("http://library.kiwix.org")
+            }
+            MenuItem {
                 enabled: !fileModel.busy
                 text: qsTr("Refresh")
                 onClicked: fileModel.refresh()

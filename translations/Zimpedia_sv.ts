@@ -58,6 +58,11 @@
     </message>
     <message>
         <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <source>Show details</source>
+        <translation>Visa detaljerat</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
         <source>Close archive</source>
         <translation>Stäng arkiv</translation>
     </message>
@@ -135,27 +140,28 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>Visa detaljerat</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>Uppdatera</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
         <translation>Det verkar som om du inte har några ZIM-arkiv</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
         <translation>ZIM är ett öppet filformat som lagrar innehåll från webben för offline-användning. Samlingen av olika arkiv finns på %1 webbplats. Om du redan har laddat ner ZIM-filer placerar du dem i vilken mapp du vill under SD-kort, Nedladdningar eller Dokument.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
         <translation>Öppna %1</translation>
     </message>

@@ -96,6 +96,12 @@ Column {
                         }
                     }
                     MenuItem {
+                        text: qsTr("Show details")
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("ZimInfoPage.qml"), {"uuid": modelData[0]});
+                        }
+                    }
+                    MenuItem {
                         text: qsTr("Close archive")
                         onClicked: zimServer.unLoadZim(modelData[0])
                     }
