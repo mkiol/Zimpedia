@@ -60,7 +60,9 @@ class ArticleModel : public SelectableItemModel {
 
    public:
     static ArticleModel *instance(QObject *parent = nullptr);
-    Q_INVOKABLE void refresh() { updateModel(); }
+    Q_INVOKABLE void refresh() {
+        if (!filter().isEmpty()) updateModel();
+    }
 
    private:
     static ArticleModel *m_instance;
