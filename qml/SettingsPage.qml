@@ -38,7 +38,7 @@ Page {
                     MenuItem {
                         text: qsTr("By title")
                         Image {
-                            source: "image://theme/icon-m-file-other?" + (parent.highlighted ? Theme.highlightColor : Theme.primaryColor)
+                            source: "image://icons/icon-m-title?" + (parent.highlighted ? Theme.highlightColor : Theme.primaryColor)
                             height: Theme.iconSizeMedium
                             width: Theme.iconSizeMedium
                             anchors.right: parent.right
@@ -48,7 +48,7 @@ Page {
                     MenuItem {
                         text: qsTr("Full-text")
                         Image {
-                            source: "image://theme/icon-m-file-document?" + (parent.highlighted ? Theme.highlightColor : Theme.primaryColor)
+                            source: "image://icons/icon-m-fulltext?" + (parent.highlighted ? Theme.highlightColor : Theme.primaryColor)
                             height: Theme.iconSizeMedium
                             width: Theme.iconSizeMedium
                             anchors.right: parent.right

@@ -44,19 +44,19 @@ Column {
             IconButton {
                 anchors {
                     right: parent.right
-                    rightMargin: Theme.horizontalPageMargin
+                    rightMargin: _search.text.length === 0 ? Theme.horizontalPageMargin :
+                                                             Theme.iconSizeMedium + Theme.horizontalPageMargin +
+                                                             Theme.paddingMedium
                 }
                 width: icon.width
                 height: parent.height
-                icon.source: _search.text.length === 0 ?
-                                 settings.searchMode === Settings.FullTextSearch ?
-                                     "image://theme/icon-m-file-document" :
-                                     "image://theme/icon-m-file-other" : ""
+                icon.source: settings.searchMode === Settings.FullTextSearch ?
+                                     "image://icons/icon-m-fulltext" :
+                                     "image://icons/icon-m-title"
                 enabled: _search.enabled
                 opacity: icon.status === Image.Ready ? 1 : 0
-                Behavior on opacity {
-                    FadeAnimation {}
-                }
+                Behavior on opacity { FadeAnimation {} }
+                Behavior on anchors.rightMargin { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
                 onClicked: {
                     if (settings.searchMode === Settings.FullTextSearch) {
                         settings.searchMode = Settings.TitleSearch
