@@ -30,8 +30,8 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: Theme.itemSizeHuge
-                width: Theme.itemSizeHuge
+                height: root.isPortrait ? Theme.itemSizeHuge : Theme.iconSizeLarge
+                width: root.isPortrait ? Theme.itemSizeHuge : Theme.iconSizeLarge
                 source: settings.appIcon()
             }
 
@@ -46,16 +46,17 @@ Page {
                 text: qsTr("Version %1").arg(APP_VERSION);
             }
 
-            Button {
-                text: qsTr("Project website")
+            Flow {
                 anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: Qt.openUrlExternally(PAGE)
-            }
-
-            Button {
-                text: qsTr("Changes")
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
+                spacing: Theme.paddingLarge
+                Button {
+                    text: qsTr("Project website")
+                    onClicked: Qt.openUrlExternally(PAGE)
+                }
+                Button {
+                    text: qsTr("Changes")
+                    onClicked: pageStack.push(Qt.resolvedUrl("ChangelogPage.qml"))
+                }
             }
 
             SectionHeader {
@@ -84,8 +85,8 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                text: "lutinotmalin \nJeff Huang \nВячеслав Диконов \nRikudouSage \npopanz \nCarmen F. B \n" +
-                      "Åke Engelbrektson \nNathan Follens \nSzabó G. \n涛 匡 \nАлексей Дедун"
+                text: "lutinotmalin · Jeff Huang · Вячеслав Диконов · RikudouSage · npopanz · Carmen F. B · " +
+                      "Åke Engelbrektson · Nathan Follens · Szabó G. · 涛 匡 · Алексей Дедун"
             }
 
             SectionHeader {
@@ -94,7 +95,7 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                text: "QHTTPServer \nLibZIM \nzstd \nXapian"
+                text: "QHTTPServer · nLibZIM · zstd · Xapian"
             }
 
             Spacer {}

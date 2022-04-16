@@ -676,8 +676,9 @@ QVariantList ZimServer::files() const {
     QVariantList fl;
     for (auto it = m_meta.cbegin(); it != m_meta.cend(); ++it) {
         const auto &meta = it.value();
-        fl.push_back(
-            QVariantList{meta.uuid, meta.title, meta.icon, meta.mainPage});
+        fl.push_back(QVariantList{
+            meta.uuid, QString{"%1 · %2"}.arg(meta.title, meta.language),
+            meta.icon, meta.mainPage});
     }
     std::sort(fl.begin(), fl.end(), [](const QVariant &f1, const QVariant &f2) {
         return f1.toList().at(1).toString().compare(
