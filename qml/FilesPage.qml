@@ -42,7 +42,7 @@ Dialog {
 
             MenuItem {
                 text: qsTr("Open %1").arg("library.kiwix.org")
-                onClicked: Qt.openUrlExternally("http://library.kiwix.org")
+                onClicked: Qt.openUrlExternally("https://library.kiwix.org")
             }
             MenuItem {
                 enabled: !fileModel.busy
@@ -89,7 +89,7 @@ Dialog {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.iconSizeMedium
             text: qsTr("Open %1").arg("library.kiwix.org")
-            onClicked: Qt.openUrlExternally("http://library.kiwix.org")
+            onClicked: Qt.openUrlExternally("https://library.kiwix.org")
         }
     }
 
