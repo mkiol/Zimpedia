@@ -41,6 +41,8 @@ class Settings : public QSettings {
     void removeZimFile(const QString& value);
     void setZoom(float value);
     float zoom() const;
+    Q_INVOKABLE QString zoomViewport() const;
+    Q_INVOKABLE QString zoomFontSize() const;
     void setBrowser(int value);
     int browser() const;
     void setSearchMode(SearchMode value);

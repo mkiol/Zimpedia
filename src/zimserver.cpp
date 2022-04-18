@@ -279,7 +279,7 @@ std::optional<ArticleResult> ZimServer::article(const zim::Archive &archive,
                                                 const QString &path) {
     std::optional<zim::Item> article;
 
-    qDebug() << "searching for path:" << path;
+    // qDebug() << "searching for path:" << path;
 
     if (path == "A/mainpage") {
         if (archive.hasMainEntry()) {
@@ -291,7 +291,7 @@ std::optional<ArticleResult> ZimServer::article(const zim::Archive &archive,
     } else {
         auto entries = archive.findByPath(stringQtoStd(path));
         if (entries.size() == 0) {
-            qWarning() << "article not found";
+            qWarning() << "article not found:" << path;
             return std::nullopt;
         }
 
@@ -605,71 +605,8 @@ QString ZimServer::fixPath(QString path) {
 }
 
 void ZimServer::filter(const QString &uuid, QString *data) {
-    int pos;
-
-    // <link href=\"../-/s/css_modules/ext.kartographer.link.css\"
-    // rel=\"stylesheet\" type=\"text/css\">
-    QRegExp rxStyle{"<link\\s[^>]*href\\s*=\\s*\"(\\S*)\"[^>]*>",
-                    Qt::CaseInsensitive};
-    pos = 0;
-    while (pos >= 0) {
-        pos = rxStyle.indexIn(*data, pos);
-        if (pos >= 0) {
-            auto path = fixPath(rxStyle.cap(1));
-            if (auto res = article(path, uuid)) {
-                data->replace(
-                    pos, rxStyle.cap(0).length(),
-                    "<style type=\"text/css\">" + res->content + "</style>");
-            } else {
-                qWarning() << "cannot get embeded style content";
-            }
-
-            ++pos;
-        }
-    }
-
-    // <script src=\"../-/j/js_modules/startup.js\"></script>
-    QRegExp rxScript{"<script\\s[^>]*src\\s*=\\s*\"(\\S*)\"[^>]*></script>",
-                     Qt::CaseInsensitive};
-    pos = 0;
-    while (pos >= 0) {
-        pos = rxScript.indexIn(*data, pos);
-        if (pos >= 0) {
-            auto url = fixPath(rxScript.cap(1));
-            if (auto res = article(url, uuid)) {
-                data->replace(pos, rxScript.cap(0).length(),
-                              "<script type=\"text/javascript\">" +
-                                  res->content + "</script>");
-            } else {
-                qWarning() << "cannot get embeded script content";
-            }
-
-            ++pos;
-        }
-    }
-
-    // <img src=\"../I/m/AloraMountain.JPG\" data-file-width=\"3648\"
-    // data-file-height=\"2736\" data-file-type=\"bitmap\" height=\"150\"
-    // width=\"200\" id=\"mwBQ\">
-    QRegExp rxImg{"<img\\s[^>]*src\\s*=\\s*\"(\\S*)\"[^>]*>",
-                  Qt::CaseInsensitive};
-    pos = 0;
-    while (pos >= 0) {
-        pos = rxImg.indexIn(*data, pos);
-        if (pos >= 0) {
-            auto url = fixPath(rxImg.cap(1));
-            if (auto res = article(url, uuid)) {
-                auto imgTag = rxImg.cap(0).replace(
-                    rxImg.cap(1),
-                    "data:" + res->mime + ";base64," + res->content.toBase64());
-                data->replace(pos, rxImg.cap(0).length(), imgTag);
-            } else {
-                qWarning() << "cannot get embeded image content";
-            }
-
-            ++pos;
-        }
-    }
+    Q_UNUSED(uuid)
+    Q_UNUSED(data)
 }
 
 QVariantList ZimServer::files() const {

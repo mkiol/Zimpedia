@@ -24,8 +24,8 @@ Item {
 
     property int showTime: 7000
     property real barShowMoveWidth: 20
-    property Flickable flickable: null
-    property bool shown: opacity == 1.0
+    property var flickable: null
+    readonly property bool shown: opacity == 1.0
 
     width: parent.width
     height: Theme.itemSizeMedium
@@ -76,9 +76,9 @@ Item {
     }
 
     MouseArea {
+        id: mouse
         enabled: root.showable
         anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-        //height: root.open ? parent.height : parent.height / 3
         height: parent.height
         onClicked: root.show();
     }
@@ -168,17 +168,21 @@ Item {
     Connections {
         target: root.flickable
 
-        onMovementStarted: {
-            m.vector = 0;
-            //m.lastContentY = 0.0;
-            m.lastContentY=root.flickable.contentY;
-            m.initialContentY=root.flickable.contentY;
+        onMovingChanged: {
+            if (root.flickable.moving) {
+                m.vector = 0;
+                m.lastContentY=root.flickable.scrollableOffset.y;
+                m.initialContentY=root.flickable.scrollableOffset.y;
+                if (root.flickable.atYEnd && root.flickable.atYBeginning) {
+                    root.show();
+                }
+            }
         }
 
-        onContentYChanged: {
+        onScrollableOffsetChanged: {
             if (root.flickable.moving) {
-                var dInit = root.flickable.contentY-m.initialContentY;
-                var dLast = root.flickable.contentY-m.lastContentY;
+                var dInit = root.flickable.scrollableOffset.y-m.initialContentY;
+                var dLast = root.flickable.scrollableOffset.y-m.lastContentY;
                 var lastV = m.vector;
                 if (dInit<-barShowMoveWidth)
                     root.show();
@@ -195,10 +199,10 @@ Item {
                         m.vector = 0;
                 }
                 if (lastV==-1 && m.vector==1)
-                    m.initialContentY=root.flickable.contentY;
+                    m.initialContentY=root.flickable.scrollableOffset.y;
                 if (lastV==1 && m.vector==-1)
-                    m.initialContentY=root.flickable.contentY;
-                m.lastContentY = root.flickable.contentY;
+                    m.initialContentY=root.flickable.scrollableOffset.y;
+                m.lastContentY = root.flickable.scrollableOffset.y;
             }
         }
     }

@@ -56,6 +56,14 @@ void Settings::setFontSize(int value) {
 
 int Settings::fontSize() const { return value("fontsize", 1).toInt(); }
 
+QString Settings::zoomViewport() const {
+    return QString::number(zoom(), 'f', 1);
+}
+
+QString Settings::zoomFontSize() const {
+    return QString::number(100 + ((zoom() - 1.0) * 10), 'f', 0) + "%";
+}
+
 float Settings::zoom() const {
     return std::min(std::max(minZoom, value("zoom", 1.0).toFloat()), maxZoom);
 }

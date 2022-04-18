@@ -6,7 +6,7 @@ Exec=harbour-zimpedia
 Name=Zimpedia
 
 [X-Sailjail]
-Permissions=Internet;RemovableMedia;Documents;Downloads
+Permissions=Internet;RemovableMedia;Documents;Downloads;WebView
 OrganizationName=org.mkiol
 ApplicationName=zimpedia
 ExecDBus=harbour-zimpedia

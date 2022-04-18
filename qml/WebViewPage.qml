@@ -5,176 +5,147 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-
-// Some ideas heavily inspired and partially borrowed from
-// harbour-webpirate project (https://github.com/Dax89/harbour-webpirate)
-
 import QtQuick 2.1
 import Sailfish.Silica 1.0
-import QtWebKit 3.0
+import Sailfish.WebView 1.0
 
-Page {
+WebViewPage {
     id: root
     objectName: "webview"
 
     property url url
 
-    property variant _settings: settings
-    property bool nightMode: false
-    property bool nightModePossible: true
-    property int toolbarHideTime: 4000
-    property variant history
-    property bool local: false
-    property string title: ""
+    property int _nightMode: 0
+    property bool _nightModePossible: true
+    property string _title: ""
+    readonly property variant _settings: settings
+    readonly property int _toolbarHideTime: 4000
 
-    function init() {
-        history = []
-        history.push(url)
-        navigate(url)
-    }
-
-    function navigate(url) {
-        local = zimServer.isServerUrl(url)
-        console.log("Opening " + (local ? "local" : "non-local") + " url: " + url.toString())
-        if (local) {
-            title = zimServer.titleFromUrl(url)
-            // WORKAROUND for https://github.com/mkiol/kaktus/issues/14
-            zimServer.articleAsync(url)
+    function updateTitle(url) {
+        if (zimServer.isServerUrl(url)) {
+            _title = zimServer.titleFromUrl(url)
         } else {
-            title = ""
-            view.url = url
+            _title = ""
         }
     }
 
     function navigateBack() {
-        if (history.length > 1) {
-            navigate(history[history.length-2])
-            history.pop()
+        if (view.canGoBack) {
+            view.goBack()
         } else {
             pageStack.pop()
         }
     }
 
-    function updateZoom(delta) {
-        var zoom = settings.zoom
-        if (zoom + delta <= 0.5)
-            settings.zoom = 0.5
-        else if (zoom + delta >= 2.0)
-            settings.zoom = 2.0
-        else
-            settings.zoom = zoom + delta
+    function errorCallback(error) {
+        console.log("error:", error)
+    }
 
-        var theme = { "zoom": settings.zoom }
-        postMessage("theme_set", { "theme": theme })
-        postMessage("theme_update_scale")
+    function updateZoom(delta) {
+        settings.zoom = settings.zoom + delta
+        setZoom(settings.zoomFontSize())
         baner.show(Math.round(settings.zoom * 100).toString() + "%")
     }
 
+    function initZoom() {
+        setZoom(settings.zoomFontSize())
+    }
+
+    function setZoom(zoom) {
+        var script =
+                "var css = 'html *{ font-size: " + zoom + "; }'\n" +
+                "var style = document.getElementById('_zoom_style')\n" +
+                "if (style) { style.innerHTML = css; return }\n" +
+                "style = document.createElement('style')\n" +
+                "style.id = '_zoom_style'\n" +
+                "style.type = 'text/css'\n" +
+                "style.appendChild(document.createTextNode(css))\n" +
+                "document.getElementsByTagName('head').item(0).appendChild(style)\n"
+        view.runJavaScript(script, function(res) {
+            console.log("zoom set done:", zoom)
+        }, errorCallback)
+    }
+
+    function initNightMode() {
+        var script =
+                "var css1 = 'html._nightmode1_class { filter: contrast(68%) brightness(108%) invert(100%); }\\n' +\n" +
+                "'html._nightmode1_class iframe { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode1_class object { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode1_class embed { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode1_class video { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode1_class img { filter: invert(100%); }'\n" +
+                "var style1 = document.getElementById('_nightmode1_style')\n" +
+                "if (style1) { style1.innerHTML = css1; return}\n" +
+                "style1 = document.createElement('style')\n" +
+                "style1.id = '_nightmode1_style'\n" +
+                "style1.type = 'text/css'\n" +
+                "style1.appendChild(document.createTextNode(css1))\n" +
+                "document.getElementsByTagName('head').item(0).appendChild(style1)\n" +
+                "var css2 = 'html._nightmode2_class { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode2_class iframe { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode2_class object { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode2_class embed { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode2_class video { filter: invert(100%); }\\n' +\n" +
+                "'html._nightmode2_class img { filter: invert(100%); }'\n" +
+                "var style2 = document.getElementById('_nightmode2_style')\n" +
+                "if (style2) { style2.innerHTML = css2; return}\n" +
+                "style2 = document.createElement('style')\n" +
+                "style2.id = '_nightmode2_style'\n" +
+                "style2.type = 'text/css'\n" +
+                "style2.appendChild(document.createTextNode(css2))\n" +
+                "document.getElementsByTagName('head').item(0).appendChild(style2)\n"
+        view.runJavaScript(script, function(res) {
+            console.log("night mode init done")
+            root._nightModePossible = true
+            setNightMode(root._nightMode)
+        }, errorCallback)
+    }
+
+    function setNightMode(type) {
+        var script
+        if (type === 0) {
+            script =
+                "var html = document.getElementsByTagName('html')[0]\n" +
+                "html.className = html.className.replace(' _nightmode1_class', '')\n" +
+                "html.className = html.className.replace(' _nightmode2_class', '')\n"
+        } else if (type === 1)  {
+            script =
+                "var html = document.getElementsByTagName('html')[0]\n" +
+                "html.className += ' _nightmode1_class'\n"
+        } else {
+            script =
+                "var html = document.getElementsByTagName('html')[0]\n" +
+                "html.className += ' _nightmode2_class'\n"
+        }
+
+        view.runJavaScript(script, function(res) {
+            console.log("night switch done:", type)
+            root._nightMode = type
+        }, errorCallback)
+    }
+
     function switchNightMode() {
-        postMessage(root.nightMode ? "nightmode_disable" : "nightmode_enable")
+        setNightMode(root._nightMode == 0 ? 1 : root._nightMode == 1 ? 2 : 0)
     }
 
-    function messageReceivedHandler(message) {
-        if (message.type === "inited") {
-            // ok
-        } else if (message.type === "nightmode_enabled") {
-            root.nightMode = true
-        } else if (message.type === "nightmode_disabled") {
-            root.nightMode = false
-        }
-    }
-
-    function postMessage(message, data) {
-        view.experimental.postMessage(JSON.stringify({ "type": message, "data": data }));
-    }
-
-    Connections {
-        target: zimServer
-        onArticleReady: {
-            view.loadHtml(article, root.url)
-        }
-    }
-
+    Component.onCompleted: view.url = root.url
     showNavigationIndicator: false
 
-    Component.onCompleted: init()
-
-    SilicaWebView {
+    WebView {
         id: view
 
+        canShowSelectionMarkers: true
+        onUrlChanged: {
+            updateTitle(url)
+        }
         anchors { top: parent.top; left: parent.left; right: parent.right}
         height: parent.height
 
-        experimental.preferences.javascriptEnabled: true
-        experimental.preferences.navigatorQtObjectEnabled: true
-        experimental.preferredMinimumContentsWidth: 980
-        experimental.overview: false
-        experimental.enableResizeContent: true
-
-        experimental.userScripts: [
-            Qt.resolvedUrl("js/Zimpedia.js"),
-            Qt.resolvedUrl("js/Console.js"),
-            Qt.resolvedUrl("js/MessageListener.js"),
-            Qt.resolvedUrl("js/NightMode.js"),
-            Qt.resolvedUrl("js/Theme.js"),
-            Qt.resolvedUrl("js/init.js")]
-
-        experimental.onMessageReceived: {
-            root.messageReceivedHandler(JSON.parse(message.data))
-        }
-
-        onLoadingChanged: {
-            switch (loadRequest.status) {
-            case WebView.LoadStartedStatus:
-                proggressPanel.text = qsTr("Loading page content...");
-                proggressPanel.open = true;
-                break;
-            case WebView.LoadSucceededStatus:
-                proggressPanel.open = false;
-                break;
-            case WebView.LoadFailedStatus:
-                proggressPanel.open = false;
-                notification.show(qsTr("Failed to load page content"));
-                break;
-            default:
-                proggressPanel.open = false;
+        onLoadedChanged: {
+            if (loaded) {
+                root.initZoom()
+                root.initNightMode()
             }
-        }
-
-        onNavigationRequested: {
-            /*console.log("onNavigationRequested: ")
-            console.log(" url:",request.url)
-            console.log(" navigation type:", request.navigationType)
-            console.log(" navigation LinkClickedNavigation:", request.navigationType === WebView.LinkClickedNavigation)
-            console.log(" navigation FormSubmittedNavigation:", request.navigationType === WebView.FormSubmittedNavigation)
-            console.log(" navigation BackForwardNavigation:", request.navigationType === WebView.BackForwardNavigation)
-            console.log(" navigation ReloadNavigation:", request.navigationType === WebView.ReloadNavigation)
-            console.log(" navigation FormResubmittedNavigation:", request.navigationType === WebView.FormResubmittedNavigation)
-            console.log(" navigation OtherNavigation:", request.navigationType === WebView.OtherNavigation)
-            console.log(" action:", request.action);*/
-
-            if (!Qt.application.active) {
-                request.action = WebView.IgnoreRequest
-                return
-            }
-
-            if (request.navigationType === WebView.LinkClickedNavigation) {
-                var url = request.url.toString()
-                if (url !== root.history[root.history.length-1])
-                    root.history.push(url)
-                var local = zimServer.isServerUrl(request.url.toString());
-                //console.log(" local:", local);
-                if (local) {
-                    request.action = WebView.IgnoreRequest
-                    root.navigate(request.url.toString())
-                    return
-                } else {
-                    root.local = false
-                    root.title = ""
-                }
-            }
-
-            request.action = WebView.AcceptRequest
         }
     }
 
@@ -185,8 +156,8 @@ Page {
 
     IconBar {
         id: controlbar
-        flickable: view
         theme: "black"
+        flickable: view
         showable: !hideToolbarTimer.running
 
         IconBarItem {
@@ -199,9 +170,10 @@ Page {
         IconBarItem {
             text: qsTr("Toggle Night View")
             theme: parent.theme
-            icon: root.nightMode ? "image://icons/icon-m-night-selected" :
-                                   "image://icons/icon-m-night"
-            enabled: root.nightModePossible
+            icon: root._nightMode === 1 ? "image://icons/icon-m-night1" :
+                  root._nightMode === 2 ? "image://icons/icon-m-night2" :
+                                          "image://icons/icon-m-night0"
+            enabled: root._nightModePossible
             visible: true
             onClicked: {
                 root.switchNightMode()
@@ -212,12 +184,10 @@ Page {
             text: qsTr("Add to bookmarks")
             theme: parent.theme
             icon: "image://theme/icon-m-favorite-selected"
-            enabled: root.title !== ""
+            enabled: root._title !== ""
             visible: true
             onClicked: {
-                bookmarkModel.addBookmark(root.title,
-                                      root.history[root.history.length-1],
-                                      zimServer.favicon)
+                bookmarkModel.addBookmark(root._title, view.url)
             }
         }
 
@@ -225,12 +195,9 @@ Page {
             text: qsTr("Browser")
             theme: parent.theme
             icon: "image://icons/icon-m-browser"
-            onClicked: {
-                var url = encodeURI(root.history[root.history.length-1])
-                console.log("Opening: " + url)
-                Qt.openUrlExternally(url)
-            }
+            onClicked: Qt.openUrlExternally(view.url)
         }
+
         IconBarItem {
             text: qsTr("Decrease font")
             theme: parent.theme
@@ -260,17 +227,8 @@ Page {
         }
     }
 
-    ProgressPanel {
-        id: proggressPanel
-        transparent: false
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        cancelable: true
-        onCloseClicked: view.stop()
-    }
-
     Timer {
         id: hideToolbarTimer
-        interval: root.toolbarHideTime
+        interval: root._toolbarHideTime
     }
 }

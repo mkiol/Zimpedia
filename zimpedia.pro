@@ -1,7 +1,7 @@
 TARGET = harbour-zimpedia
 
 CONFIG += c++1z sailfishapp dbus json
-PKGCONFIG += mlite5
+PKGCONFIG += mlite5 qt5embedwidget
 DEFINES += QT_NO_URL_CAST_FROM_STRING
 
 QMAKE_CXXFLAGS_RELEASE -= -O2
