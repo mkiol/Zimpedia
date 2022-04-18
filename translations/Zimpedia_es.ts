@@ -1,52 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.1" language="es" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
-        <source>About</source>
-        <translation type="vanished">Acerca de</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">Registro de cambios</translation>
-    </message>
-    <message>
         <location filename="../qml/AboutPage.qml" line="28"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="50"/>
+        <location filename="../qml/AboutPage.qml" line="53"/>
         <source>Project website</source>
         <translation>Web del proyecto</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
+        <location filename="../qml/AboutPage.qml" line="57"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambios</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="62"/>
+        <location filename="../qml/AboutPage.qml" line="63"/>
         <source>Authors</source>
         <translation>Autores</translation>
     </message>
     <message>
-        <source>Translations are provided by:</source>
-        <translation type="vanished">Traducciones facilitadas por:</translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="76"/>
+        <location filename="../qml/AboutPage.qml" line="77"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation>%1 se ha desarrollado como un proyecto de código libre bajo %2.</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="82"/>
+        <location filename="../qml/AboutPage.qml" line="83"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Traductores</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="93"/>
         <source>Libraries</source>
         <translation>Librerías</translation>
     </message>
@@ -61,17 +49,22 @@
     <message>
         <location filename="../qml/ArticleSearchHeader.qml" line="33"/>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
-    </message>
-    <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
-        <source>Close archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
         <source>Open main page</source>
-        <translation type="unfinished">Abrir página principal</translation>
+        <translation>Abrir página principal</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <source>Show details</source>
+        <translation>Mostrar detalles</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
+        <source>Close archive</source>
+        <translation>Cerrar archivo</translation>
     </message>
 </context>
 <context>
@@ -90,52 +83,17 @@
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="53"/>
         <source>Archive is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Falta el archivo</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="88"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation type="vanished">Cambiar</translation>
-    </message>
-    <message>
-        <source>ZIM file is missing</source>
-        <translation type="vanished">Falta el fichero ZIM</translation>
-    </message>
-    <message>
-        <source>Something went wrong and bookmark cannot be updated</source>
-        <translation type="vanished">Algo salió mal y el marcador no se ha podido actualizar</translation>
-    </message>
-    <message>
-        <source>Copy URL</source>
-        <translation type="vanished">Copiar URL</translation>
-    </message>
-    <message>
-        <source>URL was copied to the clipboard</source>
-        <translation type="vanished">Se ha copiado URL al portapapeles</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../qml/BookmarkEditPage.qml" line="61"/>
         <source>URL</source>
         <translation>URL</translation>
-    </message>
-</context>
-<context>
-    <name>BookmarkFileChoose</name>
-    <message>
-        <source>Choose ZIM file</source>
-        <translation type="vanished">Elegir fichero ZIM</translation>
-    </message>
-    <message>
-        <source>No files were found</source>
-        <translation type="vanished">No se ha encontrado ningún fichero</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="vanished">Actualizar</translation>
     </message>
 </context>
 <context>
@@ -148,7 +106,7 @@
     <message>
         <location filename="../qml/BookmarksPage.qml" line="34"/>
         <source>Archive is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Falta el archivo</translation>
     </message>
     <message>
         <location filename="../qml/BookmarksPage.qml" line="41"/>
@@ -161,14 +119,6 @@
         <translation>Borrar</translation>
     </message>
     <message>
-        <source>ZIM file is missing</source>
-        <translation type="vanished">Falta el fichero ZIM</translation>
-    </message>
-    <message>
-        <source>Bookmark&apos;s ZIM file is missing</source>
-        <translation type="vanished">Faltan los marcadores del fichero ZIM</translation>
-    </message>
-    <message>
         <location filename="../qml/BookmarksPage.qml" line="73"/>
         <source>No bookmarks</source>
         <translation>No hay marcadores</translation>
@@ -177,13 +127,9 @@
 <context>
     <name>ChangelogPage</name>
     <message>
-        <source>Changelog</source>
-        <translation type="vanished">Registro de cambios</translation>
-    </message>
-    <message>
         <location filename="../qml/ChangelogPage.qml" line="26"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambios</translation>
     </message>
     <message>
         <location filename="../qml/ChangelogPage.qml" line="30"/>
@@ -194,57 +140,30 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>Mostrar detalles</translation>
     </message>
     <message>
-        <source>No files were found</source>
-        <translation type="vanished">No se ha encontrado ningún fichero</translation>
-    </message>
-    <message>
-        <source>The ZIM is an open file format that stores wiki content for offline usage. The collection of nice wikis can be downloaded from &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt;this page&lt;/a&gt;. If you already have some ZIM files, put them to any folder you like under your home directory or SD card.</source>
-        <translation type="vanished">ZIM es un formato de archivo abierto que almacena el contenido wiki para usarlo sin conexión. La colección de buenos wikis pueden descargarse desde &lt;a href=&apos;http://www.kiwix.org/wiki/Content_in_all_languages&apos;&gt; esta página &lt;/a&gt;. Si ya dispones de algunos ficheros ZIM, ubícalos en cualquier carpeta dentro del directorio Home o en la tarjeta SD.</translation>
-    </message>
-    <message>
-        <source>ZIM files</source>
-        <translation type="vanished">Archivos ZIM</translation>
-    </message>
-    <message>
-        <source>Open file</source>
-        <translation type="vanished">Abrir archivo</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">Acerca de</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Ajustes</translation>
-    </message>
-    <message>
-        <source>Bookmarks</source>
-        <translation type="vanished">Marcadores</translation>
-    </message>
-    <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
-        <translation type="unfinished"></translation>
+        <translation>Parece que no tienes archivos ZIM</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>ZIM es un formato de archivo abierto que almacena contenido procedente de la Web para su uso sin conexión. Una colección de estos archivos puedes encontrarlos en el sitio web %1. Si ya has descargado archivos ZIM, colócalos en la  carpeta que desees dentro de la Tarjeta SD o dentro de los directorios Downloads o Documents.</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir %1</translation>
     </message>
 </context>
 <context>
@@ -252,21 +171,23 @@
     <message numerus="yes">
         <location filename="../qml/SearchDialogHeader.qml" line="36"/>
         <source>%n selected</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n seleccionado</numerusform>
+            <numerusform>%n seleccionados</numerusform>
         </translation>
     </message>
 </context>
 <context>
     <name>SearchPage</name>
     <message>
-        <source>Open in built-in viewer</source>
-        <translation type="vanished">Abrir en el visor incorporado</translation>
+        <location filename="../qml/SearchPage.qml" line="45"/>
+        <source>Open in viewer</source>
+        <translation>Abrir en el visor</translation>
     </message>
     <message>
-        <source>Open in browser</source>
-        <translation type="vanished">Abrir en el navegador</translation>
+        <location filename="../qml/SearchPage.qml" line="45"/>
+        <source>Open in an external app</source>
+        <translation>Abrir en una aplicación externa</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="56"/>
@@ -274,71 +195,34 @@
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <source>No articles</source>
-        <translation type="vanished">No hay artículos</translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="105"/>
-        <source>Find article, by typing in the search field</source>
-        <translation>Escribe en el campo de búsqueda para buscar un artículo</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">Acerca de</translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="45"/>
-        <source>Open in viewer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="45"/>
-        <source>Open in an external app</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="77"/>
-        <source>About %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="87"/>
-        <source>Select archives</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="107"/>
-        <source>You have not selected any archives to search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="109"/>
-        <source>Open pulley menu and select one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="117"/>
-        <source>Looking for archives...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/SearchPage.qml" line="118"/>
-        <source>Opening archives...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/SearchPage.qml" line="82"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="104"/>
-        <source>No results</source>
-        <translation type="unfinished"></translation>
+        <location filename="../qml/SearchPage.qml" line="87"/>
+        <source>Select archives</source>
+        <translation>Seleccionar archivos</translation>
     </message>
     <message>
-        <source>Change ZIM file</source>
-        <translation type="vanished">Cambiar fichero ZIM</translation>
+        <location filename="../qml/SearchPage.qml" line="107"/>
+        <source>You have not selected any archives to search</source>
+        <translation>No has seleccionado ningún archivo para buscar</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="109"/>
+        <source>Open pulley menu and select one</source>
+        <translation>Abre el menú deslizante y selecciona uno</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="117"/>
+        <source>Looking for archives...</source>
+        <translation>Buscando archivos...</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="118"/>
+        <source>Opening archives...</source>
+        <translation>Abriendo archivos...</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="92"/>
@@ -346,12 +230,19 @@
         <translation>Marcadores</translation>
     </message>
     <message>
-        <source>Open main page</source>
-        <translation type="vanished">Abrir página principal</translation>
+        <location filename="../qml/SearchPage.qml" line="77"/>
+        <source>About %1</source>
+        <translation>Acerca de %1</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation type="vanished">Buscar</translation>
+        <location filename="../qml/SearchPage.qml" line="104"/>
+        <source>No results</source>
+        <translation>No hay resultados</translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="105"/>
+        <source>Find article, by typing in the search field</source>
+        <translation>Escribe en el campo de búsqueda para buscar un artículo</translation>
     </message>
 </context>
 <context>
@@ -367,15 +258,6 @@
         <translation>Modo de búsqueda</translation>
     </message>
     <message>
-        <source>By default, articles are searched only by title. Alternatively, you can also search through the full article text. Full-text search only works if the ZIM file contains the appropriate index.</source>
-        <translation type="vanished">Por defecto, al introducir una frase sólo busca por el título del artículo. Una forma distinta es buscar dentro del texto completo del artículo. La búsqueda de texto-completo sólo funciona cuando el archivo ZIM contiene el índice apropiado.</translation>
-    </message>
-    <message>
-        <location filename="../qml/SettingsPage.qml" line="33"/>
-        <source>You can search for articles by title only (option &apos;By title&apos;) or, alternatively, search through the full text of all articles in the archives (option &apos;Full-text&apos;). Full-text search only works when ZIM file contains the appropriate index.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/SettingsPage.qml" line="39"/>
         <source>By title</source>
         <translation>Por título</translation>
@@ -383,7 +265,7 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>Full-text</source>
-        <translation>Texto-completo</translation>
+        <translation>Texto completo</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="72"/>
@@ -393,12 +275,12 @@
     <message>
         <location filename="../qml/SettingsPage.qml" line="73"/>
         <source>External app</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicación externa</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="80"/>
         <source>Articles can be opened in the built-in web viewer or in an external app (e.g. Web Browser).</source>
-        <translation type="unfinished"></translation>
+        <translation>Los artículos pueden abrirse con el visor web incorporado o con una aplicación externa (por ejemplo, el Navegador).</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="68"/>
@@ -406,12 +288,9 @@
         <translation>Visor por defecto</translation>
     </message>
     <message>
-        <source>Browser</source>
-        <translation type="vanished">Navegador</translation>
-    </message>
-    <message>
-        <source>Wiki pages can be opened in the built-in web viewer or in an external browser.</source>
-        <translation type="vanished">Las páginas Wiki se pueden abrir en el visor Web incorporado o en un navegador externo.</translation>
+        <location filename="../qml/SettingsPage.qml" line="33"/>
+        <source>You can search for articles by title only (option &apos;By title&apos;) or, alternatively, search through the full text of all articles in the archives (option &apos;Full-text&apos;). Full-text search only works when ZIM file contains the appropriate index.</source>
+        <translation>Puedes buscar artículos sólo por título (opción &apos;Por título&apos;) o, alternativamente, en el texto completo de todos los artículos de los archivos (opción &apos;Texto completo&apos;). La búsqueda de texto completo sólo funciona cuando el archivo ZIM contiene el índice apropiado.</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPage.qml" line="85"/>
@@ -422,51 +301,45 @@
 <context>
     <name>WebViewPage</name>
     <message>
-        <source>Launching an external browser...</source>
-        <translation type="vanished">Abriendo navegador externo...</translation>
-    </message>
-    <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>Cargando contenido de la página...</translation>
+        <translation type="vanished">Cargando contenido de la página...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>Se produjo un fallo al cargar contenido</translation>
+        <translation type="vanished">Error al cargar contenido</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="164"/>
         <source>Back</source>
         <translation>Volver</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Toggle Night View</source>
         <translation>Cambiar a vista nocturna</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="184"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="195"/>
         <source>Browser</source>
         <translation>Navegador</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Decrease font</source>
         <translation>Reducir fuente</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="211"/>
         <source>Increase font</source>
         <translation>Aumentar fuente</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="220"/>
         <source>Hide toolbar</source>
         <translation>Ocultar barra</translation>
     </message>
@@ -516,7 +389,7 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="94"/>
         <source>Full-text index</source>
-        <translation>Índice texto-completo</translation>
+        <translation>Índice de texto completo</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="95"/>
@@ -535,17 +408,17 @@
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="99"/>
         <source>Pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="104"/>
         <source>Videos</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeos</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="89"/>
         <source>Article count</source>
-        <translation>Nº artículos</translation>
+        <translation>Nº de artículos</translation>
     </message>
     <message>
         <location filename="../qml/ZimInfoPage.qml" line="114"/>
@@ -569,26 +442,14 @@
 <context>
     <name>main</name>
     <message>
-        <source>Launching an external browser...</source>
-        <translation type="vanished">Abriendo un navegador externo...</translation>
-    </message>
-    <message>
-        <source>Bookmark has been added</source>
-        <translation type="vanished">Marcador añadido</translation>
-    </message>
-    <message>
         <location filename="../qml/main.qml" line="54"/>
         <source>Bookmark added</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcador añadido</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="55"/>
         <source>Bookmark already exists</source>
         <translation>El marcador ya existe</translation>
-    </message>
-    <message>
-        <source>Bookmark has been updated</source>
-        <translation type="vanished">Se ha actualizado el marcador</translation>
     </message>
 </context>
 </TS>
