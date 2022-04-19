@@ -7,6 +7,10 @@ DEFINES += QT_NO_URL_CAST_FROM_STRING
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3
 
+CONFIG(debug, debug|release) {
+    CONFIG += sanitizer sanitize_address
+}
+
 contains(QT_ARCH, i386){
    CONFIG += x86
    DEFINES += X86
