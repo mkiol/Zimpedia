@@ -524,9 +524,11 @@ void ZimServer::searchTitle(const QString &phrase, int maxSize,
 }
 
 QStringList static phrasePermuts(const QString &phrase) {
+    static const auto maxWords = 6;
     QStringList results;
     auto words = phrase.split(QRegExp{"\\s+"}, QString::SkipEmptyParts);
-    auto perms = static_cast<int>(std::pow(2, words.size()));
+    auto size = std::min(words.size(), maxWords);
+    auto perms = static_cast<int>(std::pow(2, size));
     auto firstLetterIdx = [](const auto &word) {
         for (int i = 0; i < word.size(); ++i) {
             if (word.at(i).isLetter()) return i;
@@ -534,8 +536,8 @@ QStringList static phrasePermuts(const QString &phrase) {
         return -1;
     };
     for (auto per = 0; per < perms; ++per) {
-        auto b = std::bitset<sizeof(int)>(per);
-        for (int i = 0; i < words.size(); ++i) {
+        auto b = std::bitset<maxWords>(per);
+        for (int i = 0; i < size; ++i) {
             auto &word = words[i];
             auto idx = firstLetterIdx(word);
             if (idx >= 0) {
