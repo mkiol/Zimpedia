@@ -1,13 +1,10 @@
-/*
-  Copyright (C) 2017 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2017-2022 Michal Kosciesza <michal@mkiol.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
-  This file is part of Zimpedia application.
-
-  This Source Code Form is subject to the terms of
-  the Mozilla Public License, v.2.0. If a copy of
-  the MPL was not distributed with this file, You can
-  obtain one at http://mozilla.org/MPL/2.0/.
-*/
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
@@ -17,46 +14,34 @@ Item {
 
     default property alias children: container.children
     property string theme: "dimmer"
-
     property bool open: false
-    property bool openable: true
-    property bool showable: true
-
     property int showTime: 7000
-    property real barShowMoveWidth: 20
     property var flickable: null
     readonly property bool shown: opacity == 1.0
 
     width: parent.width
     height: Theme.itemSizeMedium
     anchors.left: parent.left
-    enabled: showable
-    visible: showable
-
-    clip: true
+    anchors.bottom: parent.bottom
+    visible: opacity > 0.0
     opacity: root.open ? 1.0 : 0.0
-    Behavior on opacity { FadeAnimation {duration: 200} }
-
-    Behavior on y {NumberAnimation { duration: 250; easing.type: Easing.OutQuad }}
-    y: open ? parent.height - height : parent.height - height/4
+    Behavior on opacity { FadeAnimation {} }
 
     function show() {
-        if (!showable)
-            return
         if (!open) {
-            root.open = true;
-            flick.contentX = 0;
+            root.open = true
+            flick.contentX = 0
         }
-        timer.restart();
+        timer.restart()
     }
 
     function hide() {
         if (open) {
             if (flick.dragging) {
-                timer.restart();
+                timer.restart()
             } else {
-                root.open = false;
-                timer.stop();
+                root.open = false
+                timer.stop()
             }
         }
     }
@@ -77,10 +62,8 @@ Item {
 
     MouseArea {
         id: mouse
-        enabled: root.showable
-        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-        height: parent.height
-        onClicked: root.show();
+        anchors.fill: parent
+        onClicked: root.show()
     }
 
     Item {
@@ -100,9 +83,7 @@ Item {
             opacity: flick.contentX < (flick.contentWidth - flick.width - Theme.paddingLarge) ? 0.5 : 0.0
             visible: opacity > 0
             anchors.right: visible ? parent.right : undefined
-            Behavior on opacity {
-                FadeAnimation {}
-            }
+            Behavior on opacity { FadeAnimation {} }
         }
 
         // Left
@@ -118,9 +99,7 @@ Item {
             opacity: flick.contentX > Theme.paddingLarge ? 0.5 : 0.0
             visible: opacity > 0
             anchors.left: visible ? parent.left : undefined
-            Behavior on opacity {
-                FadeAnimation {}
-            }
+            Behavior on opacity { FadeAnimation {} }
         }
 
         Flickable {
@@ -137,7 +116,7 @@ Item {
                 id: container
                 property alias theme: root.theme
                 property alias open: root.open
-                function show() {root.show()}
+                function show() { root.show() }
 
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -153,9 +132,7 @@ Item {
     Timer {
         id: timer
         interval: root.showTime
-        onTriggered: {
-            hide();
-        }
+        onTriggered: hide()
     }
 
     QtObject {
@@ -174,35 +151,36 @@ Item {
                 m.lastContentY=root.flickable.scrollableOffset.y;
                 m.initialContentY=root.flickable.scrollableOffset.y;
                 if (root.flickable.atYEnd && root.flickable.atYBeginning) {
-                    root.show();
+                    root.show()
                 }
             }
         }
 
         onScrollableOffsetChanged: {
             if (root.flickable.moving) {
-                var dInit = root.flickable.scrollableOffset.y-m.initialContentY;
-                var dLast = root.flickable.scrollableOffset.y-m.lastContentY;
-                var lastV = m.vector;
+                var dInit = root.flickable.scrollableOffset.y-m.initialContentY
+                var dLast = root.flickable.scrollableOffset.y-m.lastContentY
+                var lastV = m.vector
+                var barShowMoveWidth = 20
                 if (dInit<-barShowMoveWidth)
-                    root.show();
+                    root.show()
                 if (dInit>barShowMoveWidth)
-                    root.hide();
+                    root.hide()
                 if (dLast>barShowMoveWidth)
-                    root.hide();
+                    root.hide()
                 if (m.lastContentY!=0) {
                     if (dLast<0)
-                        m.vector = -1;
+                        m.vector = -1
                     if (dLast>0)
-                        m.vector = 1;
+                        m.vector = 1
                     if (dLast==0)
-                        m.vector = 0;
+                        m.vector = 0
                 }
                 if (lastV==-1 && m.vector==1)
-                    m.initialContentY=root.flickable.scrollableOffset.y;
+                    m.initialContentY=root.flickable.scrollableOffset.y
                 if (lastV==1 && m.vector==-1)
-                    m.initialContentY=root.flickable.scrollableOffset.y;
-                m.lastContentY = root.flickable.scrollableOffset.y;
+                    m.initialContentY=root.flickable.scrollableOffset.y
+                m.lastContentY = root.flickable.scrollableOffset.y
             }
         }
     }

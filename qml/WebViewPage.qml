@@ -53,7 +53,7 @@ WebViewPage {
 
     function setZoom(zoom) {
         var script =
-                "var css = 'html *{ font-size: " + zoom + "; }'\n" +
+                "var css = 'html *:not(h1) { font-size: " + zoom + " !important; }'\n" +
                 "var style = document.getElementById('_zoom_style')\n" +
                 "if (style) { style.innerHTML = css; return }\n" +
                 "style = document.createElement('style')\n" +
@@ -128,7 +128,15 @@ WebViewPage {
         setNightMode(root._nightMode == 0 ? 1 : root._nightMode == 1 ? 2 : 0)
     }
 
-    Component.onCompleted: view.url = root.url
+    onStatusChanged: {
+        if (status === PageStatus.Active) {
+            if (view.url.toString().length === 0) view.url = root.url
+            controlbar.show()
+        } else {
+            controlbar.hide()
+        }
+    }
+
     showNavigationIndicator: false
 
     WebView {
@@ -158,7 +166,6 @@ WebViewPage {
         id: controlbar
         theme: "black"
         flickable: view
-        showable: !hideToolbarTimer.running
 
         IconBarItem {
             text: qsTr("Back")
@@ -221,14 +228,8 @@ WebViewPage {
             theme: parent.theme
             icon: "image://theme/icon-m-dismiss"
             onClicked: {
-                hideToolbarTimer.start()
                 controlbar.hide()
             }
         }
-    }
-
-    Timer {
-        id: hideToolbarTimer
-        interval: root._toolbarHideTime
     }
 }

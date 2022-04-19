@@ -16,13 +16,13 @@ Column {
     width: parent.width
 
     SearchField {
-        id: _search
+        id: searchField
         Connections {
             target: zimServer
             onLoadedChanged: {
                 if (!zimServer.loaded) {
                     articleModel.filter = ""
-                    _search.text = ""
+                    searchField.text = ""
                 }
             }
         }
@@ -33,30 +33,33 @@ Column {
         placeholderText: qsTr("Search")
         onTextChanged: articleModel.filter = text.trim()
         EnterKey.iconSource: "image://theme/icon-m-enter-close"
+        textRightMargin: Theme.paddingMedium
         EnterKey.onClicked: {
             Qt.inputMethod.hide();
             root.parent.focus = true
         }
 
-        Item {
-            parent: _search
-            anchors.fill: parent
+        rightItem: Row {
             IconButton {
-                anchors {
-                    right: parent.right
-                    rightMargin: _search.text.length === 0 ? Theme.horizontalPageMargin :
-                                                             Theme.iconSizeMedium + Theme.horizontalPageMargin +
-                                                             Theme.paddingMedium
+                icon.source: searchField.canHide && searchField.text.length === 0
+                             ? "image://theme/icon-m-input-remove"
+                             : "image://theme/icon-m-clear"
+                visible: opacity > 0.0
+                enabled: searchField.canHide || searchField.text.length > 0
+                opacity: enabled ? 1.0 : 0.0
+                Behavior on opacity { FadeAnimation {} }
+                onClicked: {
+                    searchField.text = ""
                 }
-                width: icon.width
-                height: parent.height
+            }
+            IconButton {
                 icon.source: settings.searchMode === Settings.FullTextSearch ?
                                      "image://icons/icon-m-fulltext" :
                                      "image://icons/icon-m-title"
-                enabled: _search.enabled
-                opacity: icon.status === Image.Ready ? 1 : 0
+                visible: opacity > 0.0
+                enabled: searchField.enabled
+                opacity: enabled ? 1.0 : 0.0
                 Behavior on opacity { FadeAnimation {} }
-                Behavior on anchors.rightMargin { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
                 onClicked: {
                     if (settings.searchMode === Settings.FullTextSearch) {
                         settings.searchMode = Settings.TitleSearch
@@ -74,7 +77,7 @@ Column {
         Repeater {
             model: zimServer.files
             DoubleListItem {
-                hidden: articleModel.busy || !_search.active || articleModel.filter.length !== 0
+                hidden: articleModel.busy || !searchField.active || articleModel.filter.length !== 0
                 highlighted: down
                 title: modelData[1]
                 uuid: modelData[0]
