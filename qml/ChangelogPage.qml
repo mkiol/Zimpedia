@@ -31,14 +31,21 @@ Page {
             }
 
             LogItem {
+                title: "Improved web viewer"
+                description: "Old WebKit based web view is replaced with new Sailfish WebView based on Gecko engine. " +
+                             "Thanks to this change many web rendering bugs disappeared and html pages look much better now."
+            }
+
+            LogItem {
                 title: "Search multiple archives"
                 description: "You can select multiple ZIM archives and search all of them at once."
             }
 
             LogItem {
                 title: "Sandboxing"
-                description: "SailJail is now enabled. Due to sandboxing, " +
-                             "app can only open ZIM files from Documents and Download folders and SD card."
+                description: "SailJail is now explicitly enabled. " +
+                             "Due to sandboxing app no longer can read user main directory. " +
+                             "Please make sure your ZIM files are in any folder under Downloads or Documents or on SD card."
             }
 
             LogItem {
