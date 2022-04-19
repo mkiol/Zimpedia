@@ -52,17 +52,17 @@
         <translation>Buscar</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation>Abrir página principal</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
         <source>Show details</source>
         <translation>Mostrar detalles</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation>Cerrar archivo</translation>
     </message>
@@ -309,37 +309,37 @@
         <translation type="vanished">Error al cargar contenido</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="164"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>Volver</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="171"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>Cambiar a vista nocturna</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="184"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>Añadir a marcadores</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="195"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>Navegador</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="202"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>Reducir fuente</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="211"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>Aumentar fuente</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="220"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>Ocultar barra</translation>
     </message>

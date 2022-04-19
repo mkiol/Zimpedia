@@ -17,32 +17,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="50"/>
+        <location filename="../qml/AboutPage.qml" line="53"/>
         <source>Project website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
+        <location filename="../qml/AboutPage.qml" line="57"/>
         <source>Changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="62"/>
+        <location filename="../qml/AboutPage.qml" line="63"/>
         <source>Authors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="76"/>
+        <location filename="../qml/AboutPage.qml" line="77"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="82"/>
+        <location filename="../qml/AboutPage.qml" line="83"/>
         <source>Translators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="93"/>
         <source>Libraries</source>
         <translation type="unfinished"></translation>
     </message>
@@ -60,12 +60,17 @@
         <translation type="unfinished">Keresés</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
+        <source>Show details</source>
+        <translation type="unfinished">Részletek megjelenítése</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation type="unfinished">A főoldal megnyitása</translation>
     </message>
@@ -186,7 +191,7 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>Részletek megjelenítése</translation>
     </message>
@@ -211,22 +216,23 @@
         <translation type="vanished">Könyvjelzők</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>Frissítés</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,47 +407,45 @@
         <translation type="vanished">Egy külső böngésző megnyitása...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>Oldal tartalmának töltése...</translation>
+        <translation type="vanished">Oldal tartalmának töltése...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>Nem sikerült betölteni az oldal tartalmát</translation>
+        <translation type="vanished">Nem sikerült betölteni az oldal tartalmát</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>Éjszakai nézet bekapcsolása</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>Hozzáadás a könyvjelzőkhöz</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>Böngésző</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>Kisebb betűméret</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>Nagyobb betűméret</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>Eszköztár elrejtése</translation>
     </message>

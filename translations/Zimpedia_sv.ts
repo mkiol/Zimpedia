@@ -52,17 +52,17 @@
         <translation>Sök</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation>Öppna huvudsidan</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
         <source>Show details</source>
         <translation>Visa detaljerat</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation>Stäng arkiv</translation>
     </message>
@@ -301,47 +301,45 @@
 <context>
     <name>WebViewPage</name>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>Läser in sidinnehåll...</translation>
+        <translation type="vanished">Läser in sidinnehåll...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>Kunde inte läsa in sidinnehåll</translation>
+        <translation type="vanished">Kunde inte läsa in sidinnehåll</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>Tillbaka</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>Nattläge av/på</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>Lägg till i bokmärken</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>Webbläsare</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>Minska teckenstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>Öka teckenstorlek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>Dölj verktygsfältet</translation>
     </message>

@@ -17,17 +17,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="50"/>
+        <location filename="../qml/AboutPage.qml" line="53"/>
         <source>Project website</source>
         <translation>Site web du projet</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
+        <location filename="../qml/AboutPage.qml" line="57"/>
         <source>Changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="62"/>
+        <location filename="../qml/AboutPage.qml" line="63"/>
         <source>Authors</source>
         <translation>Auteurs</translation>
     </message>
@@ -36,17 +36,17 @@
         <translation type="vanished">Traductions fournies par :</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="76"/>
+        <location filename="../qml/AboutPage.qml" line="77"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation>%1 est développé en tant que projet open source, sous %2.</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="82"/>
+        <location filename="../qml/AboutPage.qml" line="83"/>
         <source>Translators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="93"/>
         <source>Libraries</source>
         <translation>Bibliothèques</translation>
     </message>
@@ -64,12 +64,17 @@
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
+        <source>Show details</source>
+        <translation type="unfinished">Afficher les détails</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation type="unfinished">Page d&apos;accueil</translation>
     </message>
@@ -194,7 +199,7 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>Afficher les détails</translation>
     </message>
@@ -227,22 +232,23 @@
         <translation type="vanished">Marque-pages</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -426,47 +432,45 @@
         <translation type="vanished">Ouverture du navigateur...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>Chargement en cours...</translation>
+        <translation type="vanished">Chargement en cours...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>Erreur lors du chargement de la page</translation>
+        <translation type="vanished">Erreur lors du chargement de la page</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>Retour</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>Mode Nuit</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>Ajouter aux marque-p.</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>Navigateur</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>Zoom -</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>Zoom +</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>Masquer la barre d&apos;outils</translation>
     </message>

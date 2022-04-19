@@ -17,17 +17,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="50"/>
+        <location filename="../qml/AboutPage.qml" line="53"/>
         <source>Project website</source>
         <translation>项目网址</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="56"/>
+        <location filename="../qml/AboutPage.qml" line="57"/>
         <source>Changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="62"/>
+        <location filename="../qml/AboutPage.qml" line="63"/>
         <source>Authors</source>
         <translation>作者</translation>
     </message>
@@ -36,17 +36,17 @@
         <translation type="vanished">翻译者:</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="76"/>
+        <location filename="../qml/AboutPage.qml" line="77"/>
         <source>%1 is developed as an open source project under %2.</source>
         <translation>%1是在%2下作为开放源码项目开发的。</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="82"/>
+        <location filename="../qml/AboutPage.qml" line="83"/>
         <source>Translators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="92"/>
+        <location filename="../qml/AboutPage.qml" line="93"/>
         <source>Libraries</source>
         <translation>库</translation>
     </message>
@@ -64,12 +64,17 @@
         <translation type="unfinished">搜索</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
+        <source>Show details</source>
+        <translation type="unfinished">显示详细信息</translation>
+    </message>
+    <message>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation type="unfinished">打开主页</translation>
     </message>
@@ -194,7 +199,7 @@
 <context>
     <name>FilesPage</name>
     <message>
-        <location filename="../qml/FilesPage.qml" line="62"/>
+        <location filename="../qml/FilesPage.qml" line="66"/>
         <source>Show details</source>
         <translation>显示详细信息</translation>
     </message>
@@ -227,22 +232,23 @@
         <translation type="vanished">书签</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="45"/>
+        <location filename="../qml/FilesPage.qml" line="49"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="74"/>
+        <location filename="../qml/FilesPage.qml" line="78"/>
         <source>It looks like you don&apos;t have any ZIM archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="75"/>
+        <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/FilesPage.qml" line="87"/>
+        <location filename="../qml/FilesPage.qml" line="44"/>
+        <location filename="../qml/FilesPage.qml" line="91"/>
         <source>Open %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -425,47 +431,45 @@
         <translation type="vanished">启动一个外部浏览器…</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>加载页面内容……</translation>
+        <translation type="vanished">加载页面内容……</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>加载页面内容失败</translation>
+        <translation type="vanished">加载页面内容失败</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>切换夜景模式</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>添加到书签</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>浏览器</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>字体缩小</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>字体增大</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>隐藏工具栏</translation>
     </message>

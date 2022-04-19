@@ -64,12 +64,12 @@
         <translation>Szukaj</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="99"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="102"/>
         <source>Show details</source>
         <translation>Pokaż szczegóły</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="105"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="108"/>
         <source>Close archive</source>
         <translation>Zamknij archiwum</translation>
     </message>
@@ -83,7 +83,7 @@
         <translation type="vanished">Odznacz archiwum</translation>
     </message>
     <message>
-        <location filename="../qml/ArticleSearchHeader.qml" line="88"/>
+        <location filename="../qml/ArticleSearchHeader.qml" line="91"/>
         <source>Open main page</source>
         <translation>Otwórz główną stronę</translation>
     </message>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../qml/FilesPage.qml" line="79"/>
         <source>The ZIM is an open file format that stores content coming from the Web for offline use. The collection of various archives can be found on %1 website. If you have already downloaded ZIM files, put them to any folder you like under SD card, Download or Documents directory.</source>
-        <translation>Archiwum ZIM jest otwartym formatem przechowywania treści pochodzących z Internetu. Zbiór różnych ciekawych archiwów można znaleźć na stronie %1. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze w &apos;Downloads&apos;, &apos;Documents&apos; lub na karcie SD.</translation>
+        <translation>Archiwum ZIM jest otwartym formatem przechowywania treści pochodzących z Internetu. Zbiór różnych ciekawych archiwów można znaleźć na stronie %1. Jeśli już masz pliki w formacie ZIM, umieść je w dowolnym folderze w Pobrane, Dokumenty lub na karcie SD.</translation>
     </message>
     <message>
         <location filename="../qml/FilesPage.qml" line="44"/>
@@ -446,47 +446,45 @@
         <translation type="vanished">Uruchamiam zewnętrzną przeglądarkę...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="129"/>
         <source>Loading page content...</source>
-        <translation>Wczytuję zawartość strony...</translation>
+        <translation type="vanished">Wczytuję zawartość strony...</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="137"/>
         <source>Failed to load page content</source>
-        <translation>Nie udało się wczytać strony</translation>
+        <translation type="vanished">Nie udało się wczytać strony</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="193"/>
+        <location filename="../qml/WebViewPage.qml" line="171"/>
         <source>Back</source>
         <translation>Cofnij</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="200"/>
+        <location filename="../qml/WebViewPage.qml" line="178"/>
         <source>Toggle Night View</source>
         <translation>Tryb nocny</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="212"/>
+        <location filename="../qml/WebViewPage.qml" line="191"/>
         <source>Add to bookmarks</source>
         <translation>Dodaj do zakładek</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="225"/>
+        <location filename="../qml/WebViewPage.qml" line="202"/>
         <source>Browser</source>
         <translation>Przeglądarka</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="235"/>
+        <location filename="../qml/WebViewPage.qml" line="209"/>
         <source>Decrease font</source>
         <translation>Zmniejsz litery</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="244"/>
+        <location filename="../qml/WebViewPage.qml" line="218"/>
         <source>Increase font</source>
         <translation>Powiększ litery</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewPage.qml" line="253"/>
+        <location filename="../qml/WebViewPage.qml" line="227"/>
         <source>Hide toolbar</source>
         <translation>Ukryj</translation>
     </message>
