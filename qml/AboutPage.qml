@@ -95,7 +95,7 @@ Page {
 
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
-                text: "QHTTPServer · nLibZIM · zstd · Xapian"
+                text: "QHTTPServer · LibZIM · zstd · Xapian"
             }
 
             Spacer {}
