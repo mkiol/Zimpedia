@@ -1,7 +1,7 @@
 TARGET = harbour-zimpedia
 
 CONFIG += c++1z sailfishapp dbus json
-PKGCONFIG += mlite5 qt5embedwidget
+PKGCONFIG += mlite5
 DEFINES += QT_NO_URL_CAST_FROM_STRING
 
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -44,8 +44,8 @@ include($${LIB_DIR}/zim/zim.pri)
 include($${LIB_DIR}/qhttpserver/qhttpserver.pri)
 
 OTHER_FILES += \
-    qml/*.qml \
-    rpm/*.*
+    $$files(qml/*.qml) \
+    $$files(rpm/*)
 
 SOURCES += \
     $${SRC_DIR}/main.cpp \
