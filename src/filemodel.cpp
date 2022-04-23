@@ -180,7 +180,7 @@ bool FileModel::scanZim(ZimMetaData *meta) {
                 "d MMMM yyyy");
         }
         meta->mainPage = archive.hasMainEntry();
-        if (meta->fields & ZimMetaData::Size && meta->size != 0) {
+        if (meta->fields & ZimMetaData::Size && meta->size == 0) {
             meta->size = QFileInfo{meta->path}.size();
         }
         if (meta->fields & ZimMetaData::ArticleCount)
@@ -295,11 +295,13 @@ QList<ListItem *> FileModel::makeItems() {
         findFiles(
             QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)
                 .at(0));
+        findFiles(QDir::homePath() + "/android_storage/Download");
         if (QFileInfo::exists(QStringLiteral("/media/sdcard"))) {
             findFiles(QStringLiteral("/media/sdcard"), -1);
         } else {
             findFiles("/run/media/" + QDir::home().dirName(), -1);
         }
+
         if (!m_initalScanDone && m_files.isEmpty()) {
             emit noFilesFound();
         }
