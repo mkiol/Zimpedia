@@ -16,6 +16,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickView>
+#include <QStandardPaths>
 #include <QTranslator>
 #include <QtQml>
 
@@ -30,7 +31,17 @@
 #include "zimmetadatareader.h"
 #include "zimserver.h"
 
-void registerTypes() {
+static void makeAppDirs() {
+    auto root = QDir::root();
+    root.mkpath(
+        QStandardPaths::writableLocation(QStandardPaths::ConfigLocation));
+    root.mkpath(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    root.mkpath(
+        QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+}
+
+static void registerTypes() {
     qmlRegisterType<ZimMetaDataReader>("harbour.zimpedia.ZimMetaDataReader", 1,
                                        0, "ZimMetaDataReader");
     qmlRegisterUncreatableType<Settings>(
@@ -40,7 +51,7 @@ void registerTypes() {
     qRegisterMetaType<ZimMetaData>("ZimMetaData");
 }
 
-void installTranslator() {
+static void installTranslator() {
     auto* translator = new QTranslator{qApp};
     auto transDir =
         SailfishApp::pathTo(QStringLiteral("translations")).toLocalFile();
@@ -89,6 +100,7 @@ Q_DECL_EXPORT int main(int argc, char** argv) {
                                 Zimpedia::LICENSE_URL);
 
     installTranslator();
+    makeAppDirs();
 
     auto* settings = Settings::instance();
     auto* fileModel = FileModel::instance();
