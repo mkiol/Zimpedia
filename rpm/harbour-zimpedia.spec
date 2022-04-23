@@ -2,7 +2,7 @@ Name:       harbour-zimpedia
 
 # >> macros
 %define __provides_exclude_from ^%{_datadir}/.*$
-%define __requires_exclude ^libxapian.*|libzim.*|libzstd.*|libicui18n.*|libicuuc.*|libicudata.*|libuuid.*$
+%define __requires_exclude ^libxapian.*|libzim.*|libzstd.*|libicui18n.*|libicuuc.*|libicudata.*|libuuid.*|liblzma.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -24,7 +24,6 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(liblzma)
 BuildRequires:  pkgconfig(zlib)
-BuildRequires:  pkgconfig(qt5embedwidget)
 BuildRequires:  desktop-file-utils
 BuildRequires:  sailfish-components-webview-qt5
 BuildRequires:  sailfish-components-webview-qt5-pickers
