@@ -9,4 +9,3 @@ Name=Zimpedia
 Permissions=Internet;RemovableMedia;Documents;Downloads;WebView
 OrganizationName=org.mkiol
 ApplicationName=zimpedia
-ExecDBus=harbour-zimpedia
