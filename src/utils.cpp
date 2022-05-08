@@ -7,6 +7,8 @@
 
 #include "utils.h"
 
+#include <sailfishapp.h>
+
 #include <QClipboard>
 #include <QDebug>
 #include <QDir>
@@ -15,7 +17,18 @@
 #include <QStandardPaths>
 #include <QStringList>
 
-Utils::Utils(QObject *parent) : QObject(parent) { createCacheDir(); }
+Utils::Utils(QObject *parent) : QObject{parent} { createCacheDir(); }
+
+QString Utils::readAsset(const QString &path) const {
+    QFile file{SailfishApp::pathTo(path).toLocalFile()};
+
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "could not open file:" << path << file.errorString();
+        return {};
+    }
+
+    return QString::fromUtf8(file.readAll());
+}
 
 QString Utils::homeDir() const {
     return QStandardPaths::standardLocations(QStandardPaths::HomeLocation)

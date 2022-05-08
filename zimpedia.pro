@@ -105,4 +105,8 @@ install_res.files = res
 install_res.path = /usr/share/$${TARGET}
 INSTALLS += install_res
 
+install_scripts.files = scripts/*
+install_scripts.path = /usr/share/$${TARGET}/scripts
+INSTALLS += install_scripts
+
 DEPENDPATH += $${INCLUDEPATH}

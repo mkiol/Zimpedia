@@ -58,10 +58,10 @@ static void installTranslator() {
     if (!translator->load(QLocale{}, QStringLiteral("Zimpedia"),
                           QStringLiteral("_"), transDir,
                           QStringLiteral(".qm"))) {
-        qDebug() << "Cannot load translation:" << QLocale::system().name()
+        qDebug() << "cannot load translation:" << QLocale::system().name()
                  << transDir;
         if (!translator->load(QStringLiteral("Zimpedia_en"), transDir)) {
-            qDebug() << "Cannot load default translation";
+            qDebug() << "cannot load default translation";
             delete translator;
             return;
         }

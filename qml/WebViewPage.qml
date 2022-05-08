@@ -16,7 +16,8 @@ WebViewPage {
     property url url
 
     property int _nightMode: 0
-    property bool _nightModePossible: true
+    property bool _nightModePossible: false
+    property bool _zoomPossible: false
     property string _title: ""
     readonly property variant _settings: settings
     readonly property int _toolbarHideTime: 4000
@@ -31,10 +32,32 @@ WebViewPage {
 
     function navigateBack() {
         if (view.canGoBack) {
+            root._nightModePossible = false
+            root._zoomPossible = false
             view.goBack()
         } else {
             pageStack.pop()
         }
+    }
+
+    function init_js() {
+        var script =
+                utils.readAsset("scripts/night_mode.js") + "\n" +
+                utils.readAsset("scripts/zoom.js") + "\n" +
+                "var res = {night_mode: false,zoom: false}\n" +
+                //"try {\n" +
+                "res.night_mode = _night_mode_init()\n" +
+                "res.zoom = _zoom_init()\n" +
+                //"} catch {}\n" +
+                "return res\n"
+        view.runJavaScript(script, function(res) {
+            console.log("js init done:", JSON.stringify(res))
+            root._nightModePossible = res.night_mode
+            root._zoomPossible = res.zoom
+            if (root._nightModePossible) setNightMode(root._nightMode)
+            if (root._zoomPossible) setZoom(settings.zoomFontSize())
+            controlbar.show()
+        }, errorCallback)
     }
 
     function errorCallback(error) {
@@ -42,85 +65,27 @@ WebViewPage {
     }
 
     function updateZoom(delta) {
+        if (!root._zoomPossible) return
         settings.zoom = settings.zoom + delta
         setZoom(settings.zoomFontSize())
         baner.show(Math.round(settings.zoom * 100).toString() + "%")
     }
 
-    function initZoom() {
-        setZoom(settings.zoomFontSize())
-    }
-
     function setZoom(zoom) {
-        var script =
-                "var css = 'html *:not(h1) { font-size: " + zoom + " !important; }'\n" +
-                "var style = document.getElementById('_zoom_style')\n" +
-                "if (style) { style.innerHTML = css; return }\n" +
-                "style = document.createElement('style')\n" +
-                "style.id = '_zoom_style'\n" +
-                "style.type = 'text/css'\n" +
-                "style.appendChild(document.createTextNode(css))\n" +
-                "document.getElementsByTagName('head').item(0).appendChild(style)\n"
+        if (!root._zoomPossible) return
+        var script = "return window._zoom_set('" + zoom + "')\n";
         view.runJavaScript(script, function(res) {
-            console.log("zoom set done:", zoom)
-        }, errorCallback)
-    }
-
-    function initNightMode() {
-        var script =
-                "var css1 = 'html._nightmode1_class { filter: contrast(68%) brightness(108%) invert(100%); }\\n' +\n" +
-                "'html._nightmode1_class iframe { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode1_class object { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode1_class embed { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode1_class video { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode1_class img { filter: invert(100%); }'\n" +
-                "var style1 = document.getElementById('_nightmode1_style')\n" +
-                "if (style1) { style1.innerHTML = css1; return}\n" +
-                "style1 = document.createElement('style')\n" +
-                "style1.id = '_nightmode1_style'\n" +
-                "style1.type = 'text/css'\n" +
-                "style1.appendChild(document.createTextNode(css1))\n" +
-                "document.getElementsByTagName('head').item(0).appendChild(style1)\n" +
-                "var css2 = 'html._nightmode2_class { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode2_class iframe { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode2_class object { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode2_class embed { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode2_class video { filter: invert(100%); }\\n' +\n" +
-                "'html._nightmode2_class img { filter: invert(100%); }'\n" +
-                "var style2 = document.getElementById('_nightmode2_style')\n" +
-                "if (style2) { style2.innerHTML = css2; return}\n" +
-                "style2 = document.createElement('style')\n" +
-                "style2.id = '_nightmode2_style'\n" +
-                "style2.type = 'text/css'\n" +
-                "style2.appendChild(document.createTextNode(css2))\n" +
-                "document.getElementsByTagName('head').item(0).appendChild(style2)\n"
-        view.runJavaScript(script, function(res) {
-            console.log("night mode init done")
-            root._nightModePossible = true
-            setNightMode(root._nightMode)
+            console.log("zoom set done:", zoom, res)
         }, errorCallback)
     }
 
     function setNightMode(type) {
-        var script
-        if (type === 0) {
-            script =
-                "var html = document.getElementsByTagName('html')[0]\n" +
-                "html.className = html.className.replace(' _nightmode1_class', '')\n" +
-                "html.className = html.className.replace(' _nightmode2_class', '')\n"
-        } else if (type === 1)  {
-            script =
-                "var html = document.getElementsByTagName('html')[0]\n" +
-                "html.className += ' _nightmode1_class'\n"
-        } else {
-            script =
-                "var html = document.getElementsByTagName('html')[0]\n" +
-                "html.className += ' _nightmode2_class'\n"
-        }
+        if (!root._nightModePossible) return
+        var script = "return window._night_mode_set(" + type + ")\n"
 
         view.runJavaScript(script, function(res) {
-            console.log("night switch done:", type)
-            root._nightMode = type
+            console.log("night switch done:", type, res)
+            if (res) root._nightMode = type
         }, errorCallback)
     }
 
@@ -142,17 +107,15 @@ WebViewPage {
     WebView {
         id: view
 
+        anchors.fill: parent
         canShowSelectionMarkers: true
         onUrlChanged: {
             updateTitle(url)
         }
-        anchors { top: parent.top; left: parent.left; right: parent.right}
-        height: parent.height
 
         onLoadedChanged: {
             if (loaded) {
-                root.initZoom()
-                root.initNightMode()
+                root.init_js()
             }
         }
     }
@@ -209,6 +172,8 @@ WebViewPage {
             text: qsTr("Decrease font")
             theme: parent.theme
             icon: "image://icons/icon-m-fontdown"
+            enabled: root._zoomPossible
+            visible: true
             onClicked: {
                 root.updateZoom(-0.1)
             }
@@ -218,6 +183,8 @@ WebViewPage {
             text: qsTr("Increase font")
             theme: parent.theme
             icon: "image://icons/icon-m-fontup"
+            enabled: root._zoomPossible
+            visible: true
             onClicked: {
                 root.updateZoom(0.1)
             }

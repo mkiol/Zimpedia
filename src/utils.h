@@ -18,6 +18,7 @@ class Utils : public QObject {
    public:
     explicit Utils(QObject *parent = nullptr);
     static bool createCacheDir();
+    Q_INVOKABLE QString readAsset(const QString &path) const;
     Q_INVOKABLE QString homeDir() const;
     Q_INVOKABLE void copyToClipboard(const QString &text) const;
     Q_INVOKABLE QColor colorFromUuid(const QString &uuid) const;

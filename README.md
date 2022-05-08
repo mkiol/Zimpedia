@@ -3,6 +3,7 @@
 Sailfish OS app for offline Wikipedia
 
 ## Description
+
 Zimpedia is a [ZIM](https://en.wikipedia.org/wiki/ZIM_%28file_format%29) archive offline reader.
 The ZIM is an open file format that stores content coming from the Web for offline use.
 Its primary focus is on the contents of Wikipedia but also other Wiki projects
