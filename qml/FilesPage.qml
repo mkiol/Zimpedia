@@ -42,7 +42,10 @@ Dialog {
 
             MenuItem {
                 text: qsTr("Open %1").arg("library.kiwix.org")
-                onClicked: Qt.openUrlExternally("https://library.kiwix.org")
+                onClicked: {
+                    // Qt.openUrlExternally("https://library.kiwix.org")
+                    Qt.openUrlExternally(zimServer.libraryLocalUrl())
+                }
             }
             MenuItem {
                 enabled: !fileModel.busy
@@ -89,7 +92,10 @@ Dialog {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.iconSizeMedium
             text: qsTr("Open %1").arg("library.kiwix.org")
-            onClicked: Qt.openUrlExternally("https://library.kiwix.org")
+            onClicked: {
+                // Qt.openUrlExternally("https://library.kiwix.org")
+                Qt.openUrlExternally(zimServer.libraryLocalUrl())
+            }
         }
     }
 

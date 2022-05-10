@@ -33,6 +33,7 @@
 #include "articlemodel.h"
 #include "filemodel.h"
 #include "settings.h"
+#include "utils.h"
 
 ZimServer *ZimServer::m_instance = nullptr;
 
@@ -46,7 +47,7 @@ ZimServer *ZimServer::instance(QObject *parent) {
 
 ZimServer::ZimServer(QObject *parent) : QThread{parent}, m_server{parent} {
     connect(&m_server, &QHttpServer::newRequest, this,
-            &ZimServer::requestHandler);
+            &ZimServer::handleHttpRequest);
     connect(FileModel::instance(), &FileModel::busyChanged, this,
             &ZimServer::handleFilemodelChanged, Qt::QueuedConnection);
     connect(
@@ -375,8 +376,23 @@ std::pair<QString, QString> ZimServer::parseUrl(const QUrl &url) {
     return result;
 }
 
-void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp) {
+void ZimServer::handleLibraryRequest([[maybe_unused]] QHttpRequest *req,
+                                     QHttpResponse *resp) {
+    auto content = Utils::readAssetStatic("scripts/library-kiwix-org.html");
+    resp->setHeader("Content-Length", QString::number(content.size()));
+    resp->setHeader("Content-Type", "text/html");
+    resp->setHeader("Connection", "close");
+    resp->writeHead(200);
+    resp->end(content);
+}
+
+void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
     qDebug() << "http request:" << req->url().path();
+
+    if (req->url().path() == "/library") {
+        handleLibraryRequest(req, resp);
+        return;
+    }
 
     auto [uuid, path] = parseUrl(req->url());
 
@@ -433,6 +449,13 @@ void ZimServer::requestHandler(QHttpRequest *req, QHttpResponse *resp) {
     resp->setHeader("Connection", "close");
     resp->writeHead(200);
     resp->end(art->content);
+}
+
+QUrl ZimServer::libraryLocalUrl() const {
+    QUrl url{"http://localhost"};
+    url.setPort(port);
+    url.setPath("/library");
+    return url;
 }
 
 QUrl ZimServer::localUrl(const QString &path, const QString &uuid) {

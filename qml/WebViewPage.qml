@@ -45,10 +45,10 @@ WebViewPage {
                 utils.readAsset("scripts/night_mode.js") + "\n" +
                 utils.readAsset("scripts/zoom.js") + "\n" +
                 "var res = {night_mode: false,zoom: false}\n" +
-                //"try {\n" +
+                "try {\n" +
                 "res.night_mode = _night_mode_init()\n" +
                 "res.zoom = _zoom_init()\n" +
-                //"} catch {}\n" +
+                "} catch {}\n" +
                 "return res\n"
         view.runJavaScript(script, function(res) {
             console.log("js init done:", JSON.stringify(res))

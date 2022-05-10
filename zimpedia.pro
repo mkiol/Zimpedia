@@ -45,7 +45,8 @@ include($${LIB_DIR}/qhttpserver/qhttpserver.pri)
 
 OTHER_FILES += \
     $$files(qml/*.qml) \
-    $$files(rpm/*)
+    $$files(rpm/*) \
+    $$files(scripts/*)
 
 SOURCES += \
     $${SRC_DIR}/main.cpp \

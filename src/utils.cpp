@@ -19,7 +19,7 @@
 
 Utils::Utils(QObject *parent) : QObject{parent} { createCacheDir(); }
 
-QString Utils::readAsset(const QString &path) const {
+QByteArray Utils::readAssetStatic(const QString &path) {
     QFile file{SailfishApp::pathTo(path).toLocalFile()};
 
     if (!file.open(QIODevice::ReadOnly)) {
@@ -27,7 +27,11 @@ QString Utils::readAsset(const QString &path) const {
         return {};
     }
 
-    return QString::fromUtf8(file.readAll());
+    return file.readAll();
+}
+
+QString Utils::readAsset(const QString &path) const {
+    return QString::fromUtf8(readAssetStatic(path));
 }
 
 QString Utils::homeDir() const {
