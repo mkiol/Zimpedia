@@ -124,6 +124,6 @@ Settings::SearchMode Settings::searchMode() const {
 
 QUrl Settings::appIcon() const {
     return QUrl::fromLocalFile(
-        QString(QStringLiteral("/usr/share/icons/hicolor/172x172/apps/%1.png"))
+        QStringLiteral("/usr/share/icons/hicolor/172x172/apps/%1.png")
             .arg(Zimpedia::APP_BINARY_ID));
 }

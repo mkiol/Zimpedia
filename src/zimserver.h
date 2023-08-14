@@ -67,7 +67,6 @@ class ZimServer : public QThread {
     Q_INVOKABLE void articleAsync(const QUrl &url);
     Q_INVOKABLE void openUrl(const QUrl &url, const QString &title);
     Q_INVOKABLE QString titleFromUrl(const QUrl &url) const;
-    Q_INVOKABLE QUrl libraryLocalUrl() const;
     QList<SearchResult> search(QString phrase) const;
 
    signals:
@@ -129,7 +128,6 @@ class ZimServer : public QThread {
     void loadZimAsyncWork();
     QVariantList files() const;
     void handleHttpRequest(QHttpRequest *req, QHttpResponse *resp);
-    void handleLibraryRequest(QHttpRequest *req, QHttpResponse *resp);
 };
 
 #endif  // ZIMSERVER_H

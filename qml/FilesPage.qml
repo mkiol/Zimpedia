@@ -43,8 +43,7 @@ Dialog {
             MenuItem {
                 text: qsTr("Open %1").arg("library.kiwix.org")
                 onClicked: {
-                    // Qt.openUrlExternally("https://library.kiwix.org")
-                    Qt.openUrlExternally(zimServer.libraryLocalUrl())
+                    Qt.openUrlExternally("https://library.kiwix.org")
                 }
             }
             MenuItem {
