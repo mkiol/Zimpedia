@@ -86,7 +86,7 @@ Page {
             PaddedLabel {
                 horizontalAlignment: Text.AlignLeft
                 text: "lutinotmalin · Jeff Huang · Вячеслав Диконов · RikudouSage · npopanz · Carmen F. B · " +
-                      "Åke Engelbrektson · Nathan Follens · Szabó G. · 涛 匡 · Алексей Дедун · Heimen Stoffels"
+                      "Åke Engelbrektson · Nathan Follens · Szabó G. · 涛 匡 · Алексей Дедун · Heimen Stoffels · Albano Battistella"
             }
 
             SectionHeader {
