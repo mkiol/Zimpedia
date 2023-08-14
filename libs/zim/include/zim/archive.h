@@ -48,9 +48,12 @@ namespace zim
    * The `Archive` is the main class to access content in a zim file.
    * `Archive` are lightweight object and can be copied easily.
    *
+   * An `Archive` is read-only, and internal states (as caches) are protected
+   * from race-condition. Therefore, all methods of `Archive` are threadsafe.
+   *
    * All methods of archive may throw an `ZimFileFormatError` if the file is invalid.
    */
-  class Archive
+  class LIBZIM_API Archive
   {
     public:
       template<EntryOrder order> class EntryRange;
@@ -137,13 +140,19 @@ namespace zim
        *  The definition of "article" depends of the zim archive.
        *  On recent archives, this correspond to all entries marked as "FRONT_ARTICLE"
        *  at creaton time.
-       *  On old archives, this correspond to all entries in 'A' namespace.
-       *  Few archives may have been created without namespace but also without specific
-       *  article listing. In this case, articles are all user entries.
+       *  On old archives, this corresponds to all "text/html*" entries.
        *
        *  @return the number of articles in the archive.
        */
       entry_index_type getArticleCount() const;
+
+      /** Return the number of media in the archive.
+       *
+       * This definition of "media" is based on the mimetype.
+       *
+       * @return the number of media in the archive.
+       */
+      entry_index_type getMediaCount() const;
 
       /** The uuid of the archive.
        *
@@ -375,7 +384,7 @@ namespace zim
        */
       EntryRange<EntryOrder::efficientOrder> iterEfficient() const;
 
-      /** Find a range of entry starting with path.
+      /** Find a range of entries starting with path.
        *
        * The path is the "long path". (Ie, with the namespace)
        *
@@ -471,18 +480,25 @@ namespace zim
   };
 
   template<EntryOrder order>
-  entry_index_type _toPathOrder(const FileImpl& file, entry_index_type idx);
+  LIBZIM_API entry_index_type _toPathOrder(const FileImpl& file, entry_index_type idx);
 
   template<>
-  entry_index_type _toPathOrder<EntryOrder::pathOrder>(const FileImpl& file, entry_index_type idx);
+  LIBZIM_API entry_index_type _toPathOrder<EntryOrder::pathOrder>(const FileImpl& file, entry_index_type idx);
   template<>
-  entry_index_type _toPathOrder<EntryOrder::titleOrder>(const FileImpl& file, entry_index_type idx);
+  LIBZIM_API entry_index_type _toPathOrder<EntryOrder::titleOrder>(const FileImpl& file, entry_index_type idx);
   template<>
-  entry_index_type _toPathOrder<EntryOrder::efficientOrder>(const FileImpl& file, entry_index_type idx);
+  LIBZIM_API entry_index_type _toPathOrder<EntryOrder::efficientOrder>(const FileImpl& file, entry_index_type idx);
 
 
+  /**
+   * A range of entries in an `Archive`.
+   *
+   * `EntryRange` represents a range of entries in a specific order.
+   *
+   * An `EntryRange` can't be modified is consequently threadsafe.
+   */
   template<EntryOrder order>
-  class Archive::EntryRange {
+  class LIBZIM_API Archive::EntryRange {
     public:
       explicit EntryRange(const std::shared_ptr<FileImpl> file, entry_index_type begin, entry_index_type end)
         : m_file(file),
@@ -516,8 +532,16 @@ private:
       entry_index_type m_end;
   };
 
+  /**
+   * An iterator on an `Archive`.
+   *
+   * `Archive::iterator` stores an internal state which is not protected
+   * from race-condition. It is not threadsafe.
+   *
+   * An `EntryRange` can't be modified and is consequently threadsafe.
+   */
   template<EntryOrder order>
-  class Archive::iterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
+  class LIBZIM_API Archive::iterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
   {
     public:
       explicit iterator(const std::shared_ptr<FileImpl> file, entry_index_type idx)
@@ -595,7 +619,20 @@ private:
       mutable std::unique_ptr<Entry> m_entry;
   };
 
+  /**
+   * The set of the integrity checks to be performed by `zim::validate()`.
+   */
   typedef std::bitset<size_t(IntegrityCheck::COUNT)> IntegrityCheckList;
+
+  /** Check the integrity of the zim file.
+   *
+   * Run the specified checks to verify the zim file is valid
+   * (with regard to the zim format). Some checks can be quite slow.
+   *
+   * @param zimPath The path of the ZIM archive to be checked.
+   * @param checksToRun The set of checks to perform.
+   * @return False if any check fails, true otherwise.
+   */
   bool validate(const std::string& zimPath, IntegrityCheckList checksToRun);
 }
 

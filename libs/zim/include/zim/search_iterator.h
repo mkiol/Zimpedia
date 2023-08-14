@@ -32,7 +32,7 @@ namespace zim
 {
 class SearchResultSet;
 
-class SearchIterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
+class LIBZIM_API SearchIterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
 {
     friend class zim::SearchResultSet;
     public:
@@ -56,7 +56,7 @@ class SearchIterator : public std::iterator<std::bidirectional_iterator_tag, Ent
         int getScore() const;
         std::string getSnippet() const;
         int getWordCount() const;
-        int getSize() const;
+        DEPRECATED int getSize() const;
         int getFileIndex() const;
         Uuid getZimId() const;
         reference operator*() const;

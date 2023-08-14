@@ -39,15 +39,81 @@ namespace zim
     using Hints = std::map<HintKeys, uint64_t>;
 
     class ContentProvider;
-    class IndexData {
+
+    /**
+     * IndexData represent data of an Item to be indexed in the archive.
+     *
+     * This is a abstract class the user need to implement.
+     * (But default `Item::getIndexData` returns a default implementation
+     * for IndexData which works for html content.)
+     */
+    class LIBZIM_API IndexData {
       public:
         using GeoPosition = std::tuple<bool, double, double>;
         virtual ~IndexData() = default;
+
+        /**
+         * If the IndexData actually has data to index.
+         *
+         * It can be used to create `IndexData` for all your content
+         * but discard some indexation based on some criteria.
+         *
+         * @return true if the item associated to this IndexData must be indexed.
+         */
         virtual bool hasIndexData() const = 0;
+
+        /**
+         * The title to use when indexing the item.
+         *
+         * May be different than `Item::getTitle()`, even if most of the time
+         * it will be the same.
+         *
+         * @return the title to use.
+         */
         virtual std::string getTitle() const = 0;
+
+        /**
+         * The content to use when indexing the item.
+         *
+         * This is probably the most important method of `IndexData`.
+         * Most item's contents are not applicable for a direct indexation.
+         * We don't want to index html tags or menu/footer of an article.
+         * This method allow you to return a currated plain text to indexe.
+         *
+         * @return the content to use.
+         */
         virtual std::string getContent() const = 0;
+
+        /**
+         * The keywords to use when indexing the item.
+         *
+         * Return a set of keywords, separated by space for the content.
+         * Keywords are indexed using a higher score than text in `getContent`
+         *
+         * @return a string containing keywords separated by space.
+         */
         virtual std::string getKeywords() const = 0;
+
+        /**
+         * The number of words in the content.
+         *
+         * This value is not directly used to index the content but it
+         * is stored in the xapian database, which may be used later to query
+         * articles.
+         *
+         * @return the number of words in the item.
+         */
         virtual uint32_t getWordCount() const = 0;
+
+        /**
+         * The Geographical position of the subject covered by the item.
+         * (When applicable)
+         *
+         * @return a 3 tuple (true, latitude, longitude) if the item is
+         *         about a geo positioned thing.
+         *         a 3 tuple (false, _, _) if having a GeoPosition is not
+         *         relevant.
+         */
         virtual GeoPosition getGeoPosition() const = 0;
     };
 
@@ -58,7 +124,7 @@ namespace zim
      * libzim provides `BasicItem`, `StringItem` and `FileItem`
      * to simplify (or avoid) this reimplementation.
      */
-    class Item
+    class LIBZIM_API Item
     {
       public:
         /**
@@ -127,6 +193,8 @@ namespace zim
          * The contentProvider will be created in the main thread but the data reading and
          * parsing will occur in a different thread.
          *
+         * All methods of `IndexData` will be called in a different (same) thread.
+         *
          * @return the indexData of the item.
          *         May return a nullptr if there is no indexData.
          */
@@ -162,7 +230,7 @@ namespace zim
      * `BasicItem` provides a basic implementation for everything about an `Item`
      * but the actual content of the item.
      */
-    class BasicItem : public Item
+    class LIBZIM_API BasicItem : public Item
     {
       public:
         /**
@@ -194,7 +262,7 @@ namespace zim
     /**
      * A `StringItem` is a full implemented item where the content is stored in a string.
      */
-    class StringItem : public BasicItem, public std::enable_shared_from_this<StringItem>
+    class LIBZIM_API StringItem : public BasicItem, public std::enable_shared_from_this<StringItem>
     {
       public:
         /**
@@ -223,15 +291,12 @@ namespace zim
           : BasicItem(path, mimetype, title, hints),
             content(content)
         {}
-
-
-
     };
 
     /**
      * A `FileItem` is a full implemented item where the content is file.
      */
-    class FileItem : public BasicItem
+    class LIBZIM_API FileItem : public BasicItem
     {
       public:
         /**

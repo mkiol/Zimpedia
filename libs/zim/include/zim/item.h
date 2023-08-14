@@ -30,7 +30,12 @@ namespace zim
   class Dirent;
   class FileImpl;
 
-  class Item
+  /**
+   * An `Item` in an `Archive`
+   *
+   * All `Item`'s methods are threadsafe.
+   */
+  class LIBZIM_API Item
   {
     public: // types
       typedef std::pair<std::string, offset_type> DirectAccessInfo;

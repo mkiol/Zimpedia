@@ -44,11 +44,26 @@ namespace zim
      *
      * During the creation of the zim file (and before the call to `finishZimCreation`),
      * some values must be set using the `set*` methods.
+     *
+     * All `add*` methods and `finishZimCreation` can throw a exception.
+     * (most of the time zim::CreatorError child but not limited to)
+     * It is up to the user to catch this exception and handle the error.
+     * The current (documented) conditions when a exception is thrown are:
+     * - When a entry cannot be added (mainly because a entry with the same path has already been added)
+     *    A `zim::InvalidEntry` will be thrown. The creator will still be in a valid state and the creation can continue.
+     * - An exception has been thrown in a worker thread.
+     *    This exception will be catch and rethrown through a `zim::AsyncError`.
+     *    The creator will be set in a invalid state and creation cannot continue.
+     * - The creator is in error state.
+     *    A `zim::CreatorStateError` will be thrown.
+     * - Any exception thrown by user implementation itself.
+     *    Note that this exception may be thrown in a worker thread and so being "catch" by a AsyncError.
+     * - Any other exception thrown for unknown reason.
+     * By default, creator status is not changed by thrown exception and creation should stop.
      */
-    class Creator
+    class LIBZIM_API Creator
     {
       public:
-
         /**
          * Creator constructor.
          *
@@ -144,7 +159,7 @@ namespace zim
          * @param mimetype the mimetype of the metadata.
          *                 Only used to detect if the metadata must be compressed.
          */
-        void addMetadata(const std::string& name, std::unique_ptr<ContentProvider> provider, const std::string& mimetype);
+        void addMetadata(const std::string& name, std::unique_ptr<ContentProvider> provider, const std::string& mimetype = "text/plain;charset=utf-8");
 
         /**
          * Add illustration to the archive.
@@ -216,6 +231,7 @@ namespace zim
 
         void fillHeader(Fileheader* header) const;
         void writeLastParts() const;
+        void checkError();
     };
   }
 
