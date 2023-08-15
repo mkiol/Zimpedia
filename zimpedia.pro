@@ -93,7 +93,8 @@ TRANSLATIONS += $${TRANSLATIONS_TS_DIR}/Zimpedia_en.ts \
                 $${TRANSLATIONS_TS_DIR}/Zimpedia_nl_BE.ts \
                 $${TRANSLATIONS_TS_DIR}/Zimpedia_zh_TW.ts \
                 $${TRANSLATIONS_TS_DIR}/Zimpedia_zh_CN.ts \
-                $${TRANSLATIONS_TS_DIR}/Zimpedia_ru.ts
+                $${TRANSLATIONS_TS_DIR}/Zimpedia_ru.ts \
+                $${TRANSLATIONS_TS_DIR}/Zimpedia_it.ts
 include(sailfishapp_i18n.pri)
 
 # install
