@@ -41,6 +41,7 @@ Dialog {
             busy: fileModel.busy
 
             MenuItem {
+                visible: false // library.kiwix.org is broken in sailish-browser
                 text: qsTr("Open %1").arg("library.kiwix.org")
                 onClicked: {
                     Qt.openUrlExternally("https://library.kiwix.org")
@@ -86,14 +87,14 @@ Dialog {
         }
 
         Button {
-            visible: placeholder.enabled
+            //visible: placeholder.enabled
+            visible: false // library.kiwix.org is broken in sailish-browser
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Theme.iconSizeMedium
             text: qsTr("Open %1").arg("library.kiwix.org")
             onClicked: {
-                // Qt.openUrlExternally("https://library.kiwix.org")
-                Qt.openUrlExternally(zimServer.libraryLocalUrl())
+                Qt.openUrlExternally("https://library.kiwix.org")
             }
         }
     }
