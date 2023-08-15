@@ -1,4 +1,4 @@
-/* Copyright (C) 2017-2022 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2017-2023 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,6 +24,26 @@ Page {
 
             PageHeader {
                 title: qsTr("Changes")
+            }
+
+            SectionHeader {
+                text: qsTr("Version %1").arg("3.1")
+            }
+
+            LogItem {
+                title: "Italian translation"
+                description: "App has been translated to Italian. Many thanks to Albano Battistella. "
+            }
+
+            LogItem {
+                title: "LibZIM update to version 8.2.1"
+                description: "LibZIM and other dependent libraries have been " +
+                             "updated to the most recent versions."
+            }
+
+            LogItem {
+                title: "Fixes for bugs in a WebView"
+                description: "Annoying bug which made page in a WebView partially visible has been fixed."
             }
 
             SectionHeader {
