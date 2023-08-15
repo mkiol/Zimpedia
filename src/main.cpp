@@ -122,5 +122,9 @@ Q_DECL_EXPORT int main(int argc, char** argv) {
     view->setSource(SailfishApp::pathTo(QStringLiteral("qml/main.qml")));
     view->show();
 
-    return QGuiApplication::exec();
+    auto ret = QGuiApplication::exec();
+
+    qDebug() << "exiting";
+
+    return ret;
 }

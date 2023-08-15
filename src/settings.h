@@ -33,6 +33,7 @@ class Settings : public QSettings {
     Q_ENUM(SearchMode)
 
     static Settings* instance();
+    static void cleanCache();
 
     void setFontSize(int value);
     int fontSize() const;

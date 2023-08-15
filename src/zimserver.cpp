@@ -379,6 +379,15 @@ std::pair<QString, QString> ZimServer::parseUrl(const QUrl &url) {
 void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
     qDebug() << "http request:" << req->url().path();
 
+    if (req->url().path().endsWith(".js")) {
+        qDebug() << "rejected script";
+        resp->setHeader("Content-Length", "0");
+        resp->setHeader("Connection", "close");
+        resp->writeHead(404);
+        resp->end();
+        return;
+    }
+
     auto [uuid, path] = parseUrl(req->url());
 
     if (path.isEmpty()) {

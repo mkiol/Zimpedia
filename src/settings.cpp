@@ -29,6 +29,20 @@ Settings::Settings() : QSettings{settingsFilepath(), QSettings::NativeFormat} {
     qDebug() << "cache location:"
              << QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     qDebug() << "settings file:" << fileName();
+
+    cleanCache();
+}
+
+void Settings::cleanCache() {
+    qDebug() << "removing chached files";
+
+    QDir{QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+         "/.mozilla"}
+        .removeRecursively();
+
+    QFile::remove(
+        QStandardPaths::writableLocation(QStandardPaths::DataLocation) +
+        "/__PREFS_WRITTEN__");
 }
 
 QString Settings::settingsFilepath() {
