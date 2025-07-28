@@ -1,4 +1,4 @@
-/* Copyright (C) 2017-2023 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2017-2025 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,6 +24,21 @@ Page {
 
             PageHeader {
                 title: qsTr("Changes")
+            }
+
+            SectionHeader {
+                text: qsTr("Version %1").arg("3.2")
+            }
+
+            LogItem {
+                title: "Fix: The articles could not be opened in the latest Wikipedia dumps."
+                description: "The most recently created Wikipedia ZIM archives were not functioning correctly. This issue has now been resolved."
+            }
+
+            LogItem {
+                title: "LibZIM update to version 9.3.0"
+                description: "LibZIM and other dependent libraries have been " +
+                             "updated to the most recent versions."
             }
 
             SectionHeader {
