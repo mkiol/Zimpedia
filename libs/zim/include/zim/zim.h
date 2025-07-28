@@ -58,6 +58,20 @@ namespace zim
   // An offset.
   typedef uint64_t offset_type;
 
+  struct FdInput {
+    // An open file descriptor
+    int fd;
+
+    // The (absolute) offset of the data "pointed" by FdInput in fd.
+    offset_type offset;
+
+    // The size (length) of the data "pointed" by FdInput
+    size_type size;
+
+    FdInput(int fd, offset_type offset, size_type size):
+      fd(fd), offset(offset), size(size) {}
+  };
+
   enum class Compression
   {
     None = 1,
@@ -81,7 +95,7 @@ namespace zim
     CHECKSUM,
 
     /**
-     * Checks that offsets in UrlPtrList are valid.
+     * Checks that offsets in PathPtrList are valid.
      */
     DIRENT_PTRS,
 
@@ -99,6 +113,11 @@ namespace zim
      * Checks that offsets in ClusterPtrList are valid.
      */
     CLUSTER_PTRS,
+
+    /**
+     * Checks that offsets inside each clusters are valid.
+     */
+    CLUSTERS_OFFSETS,
 
     /**
      * Checks that mime-type values in dirents are valid.
