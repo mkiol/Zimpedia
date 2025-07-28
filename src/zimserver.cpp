@@ -1,4 +1,4 @@
-/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2016-2025 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -354,12 +354,10 @@ void ZimServer::articleAsync(const QUrl &url) {
 }
 
 std::pair<QString, QString> ZimServer::parseUrl(const QUrl &url) {
-    // qDebug() << "parsing url:" << url;
-
     std::pair<QString, QString> result;
 
     auto parts = QUrl::fromPercentEncoding(url.path().toLocal8Bit()).split("/");
-    if (parts.size() < 4) {
+    if (parts.size() < 3) {
         qWarning() << "invalid url:" << url;
         return result;
     }
