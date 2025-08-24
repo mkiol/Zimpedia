@@ -28,6 +28,7 @@
 #include <cmath>
 #include <limits>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "articlemodel.h"
@@ -84,15 +85,15 @@ void ZimServer::run() {
 void ZimServer::openUrl(const QUrl &url, const QString &title) {
     qDebug() << "opening url:" << url;
 
-    const auto &[uuid, path] = parseUrl(url);
+    auto parsedUrl = parseUrl(url);
 
-    if (uuid.isEmpty() || path.isEmpty()) {
+    if (!parsedUrl || parsedUrl->uuid.isEmpty()) {
         qWarning() << "invalid url:" << url;
         return;
     }
 
-    if (!loadZimUuidEmit(uuid)) {
-        qWarning() << "unable to load zim file with uuid:" << uuid;
+    if (!loadZimUuidEmit(parsedUrl->uuid)) {
+        qWarning() << "unable to load zim file with uuid:" << parsedUrl->uuid;
         return;
     }
 
@@ -100,21 +101,26 @@ void ZimServer::openUrl(const QUrl &url, const QString &title) {
 }
 
 bool ZimServer::loadZimUuidEmit(const QString &uuid) {
+    if (m_archive.contains(uuid)) return true;
+    if (!FileModel::instance()->uuidExists(uuid)) return false;
+
     setBusy(true);
     auto ok = loadZimUuid(uuid);
     if (ok) Settings::instance()->addZimFile(uuid);
-    setLoaded(ok);
-    emit filesChanged();
+    setLoaded(!m_archive.empty());
+    if (ok) emit filesChanged();
     setBusy(false);
     return ok;
 }
 
 bool ZimServer::unLoadZimUuidEmit(const QString &uuid) {
+    if (!m_archive.contains(uuid)) return true;
+
     setBusy(true);
     auto ok = unLoadZimUuid(uuid);
     if (ok) Settings::instance()->removeZimFile(uuid);
     setLoaded(!m_archive.empty());
-    emit filesChanged();
+    if (ok) emit filesChanged();
     setBusy(false);
     return ok;
 }
@@ -206,7 +212,8 @@ bool ZimServer::loadZimUuid(const QString &uuid) {
     }
 
     meta.fields = ZimMetaData::Title | ZimMetaData::Uuid |
-                  ZimMetaData::Language | ZimMetaData::Icon | ZimMetaData::Tags;
+                  ZimMetaData::Language | ZimMetaData::Icon |
+                  ZimMetaData::Tags | ZimMetaData::BasePath;
 
     if (!FileModel::scanZim(&meta)) {
         qWarning() << "scan failed";
@@ -280,9 +287,9 @@ std::optional<ArticleResult> ZimServer::article(const zim::Archive &archive,
                                                 const QString &path) {
     std::optional<zim::Item> article;
 
-    // qDebug() << "searching for path:" << path;
+    qDebug() << "searching for path:" << path;
 
-    if (path == "A/mainpage") {
+    if (path.isEmpty() || path == "/") {
         if (archive.hasMainEntry()) {
             article = archive.getMainEntry().getItem(true);
         } else {
@@ -295,6 +302,11 @@ std::optional<ArticleResult> ZimServer::article(const zim::Archive &archive,
             qWarning() << "article not found:" << path;
             return std::nullopt;
         }
+
+        //        qDebug() << "entries size:" << entries.size();
+        //        for (auto &e : entries) {
+        //            qDebug() << stringStdToQ(e.getTitle());
+        //        }
 
         article = entries.begin()->getItem(true);
     }
@@ -340,35 +352,37 @@ void ZimServer::articleAsyncWork() {
 void ZimServer::articleAsync(const QUrl &url) {
     qDebug() << "getting article async:" << url;
 
-    const auto &[uuid, path] = parseUrl(url);
+    auto parsedUrl = parseUrl(url);
 
-    if (uuid.isEmpty() || path.isEmpty()) {
+    if (!parsedUrl || parsedUrl->uuid.isEmpty()) {
         qWarning() << "invalid url:" << url;
         setBusy(false);
         return;
     }
 
-    m_articleToAsyncGet = {path, uuid};
+    m_articleToAsyncGet = std::move(parsedUrl.value());
     m_workType = WorkType::article;
     start(QThread::IdlePriority);
 }
 
-std::pair<QString, QString> ZimServer::parseUrl(const QUrl &url) {
-    std::pair<QString, QString> result;
-
+std::optional<ZimServer::ParsedUrl> ZimServer::parseUrl(const QUrl &url) {
     auto parts = QUrl::fromPercentEncoding(url.path().toLocal8Bit()).split("/");
-    if (parts.size() < 3) {
+    if (parts.size() < 2) {
         qWarning() << "invalid url:" << url;
-        return result;
+        return std::nullopt;
     }
 
+    ParsedUrl result;
+
     if (parts.at(1).startsWith("uuid:")) {
-        result.first = parts.at(1).right(parts.at(1).size() - 5);
-        result.second = parts.last() == "mainpage"
-                            ? "A/mainpage"
-                            : QStringList{parts.mid(2)}.join('/');
+        if (parts.size() < 3) {
+            qWarning() << "invalid url:" << url;
+            return std::nullopt;
+        }
+        result.uuid = parts.at(1).right(parts.at(1).size() - 5);
+        result.path = QStringList{parts.mid(2)}.join('/');
     } else {
-        result.second = QStringList{parts.mid(1)}.join('/');
+        result.path = QStringList{parts.mid(1)}.join('/');
     }
 
     return result;
@@ -377,18 +391,9 @@ std::pair<QString, QString> ZimServer::parseUrl(const QUrl &url) {
 void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
     qDebug() << "http request:" << req->url().path();
 
-    if (req->url().path().endsWith(".js")) {
-        qDebug() << "rejected script";
-        resp->setHeader("Content-Length", "0");
-        resp->setHeader("Connection", "close");
-        resp->writeHead(404);
-        resp->end();
-        return;
-    }
+    auto parsedUrl = parseUrl(req->url());
 
-    auto [uuid, path] = parseUrl(req->url());
-
-    if (path.isEmpty()) {
+    if (!parsedUrl) {
         qWarning() << "invalid url:" << req->url();
         resp->setHeader("Content-Length", "0");
         resp->setHeader("Connection", "close");
@@ -397,8 +402,7 @@ void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
         return;
     }
 
-    if (uuid.isEmpty()) {
-        qWarning() << "invalid uuid";
+    if (parsedUrl->uuid.isEmpty()) {
         if (m_archive.isEmpty() || m_lastUuid.isEmpty()) {
             qWarning() << "zim file not loaded or uuid unknown";
             resp->setHeader("Content-Length", "0");
@@ -407,21 +411,42 @@ void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
             resp->end();
             return;
         }
-        uuid = m_lastUuid;
-    } else {
-        if (!loadZimUuidEmit(uuid)) {
-            qWarning() << "unable to load zim file with uuid:" << uuid;
-            resp->setHeader("Content-Length", "0");
+
+        auto url = localUrl(parsedUrl->path, m_lastUuid);
+        qWarning() << "redirect to path with uuid:" << url.path();
+        resp->setHeader("Location", url.path());
+        resp->setHeader("Connection", "close");
+        resp->writeHead(302);
+        resp->end();
+        return;
+    }
+
+    if (!loadZimUuidEmit(parsedUrl->uuid)) {
+        qWarning() << "unable to load zim file with uuid:" << parsedUrl->uuid;
+        resp->setHeader("Content-Length", "0");
+        resp->setHeader("Connection", "close");
+        resp->writeHead(500);
+        resp->end();
+        return;
+    }
+
+    m_lastUuid = parsedUrl->uuid;
+
+    auto art = article(parsedUrl->path, parsedUrl->uuid);
+    if (!art) {
+        auto metaIt = m_meta.find(parsedUrl->uuid);
+        if (metaIt != m_meta.cend() && !metaIt->basePath.isEmpty() &&
+            !parsedUrl->path.startsWith(metaIt->basePath,
+                                        Qt::CaseInsensitive)) {
+            auto url = localUrl(metaIt->basePath + '/' + parsedUrl->path,
+                                parsedUrl->uuid);
+            qWarning() << "redirect to base path:" << url.path();
+            resp->setHeader("Location", url.path());
             resp->setHeader("Connection", "close");
-            resp->writeHead(500);
+            resp->writeHead(302);
             resp->end();
             return;
         }
-        m_lastUuid = uuid;
-    }
-
-    auto art = article(path, uuid);
-    if (!art) {
         resp->setHeader("Content-Length", "0");
         resp->setHeader("Connection", "close");
         resp->writeHead(404);
@@ -432,7 +457,7 @@ void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
     if (art->mime == "text/html") {
         art->mime = "text/html; charset=utf-8";
         auto dd = QString::fromUtf8(art->content);
-        filter(uuid, &dd);
+        filter(parsedUrl->uuid, &dd);
         art->content = dd.toUtf8();
     }
 
@@ -446,30 +471,34 @@ void ZimServer::handleHttpRequest(QHttpRequest *req, QHttpResponse *resp) {
 QUrl ZimServer::localUrl(const QString &path, const QString &uuid) {
     QUrl url{"http://localhost"};
     url.setPort(port);
-    url.setPath(QString{"/uuid:%2/%3"}.arg(uuid, path));
+    url.setPath(QStringLiteral("/uuid:%1/%2").arg(uuid, path));
     return url;
 }
 
 QString ZimServer::titleFromUrl(const QUrl &url) const {
     qDebug() << "searching for title of:" << url.path();
 
-    const auto &[uuid, path] = parseUrl(url);
+    auto parsedUrl = parseUrl(url);
 
-    if (uuid.isEmpty() || path.isEmpty()) {
+    if (!parsedUrl) {
         qWarning() << "invalid url:" << url;
         return {};
     }
 
-    if (path == "A/mainpage") {
-        return tr("Main page");
-    }
-
-    if (!uuidLoaded(uuid)) {
-        qWarning() << "uuid not loaded:" << uuid;
+    if (!uuidLoaded(parsedUrl->uuid)) {
+        qWarning() << "uuid not loaded:" << parsedUrl->uuid;
         return {};
     }
 
-    auto entries = m_archive[uuid]->findByPath(stringQtoStd(path));
+    if (parsedUrl->path.isEmpty() || parsedUrl->path == "/") {
+        return m_archive[parsedUrl->uuid]->hasMainEntry()
+                   ? stringStdToQ(
+                         m_archive[parsedUrl->uuid]->getMainEntry().getTitle())
+                   : QString{};
+    }
+
+    auto entries =
+        m_archive[parsedUrl->uuid]->findByPath(stringQtoStd(parsedUrl->path));
     if (entries.size() == 0) {
         qWarning() << "entry for url not found" << url;
         return {};
@@ -598,20 +627,7 @@ bool ZimServer::isServerUrl(const QUrl &url) const {
 }
 
 QUrl ZimServer::urlToMainPage(const QString &uuid) const {
-    QUrl url{"http://localhost"};
-    url.setPort(port);
-    if (!uuid.isEmpty()) url.setPath(QString{"/uuid:%2/A/mainpage"}.arg(uuid));
-    return url;
-}
-
-QString ZimServer::fixPath(QString path) {
-    if (path.startsWith("..")) {
-        path = path.right(path.length() - 2);
-    }
-    if (path.startsWith("/")) {
-        path = path.right(path.length() - 1);
-    }
-    return path;
+    return localUrl("", uuid);
 }
 
 void ZimServer::filter(const QString &uuid, QString *data) {
@@ -624,7 +640,7 @@ QVariantList ZimServer::files() const {
     for (auto it = m_meta.cbegin(); it != m_meta.cend(); ++it) {
         const auto &meta = it.value();
         fl.push_back(QVariantList{
-            meta.uuid, QString{"%1 · %2"}.arg(meta.title, meta.language),
+            meta.uuid, QStringLiteral("%1 · %2").arg(meta.title, meta.language),
             meta.icon, meta.mainPage});
     }
     std::sort(fl.begin(), fl.end(), [](const QVariant &f1, const QVariant &f2) {

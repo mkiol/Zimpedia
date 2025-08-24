@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2016-2025 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,6 +18,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFileInfoList>
+#include <QRegExp>
 #include <QStandardPaths>
 #include <string>
 
@@ -158,11 +159,13 @@ bool FileModel::scanZim(ZimMetaData *meta) {
     try {
         zim::Archive archive{meta->path.toStdString()};
         qDebug() << "multipart:" << archive.isMultiPart();
+        qDebug() << "new namespace scheme:" << archive.hasNewNamespaceScheme();
+        qDebug() << "has main page path:" << archive.hasMainEntry();
 
-        /*qDebug() << "zim file meta keys:";
-        for (const auto &key : archive.getMetadataKeys()) {
-            qDebug() << QString::fromStdString(key);
-        }*/
+        //        qDebug() << "zim file meta keys:";
+        //        for (const auto &key : archive.getMetadataKeys()) {
+        //            qDebug() << QString::fromStdString(key);
+        //        }
 
         if (meta->filename.isEmpty()) {
             meta->filename = QFileInfo{meta->path}.fileName();
@@ -272,6 +275,26 @@ bool FileModel::scanZim(ZimMetaData *meta) {
             meta->icon = extractFavIcon(archive, meta->uuid);
             if (meta->icon.isEmpty()) {
                 qWarning() << "archive does not have Favicon";
+            }
+        }
+        if (meta->fields & ZimMetaData::BasePath && meta->basePath.isEmpty()) {
+            if (archive.hasMainEntry()) {
+                auto blob = archive.getMainEntry().getItem(true).getData();
+                if (blob.size() > 0) {
+                    QByteArray data{blob.data(), static_cast<int>(blob.size())};
+                    QRegExp rx(
+                        "current_url\\.substring\\(0\\, current_url\\.length "
+                        "\\- \\(\"(\\S+)\".length\\)\\)");
+                    auto idx = rx.indexIn(data);
+                    if (idx >= 0) {
+                        auto sp = rx.cap(1).split('/');
+                        if (!sp.isEmpty()) {
+                            sp.pop_back();
+                            meta->basePath = sp.join('/');
+                            qDebug() << "base path:" << meta->basePath;
+                        }
+                    }
+                }
             }
         }
         return true;

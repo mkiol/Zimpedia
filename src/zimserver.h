@@ -1,4 +1,4 @@
-/* Copyright (C) 2016-2022 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2016-2025 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -43,6 +43,11 @@ class ZimServer : public QThread {
     Q_PROPERTY(int filesCount READ filesCount NOTIFY loadedChanged)
     Q_PROPERTY(QVariantList files READ files NOTIFY filesChanged)
    public:
+    struct ParsedUrl {
+        QString uuid;
+        QString path;
+    };
+
     static const int port = 9091;
     static ZimServer *instance(QObject *parent = nullptr);
 
@@ -56,7 +61,7 @@ class ZimServer : public QThread {
 
     static std::optional<ArticleResult> article(const zim::Archive &archive,
                                                 const QString &path);
-    [[nodiscard]] static std::pair<QString, QString> parseUrl(const QUrl &url);
+    [[nodiscard]] static std::optional<ParsedUrl> parseUrl(const QUrl &url);
 
     Q_INVOKABLE bool loadZim();
     Q_INVOKABLE inline void unLoadZim(const QString &uuid) {
@@ -86,7 +91,7 @@ class ZimServer : public QThread {
     QHttpServer m_server;
     QHash<QString, std::shared_ptr<zim::Archive>> m_archive;  // uuid => archive
     QHash<QString, ZimMetaData> m_meta;                       // uuid => meta
-    std::pair<QString, QString> m_articleToAsyncGet;  // article path, uuid
+    ParsedUrl m_articleToAsyncGet;
     QString m_lastUuid;
     bool m_loaded = false;
     bool m_busy = false;
@@ -110,7 +115,6 @@ class ZimServer : public QThread {
     bool unLoadZimUuid(const QString &uuid);
     bool loadZimUuidEmit(const QString &uuid);
     bool unLoadZimUuidEmit(const QString &uuid);
-    [[nodiscard]] static QString fixPath(QString path);
     void setBusy(bool busy);
     void setLoaded(bool loaded);
     void searchFullText(const QString &phrase, int maxSize,

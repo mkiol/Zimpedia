@@ -81,22 +81,22 @@ class FileItem : public SelectableItem {
 struct ZimMetaData {
     enum FieldFlags {
         None = 0,
-        Size = 1,
-        Time = 2,
-        Uuid = 4,
-        Name = 8,
-        Title = 16,
-        Creator = 32,
-        Date = 64,
-        Description = 128,
-        Language = 256,
-        Icon = 512,
-        Filename = 1024,
-        Publisher = 2048,
-        Source = 4096,
-        Tags = 8192,
-        // Version = 16384,
-        ArticleCount = 32768
+        Size = 1 << 0,
+        Time = 1 << 1,
+        Uuid = 1 << 2,
+        Name = 1 << 3,
+        Title = 1 << 4,
+        Creator = 1 << 5,
+        Date = 1 << 6,
+        Description = 1 << 7,
+        Language = 1 << 8,
+        Icon = 1 << 9,
+        Filename = 1 << 10,
+        Publisher = 1 << 11,
+        Source = 1 << 12,
+        Tags = 1 << 13,
+        BasePath = 1 << 14,
+        ArticleCount = 1 << 15
     };
 
     int fields;
@@ -115,6 +115,7 @@ struct ZimMetaData {
     QString publisher;
     QString source;
     QString tags;
+    QString basePath;
     int article_count;
     bool mainPage = false;
     bool ftindex = false;
@@ -138,6 +139,7 @@ struct ZimMetaData {
         publisher.clear();
         source.clear();
         tags.clear();
+        basePath.clear();
         article_count = 0;
         mainPage = false;
         ftindex = false;

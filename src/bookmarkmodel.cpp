@@ -1,4 +1,4 @@
-/* Copyright (C) 2017-2022 Michal Kosciesza <michal@mkiol.net>
+/* Copyright (C) 2017-2025 Michal Kosciesza <michal@mkiol.net>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -51,14 +51,15 @@ QList<ListItem *> BookmarkModel::makeItems() {
     for (const auto &i : jsonlist) {
         auto obj = i.toObject();
         auto url = QUrl{obj["url"].toString()};
-        const auto &[uuid, path] = ZimServer::parseUrl(url);
-        if (uuid.isEmpty() || path.isEmpty()) {
+        auto parsedUrl = ZimServer::parseUrl(url);
+        if (!parsedUrl || parsedUrl->uuid.isEmpty()) {
             qWarning() << "invalid url:" << url;
             continue;
         }
 
-        if (FileModel::instance()->uuidExists(uuid)) {
-            const auto &meta = FileModel::instance()->uuidToMeta(uuid);
+        if (FileModel::instance()->uuidExists(parsedUrl->uuid)) {
+            const auto &meta =
+                FileModel::instance()->uuidToMeta(parsedUrl->uuid);
             items.push_back(new BookmarkItem{
                 /*id=*/url.toString(),
                 /*title=*/obj["title"].toString(),
@@ -67,7 +68,7 @@ QList<ListItem *> BookmarkModel::makeItems() {
                 /*zimtitle=*/meta.language.isEmpty()
                     ? meta.title
                     : QString{"%1 · %2"}.arg(meta.title, meta.language),
-                /*zimuuid=*/uuid, /*valid=*/true});
+                /*zimuuid=*/parsedUrl->uuid, /*valid=*/true});
         } else {
             items.push_back(new BookmarkItem{/*id=*/url.toString(),
                                              /*title=*/obj["title"].toString(),
@@ -198,8 +199,9 @@ void BookmarkModel::deleteBookmark(const QUrl &url) {
 }
 
 bool BookmarkModel::validateUrl(const QUrl &url) {
-    const auto &[uuid, path] = ZimServer::parseUrl(url);
-    return !uuid.isEmpty() && !path.isEmpty();
+    qDebug() << "BookmarkModel::validateUrl";
+    auto parsedUrl = ZimServer::parseUrl(url);
+    return parsedUrl && !parsedUrl->uuid.isEmpty();
 }
 
 BookmarkItem::BookmarkItem(const QString &id, const QString &title,
