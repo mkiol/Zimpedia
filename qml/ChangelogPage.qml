@@ -27,6 +27,16 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Version %1").arg("3.3")
+            }
+
+            LogItem {
+                title: "Fix: Some ZIM archives were unusable due to disabled JavaScript."
+                description: "Some websites from the ZIM archives require JavaScript to be enabled in order to display their content. " +
+                             "To support these ZIM archives, JavaScript has been enabled."
+            }
+
+            SectionHeader {
                 text: qsTr("Version %1").arg("3.2")
             }
 
